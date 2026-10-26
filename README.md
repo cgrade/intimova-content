@@ -118,7 +118,7 @@ Your test posts will settle each of these:
 
 - `npm test`: publisher tests against a fake copy of all four APIs. No internet needed.
 - `node engine/validate.mjs`: checks every upcoming post's captions, safety fields and rendered files.
-- `npm run render -- content/<week>`: renders a week. This needs Playwright with Chromium, ffmpeg, and python3 with numpy and Pillow. Claude's workspace has all of them.
+- `npm run render -- content/<week>`: renders a week. This needs Playwright with Chromium, ffmpeg, and python3 with numpy, scipy and Pillow. Claude's workspace has all of them.
 
 ## Folder map
 

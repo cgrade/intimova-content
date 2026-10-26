@@ -26,7 +26,7 @@ for (const slug of fs.readdirSync(weekDir).sort()) {
   const outDir = path.join(ROOT, 'public', week, slug);
   const manifestFile = path.join(outDir, 'manifest.json');
   const src = post.format === 'reel' ? post.story : post.slides;
-  const hash = crypto.createHash('sha256').update(JSON.stringify({ format: post.format, src, series: post.series_label, footer: post.last_footer })).digest('hex').slice(0, 16);
+  const hash = crypto.createHash('sha256').update(JSON.stringify({ engine: 2, format: post.format, src, series: post.series_label, footer: post.last_footer })).digest('hex').slice(0, 16);
   if (!force && fs.existsSync(manifestFile) && JSON.parse(fs.readFileSync(manifestFile, 'utf8')).hash === hash) {
     console.log(`= ${slug}: already rendered`); continue;
   }

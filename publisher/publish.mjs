@@ -120,7 +120,7 @@ export function tiktokKit(post, manifest, url, cfg) {
   const files = manifest.type === 'reel' ? [manifest.video] : manifest.images;
   const who = cfg.github?.notifyUser ? `@${cfg.github.notifyUser} ` : '';
   const steps = manifest.type === 'reel'
-    ? ['Open the video link below and save it to your phone.', 'In TikTok, tap **+**, then **Upload**, and pick the video.', 'Add a sound if you like, then paste the caption below.']
+    ? ['Open the video link below and save it to your phone.', 'In TikTok, tap **+**, then **Upload**, and pick the video.', manifest.score ? 'It already has its own soundtrack, so keep the original sound on. If you add a TikTok sound, turn it down low so the score still carries. Then paste the caption below.' : 'Add a sound if you like, then paste the caption below.']
     : ['Open each image link below and save it to your phone, in order.', `In TikTok, tap **+**, then **Upload**, and pick the ${files.length > 1 ? `${files.length} images in order` : 'image'}. TikTok makes them a photo post.`, 'Add a sound, then paste the title and caption below.'];
   const body = [
     `${who}it's time to post this on TikTok.`, '',

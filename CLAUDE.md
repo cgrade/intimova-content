@@ -46,5 +46,13 @@ Read the open week pull request's comments. Make the changes, re-render the post
 ## Engine notes
 
 - `story.scenes[].lines[]` hold `text`, which takes `*emphasis*`. They can also set `style` (`hook`, `sub`, `big`, `punch`), `slow: true`, and `cue`. Use `heat` and `peak` on scenes, and `lights` on a line, to drive the background.
+- Every reel gets an original score (`engine/reel/score.py`) timed to the same cues. The score cues are:
+  - `pulse`: a scene. The heartbeat enters (when the longing starts).
+  - `turn`: a line. A surprise chord and a new cello line (a key emotional beat).
+  - `heat` and `peak`: scenes. The tempo climbs from 56 to about 100 bpm, the music brightens and builds, and an endlessly rising tone sits under it.
+  - `lights`: a line. A hard cut to silence, then switch clicks and hum. Use it for any sudden reveal or interruption, not just lights.
+  - `dread`: a line. One heavy heartbeat on the cliffhanger line.
+
+  Every story should set `pulse`, `turn`, `heat` and `peak`. Stories without a sharp interruption can skip `lights` and `dread`; the music then plays through to the end card. Set `"music": "none"` on a story to make it silent.
 - Slide types: `cover`, `myth`, `fact`, `text`, `takeaway`, `quote`. In sources, `_text_` means italic.
-- Rendering needs Playwright with Chromium, ffmpeg, and python3 with numpy and Pillow. All of these exist in Claude's workspace.
+- Rendering needs Playwright with Chromium, ffmpeg, and python3 with numpy, scipy and Pillow. All of these exist in Claude's workspace.

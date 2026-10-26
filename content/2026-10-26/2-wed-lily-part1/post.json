@@ -4,64 +4,202 @@
   "pillar": "Intimova Stories",
   "series": "Lily, part 1",
   "publish_at": "2026-10-28T19:30:00+01:00",
-  "platforms": ["instagram", "facebook", "x", "tiktok"],
+  "platforms": [
+    "instagram",
+    "facebook",
+    "x",
+    "tiktok"
+  ],
   "story": {
     "label": "INTIMOVA STORIES · LILY",
     "max_seconds": 89.5,
     "end_seconds": 3.0,
     "cover_at": 3.0,
     "scenes": [
-      { "lines": [
-        { "style": "hook", "text": "She called him *at 2am.*" },
-        { "style": "sub", "text": "On her anniversary." } ] },
-      { "lines": [
-        { "text": "Her husband had forgotten. *Again.*" },
-        { "text": "He ate the pepper soup, watched the match, and at ten he kissed the air near her temple and went to bed." } ] },
-      { "lines": [
-        { "text": "The dress was still on." },
-        { "text": "*Wine-red.* Cut low at the back. Bought in Lagos and hidden for six months, waiting for tonight." } ] },
-      { "lines": [
-        { "text": "Seven years married." },
-        { "text": "She couldn’t remember the last time a man’s eyes stayed on her long enough *to undress her.*" } ] },
-      { "lines": [
-        { "text": "At 1:58, her thumb found his name." },
-        { "style": "hook", "text": "*Chris.*" },
-        { "text": "The boy from university who walked her to the hostel every night and never once tried to come inside." },
-        { "text": "She had waited, every night, *for him to try.*" } ] },
-      { "lines": [
-        { "text": "One ring. Two." },
-        { "style": "hook", "text": "*“Lily.”*" },
-        { "text": "Low and unhurried, as if he had been holding her name in his mouth for eight years." } ] },
-      { "lines": [
-        { "text": "*“What colour is the dress?”*" },
-        { "text": "Something warm unfolded low in her stomach." },
-        { "style": "big", "slow": true, "text": "*“Red.”*" },
-        { "text": "He breathed out slowly, as if the word had touched him." } ] },
-      { "cue": "heat", "lines": [
-        { "text": "*“Are you still wearing it?”*" },
-        { "text": "“Yes.”" },
-        { "text": "*“Then go where he can’t hear you.”*" } ] },
-      { "lines": [
-        { "text": "She slipped into the parlour. The tiles were cold under her bare feet." },
-        { "style": "punch", "slow": true, "text": "*Her skin was not.*" } ] },
-      { "lines": [
-        { "text": "*“Find the zip,”* he said." },
-        { "text": "Her fingers found it at the small of her back." },
-        { "text": "*“Slowly, Lily. I want to hear it.”*" } ] },
-      { "lines": [
-        { "text": "The zip whispered down. The dress loosened at her shoulders." },
-        { "text": "One strap slipped. *Then the other.*" },
-        { "text": "Her breath caught, and he heard that too." } ] },
-      { "cue": "peak", "lines": [
-        { "text": "*“Close your eyes,”* he whispered. *“And let your hand go where mine would.”*" },
-        { "style": "hook", "slow": true, "text": "*She did.*" } ] },
-      { "lines": [
-        { "cue": "lights", "text": "Then NEPA brought the light back." },
-        { "text": "Every bulb in the flat blazed on at once." },
-        { "text": "Behind her, the bedroom door stood open." },
-        { "style": "punch", "slow": true, "text": "*She had closed it.*" } ] }
+      {
+        "lines": [
+          {
+            "style": "hook",
+            "text": "She called him *at 2am.*"
+          },
+          {
+            "style": "sub",
+            "text": "On her anniversary."
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "Her husband had forgotten. *Again.*"
+          },
+          {
+            "text": "He ate the pepper soup, watched the match, and at ten he kissed the air near her temple and went to bed."
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "The dress was still on."
+          },
+          {
+            "text": "*Wine-red.* Cut low at the back. Bought in Lagos and hidden for six months, waiting for tonight."
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "Seven years married."
+          },
+          {
+            "text": "She couldn’t remember the last time a man’s eyes stayed on her long enough *to undress her.*"
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "At 1:58, her thumb found his name."
+          },
+          {
+            "style": "hook",
+            "text": "*Chris.*"
+          },
+          {
+            "text": "The boy from university who walked her to the hostel every night and never once tried to come inside."
+          },
+          {
+            "text": "She had waited, every night, *for him to try.*"
+          }
+        ],
+        "cue": "pulse"
+      },
+      {
+        "lines": [
+          {
+            "text": "One ring. Two."
+          },
+          {
+            "style": "hook",
+            "text": "*“Lily.”*"
+          },
+          {
+            "text": "Low and unhurried, as if he had been holding her name in his mouth for eight years."
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "*“What colour is the dress?”*"
+          },
+          {
+            "text": "Something warm unfolded low in her stomach."
+          },
+          {
+            "style": "big",
+            "slow": true,
+            "text": "*“Red.”*",
+            "cue": "turn"
+          },
+          {
+            "text": "He breathed out slowly, as if the word had touched him."
+          }
+        ]
+      },
+      {
+        "cue": "heat",
+        "lines": [
+          {
+            "text": "*“Are you still wearing it?”*"
+          },
+          {
+            "text": "“Yes.”"
+          },
+          {
+            "text": "*“Then go where he can’t hear you.”*"
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "She slipped into the parlour. The tiles were cold under her bare feet."
+          },
+          {
+            "style": "punch",
+            "slow": true,
+            "text": "*Her skin was not.*"
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "*“Find the zip,”* he said."
+          },
+          {
+            "text": "Her fingers found it at the small of her back."
+          },
+          {
+            "text": "*“Slowly, Lily. I want to hear it.”*"
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "The zip whispered down. The dress loosened at her shoulders."
+          },
+          {
+            "text": "One strap slipped. *Then the other.*"
+          },
+          {
+            "text": "Her breath caught, and he heard that too."
+          }
+        ]
+      },
+      {
+        "cue": "peak",
+        "lines": [
+          {
+            "text": "*“Close your eyes,”* he whispered. *“And let your hand go where mine would.”*"
+          },
+          {
+            "style": "hook",
+            "slow": true,
+            "text": "*She did.*"
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "cue": "lights",
+            "text": "Then NEPA brought the light back."
+          },
+          {
+            "text": "Every bulb in the flat blazed on at once."
+          },
+          {
+            "text": "Behind her, the bedroom door stood open."
+          },
+          {
+            "style": "punch",
+            "slow": true,
+            "text": "*She had closed it.*",
+            "cue": "dread"
+          }
+        ]
+      }
     ],
-    "end": { "kicker": "LILY · PART 2", "line": "Next week. Follow so you don’t miss it.", "url": "INTIMOVA.NG" }
+    "end": {
+      "kicker": "LILY · PART 2",
+      "line": "Next week. Follow so you don’t miss it.",
+      "url": "INTIMOVA.NG"
+    }
   },
   "captions": {
     "instagram": "She called him at 2am. On her anniversary. 🍷\n\nLily · Part 1. Seven years married, and her husband forgot again. So at 1:58 she called the one man who never once tried.\n\nPart 2 drops next Wednesday. Follow so you don’t miss it.\n\nHave you ever felt invisible in your own home? Tell us below. 👇\n\n#IntimovaStories #LoveStory #RomanceReads #NaijaRomance #Relationships #SelfLove #Intimova",
@@ -70,6 +208,10 @@
     "tiktok_title": "She called him at 2am. Lily · Part 1",
     "tiktok": "She called him at 2am. On her anniversary. 🍷 Lily · Part 1. Part 2 drops next Wednesday, follow so you don’t miss it. #IntimovaStories #BookTok #RomanceBooks #LoveStory #Intimova"
   },
-  "safety": { "explicit": false, "health_claim": false, "clear_faces": false },
+  "safety": {
+    "explicit": false,
+    "health_claim": false,
+    "clear_faces": false
+  },
   "ai_generated": false
 }

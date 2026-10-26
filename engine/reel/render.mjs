@@ -55,9 +55,13 @@ export async function renderReel(story, outDir, { log = console.log } = {}) {
   fs.writeFileSync(path.join(tmp, 'meta.json'), JSON.stringify({ ...meta, fps: FPS, frames }));
   log(`reel: ${meta.total.toFixed(1)}s, ${frames} frames (pace x${(1 / meta.scale).toFixed(2)})`);
 
-  // Background renders in parallel with the text frames.
+  // Background and score render in parallel with the text frames.
   const bgPath = path.join(tmp, 'bg.mp4');
   const bg = run('python3', [path.join(HERE, 'satin.py'), String(meta.total), bgPath, '-', '0', path.join(tmp, 'meta.json')]);
+  // Original score timed to the story's cues (pulse, turn, heat, peak, lights, dread, end). "music": "none" turns it off.
+  const withScore = (story.music ?? 'score') !== 'none';
+  const scorePath = path.join(tmp, 'score.wav');
+  const score = withScore ? run('python3', [path.join(HERE, 'score.py'), path.join(tmp, 'meta.json'), scorePath, String(story.music_seed ?? 11)]) : Promise.resolve();
 
   const stage = await page.$('#stage');
   for (let i = 0; i < frames; i++) {
@@ -67,15 +71,17 @@ export async function renderReel(story, outDir, { log = console.log } = {}) {
   }
   await browser.close();
   await bg;
+  await score;
 
   const out = path.join(outDir, 'reel.mp4');
   const D = meta.total;
+  const audioIn = withScore ? ['-i', scorePath] : ['-f', 'lavfi', '-i', 'anullsrc=r=48000:cl=stereo'];
   const encode = crf => run('ffmpeg', ['-y', '-loglevel', 'error',
     '-i', bgPath, '-framerate', String(FPS), '-i', path.join(tmp, '%05d.png'),
-    '-f', 'lavfi', '-i', 'anullsrc=r=48000:cl=stereo',
+    ...audioIn,
     '-filter_complex', `[0:v]noise=alls=3:allf=t[b];[b][1:v]overlay=0:0:format=auto,fade=t=in:st=0:d=0.6,fade=t=out:st=${(D - 0.7).toFixed(3)}:d=0.7,format=yuv420p[v]`,
     '-map', '[v]', '-map', '2:a', '-c:v', 'libx264', '-crf', String(crf), '-maxrate', '9M', '-bufsize', '18M', '-preset', 'slow',
-    '-profile:v', 'high', '-r', String(FPS), '-g', String(FPS * 2), '-c:a', 'aac', '-b:a', '128k', '-ar', '48000',
+    '-profile:v', 'high', '-r', String(FPS), '-g', String(FPS * 2), '-c:a', 'aac', '-b:a', '160k', '-ar', '48000',
     '-t', D.toFixed(3), '-movflags', '+faststart', out]);
   await encode(20);
   if (fs.statSync(out).size > MAX_FILE_BYTES) { log('  file over 24 MB, re-encoding smaller'); await encode(25); }
@@ -84,5 +90,5 @@ export async function renderReel(story, outDir, { log = console.log } = {}) {
   const coverAt = story.cover_at ?? 3.0;
   await run('ffmpeg', ['-y', '-loglevel', 'error', '-ss', String(coverAt), '-i', out, '-frames:v', '1', '-q:v', '3', path.join(outDir, 'cover.jpg')]);
   fs.rmSync(tmp, { recursive: true, force: true });
-  return { video: 'reel.mp4', cover: 'cover.jpg', duration: Number(D.toFixed(2)), bytes: fs.statSync(out).size };
+  return { video: 'reel.mp4', cover: 'cover.jpg', duration: Number(D.toFixed(2)), bytes: fs.statSync(out).size, score: withScore };
 }
