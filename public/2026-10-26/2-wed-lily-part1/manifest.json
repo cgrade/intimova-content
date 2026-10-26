@@ -1,9 +1,10 @@
 {
   "type": "reel",
-  "hash": "a73754b95e91cf74",
-  "rendered_at": "2026-10-26T09:33:16.661Z",
+  "hash": "22181809c47857ad",
+  "rendered_at": "2026-10-26T18:50:38.849Z",
   "video": "reel.mp4",
   "cover": "cover.jpg",
   "duration": 89.2,
-  "bytes": 19824567
+  "bytes": 21622321,
+  "score": true
 }
