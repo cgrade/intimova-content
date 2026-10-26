@@ -1,0 +1,9 @@
+{
+  // Cloudflare serves the rendered images and videos in public/ at media.intimova.ng.
+  // There is no Worker code: every request is answered from public/, or with a 404.
+  "name": "intimova-content",
+  "compatibility_date": "2026-10-26",
+  "assets": {
+    "directory": "./public"
+  }
+}
