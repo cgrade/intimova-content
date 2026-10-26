@@ -1,16 +1,16 @@
-# Intimova: week of 2026-11-02
+# Intimova: week of 2026-10-26
 
 Merge this pull request to approve the week. Comment on anything you want changed.
 
 | When (Lagos) | Post | Format | Platforms |
 | --- | --- | --- | --- |
-| Mon 2 Nov, 19:30 | 2026-11-02-myth-toys | carousel | instagram, facebook, x, tiktok |
-| Wed 4 Nov, 19:30 | 2026-11-04-lily-part1 | reel | instagram, facebook, x, tiktok |
-| Fri 6 Nov, 19:30 | 2026-11-06-quote-surviving | carousel | instagram, facebook, x, tiktok |
+| Mon 26 Oct, 19:30 | 2026-10-26-myth-toys | carousel | instagram, facebook, x, tiktok |
+| Wed 28 Oct, 19:30 | 2026-10-28-lily-part1 | reel | instagram, facebook, x, tiktok |
+| Fri 30 Oct, 19:30 | 2026-10-30-quote-surviving | carousel | instagram, facebook, x, tiktok |
 
-## Mon 2 Nov, 19:30 · 2026-11-02-myth-toys
+## Mon 26 Oct, 19:30 · 2026-10-26-myth-toys
 
-<img src="../../public/2026-11-02/1-mon-myth-toys/slide-1.jpg" width="200"> <img src="../../public/2026-11-02/1-mon-myth-toys/slide-2.jpg" width="200"> <img src="../../public/2026-11-02/1-mon-myth-toys/slide-3.jpg" width="200"> <img src="../../public/2026-11-02/1-mon-myth-toys/slide-4.jpg" width="200"> <img src="../../public/2026-11-02/1-mon-myth-toys/slide-5.jpg" width="200">
+<img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/1-mon-myth-toys/slide-1.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/1-mon-myth-toys/slide-2.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/1-mon-myth-toys/slide-3.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/1-mon-myth-toys/slide-4.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/1-mon-myth-toys/slide-5.jpg?raw=true" width="200">
 
 **Instagram**
 
@@ -42,11 +42,11 @@ Merge this pull request to approve the week. Comment on anything you want change
 
 Safety: explicit no ✅ · health claim yes, sourced ✅ · clear faces no ✅
 
-## Wed 4 Nov, 19:30 · 2026-11-04-lily-part1
+## Wed 28 Oct, 19:30 · 2026-10-28-lily-part1
 
-<img src="../../public/2026-11-02/2-wed-lily-part1/cover.jpg" width="240">
+<img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/2-wed-lily-part1/cover.jpg?raw=true" width="240">
 
-[Watch the reel (89.2s)](../../public/2026-11-02/2-wed-lily-part1/reel.mp4)
+[Watch the reel (89.2s)](https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/2-wed-lily-part1/reel.mp4?raw=true)
 
 **Instagram**
 
@@ -72,9 +72,9 @@ Safety: explicit no ✅ · health claim yes, sourced ✅ · clear faces no ✅
 
 Safety: explicit no ✅ · health claim none · clear faces no ✅
 
-## Fri 6 Nov, 19:30 · 2026-11-06-quote-surviving
+## Fri 30 Oct, 19:30 · 2026-10-30-quote-surviving
 
-<img src="../../public/2026-11-02/3-fri-quote-surviving/slide-1.jpg" width="200">
+<img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/3-fri-quote-surviving/slide-1.jpg?raw=true" width="200">
 
 **Instagram**
 
@@ -96,7 +96,7 @@ Safety: explicit no ✅ · health claim none · clear faces no ✅
 
 ---
 
-### Needs your input: Sunday 8 Nov, product guide
+### Needs your input: Sunday 1 Nov, product guide
 
 The playbook's starter week ends with a product guide on Sunday. I haven't made it because I don't know which product to feature.
 Reply on this pull request with:

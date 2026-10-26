@@ -1,4 +1,4 @@
-### Needs your input: Sunday 8 Nov, product guide
+### Needs your input: Sunday 1 Nov, product guide
 
 The playbook's starter week ends with a product guide on Sunday. I haven't made it because I don't know which product to feature.
 Reply on this pull request with:

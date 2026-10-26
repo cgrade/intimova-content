@@ -46,6 +46,8 @@ Instagram, Facebook and TikTok fetch media from a public link, so the `public/` 
 3. Add the custom domain `media.intimova.ng` to the Pages project. If intimova.ng's DNS isn't on Cloudflare, add the CNAME record it shows you at your DNS provider.
 4. In GitHub, go to Settings > Secrets and variables > Actions > **Variables**. Add `MEDIA_BASE_URL` = `https://media.intimova.ng`.
 
+`wrangler.jsonc` tells Cloudflare to serve the `public/` folder. If the custom domain isn't ready yet, set `MEDIA_BASE_URL` to the `https://intimova-content.<your-subdomain>.workers.dev` address Cloudflare shows. Instagram, Facebook and X accept it. TikTok needs a verified domain, so switch to `media.intimova.ng` before connecting TikTok.
+
 Check that `https://media.intimova.ng/robots.txt` opens. Facebook refuses video from sites that block its crawler, and that file allows it.
 
 ### 3. Meta (Instagram and Facebook)
@@ -60,6 +62,7 @@ Check that `https://media.intimova.ng/robots.txt` opens. Facebook refuses video 
    npm run setup:meta
    ```
 5. Add the secrets it prints (`META_PAGE_ID`, `IG_USER_ID`, `META_PAGE_TOKEN`) under Settings > Secrets and variables > Actions > **Secrets**.
+6. **Switch the app from Development to Live** with the toggle at the top of the App Dashboard. Meta says anything a Development-mode app posts "can only be seen by role users", so without this your followers won't see the posts. Meta may ask for a privacy policy URL (for example intimova.ng/privacy) and an app icon. I'm not certain what else it will ask for an app that only posts to your own accounts.
 
 ### 4. The encryption key
 
