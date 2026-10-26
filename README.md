@@ -4,7 +4,7 @@ This repo makes and posts Intimova's social content.
 
 - **Claude drafts the week.** Every Saturday Claude writes the next week's posts, renders them (story reels and carousels), and opens a pull request.
 - **You approve.** You review the pull request on your phone. Comment to change something; merge to approve.
-- **It posts itself.** An hourly GitHub job posts each approved post at its time to Instagram, Facebook and X. TikTok gets a draft in your inbox.
+- **It posts itself.** An hourly GitHub job posts each approved post at its time to Instagram and Facebook, and to X once it's connected. For TikTok, it sends you the files and caption to post by hand.
 
 Nothing posts unless it is merged into `main`. A post with `"hold": true` never posts on its own.
 
@@ -16,7 +16,7 @@ Nothing posts unless it is merged into `main`. A post with `"hold": true` never 
    - To approve, merge the pull request.
 3. **After the merge.** Cloudflare publishes the images and videos at `https://media.intimova.ng` within a minute or two.
 4. **At each post's time.** The **Publish due posts** job runs every hour from 06:05 to 22:05 and posts whatever is due.
-5. **TikTok.** You get a TikTok notification. Open it, add a sound, and post. For reels, copy the caption from the job's summary page (Actions tab, open the run). TikTok doesn't let apps send reel captions.
+5. **TikTok.** You get a GitHub notification titled "Post to TikTok" with the files and caption. Post it by hand, then close the issue.
 
 If a platform fails, the job retries it on the next run, up to three times. GitHub emails you when a run fails. Platforms that already worked are never posted twice.
 
@@ -85,18 +85,12 @@ Save the key it prints as the GitHub secret `TOKENS_KEY`, and in your password m
    ```
 4. Add the secrets `X_CLIENT_ID` and `X_CLIENT_SECRET`, then commit and push `state/tokens.enc`.
 
-### 6. TikTok
+### 6. TikTok (posted by hand)
 
-1. At developers.tiktok.com, create an app.
-   - Add **Login Kit**, with the redirect URI `https://intimova.ng/oauth/tiktok`.
-   - Add the **Content Posting API**, and request the `video.upload` scope.
-2. Verify `https://media.intimova.ng/` as your URL prefix. TikTok gives you a file to put in `public/` or a DNS record.
-3. Once TikTok approves the app, run:
-   ```
-   export TIKTOK_CLIENT_KEY=... TIKTOK_CLIENT_SECRET=... TIKTOK_REDIRECT_URI=https://intimova.ng/oauth/tiktok TOKENS_KEY=...
-   npm run setup:tiktok
-   ```
-4. Add the secrets `TIKTOK_CLIENT_KEY` and `TIKTOK_CLIENT_SECRET`, then commit and push `state/tokens.enc`.
+TikTok's app review doesn't allow apps that only post to your own account, or apps for adult products, so TikTok isn't automated.
+Instead, when a post's time comes, the job opens a GitHub issue titled **"Post to TikTok: …"** and tags you, so the GitHub app alerts you.
+The issue has links to each slide or the video, and the title and caption ready to copy. Post it, then close the issue. It takes about 2 minutes.
+For this to work, `PLATFORMS` must not include `tiktok`. The default is `instagram,facebook`.
 
 ### 7. Test before the first live week
 

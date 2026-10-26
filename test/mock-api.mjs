@@ -67,6 +67,11 @@ export function startMock({ publicDir, failOnce = {} } = {}) {
     if (p === '/tiktok/v2/oauth/token/') return send(200, { access_token: 'tt-access-2', refresh_token: 'tt-refresh-2', expires_in: 86400, refresh_expires_in: 31536000, open_id: 'o1' });
     if (p === '/tiktok/v2/post/publish/content/init/' || p === '/tiktok/v2/post/publish/inbox/video/init/') return send(200, { data: { publish_id: 'pub' + n }, error: { code: 'ok', message: '' } });
     if (p === '/tiktok/v2/post/publish/status/fetch/') return send(200, { data: { status: 'SEND_TO_USER_INBOX' }, error: { code: 'ok' } });
+    // GitHub issues
+    if ((m = p.match(/^\/gh\/repos\/([^/]+)\/([^/]+)\/issues$/)) && req.method === 'POST') {
+      if (!String(req.headers.authorization).startsWith('Bearer ')) return send(401, { message: 'Bad credentials' });
+      return send(201, { number: 100 + n, html_url: `https://github.com/${m[1]}/${m[2]}/issues/${100 + n}`, title: body.title });
+    }
     send(404, { error: { message: 'mock: no route for ' + key } });
   });
   return new Promise(resolve => server.listen(0, '127.0.0.1', () => {

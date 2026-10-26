@@ -44,9 +44,37 @@ function cfgFor(root, mock, over = {}) {
     CONTENT_ROOT: root, NOW: '2026-11-02T20:30:00+01:00', MEDIA_BASE_URL: mock.base + '/media', POLL_MS: '5',
     GRAPH_BASE: mock.base + '/graph', RUPLOAD_BASE: mock.base + '/rupload', X_BASE: mock.base + '/x', TIKTOK_BASE: mock.base + '/tiktok',
     META_PAGE_ID: 'PAGE1', META_PAGE_TOKEN: 'page-token', IG_USER_ID: 'IG123',
-    X_CLIENT_ID: 'xid', X_CLIENT_SECRET: 'xsecret', TIKTOK_CLIENT_KEY: 'tkey', TIKTOK_CLIENT_SECRET: 'tsecret', TOKENS_KEY: KEY, ...over });
+    X_CLIENT_ID: 'xid', X_CLIENT_SECRET: 'xsecret', TIKTOK_CLIENT_KEY: 'tkey', TIKTOK_CLIENT_SECRET: 'tsecret', TOKENS_KEY: KEY,
+    PLATFORMS: 'instagram,facebook,x,tiktok', ...over });
 }
 const quiet = () => {};
+
+test('TikTok by hand: one GitHub issue per post with links and caption, never twice', async () => {
+  const root = makeRoot();
+  const mock = await startMock({ publicDir: path.join(root, 'public') });
+  try {
+    const gh = { PLATFORMS: 'instagram,facebook', GITHUB_API_URL: mock.base + '/gh', GITHUB_TOKEN: 'ghs_test', GITHUB_REPOSITORY: 'cgrade/intimova-content', NOTIFY_USER: 'cgrade' };
+    const r = await run(cfgFor(root, mock, gh), quiet);
+    const manual = r.filter(x => x.platform === 'tiktok (by hand)');
+    assert.equal(manual.length, 3);                                   // carousel, reel, single
+    assert.ok(manual.every(x => x.ok && /issue #\d+/.test(x.id)));
+    assert.equal(mock.calls.filter(c => c.path.startsWith('/tiktok') || c.path.startsWith('/x')).length, 0); // no TikTok or X API calls
+    const issues = mock.calls.filter(c => c.path === '/gh/repos/cgrade/intimova-content/issues');
+    assert.equal(issues.length, 3);
+    const reel = issues.find(i => /reel\.mp4/.test(i.body.body));
+    assert.match(reel.body.body, /^@cgrade it's time to post this on TikTok/);
+    assert.match(reel.body.body, /\/media\/2026-11-02\/2-reel\/reel\.mp4\)/);
+    assert.match(reel.body.body, /tt desc/);                          // the TikTok caption
+    assert.doesNotMatch(reel.body.body, /\*\*Title\*\*/);              // reels have no title field
+    const car = issues.find(i => /Slide 5/.test(i.body.body));
+    assert.match(car.body.body, /\*\*Title\*\*\n```\ntt\n```/);
+    assert.equal(issues[0].headers.authorization, 'Bearer ghs_test');
+    assert.ok(loadState(root).car.tiktok_manual.notified);
+    const again = await run(cfgFor(root, mock, gh), quiet);
+    assert.equal(again.filter(x => x.platform === 'tiktok (by hand)').length, 0);
+    assert.equal(mock.calls.filter(c => c.path.endsWith('/issues')).length, 3);
+  } finally { await mock.close(); }
+});
 
 test('publishes carousel, single image and reel to all four platforms, once', async () => {
   const root = makeRoot();

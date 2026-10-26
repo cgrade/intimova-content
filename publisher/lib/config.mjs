@@ -12,7 +12,7 @@ export function loadConfig(env = process.env) {
     onlyPost: env.ONLY_POST || '',            // post id to publish now, ignoring its time (manual run)
     maxLateHours: Number(env.MAX_LATE_HOURS || 12),
     maxAttempts: Number(env.MAX_ATTEMPTS || 3),
-    platforms: (env.PLATFORMS || 'instagram,facebook,x,tiktok').split(',').map(s => s.trim()).filter(Boolean),
+    platforms: (env.PLATFORMS || 'instagram,facebook').split(',').map(s => s.trim()).filter(Boolean),
     mediaBase: env.MEDIA_BASE_URL || '',      // e.g. https://media.intimova.ng
     pollMs: Number(env.POLL_MS || 10000),
     graph: {
@@ -33,6 +33,12 @@ export function loadConfig(env = process.env) {
       base: env.TIKTOK_BASE || 'https://open.tiktokapis.com',
       clientKey: env.TIKTOK_CLIENT_KEY || '',
       clientSecret: env.TIKTOK_CLIENT_SECRET || '',
+    },
+    github: {
+      api: env.GITHUB_API_URL || 'https://api.github.com',
+      token: env.GITHUB_TOKEN || '',
+      repo: env.GITHUB_REPOSITORY || '',        // owner/name, set by GitHub Actions
+      notifyUser: env.NOTIFY_USER || '',        // tagged in the TikTok issue so GitHub alerts them
     },
     tokensKey: env.TOKENS_KEY || '',
     summaryFile: env.GITHUB_STEP_SUMMARY || '',

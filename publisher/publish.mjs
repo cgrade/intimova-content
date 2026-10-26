@@ -5,7 +5,7 @@ import { pathToFileURL } from 'node:url';
 import { loadConfig } from './lib/config.mjs';
 import { loadAllPosts, validatePost, manifestOf, mediaUrl, localMedia } from '../lib/post.mjs';
 import { loadState, saveState, loadTokens, saveTokens } from './lib/store.mjs';
-import { head } from './lib/http.mjs';
+import { head, request } from './lib/http.mjs';
 import { postInstagram } from './platforms/instagram.mjs';
 import { postFacebook } from './platforms/facebook.mjs';
 import { postX } from './platforms/x.mjs';
@@ -27,6 +27,7 @@ export async function run(cfg = loadConfig(), log = console.log) {
   const tokens = cfg.tokensKey ? loadTokens(cfg.root, cfg.tokensKey) : {};
   const tokensBefore = JSON.stringify(tokens);
   const results = [];
+  const kits = [];
   const due = posts.filter(p => isDue(p, cfg));
   log(`${cfg.dryRun ? '[DRY RUN] ' : ''}${due.length} post(s) due at ${cfg.now.toISOString()}`);
 
@@ -73,17 +74,67 @@ export async function run(cfg = loadConfig(), log = console.log) {
       }
       if (!cfg.dryRun) saveState(cfg.root, state); // save after every platform so a crash can't cause a repost
     }
+
+    // TikTok by hand: when TikTok isn't automated, send Grade the files and caption to post himself.
+    if (post.platforms.includes('tiktok') && !cfg.platforms.includes('tiktok')) {
+      const m = (st.tiktok_manual ||= { attempts: 0 });
+      if (m.notified) { log(`  = tiktok (by hand): already sent, issue #${m.issue}`); continue; }
+      if (m.attempts >= cfg.maxAttempts) { log('  = tiktok (by hand): gave up earlier'); continue; }
+      if (!(await ensureLive())) {
+        log('  … tiktok (by hand): waiting until the media is live');
+        results.push({ post: post.id, platform: 'tiktok (by hand)', ok: false, waiting: true, note: 'media not live yet' });
+        continue;
+      }
+      const kit = tiktokKit(post, manifest, url, cfg);
+      kits.push(kit);
+      if (cfg.dryRun) { results.push({ post: post.id, platform: 'tiktok (by hand)', ok: true, dry: true }); continue; }
+      if (!cfg.github.token || !cfg.github.repo) { log('  ~ tiktok (by hand): no GITHUB_TOKEN, kit is in the run summary only'); continue; }
+      m.attempts++;
+      try {
+        const issue = await request('POST', `${cfg.github.api}/repos/${cfg.github.repo}/issues`, {
+          headers: { Authorization: `Bearer ${cfg.github.token}`, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' },
+          json: { title: kit.title, body: kit.body }, retries: 1 });
+        Object.assign(m, { notified: true, issue: issue.number, url: issue.html_url, at: new Date().toISOString() });
+        log(`  ✓ tiktok (by hand): issue #${issue.number}`);
+        results.push({ post: post.id, platform: 'tiktok (by hand)', ok: true, id: `issue #${issue.number}` });
+      } catch (e) {
+        log(`  ✗ tiktok (by hand): could not open the GitHub issue: ${e.message}`);
+        results.push({ post: post.id, platform: 'tiktok (by hand)', ok: false, note: e.message });
+      }
+      saveState(cfg.root, state);
+    }
   }
   if (!cfg.dryRun && cfg.tokensKey && JSON.stringify(tokens) !== tokensBefore) saveTokens(cfg.root, tokens, cfg.tokensKey);
   const warnings = [];
   const ttEnd = tokens.tiktok?.refresh_expires_at;
   if (ttEnd && ttEnd - cfg.now.getTime() < 30 * 24 * 3600 * 1000) warnings.push(`TikTok login ends on ${new Date(ttEnd).toDateString()}. Rerun npm run setup:tiktok before then.`);
   for (const w of warnings) log('⚠ ' + w);
-  writeSummary(cfg, due, results, warnings);
+  writeSummary(cfg, due, results, warnings, kits);
   return results;
 }
 
-function writeSummary(cfg, due, results, warnings = []) {
+/** Everything Grade needs to post one item on TikTok himself. */
+export function tiktokKit(post, manifest, url, cfg) {
+  const c = post.captions || {};
+  const name = post.series || c.tiktok_title || post.id;
+  const files = manifest.type === 'reel' ? [manifest.video] : manifest.images;
+  const who = cfg.github?.notifyUser ? `@${cfg.github.notifyUser} ` : '';
+  const steps = manifest.type === 'reel'
+    ? ['Open the video link below and save it to your phone.', 'In TikTok, tap **+**, then **Upload**, and pick the video.', 'Add a sound if you like, then paste the caption below.']
+    : ['Open each image link below and save it to your phone, in order.', `In TikTok, tap **+**, then **Upload**, and pick the ${files.length > 1 ? `${files.length} images in order` : 'image'}. TikTok makes them a photo post.`, 'Add a sound, then paste the title and caption below.'];
+  const body = [
+    `${who}it's time to post this on TikTok.`, '',
+    `**${name}** · ${manifest.type === 'reel' ? `reel, ${manifest.duration}s` : `${files.length} image${files.length > 1 ? 's' : ''}`}`, '',
+    ...steps.map((s, i) => `${i + 1}. ${s}`), '',
+    '**Files**', ...files.map((f, i) => `- [${manifest.type === 'reel' ? 'Video' : `Slide ${i + 1}`}](${url(f)})`), '',
+    ...(manifest.type === 'reel' ? [] : ['**Title**', '```', c.tiktok_title || '', '```', '']),
+    '**Caption**', '```', c.tiktok || '', '```', '',
+    ...(post.ai_generated ? ['Turn on TikTok\'s "AI-generated content" label for this post.', ''] : []),
+    'Close this issue once it\'s posted.'];
+  return { post: post.id, title: `Post to TikTok: ${name}`, body: body.join('\n') };
+}
+
+function writeSummary(cfg, due, results, warnings = [], kits = []) {
   if (!cfg.summaryFile) return;
   const lines = [`## Intimova publisher ${cfg.dryRun ? '(dry run)' : ''}`, '', `Checked at ${cfg.now.toISOString()}. ${due.length} post(s) due.`, '', ...warnings.map(w => `> ⚠ ${w}`), ''];
   if (results.length) {
@@ -98,10 +149,11 @@ function writeSummary(cfg, due, results, warnings = []) {
       lines.push('', `**${r.post}**`, '', '```', post?.captions?.tiktok || '', '```');
     }
   }
+  for (const k of kits) lines.push('', `### ${k.title}`, '', k.body);
   fs.appendFileSync(cfg.summaryFile, lines.join('\n') + '\n');
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const results = await run();
   const failed = results.filter(r => !r.ok && !r.waiting);
   process.exit(failed.length ? 1 : 0);

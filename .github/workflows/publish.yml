@@ -17,6 +17,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: publisher
@@ -45,7 +46,9 @@ jobs:
           TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
           TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
           TOKENS_KEY: ${{ secrets.TOKENS_KEY }}
-          PLATFORMS: ${{ vars.PLATFORMS || 'instagram,facebook,x,tiktok' }}
+          PLATFORMS: ${{ vars.PLATFORMS || 'instagram,facebook' }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NOTIFY_USER: ${{ github.repository_owner }}
         run: node publisher/publish.mjs
       - name: Save what was posted
         if: always()
