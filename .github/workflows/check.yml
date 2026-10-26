@@ -1,0 +1,20 @@
+name: Check the week
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Publisher tests
+        run: node --test test/*.test.mjs
+      - name: Every post is valid and rendered
+        run: node engine/validate.mjs

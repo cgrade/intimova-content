@@ -1,0 +1,59 @@
+name: Publish due posts
+
+on:
+  schedule:
+    # Every hour at :05 from 06:05 to 22:05 Lagos time (cron is in UTC).
+    - cron: '5 5-21 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run: check everything, post nothing'
+        type: boolean
+        default: true
+      only_post:
+        description: 'Post id to publish now, ignoring its time (leave empty for the normal schedule)'
+        type: string
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publisher
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Publish
+        env:
+          DRY_RUN: ${{ inputs.dry_run && '1' || '0' }}
+          ONLY_POST: ${{ inputs.only_post }}
+          MEDIA_BASE_URL: ${{ vars.MEDIA_BASE_URL }}
+          META_PAGE_ID: ${{ secrets.META_PAGE_ID }}
+          META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN }}
+          META_IG_TOKEN: ${{ secrets.META_IG_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          X_CLIENT_ID: ${{ secrets.X_CLIENT_ID }}
+          X_CLIENT_SECRET: ${{ secrets.X_CLIENT_SECRET }}
+          TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          TOKENS_KEY: ${{ secrets.TOKENS_KEY }}
+          PLATFORMS: ${{ vars.PLATFORMS || 'instagram,facebook,x,tiktok' }}
+        run: node publisher/publish.mjs
+      - name: Save what was posted
+        if: always()
+        run: |
+          git config user.name "intimova-publisher"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state/
+          if ! git diff --cached --quiet; then
+            git commit -m "Publisher: record posts [skip ci]"
+            git push
+          fi

@@ -1,0 +1,26 @@
+{
+  "id": "2026-11-02-myth-toys",
+  "format": "carousel",
+  "pillar": "Body facts",
+  "publish_at": "2026-11-02T19:30:00+01:00",
+  "platforms": ["instagram", "facebook", "x", "tiktok"],
+  "series_label": "MYTH VS FACT",
+  "last_footer": "DISCREET DELIVERY · INTIMOVA.NG",
+  "slides": [
+    { "type": "myth", "text": "“Sex toys are for people who can’t find a partner.”", "lead": "Swipe. The research says otherwise." },
+    { "type": "fact", "number": "52.5%", "statement": "of women in a national US study had used a vibrator.", "detail": "Nearly 1 in 4 had used one in the past month.", "source": "Source: Herbenick et al., _Journal of Sexual Medicine_, 2009. 2,056 US women aged 18–60." },
+    { "type": "fact", "number": "91%", "statement": "of heterosexual men who had used a vibrator used it with a female partner, during foreplay or sex.", "detail": "Men’s use was common too: 44.8% had used one.", "source": "Source: Reece et al., _Journal of Sexual Medicine_, 2009. 1,047 US men aged 18–60." },
+    { "type": "text", "kicker": "WHAT IT MEANS", "headline": "A toy isn’t a replacement for a partner. For many couples, it’s *part of how they enjoy each other.*", "body": "Women who used vibrators also scored higher on desire, arousal and orgasm. That’s a link, not proof that the toy caused it.", "note": "These are US figures. We haven’t found Nigerian data on this yet." },
+    { "type": "takeaway", "kicker": "THE TAKEAWAY", "headline": "Wanting more pleasure doesn’t mean *something is missing.*", "lead": "Save this for the next time someone says it." }
+  ],
+  "captions": {
+    "instagram": "Myth: sex toys are for people who can’t find a partner.\n\nIn a national US study, 52.5% of women had used a vibrator. And 91% of heterosexual men who had used one used it with a female partner. A toy isn’t a replacement for love. For many couples, it’s part of it.\n\nSave this for the next time someone says it.\n\nSources: Herbenick et al. and Reece et al., Journal of Sexual Medicine, 2009. US adults aged 18–60. Both studies were funded by Church & Dwight Co.\n\n#MythVsFact #SexualWellness #PleasureIsSelfCare #Relationships #Intimova",
+    "facebook": "Myth: sex toys are for people who can’t find a partner.\n\nIn a national US study, 52.5% of women had used a vibrator. And 91% of heterosexual men who had used one used it with a female partner. A toy isn’t a replacement for love. For many couples, it’s part of it.\n\nSave this for the next time someone says it.\n\nSources: Herbenick et al. and Reece et al., Journal of Sexual Medicine, 2009. US adults aged 18–60. Both studies were funded by Church & Dwight Co.",
+    "x": "Myth: sex toys are for people who can’t find a partner.\n\nThe research says otherwise. 👇",
+    "x_thread": ["Sources: Herbenick et al. and Reece et al., Journal of Sexual Medicine, 2009. US adults aged 18–60."],
+    "tiktok_title": "Myth vs fact: sex toys are for single people?",
+    "tiktok": "Myth: sex toys are for people who can’t find a partner. The research says otherwise. Swipe to see the numbers.\n\nSources: Herbenick et al. and Reece et al., Journal of Sexual Medicine, 2009 (US adults aged 18–60).\n\n#MythVsFact #SexualWellness #Relationships #Intimova"
+  },
+  "safety": { "explicit": false, "health_claim": true, "health_sources": ["https://www.sciencedaily.com/releases/2009/06/090629100643.htm"], "clear_faces": false },
+  "ai_generated": false
+}

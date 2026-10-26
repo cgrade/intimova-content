@@ -1,0 +1,22 @@
+{
+  "name": "intimova-content",
+  "private": true,
+  "type": "module",
+  "description": "Intimova content pipeline: renders story reels and carousels, and publishes approved posts to Instagram, Facebook, X and TikTok.",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "render": "node engine/render-week.mjs",
+    "preview": "node engine/preview.mjs",
+    "publish": "node publisher/publish.mjs",
+    "publish:dry": "DRY_RUN=1 node publisher/publish.mjs",
+    "test": "node --test test/*.test.mjs",
+    "setup:key": "node publisher/setup/make-key.mjs",
+    "setup:meta": "node publisher/setup/meta.mjs",
+    "setup:x": "node publisher/setup/x.mjs",
+    "setup:tiktok": "node publisher/setup/tiktok.mjs"
+  },
+  "devDependencies": {
+    "@fontsource/inter": "5.1.1",
+    "@fontsource/playfair-display": "5.1.1"
+  }
+}

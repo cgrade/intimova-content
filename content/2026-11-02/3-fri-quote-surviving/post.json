@@ -1,0 +1,20 @@
+{
+  "id": "2026-11-06-quote-surviving",
+  "format": "carousel",
+  "pillar": "Permission",
+  "publish_at": "2026-11-06T19:30:00+01:00",
+  "platforms": ["instagram", "facebook", "x", "tiktok"],
+  "series_label": "PERMISSION",
+  "slides": [
+    { "type": "quote", "quote": "You are allowed to want *more than surviving.*", "attribution": "— INTIMOVA" }
+  ],
+  "captions": {
+    "instagram": "You are allowed to want more than surviving.\n\nFor everyone holding it together for everybody else: your own joy is not a luxury. Tag someone who needs to hear this today.\n\n#Intimova #SelfLove #PleasureIsSelfCare #Wellbeing",
+    "facebook": "You are allowed to want more than surviving.\n\nFor everyone holding it together for everybody else: your own joy is not a luxury. Tag someone who needs to hear this today.",
+    "x": "You are allowed to want more than surviving.",
+    "tiktok_title": "You are allowed to want more.",
+    "tiktok": "For everyone holding it together for everybody else: your own joy is not a luxury. #Intimova #SelfLove #Wellbeing"
+  },
+  "safety": { "explicit": false, "health_claim": false, "clear_faces": false },
+  "ai_generated": false
+}

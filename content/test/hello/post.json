@@ -1,0 +1,18 @@
+{
+  "id": "test-hello",
+  "hold": true,
+  "format": "carousel",
+  "publish_at": "2026-01-01T12:00:00+01:00",
+  "platforms": ["instagram", "facebook", "x", "tiktok"],
+  "series_label": "INTIMOVA",
+  "slides": [ { "type": "quote", "quote": "Something *warm* is coming.", "attribution": "— INTIMOVA" } ],
+  "captions": {
+    "instagram": "Something warm is coming. ✨",
+    "facebook": "Something warm is coming. ✨",
+    "x": "Something warm is coming. ✨",
+    "tiktok_title": "Something warm is coming.",
+    "tiktok": "Something warm is coming. ✨ #Intimova"
+  },
+  "safety": { "explicit": false, "health_claim": false, "clear_faces": false },
+  "ai_generated": false
+}

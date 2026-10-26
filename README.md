@@ -1,0 +1,136 @@
+# Intimova content pipeline
+
+This repo makes and posts Intimova's social content.
+
+- **Claude drafts the week.** Every Saturday Claude writes the next week's posts, renders them (story reels and carousels), and opens a pull request.
+- **You approve.** You review the pull request on your phone. Comment to change something; merge to approve.
+- **It posts itself.** An hourly GitHub job posts each approved post at its time to Instagram, Facebook and X. TikTok gets a draft in your inbox.
+
+Nothing posts unless it is merged into `main`. A post with `"hold": true` never posts on its own.
+
+## How a week runs
+
+1. **Saturday 10:00 (Lagos).** Claude opens a pull request named "Intimova: week of …". It shows every slide, the reel cover with a link to watch it, and every caption.
+2. **Saturday to Sunday.** You review it in the GitHub app.
+   - To change something, comment on the post. Claude's Sunday 18:00 run makes the fixes.
+   - To approve, merge the pull request.
+3. **After the merge.** Cloudflare publishes the images and videos at `https://media.intimova.ng` within a minute or two.
+4. **At each post's time.** The **Publish due posts** job runs every hour from 06:05 to 22:05 and posts whatever is due.
+5. **TikTok.** You get a TikTok notification. Open it, add a sound, and post. For reels, copy the caption from the job's summary page (Actions tab, open the run). TikTok doesn't let apps send reel captions.
+
+If a platform fails, the job retries it on the next run, up to three times. GitHub emails you when a run fails. Platforms that already worked are never posted twice.
+
+## One-time setup
+
+This takes about 2 hours, plus however long TikTok takes to approve the app; I don't know how long that is. Do the steps in order.
+
+### 1. GitHub
+
+1. Create a **private** repository called `intimova-content` on GitHub.
+2. Push this folder to it:
+   ```
+   cd intimova-content
+   git init && git add . && git commit -m "Intimova pipeline"
+   git branch -M main
+   git remote add origin https://github.com/<you>/intimova-content.git
+   git push -u origin main
+   ```
+3. Connect GitHub to Claude in your Claude settings, so the weekly runs can push and open pull requests.
+
+### 2. Image and video hosting (Cloudflare Pages, free)
+
+Instagram, Facebook and TikTok fetch media from a public link, so the `public/` folder needs a web address. Menu names below may differ slightly in Cloudflare's dashboard.
+
+1. Create a Cloudflare account. Then go to Workers & Pages > Create > Pages > Connect to Git, and pick `intimova-content`.
+2. Leave the build command empty, set the output directory to `public`, then deploy.
+3. Add the custom domain `media.intimova.ng` to the Pages project. If intimova.ng's DNS isn't on Cloudflare, add the CNAME record it shows you at your DNS provider.
+4. In GitHub, go to Settings > Secrets and variables > Actions > **Variables**. Add `MEDIA_BASE_URL` = `https://media.intimova.ng`.
+
+Check that `https://media.intimova.ng/robots.txt` opens. Facebook refuses video from sites that block its crawler, and that file allows it.
+
+### 3. Meta (Instagram and Facebook)
+
+1. Make the Intimova Instagram a professional account, and link it to the Intimova Facebook Page.
+2. At developers.facebook.com, create an app (type Business) with you as admin. Add Facebook Login for Business and the Instagram API with Facebook Login. Meta says an app that only serves accounts you manage needs Standard Access, so no App Review.
+3. If Meta asks the Page for **Page Publishing Authorization**, complete it. Posting is blocked until you do.
+4. In Graph API Explorer, generate a user token with the permissions listed at the top of `publisher/setup/meta.mjs`. Then run:
+   ```
+   npm install
+   export META_APP_ID=... META_APP_SECRET=... META_SHORT_TOKEN=...
+   npm run setup:meta
+   ```
+5. Add the secrets it prints (`META_PAGE_ID`, `IG_USER_ID`, `META_PAGE_TOKEN`) under Settings > Secrets and variables > Actions > **Secrets**.
+
+### 4. The encryption key
+
+X and TikTok logins change every time they refresh, so the job keeps them in `state/tokens.enc`, encrypted.
+
+```
+npm run setup:key
+```
+
+Save the key it prints as the GitHub secret `TOKENS_KEY`, and in your password manager.
+
+### 5. X
+
+1. In the X developer console, set up pay-per-use credit. A few dollars covers months, at about $0.015 a post without a link.
+2. Create an app. Under User authentication settings, turn on OAuth 2.0, choose type **Web App**, allow **Read and write**, and set the callback URL to `https://intimova.ng/oauth/x` (the page can be blank).
+3. Run:
+   ```
+   export X_CLIENT_ID=... X_CLIENT_SECRET=... X_REDIRECT_URI=https://intimova.ng/oauth/x TOKENS_KEY=...
+   npm run setup:x
+   ```
+4. Add the secrets `X_CLIENT_ID` and `X_CLIENT_SECRET`, then commit and push `state/tokens.enc`.
+
+### 6. TikTok
+
+1. At developers.tiktok.com, create an app.
+   - Add **Login Kit**, with the redirect URI `https://intimova.ng/oauth/tiktok`.
+   - Add the **Content Posting API**, and request the `video.upload` scope.
+2. Verify `https://media.intimova.ng/` as your URL prefix. TikTok gives you a file to put in `public/` or a DNS record.
+3. Once TikTok approves the app, run:
+   ```
+   export TIKTOK_CLIENT_KEY=... TIKTOK_CLIENT_SECRET=... TIKTOK_REDIRECT_URI=https://intimova.ng/oauth/tiktok TOKENS_KEY=...
+   npm run setup:tiktok
+   ```
+4. Add the secrets `TIKTOK_CLIENT_KEY` and `TIKTOK_CLIENT_SECRET`, then commit and push `state/tokens.enc`.
+
+### 7. Test before the first live week
+
+1. Go to Actions > **Publish due posts** > Run workflow, and leave **Dry run** ticked. The summary shows what would post and whether the media links work.
+2. Post the test card (`content/test/hello`, "Something warm is coming.") to **one platform at a time**:
+   - Set the repository variable `PLATFORMS` to `instagram`.
+   - Run the workflow with Dry run unticked and `only_post` = `test-hello`.
+   - Check the post on Instagram, then delete it.
+   - Repeat with `facebook`, `x`, then `tiktok`.
+3. When each platform works, delete the `PLATFORMS` variable, so all four are used again.
+4. Delete the `test-hello` entry from `state/posted.json`, so the test card can be used again later.
+
+## Things I couldn't confirm from the platforms' docs
+
+Your test posts will settle each of these:
+
+- **The Page token may not be enough for Instagram.** Meta's docs don't say whether a Page token can publish to Instagram. `setup:meta` checks that it can read the account. If publishing is refused, add `META_IG_TOKEN`; the script prints it when needed.
+- **Instagram may crop the carousel.** Meta says carousel images are cropped to the first image's shape. The slides are 4:5, which Instagram allows, so check the first carousel isn't cut square.
+- **The Facebook photo limit isn't documented.** Meta doesn't state how many photos one post can hold; one third-party guide says 4. If Facebook refuses a 5-slide post, tell Claude.
+- **X shows 4 images per post (as far as I know).** Longer carousels continue as a reply thread.
+- **TikTok's example uses WebP images.** These slides are JPEG. If TikTok refuses them, Claude can render WebP.
+- **Cloudflare Pages' free plan:** check its terms allow a commercial site. As far as I know, each file must be under 25 MB, and the reel engine keeps files under 24 MB.
+
+## Running it yourself
+
+- `npm test`: publisher tests against a fake copy of all four APIs. No internet needed.
+- `node engine/validate.mjs`: checks every upcoming post's captions, safety fields and rendered files.
+- `npm run render -- content/<week>`: renders a week. This needs Playwright with Chromium, ffmpeg, and python3 with numpy and Pillow. Claude's workspace has all of them.
+
+## Folder map
+
+| Folder | What's in it |
+| --- | --- |
+| `content/<monday>/<post>/post.json` | One post: time, platforms, captions, and the story or slides |
+| `public/<monday>/<post>/` | Rendered media served at media.intimova.ng |
+| `engine/` | The reel and carousel renderers |
+| `publisher/` | The posting job and the one-time setup scripts |
+| `state/posted.json` | What was posted, where, and its post IDs |
+| `state/tokens.enc` | Encrypted X and TikTok logins |
+| `CLAUDE.md` | Instructions for Claude's weekly runs |

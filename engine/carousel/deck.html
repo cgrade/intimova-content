@@ -1,0 +1,84 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- Intimova carousel and single-image templates. The deck is injected as window.DECK before this page runs. -->
+<style>
+@font-face{font-family:'PF';src:url('../../node_modules/@fontsource/playfair-display/files/playfair-display-latin-400-normal.woff2');font-weight:400;font-style:normal}
+@font-face{font-family:'PF';src:url('../../node_modules/@fontsource/playfair-display/files/playfair-display-latin-400-italic.woff2');font-weight:400;font-style:italic}
+@font-face{font-family:'PF';src:url('../../node_modules/@fontsource/playfair-display/files/playfair-display-latin-700-normal.woff2');font-weight:700;font-style:normal}
+@font-face{font-family:'IN';src:url('../../node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2');font-weight:400}
+@font-face{font-family:'IN';src:url('../../node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2');font-weight:600}
+:root{--cream:#faf3ec;--ink:#2a141c;--muted:#7a6469;--wine:#6b0f3a;--rule:#a34f43}
+body{margin:0;background:#ccc}
+.slide{position:relative;width:1080px;height:1350px;box-sizing:border-box;padding:84px 90px 56px;display:flex;flex-direction:column;background:var(--cream);font-family:'IN',sans-serif;color:var(--ink);overflow:hidden;margin-bottom:20px}
+.slide.dark{background:linear-gradient(180deg,#5a0c31 0%,#6b0f3a 60%,#7a1745 100%);color:var(--cream)}
+.slide.night{background:linear-gradient(180deg,#12070d 0%,#1d0812 55%,#34091f 100%);color:var(--cream)}
+.deco{position:absolute;right:-180px;top:-180px;width:640px;height:640px;pointer-events:none}
+.top{display:flex;justify-content:space-between;font-size:22px;font-weight:600;letter-spacing:5px;color:var(--wine);position:relative}
+.dark .top,.night .top{color:#e9c9bd}
+.top span:last-child{font-weight:400;letter-spacing:0;color:var(--muted)}
+.dark .top span:last-child,.night .top span:last-child{color:#e9c9bd}
+.tag{display:inline-block;align-self:flex-start;font-size:22px;font-weight:600;letter-spacing:6px;padding:12px 22px 11px;border-radius:999px;border:2px solid var(--wine);color:var(--wine)}
+.tag.fill{background:var(--wine);color:var(--cream)}
+.myth{margin:36px 0 0;font-family:'PF',serif;font-style:italic;font-size:92px;line-height:1.14}
+.lead{font-size:34px;line-height:1.45;margin:30px 0 0}
+.num{font-family:'PF',serif;font-weight:700;font-size:300px;line-height:.9;color:var(--wine);margin:40px 0 0;letter-spacing:-6px}
+.stmt{font-family:'PF',serif;font-size:58px;line-height:1.2;margin:72px 0 0}
+.detail{font-size:32px;line-height:1.45;color:var(--muted);margin:28px 0 0}
+.h{font-family:'PF',serif;font-size:72px;line-height:1.16;margin:0}
+.h.xl{font-size:92px;line-height:1.1}
+.h em,.myth em{font-style:italic;color:var(--wine)}
+.dark .h em,.night .h em{color:#f0c7bd}
+.body{font-size:32px;line-height:1.45;margin:28px 0 0}
+.quote{font-family:'PF',serif;font-style:italic;font-size:96px;line-height:1.12;margin:0}
+.quote em{color:#f0c7bd}
+.slide:not(.dark):not(.night) .quote em{color:var(--wine)}
+.attr{font-size:26px;font-weight:600;letter-spacing:5px;margin-top:34px;color:#e9c9bd}
+.slide:not(.dark):not(.night) .attr{color:var(--wine)}
+.rule{width:72px;height:3px;background:var(--rule);margin-top:30px}
+.dark .rule,.night .rule{background:#e9a99c}
+.src{margin-top:auto;font-size:21px;line-height:1.45;color:var(--muted);border-top:1px solid #e4d6cf;padding-top:18px}
+.dark .src,.night .src{color:#e9c9bd;border-top-color:rgba(255,255,255,.18)}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:30px}
+.foot .brand{font-family:'PF',serif;font-weight:700;font-size:30px;color:var(--wine)}
+.dark .foot .brand,.night .foot .brand{color:var(--cream)}
+.foot .sw{font-size:22px;color:var(--muted)}
+.dark .foot .sw,.night .foot .sw{color:#e9c9bd;letter-spacing:4px}
+.spacer{margin-top:auto}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<g id="rings" fill="none" stroke-width="2"><circle cx="320" cy="320" r="300"/><circle cx="320" cy="320" r="230"/><circle cx="320" cy="320" r="160"/><circle cx="320" cy="320" r="90"/></g>
+</defs></svg>
+<div id="deck"></div>
+<script>
+const DECK = window.DECK;
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// *text* = emphasis, _text_ = italic (used for journal names in sources)
+const md = s => esc(s).replace(/\*([^*]+)\*/g, '<em>$1</em>').replace(/_([^_]+)_/g, '<i>$1</i>');
+const n = DECK.slides.length;
+
+function frame(s, i, inner) {
+  const theme = s.theme || ({takeaway: 'dark', quote: 'dark'}[s.type] || 'cream');
+  const cls = theme === 'cream' ? '' : theme;
+  const ring = theme === 'cream' ? '#6b0f3a' : '#faf3ec', ro = theme === 'cream' ? '.08' : '.10';
+  const last = i === n - 1;
+  const right = n > 1 ? `${i + 1} / ${n}` : '';
+  const footRight = last ? (DECK.last_footer || 'INTIMOVA.NG') : 'Swipe →';
+  return `<div class="slide ${cls}"><svg class="deco" viewBox="0 0 640 640" aria-hidden="true"><use href="#rings" stroke="${ring}" stroke-opacity="${ro}"/></svg>
+    <div class="top"><span>${esc(s.kicker || DECK.series || '')}</span><span>${right}</span></div>
+    ${inner}
+    <div class="foot"${s.type === 'myth' || s.type === 'takeaway' || s.type === 'cover' ? ' style="margin-top:96px"' : ''}><span class="brand">Intimova</span><span class="sw">${esc(footRight)}</span></div></div>`;
+}
+const T = {
+  cover: s => `<div class="spacer"></div><p class="h xl">${md(s.headline)}</p><div class="rule"></div>${s.lead ? `<p class="lead">${md(s.lead)}</p>` : ''}`,
+  myth: s => `<div class="spacer"></div><span class="tag">${esc(s.tag || 'MYTH')}</span><p class="myth">${md(s.text)}</p><div class="rule"></div>${s.lead ? `<p class="lead">${md(s.lead)}</p>` : ''}`,
+  fact: s => `<div class="spacer"></div><span class="tag fill">${esc(s.tag || 'FACT')}</span><p class="num">${esc(s.number)}</p><p class="stmt">${md(s.statement)}</p>${s.detail ? `<p class="detail">${md(s.detail)}</p>` : ''}<p class="src">${md(s.source || '')}</p>`,
+  text: s => `<div class="spacer"></div><p class="h">${md(s.headline)}</p><div class="rule"></div>${s.body ? `<p class="body">${md(s.body)}</p>` : ''}${s.note ? `<p class="src">${md(s.note)}</p>` : '<div class="spacer"></div>'}`,
+  takeaway: s => `<div class="spacer"></div><p class="h xl">${md(s.headline)}</p><div class="rule"></div>${s.lead ? `<p class="lead">${md(s.lead)}</p>` : ''}`,
+  quote: s => `<div class="spacer"></div><p class="quote">${md(s.quote)}</p><div class="rule"></div><div class="attr">${esc(s.attribution || '— INTIMOVA')}</div><div class="spacer"></div>`,
+};
+document.getElementById('deck').innerHTML = DECK.slides.map((s, i) => {
+  if (!T[s.type]) throw new Error('Unknown slide type: ' + s.type);
+  return frame(s, i, T[s.type](s));
+}).join('');
+window.READY = true;
+</script></body></html>
