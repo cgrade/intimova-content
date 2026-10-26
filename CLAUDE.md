@@ -1,6 +1,6 @@
 # Weekly run instructions for Claude
 
-This repo is Intimova's content pipeline. Each week Claude drafts and renders the next week's posts and opens a pull request. Grade approves by merging. GitHub Actions then posts each one at its time.
+This repo is Intimova's content pipeline. **For the current state, open items and the decisions made so far, read `HANDOFF.md` first.** Each week Claude drafts and renders the next week's posts and opens a pull request. Grade approves by merging. GitHub Actions then posts each one at its time.
 
 ## References
 

@@ -3,7 +3,9 @@
   "private": true,
   "type": "module",
   "description": "Intimova content pipeline: renders story reels and carousels, and publishes approved posts to Instagram, Facebook, X and TikTok.",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "render": "node engine/render-week.mjs",
     "preview": "node engine/preview.mjs",
@@ -17,6 +19,7 @@
   },
   "devDependencies": {
     "@fontsource/inter": "5.1.1",
-    "@fontsource/playfair-display": "5.1.1"
+    "@fontsource/playfair-display": "5.1.1",
+    "playwright": "1.56.0"
   }
 }
