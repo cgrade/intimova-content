@@ -17,7 +17,7 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
   - Mon 26: myth vs fact carousel
   - Wed 28: Lily part 1 reel, with its original score
   - Fri 30: quote card
-  - Sun 1 Nov: product guide, waiting on Grade's product details (see `NEEDS-INPUT.md`)
+  - Sun 1 Nov: product guide for The Bullet (rechargeable), ₦15,000. Details come from intimova.ng/product/bullet-rechargeable as of 27 Oct. Check the price is still the same before it posts.
 
 ## The reel engine
 
@@ -64,7 +64,7 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
 
 ## Open items
 
-1. Grade: the product details for the Sunday product guide (name, link, price, who it's for).
+1. Product guides: take the details from intimova.ng/shop (each product page lists price, materials, care, delivery and returns). Use only what the page states; it doesn't mention Paystack.
 2. Grade: reconnect GitHub so Claude can push (needed for the Saturday run on 31 Oct).
 3. Grade: regenerate the Meta Page token and update the secret.
 4. Optional: connect X (README step 5). This needs pay-per-use credit.
