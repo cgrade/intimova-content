@@ -74,7 +74,7 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
 ## Open items
 
 1. Product guides: take the details from intimova.ng/shop (each product page lists price, materials, care, delivery and returns). Use only what the page states; it doesn't mention Paystack.
-2. Grade: deploy the posting alarm (README step 8). Until it's deployed, posts depend on GitHub's unreliable schedule; if a post is late, run the workflow by hand with Dry run unticked and `only_post` set to the post's id.
+2. Done 27 Oct: Grade deployed the posting alarm (README step 8). Its first run started "Publish due posts" at 22:38 Lagos and succeeded. The GitHub token it uses expires on the date Grade chose; when it does, make a new one and run `npx wrangler secret put GITHUB_TOKEN` in `alarm/`. If a post is ever late, run the workflow by hand with Dry run unticked and `only_post` set to the post's id.
 3. Grade: regenerate the Meta Page token and update the secret.
 4. Optional: connect X (README step 5). This needs pay-per-use credit.
 5. Optional later: Instagram's Audio API can attach a track from Instagram's own library to Reels at publish time. It's untested with the Page token we use, and Facebook has no equivalent.
