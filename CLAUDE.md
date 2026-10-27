@@ -24,7 +24,7 @@ This repo is Intimova's content pipeline. **For the current state, open items an
    | Sun | Product | carousel (5 slides) | `products.json` |
 
    - Record what each post used: `"library": "<item id>"` (story parts are `<series>-<n>`, e.g. `lily-2`).
-   - Facts: only the findings a library item names, in `sources.json`'s wording, with the source on the slide. Carousels: only what the article page says. Products: only what the live product page says, with the price from `npm run products`; add `"product": { "slug": "...", "price": <naira on the slides> }` so the publisher holds the post if the shop changes.
+   - Facts: only the findings a library item names, in `sources.json`'s wording, with the source on the slide. Carousels: only what the article page says. Products: only what the product page says, with the price from `npm run products`. Claude's cloud runs can't reach intimova.ng, so there read the copies GitHub saves every Saturday morning: `state/site/article-<slug>.txt` and `state/site/product-<slug>.txt` (and `npm run products` falls back to `state/products.json`). Add `"product": { "slug": "...", "price": <naira on the slides> }` so the publisher holds the post if the shop changes.
    - Never draft an item whose status is `hold` or `website-only`. If a slot has nothing ready, skip it and say so in the pull request.
    - All posts go out at 19:30 Lagos time unless Grade changes it.
 5. Rules that never bend:

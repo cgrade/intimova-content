@@ -15,6 +15,7 @@ Everything Intimova's social posts can draw on, planned about six months ahead, 
 
 - `npm run runway -- 2026-11-02 --live` shows each day's next item and how many weeks are left. Under 6 weeks is flagged, and the Saturday run adds new, researched items to that file.
 - `npm run products` shows each product's live price and stock on intimova.ng. Out-of-stock products are skipped.
+- Every Saturday at 07:13 GitHub saves copies of the product pages and library articles to `state/site/`, and prices to `state/products.json` (`node engine/site-snapshot.mjs`). Claude's cloud runs can't reach intimova.ng, so they read these.
 - A post records what it used with `"library": "<id>"`. That's how an item counts as used; there is no separate list to keep up to date.
 - `node engine/validate.mjs` (and the pull request check) fails if a library item cites a source that doesn't exist, or a post names a library id or product that doesn't exist.
 

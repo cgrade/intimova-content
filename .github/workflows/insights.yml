@@ -28,16 +28,16 @@ jobs:
           META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN }}
           META_IG_TOKEN: ${{ secrets.META_IG_TOKEN }}
         run: node publisher/insights.mjs
-      - name: Save product prices and stock
-        # Claude's cloud runs can't reach intimova.ng, so the Saturday draft reads this snapshot instead.
+      - name: Save product prices, product pages and articles
+        # Claude's cloud runs can't reach intimova.ng, so the Saturday draft reads these copies instead.
         if: always()
-        run: node engine/products.mjs --save
+        run: node engine/site-snapshot.mjs
       - name: Save results
         if: always()
         run: |
           git config user.name "intimova-publisher"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add state/insights.json state/products.json
+          git add state/insights.json state/products.json state/site
           if ! git diff --cached --quiet; then
             git commit -m "Post results and product prices [skip ci]"
             for i in 1 2 3 4 5; do

@@ -145,3 +145,9 @@ test('falls back to the saved product snapshot when the shop can\'t be reached',
     assert.deepEqual(r.failed, []);
   } finally { await mock.close(); }
 });
+
+test('saves a page as readable text without scripts, navigation or markup', async () => {
+  const { pageText } = await import('../engine/site-snapshot.mjs');
+  const html = '<html><nav>Shop Learn</nav><main><h1>The Bullet</h1><script>var x=1</script><p>Care: wipe clean &amp; store dry.</p><p>&#8358;15,000</p></main><footer>© Intimova</footer></html>';
+  assert.equal(pageText(html), 'The Bullet\nCare: wipe clean & store dry.\n₦15,000');
+});
