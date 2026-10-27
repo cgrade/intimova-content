@@ -11,7 +11,7 @@ Merge this pull request to approve the week. Comment on anything you want change
 
 ## Mon 26 Oct, 19:30 · 2026-10-26-myth-toys
 
-<img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/1-mon-myth-toys/slide-1.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/1-mon-myth-toys/slide-2.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/1-mon-myth-toys/slide-3.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/1-mon-myth-toys/slide-4.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/1-mon-myth-toys/slide-5.jpg?raw=true" width="200">
+<img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/1-mon-myth-toys/slide-1.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/1-mon-myth-toys/slide-2.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/1-mon-myth-toys/slide-3.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/1-mon-myth-toys/slide-4.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/1-mon-myth-toys/slide-5.jpg?raw=true" width="200">
 
 **Instagram**
 
@@ -45,9 +45,9 @@ Safety: explicit no ✅ · health claim yes, sourced ✅ · clear faces no ✅
 
 ## Wed 28 Oct, 19:30 · 2026-10-28-lily-part1
 
-<img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/2-wed-lily-part1/cover.jpg?raw=true" width="240">
+<img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/2-wed-lily-part1/cover.jpg?raw=true" width="240">
 
-[Watch the reel (89.2s)](https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/2-wed-lily-part1/reel.mp4?raw=true)
+[Watch the reel (89.2s)](https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/2-wed-lily-part1/reel.mp4?raw=true)
 
 **Instagram**
 
@@ -75,7 +75,7 @@ Safety: explicit no ✅ · health claim none · clear faces no ✅
 
 ## Fri 30 Oct, 19:30 · 2026-10-30-quote-surviving
 
-<img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/3-fri-quote-surviving/slide-1.jpg?raw=true" width="200">
+<img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/3-fri-quote-surviving/slide-1.jpg?raw=true" width="200">
 
 **Instagram**
 
@@ -97,7 +97,7 @@ Safety: explicit no ✅ · health claim none · clear faces no ✅
 
 ## Sun 1 Nov, 19:30 · 2026-11-01-guide-bullet
 
-<img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/4-sun-guide-bullet/slide-1.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/4-sun-guide-bullet/slide-2.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/4-sun-guide-bullet/slide-3.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/4-sun-guide-bullet/slide-4.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/4-sun-guide-bullet/slide-5.jpg?raw=true" width="200">
+<img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/4-sun-guide-bullet/slide-1.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/4-sun-guide-bullet/slide-2.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/4-sun-guide-bullet/slide-3.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/4-sun-guide-bullet/slide-4.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/4-sun-guide-bullet/slide-5.jpg?raw=true" width="200">
 
 **Instagram**
 
