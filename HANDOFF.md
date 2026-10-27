@@ -15,7 +15,7 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
   - The Page token was pasted into a chat once, so it should be regenerated after the first live posts, then the secret updated.
 - **Content library (`library/`):** about six months of material for five posts a week (Mon myth vs fact, Tue education carousel, Wed story, Fri quote or tip, Sun product). `npm run runway` shows weeks left per day; see `library/README.md`. From the week of 2 Nov the Saturday run drafts five posts a week from it.
 - **Product checks:** product facts come from intimova.ng's public product pages (their schema.org data), read-only. A post with `"product"` is held by the publisher if the live price or stock no longer matches. Nothing in the marketplace repo was changed.
-- **Results:** the "Read post results" job (Saturdays 07:13 Lagos) saves Instagram and Facebook numbers to `state/insights.json`. Not yet run against the live API: check its first run on 31 Oct.
+- **Results and prices:** the "Read post results and product prices" job (Saturdays 07:13 Lagos) saves Instagram and Facebook numbers to `state/insights.json` and product prices and stock to `state/products.json`. Claude's cloud sandbox can't reach intimova.ng, so the Saturday draft uses that snapshot; the publisher's own pre-post check runs on GitHub and reads the live shop. The results part hasn't run against the live Meta API yet: check its first run on 31 Oct.
 - **This week (folder `content/2026-10-26`), all at 19:30 Lagos time:**
   - Mon 26: myth vs fact carousel
   - Wed 28: Lily part 1 reel, with its original score
@@ -44,7 +44,7 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
 
 - **"Intimova weekly content draft":** Saturdays 09:33 Lagos. It drafts the first Monday with no folder in `content/` (31 Oct drafts the week of 2 Nov, with Lily part 2 on Wednesday), renders it, and opens a pull request for Grade to approve by merging.
 - **"Intimova Sunday fixes":** Sundays 17:40 Lagos. It applies Grade's pull request comments.
-- **GitHub push from the cloud works** (tested 27 Oct with a one-off cloud run: it pushed a branch). The cloud sandbox can't delete remote branches, which the weekly runs never need.
+- **Cloud runs (tested 27 Oct):** push works; pull requests and comments go through the built-in GitHub tools (`gh` can't); `bash scripts/cloud-setup.sh` sets up Python and Chromium, and rendering works after it; intimova.ng is blocked from the cloud (see the price snapshot above).
 
 ## Content rules (summary; the full playbook is a Claude Doc)
 

@@ -1,4 +1,4 @@
-name: Read post results
+name: Read post results and product prices
 
 on:
   schedule:
@@ -28,19 +28,23 @@ jobs:
           META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN }}
           META_IG_TOKEN: ${{ secrets.META_IG_TOKEN }}
         run: node publisher/insights.mjs
+      - name: Save product prices and stock
+        # Claude's cloud runs can't reach intimova.ng, so the Saturday draft reads this snapshot instead.
+        if: always()
+        run: node engine/products.mjs --save
       - name: Save results
         if: always()
         run: |
           git config user.name "intimova-publisher"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add state/insights.json
+          git add state/insights.json state/products.json
           if ! git diff --cached --quiet; then
-            git commit -m "Post results [skip ci]"
+            git commit -m "Post results and product prices [skip ci]"
             for i in 1 2 3 4 5; do
               git pull --rebase origin main && git push && exit 0
               git rebase --abort 2>/dev/null || true
               echo "Push failed, retrying ($i)"; sleep $((i * 5))
             done
-            echo "::error::Could not save state/insights.json."
+            echo "::error::Could not save state/insights.json and state/products.json."
             exit 1
           fi

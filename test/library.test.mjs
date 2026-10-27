@@ -7,7 +7,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { startMock } from './mock-api.mjs';
 import { loadLibrary, validateLibrary, runway, usedIds } from '../lib/library.mjs';
-import { productFromHtml, productProblem } from '../lib/product.mjs';
+import { productFromHtml, productProblem, fetchProducts } from '../lib/product.mjs';
 import { run as publish } from '../publisher/publish.mjs';
 import { run as readInsights, loadInsights } from '../publisher/insights.mjs';
 import { loadConfig } from '../publisher/lib/config.mjs';
@@ -128,5 +128,20 @@ test('reads Instagram and Facebook results for recent posts and skips metrics Me
     assert.equal(saved.reel.facebook.likes, 5);
     assert.equal(saved.old.instagram.reach, 99);                     // older than 30 days: kept, not refetched
     assert.equal(saved['test-hello'], undefined);                    // test posts are ignored
+  } finally { await mock.close(); }
+});
+
+test('falls back to the saved product snapshot when the shop can\'t be reached', async () => {
+  const root = makeRoot();
+  fs.mkdirSync(path.join(root, 'state'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'state', 'products.json'), JSON.stringify({ fetched_at: '2026-10-31T06:13:00Z',
+    products: { 'the-wand': { name: 'The Wand', price: 20000, inStock: true, availability: 'InStock' } } }));
+  const mock = await startMock({ publicDir: root, products: { 'bullet-classic': { price: 10000 } } });
+  try {
+    const r = await fetchProducts(root, ['bullet-classic', 'the-wand'], { base: mock.base + '/shop' });
+    assert.equal(r.from, 'snapshot of 2026-10-31T06:13:00Z');
+    assert.equal(r.products['bullet-classic'].price, 10000);   // read live
+    assert.equal(r.products['the-wand'].price, 20000);         // from the snapshot
+    assert.deepEqual(r.failed, []);
   } finally { await mock.close(); }
 });

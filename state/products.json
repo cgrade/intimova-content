@@ -1,0 +1,86 @@
+{
+  "fetched_at": "2026-10-27T18:23:24.154Z",
+  "products": {
+    "rose-air-pulse": {
+      "slug": "rose-air-pulse",
+      "name": "The Rose — Air-Pulse",
+      "price": 25000,
+      "currency": "NGN",
+      "inStock": true,
+      "availability": "InStock",
+      "url": "https://intimova.ng/product/rose-air-pulse"
+    },
+    "rose-flutter": {
+      "slug": "rose-flutter",
+      "name": "The Rose — Flutter",
+      "price": 25000,
+      "currency": "NGN",
+      "inStock": true,
+      "availability": "InStock",
+      "url": "https://intimova.ng/product/rose-flutter"
+    },
+    "rose-duo": {
+      "slug": "rose-duo",
+      "name": "The Rose Duo — Flutter & Vibration",
+      "price": 35000,
+      "currency": "NGN",
+      "inStock": true,
+      "availability": "InStock",
+      "url": "https://intimova.ng/product/rose-duo"
+    },
+    "the-wand": {
+      "slug": "the-wand",
+      "name": "The Wand — Full-Body Massager",
+      "price": 20000,
+      "currency": "NGN",
+      "inStock": true,
+      "availability": "InStock",
+      "url": "https://intimova.ng/product/the-wand"
+    },
+    "bullet-rechargeable": {
+      "slug": "bullet-rechargeable",
+      "name": "The Bullet — Rechargeable",
+      "price": 15000,
+      "currency": "NGN",
+      "inStock": true,
+      "availability": "InStock",
+      "url": "https://intimova.ng/product/bullet-rechargeable"
+    },
+    "bullet-classic": {
+      "slug": "bullet-classic",
+      "name": "The Bullet — Classic",
+      "price": 10000,
+      "currency": "NGN",
+      "inStock": true,
+      "availability": "InStock",
+      "url": "https://intimova.ng/product/bullet-classic"
+    },
+    "silk-water-based-glide": {
+      "slug": "silk-water-based-glide",
+      "name": "xun z lan water based lubricant",
+      "price": 3000,
+      "currency": "NGN",
+      "inStock": false,
+      "availability": "OutOfStock",
+      "url": "https://intimova.ng/product/silk-water-based-glide"
+    },
+    "pocket-toto": {
+      "slug": "pocket-toto",
+      "name": "Pocket Toto",
+      "price": 35000,
+      "currency": "NGN",
+      "inStock": true,
+      "availability": "InStock",
+      "url": "https://intimova.ng/product/pocket-toto"
+    },
+    "x-power-coffee-for-men": {
+      "slug": "x-power-coffee-for-men",
+      "name": "X-Power Coffee for Men",
+      "price": 15000,
+      "currency": "NGN",
+      "inStock": true,
+      "availability": "InStock",
+      "url": "https://intimova.ng/product/x-power-coffee-for-men"
+    }
+  }
+}

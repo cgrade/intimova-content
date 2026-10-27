@@ -22,7 +22,7 @@ If a platform fails, the job retries it on the next run, up to three times. GitH
 
 A product post is held, and the run fails so GitHub emails you, if the product's price or stock on intimova.ng has changed since the post was made.
 
-Every Saturday at 07:13 the **Read post results** job saves each recent post's Instagram and Facebook numbers (reach, saves, shares, comments) to `state/insights.json`, and the Saturday draft reads them.
+Every Saturday at 07:13 the **Read post results and product prices** job saves each recent post's Instagram and Facebook numbers (reach, saves, shares, comments) to `state/insights.json`, and every product's price and stock to `state/products.json`. The Saturday draft reads both (Claude's cloud runs can't reach intimova.ng themselves).
 
 ## The week, and the library
 

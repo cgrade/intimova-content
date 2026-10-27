@@ -5,7 +5,7 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadLibrary, validateLibrary, runway, LOW_WEEKS } from '../lib/library.mjs';
-import { fetchProduct } from '../lib/product.mjs';
+import { fetchProducts } from '../lib/product.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -13,11 +13,11 @@ export async function runwayReport(root, { weekStart, liveCheck = false, md = fa
   const lib = loadLibrary(root);
   const problems = validateLibrary(lib);
   let live = null;
+  let stockFrom = null;
   if (liveCheck) {
-    live = {};
-    for (const slug of Object.keys(lib.products.catalogue)) {
-      try { live[slug] = await fetchProduct(slug); } catch (e) { live[slug] = { inStock: true, error: e.message }; }
-    }
+    const r = await fetchProducts(root, Object.keys(lib.products.catalogue));
+    live = r.products;
+    stockFrom = r.from;
   }
   const rows = runway(root, lib, { weekStart, live });
   const out = [];
@@ -33,6 +33,7 @@ export async function runwayReport(root, { weekStart, liveCheck = false, md = fa
   if (live) {
     const gone = Object.entries(live).filter(([, p]) => p.inStock === false).map(([s]) => s);
     if (gone.length) out.push('', `Out of stock, skipped: ${gone.join(', ')}`);
+    if (stockFrom !== 'live') out.push('', `Stock from: ${stockFrom === 'unavailable' ? 'nowhere (intimova.ng unreachable and no saved snapshot), so no product was skipped' : stockFrom}.`);
   }
   if (problems.length) out.push('', md ? '**Library problems:**' : 'Library problems:', ...problems.map(p => `- ${p}`));
   return { text: out.join('\n'), rows, problems };
