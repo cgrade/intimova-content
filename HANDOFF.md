@@ -7,7 +7,11 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
 
 - **Repo** `cgrade/intimova-content` (public). It holds the content, the rendered media in `public/`, the reel and carousel engine in `engine/`, and the publisher in `publisher/`. See `README.md` for setup and the folder map.
 - **Media hosting:** Cloudflare (Workers static assets, via `wrangler.jsonc`) serves `public/` at `MEDIA_BASE_URL`.
-- **Posting:** the GitHub Actions job "Publish due posts" runs every 10 minutes from 06:03 to 22:53 Lagos time (GitHub delays or drops scheduled runs under load, so it runs often).
+- **Posting:** the GitHub Actions job "Publish due posts" posts whatever is due.
+  - **Main clock:** the Cloudflare Worker `intimova-alarm` (`alarm/`) starts it every 10 minutes from 06:08 to 22:58 Lagos time, through GitHub's workflow-dispatch API, with a fine-grained token (Actions: read and write) stored as the Worker secret `GITHUB_TOKEN`. It also starts "Read post results and product prices" on Saturdays at 06:06 and 08:06. Grade deploys it (README step 8).
+  - **Backup clock:** GitHub's own schedule at :03, :13 … It is unreliable: on 26–27 Oct GitHub started 4 of the 20-plus runs due.
+  - Runs queue one at a time (`concurrency: publisher`) and check out the newest `main`, so a run that waited behind another sees what that run posted and doesn't repost it.
+  - A post that no run picks up within 12 hours of its time is skipped (`maxLateHours`).
   - It posts what's due to **Instagram and Facebook**. Tested live on 26 Oct with `test-hello`; see `state/posted.json` for the IDs.
   - For **TikTok**, it opens a GitHub issue that tags Grade, with the file links and caption, and he posts by hand. TikTok's app review rules out apps that only post to your own account and apps for adult products, so TikTok isn't automated.
   - **X** isn't connected (no credit or app yet). `PLATFORMS` is `instagram,facebook`.
@@ -70,7 +74,7 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
 ## Open items
 
 1. Product guides: take the details from intimova.ng/shop (each product page lists price, materials, care, delivery and returns). Use only what the page states; it doesn't mention Paystack.
-2. Grade: reconnect GitHub so Claude can push (needed for the Saturday run on 31 Oct).
+2. Grade: deploy the posting alarm (README step 8). Until it's deployed, posts depend on GitHub's unreliable schedule; if a post is late, run the workflow by hand with Dry run unticked and `only_post` set to the post's id.
 3. Grade: regenerate the Meta Page token and update the secret.
 4. Optional: connect X (README step 5). This needs pay-per-use credit.
 5. Optional later: Instagram's Audio API can attach a track from Instagram's own library to Reels at publish time. It's untested with the Page token we use, and Facebook has no equivalent.

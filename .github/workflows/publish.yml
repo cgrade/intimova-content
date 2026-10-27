@@ -3,8 +3,9 @@ name: Publish due posts
 on:
   schedule:
     # Every 10 minutes (:03, :13, ... :53) from 06:03 to 22:53 Lagos time (cron is in UTC).
-    # GitHub delays or drops scheduled runs under load, especially at the top of the hour,
-    # so we run often and off the hour. Runs are idempotent: nothing is posted twice.
+    # GitHub delays or drops scheduled runs under load (on 26-27 Oct it started 4 of the 20-plus runs due),
+    # so this is only the backup clock. The main clock is the Cloudflare alarm in alarm/,
+    # which starts this job at :08, :18, ... :58. Runs are idempotent: nothing is posted twice.
     - cron: '3-59/10 5-21 * * *'
   workflow_dispatch:
     inputs:
@@ -30,13 +31,18 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
+      # Check out the newest main, not the commit the run was queued on. A run that waited
+      # behind another run would otherwise miss the posts that run just recorded, and repost them.
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
       - name: Publish
         env:
-          DRY_RUN: ${{ inputs.dry_run && '1' || '0' }}
+          # The alarm sends dry_run as the text "false"; only a real true (or "true") means a dry run.
+          DRY_RUN: ${{ (inputs.dry_run == true || inputs.dry_run == 'true') && '1' || '0' }}
           ONLY_POST: ${{ inputs.only_post }}
           MEDIA_BASE_URL: ${{ vars.MEDIA_BASE_URL }}
           META_PAGE_ID: ${{ secrets.META_PAGE_ID }}
