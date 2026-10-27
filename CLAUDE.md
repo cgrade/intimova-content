@@ -61,4 +61,4 @@ Read the open week pull request's comments. Make the changes, re-render the post
 
   Every story should set `pulse`, `turn`, `heat` and `peak`. Stories without a sharp interruption can skip `lights` and `dread`; the music then plays through to the end card. Set `"music": "none"` on a story to make it silent.
 - Slide types: `cover`, `myth`, `fact`, `text`, `takeaway`, `quote`. In sources, `_text_` means italic.
-- Rendering needs Playwright with Chromium, ffmpeg, and python3 with numpy, scipy and Pillow. All of these exist in Claude's workspace.
+- Rendering needs Playwright with Chromium, ffmpeg, and python3 with numpy, scipy and Pillow. In a Claude cloud run, `bash scripts/cloud-setup.sh` sets these up.
