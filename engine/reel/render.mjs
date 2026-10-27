@@ -57,11 +57,13 @@ export async function renderReel(story, outDir, { log = console.log } = {}) {
 
   // Background and score render in parallel with the text frames.
   const bgPath = path.join(tmp, 'bg.mp4');
-  const bg = run('python3', [path.join(HERE, 'satin.py'), String(meta.total), bgPath, '-', '0', path.join(tmp, 'meta.json')]);
+  // settle() keeps a failure here from crashing the process while text frames are still rendering.
+  const settle = pr => pr.then(() => null, e => e);
+  const bg = settle(run('python3', [path.join(HERE, 'satin.py'), String(meta.total), bgPath, '-', '0', path.join(tmp, 'meta.json')]));
   // Original score timed to the story's cues (pulse, turn, heat, peak, lights, dread, end). "music": "none" turns it off.
   const withScore = (story.music ?? 'score') !== 'none';
   const scorePath = path.join(tmp, 'score.wav');
-  const score = withScore ? run('python3', [path.join(HERE, 'score.py'), path.join(tmp, 'meta.json'), scorePath, String(story.music_seed ?? 11)]) : Promise.resolve();
+  const score = settle(withScore ? run('python3', [path.join(HERE, 'score.py'), path.join(tmp, 'meta.json'), scorePath, String(story.music_seed ?? 11)]) : Promise.resolve());
 
   const stage = await page.$('#stage');
   for (let i = 0; i < frames; i++) {
@@ -70,8 +72,9 @@ export async function renderReel(story, outDir, { log = console.log } = {}) {
     if (i % 300 === 0) log(`  text frame ${i}/${frames}`);
   }
   await browser.close();
-  await bg;
-  await score;
+  const bgErr = await bg, scoreErr = await score;
+  if (bgErr) throw new Error('Background render failed: ' + bgErr.message);
+  if (scoreErr) throw new Error('Score failed (is scipy installed for python3?): ' + scoreErr.message);
 
   const out = path.join(outDir, 'reel.mp4');
   const D = meta.total;

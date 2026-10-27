@@ -7,7 +7,7 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
 
 - **Repo** `cgrade/intimova-content` (public). It holds the content, the rendered media in `public/`, the reel and carousel engine in `engine/`, and the publisher in `publisher/`. See `README.md` for setup and the folder map.
 - **Media hosting:** Cloudflare (Workers static assets, via `wrangler.jsonc`) serves `public/` at `MEDIA_BASE_URL`.
-- **Posting:** the GitHub Actions job "Publish due posts" runs hourly from 06:05 to 22:05 Lagos time.
+- **Posting:** the GitHub Actions job "Publish due posts" runs every 10 minutes from 06:03 to 22:53 Lagos time (GitHub delays or drops scheduled runs under load, so it runs often).
   - It posts what's due to **Instagram and Facebook**. Tested live on 26 Oct with `test-hello`; see `state/posted.json` for the IDs.
   - For **TikTok**, it opens a GitHub issue that tags Grade, with the file links and caption, and he posts by hand. TikTok's app review rules out apps that only post to your own account and apps for adult products, so TikTok isn't automated.
   - **X** isn't connected (no credit or app yet). `PLATFORMS` is `instagram,facebook`.

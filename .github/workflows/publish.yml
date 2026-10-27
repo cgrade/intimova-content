@@ -2,8 +2,10 @@ name: Publish due posts
 
 on:
   schedule:
-    # Every hour at :05 from 06:05 to 22:05 Lagos time (cron is in UTC).
-    - cron: '5 5-21 * * *'
+    # Every 10 minutes (:03, :13, ... :53) from 06:03 to 22:53 Lagos time (cron is in UTC).
+    # GitHub delays or drops scheduled runs under load, especially at the top of the hour,
+    # so we run often and off the hour. Runs are idempotent: nothing is posted twice.
+    - cron: '3-59/10 5-21 * * *'
   workflow_dispatch:
     inputs:
       dry_run:
@@ -58,5 +60,13 @@ jobs:
           git add state/
           if ! git diff --cached --quiet; then
             git commit -m "Publisher: record posts [skip ci]"
-            git push
+            # If someone pushed to main while this ran, rebase onto it and retry.
+            # Losing this record could make the next run post the same thing again.
+            for i in 1 2 3 4 5; do
+              git pull --rebase origin main && git push && exit 0
+              git rebase --abort 2>/dev/null || true
+              echo "Push failed, retrying ($i)"; sleep $((i * 5))
+            done
+            echo "::error::Could not save state/posted.json. Check before the next run, or a post may repeat."
+            exit 1
           fi

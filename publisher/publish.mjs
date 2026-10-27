@@ -1,4 +1,4 @@
-// Publishes every approved post whose time has come. Run hourly by GitHub Actions.
+// Publishes every approved post whose time has come. Run every 10 minutes by GitHub Actions.
 // A post is approved when it is on the main branch and has no "hold": true.
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';

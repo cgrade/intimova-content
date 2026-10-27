@@ -4,7 +4,7 @@ This repo makes and posts Intimova's social content.
 
 - **Claude drafts the week.** Every Saturday Claude writes the next week's posts, renders them (story reels and carousels), and opens a pull request.
 - **You approve.** You review the pull request on your phone. Comment to change something; merge to approve.
-- **It posts itself.** An hourly GitHub job posts each approved post at its time to Instagram and Facebook, and to X once it's connected. For TikTok, it sends you the files and caption to post by hand.
+- **It posts itself.** A GitHub job that runs every 10 minutes posts each approved post at its time to Instagram and Facebook, and to X once it's connected. For TikTok, it sends you the files and caption to post by hand.
 
 Nothing posts unless it is merged into `main`. A post with `"hold": true` never posts on its own.
 
@@ -15,7 +15,7 @@ Nothing posts unless it is merged into `main`. A post with `"hold": true` never 
    - To change something, comment on the post. Claude's Sunday 18:00 run makes the fixes.
    - To approve, merge the pull request.
 3. **After the merge.** Cloudflare publishes the images and videos at `https://media.intimova.ng` within a minute or two.
-4. **At each post's time.** The **Publish due posts** job runs every hour from 06:05 to 22:05 and posts whatever is due.
+4. **At each post's time.** The **Publish due posts** job runs every 10 minutes from 06:03 to 22:53 and posts whatever is due. GitHub sometimes delays these runs, so a post can go out up to about an hour late.
 5. **TikTok.** You get a GitHub notification titled "Post to TikTok" with the files and caption. Post it by hand, then close the issue.
 
 If a platform fails, the job retries it on the next run, up to three times. GitHub emails you when a run fails. Platforms that already worked are never posted twice.
