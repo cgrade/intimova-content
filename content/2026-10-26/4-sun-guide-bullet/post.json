@@ -2,6 +2,8 @@
   "id": "2026-11-01-guide-bullet",
   "format": "carousel",
   "pillar": "Product guide",
+  "library": "bullet-rechargeable-guide",
+  "product": { "slug": "bullet-rechargeable", "price": 15000 },
   "publish_at": "2026-11-01T19:30:00+01:00",
   "platforms": ["instagram", "facebook", "x", "tiktok"],
   "series_label": "PRODUCT GUIDE",
