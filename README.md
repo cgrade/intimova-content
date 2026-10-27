@@ -15,7 +15,7 @@ Nothing posts unless it is merged into `main`. A post with `"hold": true` never 
    - To change something, comment on the post. Claude's Sunday 18:00 run makes the fixes.
    - To approve, merge the pull request.
 3. **After the merge.** Cloudflare publishes the images and videos at `https://media.intimova.ng` within a minute or two.
-4. **At each post's time.** The **Publish due posts** job runs every 10 minutes from 06:03 to 22:53 and posts whatever is due. GitHub sometimes delays these runs, so a post can go out up to about an hour late.
+4. **At each post's time.** The **Publish due posts** job runs every 10 minutes from 06:08 to 22:58 and posts whatever is due, so a post goes out within about 10 minutes of its time. A Cloudflare alarm starts it (setup step 8), because GitHub's own schedule skips runs when GitHub is busy. GitHub's schedule stays on as a backup.
 5. **TikTok.** You get a GitHub notification titled "Post to TikTok" with the files and caption. Post it by hand, then close the issue.
 
 If a platform fails, the job retries it on the next run, up to three times. GitHub emails you when a run fails. Platforms that already worked are never posted twice.
@@ -118,6 +118,28 @@ For this to work, `PLATFORMS` must not include `tiktok`. The default is `instagr
    - Repeat with `facebook`, `x`, then `tiktok`.
 3. When each platform works, delete the `PLATFORMS` variable, so all four are used again.
 4. Delete the `test-hello` entry from `state/posted.json`, so the test card can be used again later.
+
+### 8. The posting alarm (Cloudflare, about 10 minutes)
+
+GitHub's own schedule is unreliable. GitHub's docs say scheduled runs "can be delayed during periods of high loads" and "some queued jobs may be dropped". On 26–27 Oct it started only 4 of the 20-plus runs due.
+So a tiny Cloudflare Worker in `alarm/` starts the job every 10 minutes instead, and GitHub's schedule stays as a backup. Cloudflare's free plan allows 5 of these schedules per account; this uses 1.
+
+1. **Make a GitHub token** that can only start this repo's jobs. In GitHub, go to Settings > Developer settings > Personal access tokens > Fine-grained tokens > Generate new token.
+   - Repository access: **Only select repositories**, then `intimova-content`.
+   - Permissions: under Repository permissions, set **Actions** to **Read and write**. Leave everything else as it is.
+   - Expiration: the longest it offers. Put the end date in your calendar, because posting stops starting on time when it expires.
+   - Copy the token.
+2. **Deploy the alarm** from this repo on your computer:
+   ```
+   git pull
+   cd alarm
+   npx wrangler login                    # opens the browser to sign in to Cloudflare
+   npx wrangler deploy
+   npx wrangler secret put GITHUB_TOKEN  # paste the token when it asks
+   ```
+3. **Check it.** After the next :08, :18, :28 … mark, Actions > **Publish due posts** shows a new run with the event `workflow_dispatch`. The Worker's logs in Cloudflare (Workers & Pages > intimova-alarm) say "Started the publisher".
+
+If the token expires, make a new one and run `npx wrangler secret put GITHUB_TOKEN` again.
 
 ## Things I couldn't confirm from the platforms' docs
 

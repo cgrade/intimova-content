@@ -1,0 +1,18 @@
+// The posting alarm (see worker.js). Deploy from this folder: npx wrangler deploy
+{
+  "name": "intimova-alarm",
+  "main": "worker.js",
+  "compatibility_date": "2026-10-26",
+  // No public address: the Worker only runs on its schedule.
+  "workers_dev": false,
+  "triggers": {
+    // Cron is in UTC. This is every 10 minutes at :08, :18 ... :58, from 06:08 to 22:58 Lagos time.
+    // GitHub's own schedule runs at :03, :13 ... as a backup, so the two clocks don't collide.
+    "crons": ["8,18,28,38,48,58 5-21 * * *"]
+  },
+  "vars": {
+    "GITHUB_REPO": "cgrade/intimova-content",
+    "WORKFLOW": "publish.yml"
+  },
+  "observability": { "enabled": true }
+}
