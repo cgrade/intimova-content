@@ -42,8 +42,9 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
 
 ## Weekly automation (Claude cloud scheduled tasks on Grade's account)
 
-- **"Intimova weekly content draft":** Saturdays 09:33 Lagos. It drafts the first Monday with no folder in `content/` (31 Oct drafts the week of 2 Nov, with Lily part 2 on Wednesday), renders it, and opens a pull request for Grade to approve by merging.
-- **"Intimova Sunday fixes":** Sundays 17:40 Lagos. It applies Grade's pull request comments.
+- **"Intimova weekly draft (Saturday)"** (`trig_01LVP5w5KfqmuEmvyRFRshuP`): Saturdays 09:33 Lagos. It drafts five posts from `library/` for the first Monday with no folder in `content/` (31 Oct drafts the week of 2 Nov, with Lily part 2 on Wednesday), renders them, and opens a pull request for Grade to approve by merging. It stops and asks Grade to merge the library pull request (#3) if that isn't on main yet.
+- **"Intimova Sunday fixes (cloud)"** (`trig_01N2yTr36RUKEF1tki4bM7Se`): Sundays 17:40 Lagos. It applies Grade's pull request comments, and can release or retire held library items when he says so.
+- Both were created on 27 Oct as standard cloud routines (environment "Default"). The two older routines ("Intimova weekly content draft", "Intimova Sunday fixes") are paused, not deleted; their prompts still asked Grade for product details and couldn't be edited safely.
 - **Cloud runs (tested 27 Oct):** push works; pull requests and comments go through the built-in GitHub tools (`gh` can't); `bash scripts/cloud-setup.sh` sets up Python and Chromium, and rendering works after it; intimova.ng is blocked from the cloud (see the price snapshot above).
 
 ## Content rules (summary; the full playbook is a Claude Doc)
