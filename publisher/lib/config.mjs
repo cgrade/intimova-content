@@ -14,6 +14,7 @@ export function loadConfig(env = process.env) {
     maxAttempts: Number(env.MAX_ATTEMPTS || 3),
     platforms: (env.PLATFORMS || 'instagram,facebook').split(',').map(s => s.trim()).filter(Boolean),
     mediaBase: env.MEDIA_BASE_URL || '',      // e.g. https://media.intimova.ng
+    shopBase: env.SHOP_BASE_URL || 'https://intimova.ng', // product pages, checked before a product post goes out
     pollMs: Number(env.POLL_MS || 10000),
     graph: {
       base: env.GRAPH_BASE || 'https://graph.facebook.com',

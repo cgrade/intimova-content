@@ -5,6 +5,7 @@ import { pathToFileURL } from 'node:url';
 import { loadConfig } from './lib/config.mjs';
 import { loadAllPosts, validatePost, manifestOf, mediaUrl, localMedia } from '../lib/post.mjs';
 import { loadState, saveState, loadTokens, saveTokens } from './lib/store.mjs';
+import { fetchProduct, productProblem } from '../lib/product.mjs';
 import { head, request } from './lib/http.mjs';
 import { postInstagram } from './platforms/instagram.mjs';
 import { postFacebook } from './platforms/facebook.mjs';
@@ -40,6 +41,23 @@ export async function run(cfg = loadConfig(), log = console.log) {
       for (const p of problems) log(`  ✗ ${p}`);
       results.push({ post: post.id, platform: '-', ok: false, note: problems.join('; ') });
       continue;
+    }
+    // A product post names its price on the slides, so hold it if the shop has changed since it was approved.
+    const pending = post.platforms.some(p => cfg.platforms.includes(p) && !(state[post.id]?.[p]?.done || state[post.id]?.[p]?.gave_up));
+    if (post.product?.slug && pending) {
+      let live;
+      try { live = await fetchProduct(post.product.slug, { base: cfg.shopBase }); }
+      catch (e) {
+        log(`  … couldn't check ${post.product.slug} on the shop (${e.message}); will try next run`);
+        results.push({ post: post.id, platform: '-', ok: false, waiting: true, note: 'shop not reachable to check the product' });
+        continue;
+      }
+      const why = productProblem(post.product, live);
+      if (why) {
+        log(`  ✗ held: ${why}. Fix the post (or set "hold": true) and push.`);
+        results.push({ post: post.id, platform: '-', ok: false, note: `held: ${why}` });
+        continue;
+      }
     }
     const url = f => mediaUrl(cfg.mediaBase, post, f);
     const local = f => localMedia(cfg.root, post, f);

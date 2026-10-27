@@ -2,7 +2,7 @@
 
 This repo makes and posts Intimova's social content.
 
-- **Claude drafts the week.** Every Saturday Claude writes the next week's posts, renders them (story reels and carousels), and opens a pull request.
+- **Claude drafts the week.** Every Saturday Claude writes the next week's five posts from the content library (`library/`, about six months planned ahead), renders them (story reels and carousels), and opens a pull request.
 - **You approve.** You review the pull request on your phone. Comment to change something; merge to approve.
 - **It posts itself.** A GitHub job that runs every 10 minutes posts each approved post at its time to Instagram and Facebook, and to X once it's connected. For TikTok, it sends you the files and caption to post by hand.
 
@@ -19,6 +19,22 @@ Nothing posts unless it is merged into `main`. A post with `"hold": true` never 
 5. **TikTok.** You get a GitHub notification titled "Post to TikTok" with the files and caption. Post it by hand, then close the issue.
 
 If a platform fails, the job retries it on the next run, up to three times. GitHub emails you when a run fails. Platforms that already worked are never posted twice.
+
+A product post is held, and the run fails so GitHub emails you, if the product's price or stock on intimova.ng has changed since the post was made.
+
+Every Saturday at 07:13 the **Read post results** job saves each recent post's Instagram and Facebook numbers (reach, saves, shares, comments) to `state/insights.json`, and the Saturday draft reads them.
+
+## The week, and the library
+
+| Day | Post | From |
+| --- | --- | --- |
+| Mon | Myth vs fact | `library/myths.json` |
+| Tue | Education carousel | `library/carousels.json` |
+| Wed | Story reel | `library/stories.json` |
+| Fri | Quote card or couples tip | `library/quotes-tips.json` |
+| Sun | Product | `library/products.json` |
+
+`npm run runway` shows how many weeks each day has left, and each week's pull request ends with the same table. See `library/README.md`.
 
 ## One-time setup
 

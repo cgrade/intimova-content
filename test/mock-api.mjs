@@ -3,7 +3,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 
-export function startMock({ publicDir, failOnce = {} } = {}) {
+export function startMock({ publicDir, failOnce = {}, products = {} } = {}) {
   const calls = [];
   let n = 0;
   const fails = { ...failOnce };
@@ -23,13 +23,32 @@ export function startMock({ publicDir, failOnce = {} } = {}) {
     for (const [pat, times] of Object.entries(fails)) if (times > 0 && key.includes(pat)) { fails[pat]--; return send(500, { error: { message: 'simulated outage' } }); }
     const p = u.pathname;
     n++;
+    let m;
 
+    // Shop product pages, with the schema.org Product data the real pages publish
+    if ((m = p.match(/^\/shop\/product\/([^/]+)$/))) {
+      const prod = products[m[1]];
+      if (!prod) return send(404, {});
+      const ld = { '@context': 'https://schema.org', '@type': 'Product', name: prod.name || m[1], offers: { '@type': 'Offer', price: prod.price, priceCurrency: 'NGN', availability: 'https://schema.org/' + (prod.availability || 'InStock'), url: 'https://intimova.ng/product/' + m[1] } };
+      res.writeHead(200, { 'Content-Type': 'text/html' });
+      return res.end(`<html><script type="application/ld+json">${JSON.stringify({ '@type': 'Organization' })}</script><script type="application/ld+json">${JSON.stringify(ld)}</script></html>`);
+    }
+    // Results: Instagram media insights and Facebook post/video fields
+    if ((m = p.match(/^\/graph\/v26\.0\/(ig[^/]+)\/insights$/))) {
+      const metrics = u.searchParams.get('metric').split(',');
+      // Like Meta, refuse the whole request when one metric isn't available for this media type.
+      if (metrics.includes('views')) return send(400, { error: { message: 'views is not supported for this media' } });
+      return send(200, { data: metrics.map((name, i) => ({ name, period: 'lifetime', values: [{ value: 10 + i }] })) });
+    }
+    if ((m = p.match(/^\/graph\/v26\.0\/([^/]+)$/)) && req.method === 'GET' && /summary/.test(u.searchParams.get('fields') || '')) {
+      const f = u.searchParams.get('fields');
+      return send(200, { id: m[1], ...(f.includes('reactions') ? { reactions: { summary: { total_count: 7 } }, shares: { count: 2 } } : { likes: { summary: { total_count: 5 } } }), comments: { summary: { total_count: 3 } } });
+    }
     if (p.startsWith('/media/')) {
       const f = path.join(publicDir, p.slice('/media/'.length));
       res.writeHead(fs.existsSync(f) ? 200 : 404); return res.end();
     }
     // Meta Graph
-    let m;
     if ((m = p.match(/^\/graph\/v26\.0\/IG123\/media$/)) && req.method === 'POST') return send(200, { id: 'c' + n });
     if (p === '/graph/v26.0/IG123/media_publish') return send(200, { id: 'igpost' + n });
     if (p === '/graph/v26.0/PAGE1/photos') return send(200, { id: 'ph' + n, post_id: 'PAGE1_' + n });
