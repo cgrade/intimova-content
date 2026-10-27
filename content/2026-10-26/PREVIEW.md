@@ -7,10 +7,11 @@ Merge this pull request to approve the week. Comment on anything you want change
 | Mon 26 Oct, 19:30 | 2026-10-26-myth-toys | carousel | instagram, facebook, x, tiktok |
 | Wed 28 Oct, 19:30 | 2026-10-28-lily-part1 | reel | instagram, facebook, x, tiktok |
 | Fri 30 Oct, 19:30 | 2026-10-30-quote-surviving | carousel | instagram, facebook, x, tiktok |
+| Sun 1 Nov, 19:30 | 2026-11-01-guide-bullet | carousel | instagram, facebook, x, tiktok |
 
 ## Mon 26 Oct, 19:30 · 2026-10-26-myth-toys
 
-<img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/1-mon-myth-toys/slide-1.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/1-mon-myth-toys/slide-2.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/1-mon-myth-toys/slide-3.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/1-mon-myth-toys/slide-4.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/1-mon-myth-toys/slide-5.jpg?raw=true" width="200">
+<img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/1-mon-myth-toys/slide-1.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/1-mon-myth-toys/slide-2.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/1-mon-myth-toys/slide-3.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/1-mon-myth-toys/slide-4.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/1-mon-myth-toys/slide-5.jpg?raw=true" width="200">
 
 **Instagram**
 
@@ -44,9 +45,9 @@ Safety: explicit no ✅ · health claim yes, sourced ✅ · clear faces no ✅
 
 ## Wed 28 Oct, 19:30 · 2026-10-28-lily-part1
 
-<img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/2-wed-lily-part1/cover.jpg?raw=true" width="240">
+<img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/2-wed-lily-part1/cover.jpg?raw=true" width="240">
 
-[Watch the reel (89.2s)](https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/2-wed-lily-part1/reel.mp4?raw=true)
+[Watch the reel (89.2s)](https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/2-wed-lily-part1/reel.mp4?raw=true)
 
 **Instagram**
 
@@ -74,7 +75,7 @@ Safety: explicit no ✅ · health claim none · clear faces no ✅
 
 ## Fri 30 Oct, 19:30 · 2026-10-30-quote-surviving
 
-<img src="https://github.com/cgrade/intimova-content/blob/main/public/2026-10-26/3-fri-quote-surviving/slide-1.jpg?raw=true" width="200">
+<img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/3-fri-quote-surviving/slide-1.jpg?raw=true" width="200">
 
 **Instagram**
 
@@ -94,16 +95,26 @@ Safety: explicit no ✅ · health claim none · clear faces no ✅
 
 Safety: explicit no ✅ · health claim none · clear faces no ✅
 
----
+## Sun 1 Nov, 19:30 · 2026-11-01-guide-bullet
 
-### Needs your input: Sunday 1 Nov, product guide
+<img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/4-sun-guide-bullet/slide-1.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/4-sun-guide-bullet/slide-2.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/4-sun-guide-bullet/slide-3.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/4-sun-guide-bullet/slide-4.jpg?raw=true" width="200"> <img src="https://github.com/cgrade/intimova-content/blob/week/2026-10-26/public/2026-10-26/4-sun-guide-bullet/slide-5.jpg?raw=true" width="200">
 
-The playbook's starter week ends with a product guide on Sunday. I haven't made it because I don't know which product to feature.
-Reply on this pull request with:
+**Instagram**
 
-1. The product name and its link on intimova.ng
-2. Its price
-3. Who it's for (beginners, couples, solo) and one thing customers like about it
+> Your first toy doesn’t need to be big, loud or complicated.
+> 
+> The Bullet (rechargeable) is small, quiet and pocket-sized, with adjustable vibration and a body-safe silicone tip. Wipe it clean after use and pair it with water-based lubricant only.
+> 
+> ₦15,000 at intimova.ng. Delivered nationwide in plain, unbranded packaging. Link in bio.
+> 
+> #Intimova #SexualWellness #PleasureIsSelfCare #SelfLove #Wellbeing
 
-I'll build the 5-slide guide (the problem, which tool fits, care and safe use, discreet delivery and Paystack, link) and add it to this week.
+**X**
 
+> Your first toy doesn’t need to be big, loud or complicated. Small, quiet, pocket-sized, and delivered in plain, unbranded packaging. 👇
+
+**TikTok** · A first toy: start small
+
+> Your first toy doesn’t need to be big, loud or complicated. Small, quiet, pocket-sized, delivered in plain packaging. Swipe for care tips. #Intimova #SexualWellness #SelfLove
+
+Safety: explicit no ✅ · health claim none · clear faces no ✅

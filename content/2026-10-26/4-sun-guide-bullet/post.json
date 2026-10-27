@@ -1,0 +1,27 @@
+{
+  "id": "2026-11-01-guide-bullet",
+  "format": "carousel",
+  "pillar": "Product guide",
+  "library": "bullet-rechargeable-guide",
+  "product": { "slug": "bullet-rechargeable", "price": 15000 },
+  "publish_at": "2026-11-01T19:30:00+01:00",
+  "platforms": ["instagram", "facebook", "x", "tiktok"],
+  "series_label": "PRODUCT GUIDE",
+  "last_footer": "DISCREET DELIVERY · INTIMOVA.NG",
+  "slides": [
+    { "type": "cover", "headline": "Your first toy doesn’t need to be *big, loud or complicated.*", "lead": "A small place to start. Swipe." },
+    { "type": "text", "kicker": "WHICH ONE FITS", "headline": "The Bullet, rechargeable: *small, quiet, pocket-sized.*", "body": "Adjustable vibration in something that fits in your bag. A starter toy for time alone, or to bring into time together.", "note": "₦15,000 on intimova.ng (was ₦18,500)." },
+    { "type": "text", "kicker": "WHAT IT’S MADE OF", "headline": "Body-safe silicone tip. *USB-rechargeable.*", "body": "Phthalate-free, according to the manufacturer. It’s splash-proof, not waterproof, so keep it out of the bath.", "note": "Details from the product page on intimova.ng." },
+    { "type": "text", "kicker": "CARE", "headline": "Wipe it clean after every use. *Water-based lubricant only.*", "body": "If it arrives faulty or wrong, tell us within 2 days of delivery and we replace it free." },
+    { "type": "takeaway", "kicker": "DISCREET DELIVERY", "headline": "Plain, unbranded packaging. *Always.*", "lead": "Nationwide delivery from ₦6,000. Shop at intimova.ng." }
+  ],
+  "captions": {
+    "instagram": "Your first toy doesn’t need to be big, loud or complicated.\n\nThe Bullet (rechargeable) is small, quiet and pocket-sized, with adjustable vibration and a body-safe silicone tip. Wipe it clean after use and pair it with water-based lubricant only.\n\n₦15,000 at intimova.ng. Delivered nationwide in plain, unbranded packaging. Link in bio.\n\n#Intimova #SexualWellness #PleasureIsSelfCare #SelfLove #Wellbeing",
+    "facebook": "Your first toy doesn’t need to be big, loud or complicated.\n\nThe Bullet (rechargeable) is small, quiet and pocket-sized, with adjustable vibration and a body-safe silicone tip. Wipe it clean after use and pair it with water-based lubricant only.\n\n₦15,000, delivered nationwide in plain, unbranded packaging: https://intimova.ng/product/bullet-rechargeable",
+    "x": "Your first toy doesn’t need to be big, loud or complicated. Small, quiet, pocket-sized, and delivered in plain, unbranded packaging. 👇",
+    "tiktok_title": "A first toy: start small",
+    "tiktok": "Your first toy doesn’t need to be big, loud or complicated. Small, quiet, pocket-sized, delivered in plain packaging. Swipe for care tips. #Intimova #SexualWellness #SelfLove"
+  },
+  "safety": { "explicit": false, "health_claim": false, "clear_faces": false },
+  "ai_generated": false
+}
