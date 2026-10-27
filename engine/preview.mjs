@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { loadPost, manifestOf } from '../lib/post.mjs';
+import { runwayReport } from './runway.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const weekDir = path.resolve(process.argv[2] || '');
@@ -30,7 +31,10 @@ for (const p of posts) {
   out.push('', `**TikTok** · ${c.tiktok_title || ''}`, '', '> ' + c.tiktok.replace(/\n/g, '\n> '));
   const s = p.safety;
   out.push('', `Safety: explicit ${s.explicit ? '❌' : 'no ✅'} · health claim ${s.health_claim ? 'yes, sourced ✅' : 'none'} · clear faces ${s.clear_faces ? '❌' : 'no ✅'}`);
+  if (p.library) out.push('', `From the library: ${[].concat(p.library).map(id => '`' + id + '`').join(', ')}`);
+  if (p.product) out.push('', `Product: \`${p.product.slug}\` at ₦${Number(p.product.price).toLocaleString('en-NG')}. The publisher checks the shop before posting and holds the post if the price or stock has changed.`);
 }
+out.push('', '---', '', (await runwayReport(ROOT, { weekStart: new Date(week + 'T00:00:00+01:00'), liveCheck: true, md: true })).text);
 const need = path.join(weekDir, 'NEEDS-INPUT.md');
 if (fs.existsSync(need)) out.push('', '---', '', fs.readFileSync(need, 'utf8'));
 fs.writeFileSync(path.join(weekDir, 'PREVIEW.md'), out.join('\n') + '\n');

@@ -1,0 +1,370 @@
+{
+  "_about": "Vetted sources for health and relationship facts. A post may only state a number or a research finding that is listed here. Each finding has the wording that is safe to use. 'observational: true' means say 'a link, not proof'. Add a source only after checking the paper itself (DOI, PubMed or the publisher's page). The entries marked from_marketplace are copied from intimova.ng's citations library (content/foundation/citations.ts in cgrade/intomova_marketplace) and must stay in step with it.",
+  "sources": [
+    {
+      "id": "herbenick-2009-vibrators",
+      "cite": "Herbenick et al., Journal of Sexual Medicine, 2009",
+      "country": "US",
+      "sample": "2,056 women aged 18–60, nationally representative",
+      "design": "survey",
+      "observational": true,
+      "url": "https://doi.org/10.1111/j.1743-6109.2009.01321.x",
+      "findings": [
+        { "id": "prevalence", "text": "52.5% of women had used a vibrator.", "used_in": "2026-10-26-myth-toys" },
+        { "id": "function", "text": "Women who had used a vibrator recently scored higher on most measures of sexual function, including desire, arousal and orgasm. A link, not proof.", "used_in": "2026-10-26-myth-toys" },
+        { "id": "side-effects", "text": "71.5% of women who used vibrators reported no side effects, and the side effects that were reported were mostly rare and short-lived." }
+      ]
+    },
+    {
+      "id": "reece-2009-men",
+      "cite": "Reece et al., Journal of Sexual Medicine, 2009",
+      "country": "US",
+      "sample": "1,047 men aged 18–60, nationally representative",
+      "design": "survey",
+      "observational": true,
+      "url": "https://doi.org/10.1111/j.1743-6109.2009.01273.x",
+      "findings": [
+        { "id": "partner-use", "text": "91% of heterosexual men who had used a vibrator had used it with a female partner.", "used_in": "2026-10-26-myth-toys" },
+        { "id": "men-use", "text": "44.8% of men had used a vibrator.", "used_in": "2026-10-26-myth-toys" }
+      ]
+    },
+    {
+      "id": "frederick-2018-orgasm-gap",
+      "cite": "Frederick et al., Archives of Sexual Behavior, 2018",
+      "country": "US",
+      "sample": "52,588 adults, including 24,102 heterosexual women and 26,032 heterosexual men",
+      "design": "survey",
+      "observational": true,
+      "url": "https://doi.org/10.1007/s10508-017-0939-z",
+      "findings": [
+        { "id": "gap", "text": "95% of heterosexual men said they usually or always orgasm when sexually intimate, compared with 65% of heterosexual women." }
+      ],
+      "caution": "Use the 'usually or always' figures only. Don't mix them with the narrower 'always' figures some articles quote."
+    },
+    {
+      "id": "herbenick-2014-lubricant",
+      "cite": "Herbenick et al., Journal of Sexual Medicine, 2014",
+      "country": "US",
+      "sample": "Nationally representative sample of US women",
+      "design": "survey",
+      "observational": true,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/24521034/",
+      "findings": [
+        { "id": "reasons", "text": "Women said they used lubricant to make sex more comfortable, more fun and more pleasurable, and to reduce discomfort or pain." }
+      ],
+      "caution": "Don't quote a single 'X% of women use lube' figure from this paper: the abstract doesn't give one."
+    },
+    {
+      "id": "muise-2016-frequency",
+      "cite": "Muise et al., Social Psychological and Personality Science, 2016",
+      "country": "US",
+      "sample": "Over 25,000 adults across three studies, including the US General Social Survey 1989–2012",
+      "design": "survey",
+      "observational": true,
+      "url": "https://doi.org/10.1177/1948550615616462",
+      "findings": [
+        { "id": "once-a-week", "text": "For people in relationships, well-being rose with how often they had sex up to about once a week, and not beyond that. A link, not proof." }
+      ]
+    },
+    {
+      "id": "kalmbach-2015-sleep",
+      "cite": "Kalmbach et al., Journal of Sexual Medicine, 2015",
+      "country": "US",
+      "sample": "171 college-age women, 14-day sleep and sex diaries",
+      "design": "diary study",
+      "observational": true,
+      "url": "https://doi.org/10.1111/jsm.12858",
+      "findings": [
+        { "id": "extra-hour", "text": "Each extra hour of sleep was linked to 14% higher odds of partnered sexual activity the next day." },
+        { "id": "desire", "text": "Longer sleep was linked to greater sexual desire the next day." }
+      ],
+      "caution": "Say 'higher odds', not '14% more likely'. Small sample of young women."
+    },
+    {
+      "id": "capogrosso-2013-young-ed",
+      "cite": "Capogrosso et al., Journal of Sexual Medicine, 2013",
+      "country": "Italy",
+      "sample": "439 men seeking help for new erection problems at one clinic in Milan, 2010–2012",
+      "design": "clinic records",
+      "observational": true,
+      "url": "https://doi.org/10.1111/jsm.12179",
+      "findings": [
+        { "id": "one-in-four", "text": "About 1 in 4 men (26%) who came to the clinic with new erection problems were aged 40 or younger." }
+      ],
+      "caution": "One clinic in Italy. A later study from the same group found closer to 1 in 5."
+    },
+    {
+      "id": "mallory-2019-communication",
+      "cite": "Mallory, Stanton & Handy, Journal of Sex Research, 2019",
+      "country": "Multiple (meta-analysis)",
+      "sample": "48 studies, 12,145 people",
+      "design": "meta-analysis",
+      "observational": true,
+      "url": "https://doi.org/10.1080/00224499.2019.1568375",
+      "findings": [
+        { "id": "talking-helps", "text": "Couples who communicated more about sex reported better sexual function, including desire, arousal and orgasm. A link, not proof, and many of the effects were small." }
+      ]
+    },
+    {
+      "id": "dorey-2005-pelvic-floor",
+      "cite": "Dorey et al., BJU International, 2005",
+      "country": "UK",
+      "sample": "55 men with erection problems, randomised trial",
+      "design": "randomised trial",
+      "observational": false,
+      "url": "https://doi.org/10.1111/j.1464-410X.2005.05690.x",
+      "findings": [
+        { "id": "forty-percent", "text": "In a small UK trial, 40% of men with erection problems who did pelvic floor exercises with a physiotherapist had normal erectile function after six months." }
+      ],
+      "caution": "Small trial run by the people who designed the exercises. Never say the exercises 'treat' or 'cure'. Always add: see a doctor about erection problems, because they can be an early sign of heart or blood-sugar problems."
+    },
+    {
+      "id": "danish-epa-2006-toys",
+      "cite": "Danish Environmental Protection Agency, Survey of chemical substances in consumer products no. 77, 2006",
+      "country": "Denmark",
+      "sample": "16 sex toys screened, 6 tested for migration",
+      "design": "laboratory survey",
+      "observational": false,
+      "url": "https://www2.mst.dk/udgiv/publications/2006/87-7052-227-8/html/default_eng.htm",
+      "findings": [
+        { "id": "jelly-plasticisers", "text": "Jelly-type toys are made of soft PVC, which can contain up to 70% plasticisers, including phthalates." }
+      ],
+      "caution": "The report found little risk at normal use, so don't frighten people. Use it to explain why 'body-safe silicone' matters."
+    },
+    {
+      "id": "basson-2000-desire",
+      "cite": "Basson, Journal of Sex & Marital Therapy, 2000",
+      "country": "Canada",
+      "sample": "Review and model, not a survey",
+      "design": "theoretical model",
+      "observational": false,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/10693116/",
+      "findings": [
+        { "id": "responsive", "text": "A widely used model of sexual response describes desire that is often responsive: it can grow after closeness and touch begin, instead of arriving first." }
+      ],
+      "caution": "This is a model, not a measured finding. Say 'researchers describe', never 'studies prove'."
+    },
+    {
+      "id": "muise-2014-afterglow",
+      "cite": "Muise, Giang & Impett, Archives of Sexual Behavior, 2014",
+      "country": "Canada",
+      "sample": "335 people in relationships, and 101 couples followed for three weeks",
+      "design": "survey and daily diary",
+      "observational": true,
+      "url": "https://doi.org/10.1007/s10508-014-0305-3",
+      "findings": [
+        { "id": "after-sex-affection", "text": "Couples who spent longer being affectionate after sex (cuddling, talking, closeness) reported higher sexual and relationship satisfaction, and still did three months later. A link, not proof." }
+      ]
+    },
+    {
+      "id": "lastella-2019-sleep",
+      "cite": "Lastella et al., Frontiers in Public Health, 2019",
+      "country": "Australia (authors' institution; online survey)",
+      "sample": "778 adults, anonymous online survey",
+      "design": "survey of perceptions",
+      "observational": true,
+      "url": "https://www.frontiersin.org/articles/10.3389/fpubh.2019.00033/full",
+      "findings": [
+        { "id": "orgasm-sleep", "text": "70.8% said sex with a partner and orgasm improved their sleep, and 54.1% said the same after masturbation with orgasm. Self-reported, so it doesn't prove cause." }
+      ],
+      "caution": "Say 'many people say they sleep better', not 'orgasm improves sleep'. Avoid the word masturbation on the slide; 'on their own' works."
+    },
+    {
+      "id": "rider-2016-prostate",
+      "cite": "Rider et al., European Urology, 2016",
+      "country": "US",
+      "sample": "31,925 men followed from 1992 to 2010",
+      "design": "cohort study",
+      "observational": true,
+      "url": "https://www.bu.edu/sph/news/articles/2016/ejaculation-may-lower-prostate-cancer-risk",
+      "findings": [
+        { "id": "frequency", "text": "Men who ejaculated 21 or more times a month had about a 20% lower risk of a prostate cancer diagnosis than men who did 4–7 times. A link, not proof." }
+      ],
+      "caution": "Never 'prevents'. End with: see a doctor about prostate checks."
+    },
+    {
+      "id": "atlantis-2012-mood",
+      "cite": "Atlantis & Sullivan, Journal of Sexual Medicine, 2012",
+      "country": "Multiple (systematic review)",
+      "sample": "Systematic review and meta-analysis",
+      "design": "review",
+      "observational": true,
+      "url": "https://researchers.westernsydney.edu.au/en/publications/bidirectional-association-between-depression-and-sexual-dysfuncti/",
+      "findings": [
+        { "id": "both-ways", "text": "Low mood and sexual problems are linked both ways: each raises the risk of the other." }
+      ],
+      "caution": "Mood posts end with a pointer to a doctor or mental health professional. Never say pleasure treats depression."
+    },
+    {
+      "id": "who-2017-nigeria",
+      "cite": "WHO estimate, 2017, as reported by The Guardian Nigeria and checked by Africa Check",
+      "country": "Nigeria",
+      "sample": "WHO national estimate",
+      "design": "estimate",
+      "observational": true,
+      "url": "https://africacheck.org/fact-checks/spotchecks/fact-checking-two-claims-about-mental-health-nigeria",
+      "findings": [
+        { "id": "depression", "text": "WHO estimated in 2017 that about 7.08 million Nigerians (3.9%) were living with depression." }
+      ],
+      "caution": "Always give the year; the estimate is old."
+    },
+    {
+      "id": "ojomu-ileife-fsd",
+      "from_marketplace": "nigeria-ileife-63",
+      "cite": "Ojomu et al. (PMC3013270)",
+      "country": "Nigeria",
+      "sample": "384 women, Ile-Ife",
+      "design": "survey",
+      "observational": true,
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3013270/",
+      "findings": [
+        { "id": "sixty-three", "text": "In a study of 384 women in Ile-Ife, 63% had some form of sexual difficulty, and trouble reaching orgasm was the most common." }
+      ]
+    },
+    {
+      "id": "enugu-fsd-age",
+      "from_marketplace": "nigeria-enugu-age",
+      "cite": "Nigerian FSD study, Enugu (PubMed 25385921)",
+      "country": "Nigeria",
+      "sample": "500 women, Enugu",
+      "design": "survey",
+      "observational": true,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/25385921/",
+      "findings": [
+        { "id": "forties", "text": "In a study of 500 women in Enugu, sexual difficulties were most common among women aged 41–50." }
+      ]
+    },
+    {
+      "id": "mccool-fsd-global",
+      "from_marketplace": "fsd-global-41",
+      "cite": "McCool et al., Sexual Medicine Reviews (PMC6013982)",
+      "country": "Global (meta-analysis)",
+      "sample": "215,740 women worldwide",
+      "design": "meta-analysis",
+      "observational": true,
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6013982/",
+      "findings": [
+        { "id": "forty-one", "text": "Across studies of 215,740 women worldwide, about 41% reported some form of sexual difficulty." },
+        { "id": "inequality", "text": "Sexual difficulties were more common where gender inequality is higher, reaching about 62% in some African regions." }
+      ]
+    },
+    {
+      "id": "fsd-domains",
+      "from_marketplace": "fsd-domains",
+      "cite": "Domain prevalence analysis (PMC8261092)",
+      "country": "Multiple (pooled)",
+      "sample": "Pooled analysis",
+      "design": "meta-analysis",
+      "observational": true,
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8261092/",
+      "findings": [
+        { "id": "lubrication", "text": "Across studies, about half of women with sexual difficulties reported problems with lubrication (about 51%)." }
+      ],
+      "caution": "Check the paper before using: the marketplace label is generic. Hold the post until checked."
+    },
+    {
+      "id": "cunha-2014-lubricants",
+      "from_marketplace": "lubricant-osmolality-ph",
+      "cite": "Cunha et al., Pharmaceutics, 2014 (PMC4190534)",
+      "country": "Portugal (laboratory)",
+      "sample": "12 commercial lubricants tested in a lab",
+      "design": "laboratory analysis",
+      "observational": false,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4190534/",
+      "findings": [
+        { "id": "seven-of-twelve", "text": "Of 12 commercial lubricants tested, 7 were more concentrated than the WHO's recommended limit, and only 5 had a pH in the normal vaginal range." }
+      ],
+      "caution": "Don't claim our lubricant passes unless the product page says so."
+    },
+    {
+      "id": "althof-2014-pe",
+      "from_marketplace": "pe-prevalence-issm",
+      "cite": "Althof et al., Sexual Medicine, 2014 (ISSM guideline, PMC4184677)",
+      "country": "International guideline",
+      "sample": "Guideline review",
+      "design": "review",
+      "observational": false,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4184677/",
+      "findings": [
+        { "id": "four-percent", "text": "Lifelong premature ejaculation (within about a minute, every time) is unlikely to affect more than 4% of men, far fewer than figures repeated online." }
+      ]
+    },
+    {
+      "id": "cooper-2015-pe-techniques",
+      "from_marketplace": "pe-behavioural-cooper",
+      "cite": "Cooper et al., Sexual Medicine, 2015 (PubMed 26468381)",
+      "country": "Multiple (systematic review)",
+      "sample": "10 randomised trials, 521 men",
+      "design": "systematic review of trials",
+      "observational": false,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/26468381/",
+      "findings": [
+        { "id": "stop-start", "text": "Simple techniques like stop–start have been tested in randomised trials. Two trials reported men lasting roughly 7–9 minutes longer than men on a waiting list, with no side effects reported." }
+      ]
+    },
+    {
+      "id": "herbenick-2018-stimulation",
+      "from_marketplace": "clitoral-stimulation-herbenick",
+      "cite": "Herbenick et al., Journal of Sex & Marital Therapy, 2018 (PubMed 28678639)",
+      "country": "US",
+      "sample": "1,055 women aged 18–94, probability sample",
+      "design": "survey",
+      "observational": true,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28678639/",
+      "findings": [
+        { "id": "intercourse-alone", "text": "Only 18.4% of women said intercourse alone was enough for them to orgasm. Most needed, or enjoyed, other touch as well." }
+      ],
+      "caution": "Platform-safe wording: 'other touch', not anatomical terms."
+    },
+    {
+      "id": "lindau-2007-older-adults",
+      "cite": "Lindau et al., New England Journal of Medicine, 2007",
+      "country": "US",
+      "sample": "3,005 adults aged 57–85, national probability sample",
+      "design": "survey",
+      "observational": true,
+      "url": "https://doi.org/10.1056/NEJMoa067423",
+      "findings": [
+        { "id": "by-age", "text": "73% of adults aged 57–64, 53% of those aged 65–74 and 26% of those aged 75–85 had been sexually active in the past year." }
+      ],
+      "caution": "These figures combine men and women; don't mix them with the by-sex figures some news reports give."
+    },
+    {
+      "id": "nhs-condoms-oil",
+      "cite": "NHS, 'How do I use a condom?'",
+      "country": "UK (health service guidance)",
+      "sample": "Health service guidance",
+      "design": "guidance",
+      "observational": false,
+      "url": "https://www.nhs.uk/conditions/contraception/how-do-i-use-condom/",
+      "findings": [
+        { "id": "oil-damages", "text": "Oil-based lubricants, such as lotion or baby oil, can damage latex condoms and make them more likely to break. Use a water-based or silicone-based lubricant instead." }
+      ]
+    },
+    {
+      "id": "nhs-erection-problems",
+      "cite": "NHS, 'Erection problems (erectile dysfunction)'",
+      "country": "UK (health service guidance)",
+      "sample": "Health service guidance",
+      "design": "guidance",
+      "observational": false,
+      "url": "https://www.nhs.uk/conditions/erection-problems-erectile-dysfunction/",
+      "findings": [
+        { "id": "occasional", "text": "Erection problems are very common. When they happen now and then, they're usually caused by stress, tiredness or drinking too much alcohol." },
+        { "id": "see-gp", "text": "See a doctor if it keeps happening: it might be a sign of a health condition that can be treated, such as high blood pressure or diabetes." }
+      ]
+    },
+    {
+      "id": "brook-painful-sex",
+      "cite": "Brook (UK sexual health charity), 'Painful sex'",
+      "country": "UK (health charity guidance)",
+      "sample": "Health guidance",
+      "design": "guidance",
+      "observational": false,
+      "url": "https://www.brook.org.uk/your-life/painful-sex/",
+      "findings": [
+        { "id": "should-not-hurt", "text": "Sex is never supposed to be painful. Many people have pain during sex at some point, and causes include infections, anxiety and not enough lubrication. See a doctor or sexual health clinic." }
+      ]
+    }
+  ]
+}

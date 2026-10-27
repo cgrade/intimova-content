@@ -1,0 +1,50 @@
+name: Read post results and product prices
+
+on:
+  schedule:
+    # Saturdays at 07:13 Lagos time (cron is in UTC), before the 09:33 weekly draft run reads them.
+    - cron: '13 6 * * 6'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Shares the publisher's group so the two never push state/ at the same time.
+concurrency:
+  group: publisher
+  cancel-in-progress: false
+
+jobs:
+  insights:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Read results from Instagram and Facebook
+        env:
+          META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN }}
+          META_IG_TOKEN: ${{ secrets.META_IG_TOKEN }}
+        run: node publisher/insights.mjs
+      - name: Save product prices, product pages and articles
+        # Claude's cloud runs can't reach intimova.ng, so the Saturday draft reads these copies instead.
+        if: always()
+        run: node engine/site-snapshot.mjs
+      - name: Save results
+        if: always()
+        run: |
+          git config user.name "intimova-publisher"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state/insights.json state/products.json state/site
+          if ! git diff --cached --quiet; then
+            git commit -m "Post results and product prices [skip ci]"
+            for i in 1 2 3 4 5; do
+              git pull --rebase origin main && git push && exit 0
+              git rebase --abort 2>/dev/null || true
+              echo "Push failed, retrying ($i)"; sleep $((i * 5))
+            done
+            echo "::error::Could not save state/insights.json and state/products.json."
+            exit 1
+          fi

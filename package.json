@@ -9,6 +9,9 @@
   "scripts": {
     "render": "node engine/render-week.mjs",
     "preview": "node engine/preview.mjs",
+    "runway": "node engine/runway.mjs",
+    "products": "node engine/products.mjs",
+    "insights": "node publisher/insights.mjs",
     "publish": "node publisher/publish.mjs",
     "publish:dry": "DRY_RUN=1 node publisher/publish.mjs",
     "test": "node --test test/*.test.mjs",

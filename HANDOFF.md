@@ -1,4 +1,4 @@
-# Handoff: where the Intimova pipeline stands (26 Oct 2026, evening)
+# Handoff: where the Intimova pipeline stands (27 Oct 2026, evening)
 
 This file lets a new Claude Code session, in your editor or the terminal, pick up the work without the original chat.
 Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly runs; this file is the state of things.
@@ -13,6 +13,9 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
   - **X** isn't connected (no credit or app yet). `PLATFORMS` is `instagram,facebook`.
 - **GitHub secrets set:** `META_PAGE_ID`, `IG_USER_ID`, `META_PAGE_TOKEN`. **Variables:** `MEDIA_BASE_URL`, `PLATFORMS`.
   - The Page token was pasted into a chat once, so it should be regenerated after the first live posts, then the secret updated.
+- **Content library (`library/`):** about six months of material for five posts a week (Mon myth vs fact, Tue education carousel, Wed story, Fri quote or tip, Sun product). `npm run runway` shows weeks left per day; see `library/README.md`. From the week of 2 Nov the Saturday run drafts five posts a week from it.
+- **Product checks:** product facts come from intimova.ng's public product pages (their schema.org data), read-only. A post with `"product"` is held by the publisher if the live price or stock no longer matches. Nothing in the marketplace repo was changed.
+- **Results and prices:** the "Read post results and product prices" job (Saturdays 07:13 Lagos) saves Instagram and Facebook numbers to `state/insights.json` and product prices and stock to `state/products.json`. Claude's cloud sandbox can't reach intimova.ng, so the Saturday draft uses that snapshot; the publisher's own pre-post check runs on GitHub and reads the live shop. The results part hasn't run against the live Meta API yet: check its first run on 31 Oct.
 - **This week (folder `content/2026-10-26`), all at 19:30 Lagos time:**
   - Mon 26: myth vs fact carousel
   - Wed 28: Lily part 1 reel, with its original score
@@ -39,9 +42,10 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
 
 ## Weekly automation (Claude cloud scheduled tasks on Grade's account)
 
-- **"Intimova weekly content draft":** Saturdays 09:33 Lagos. It drafts the first Monday with no folder in `content/` (31 Oct drafts the week of 2 Nov, with Lily part 2 on Wednesday), renders it, and opens a pull request for Grade to approve by merging.
-- **"Intimova Sunday fixes":** Sundays 17:40 Lagos. It applies Grade's pull request comments.
-- **Blocker:** as of 26 Oct the Claude GitHub connection can read this repo but **can't push** (error 403). Until Grade reconnects GitHub in claude.ai settings, the weekly runs can't open pull requests, so they send him the files instead. Changes made outside this repo's GitHub flow have gone to Grade as `git am` patches.
+- **"Intimova weekly draft (Saturday)"** (`trig_01LVP5w5KfqmuEmvyRFRshuP`): Saturdays 09:33 Lagos. It drafts five posts from `library/` for the first Monday with no folder in `content/` (31 Oct drafts the week of 2 Nov, with Lily part 2 on Wednesday), renders them, and opens a pull request for Grade to approve by merging. It stops and asks Grade to merge the library pull request (#3) if that isn't on main yet.
+- **"Intimova Sunday fixes (cloud)"** (`trig_01N2yTr36RUKEF1tki4bM7Se`): Sundays 17:40 Lagos. It applies Grade's pull request comments, and can release or retire held library items when he says so.
+- Both were created on 27 Oct as standard cloud routines (environment "Default"). The two older routines ("Intimova weekly content draft", "Intimova Sunday fixes") are paused, not deleted; their prompts still asked Grade for product details and couldn't be edited safely.
+- **Cloud runs (tested 27 Oct):** push works; pull requests and comments go through the built-in GitHub tools (`gh` can't); `bash scripts/cloud-setup.sh` sets up Python and Chromium, and rendering works after it; intimova.ng is blocked from the cloud (see the price snapshot above).
 
 ## Content rules (summary; the full playbook is a Claude Doc)
 
@@ -56,11 +60,12 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
   - never "cures", "treats" or "prevents"
   - "a link, not proof" for observational studies
 - **Captions:** X posts under 280 characters and without links. Instagram allows up to 2,200 characters and 30 hashtags.
-- **Starter week:**
-  - Mon: fact or myth-buster
+- **The week (from 2 Nov), five posts:**
+  - Mon: myth vs fact
+  - Tue: education carousel
   - Wed: story reel
-  - Fri: quote card or couples tip
-  - Sun: product guide
+  - Fri: quote card or couples tip, alternating
+  - Sun: product
 
 ## Open items
 

@@ -11,33 +11,39 @@ This repo is Intimova's content pipeline. **For the current state, open items an
 ## Saturday run (10:00 WAT): draft the next week
 
 1. Work out the coming Monday's date. The week folder is `content/<YYYY-MM-DD of that Monday>/`.
-2. Read the playbook, the last two weeks' folders, and `state/posted.json`, so you continue the story series and don't repeat a fact.
-3. Write one `post.json` per post, following the starter week unless Grade has moved to the full week:
+2. Read the playbook, the last two weeks' folders, `state/posted.json` and `state/insights.json` (how recent posts did), so you continue the story series, don't repeat a fact, and lean towards what's working.
+3. Run `npm run runway -- <Monday's date> --live`. It shows, for each day, the next item to use from `library/` and how many weeks are left. See `library/README.md` for how the library works.
+4. Write one `post.json` per post. Five posts a week, each built from the library item the runway names (you may pick a later ready item instead if it fits better, e.g. to keep 6 weeks between similar topics):
 
-   | Day | Post | Format |
-   | --- | --- | --- |
-   | Mon | Fact or myth-buster | carousel (5 slides: myth/cover, fact, fact or text, takeaway) |
-   | Wed | Story, next part of the current series | reel |
-   | Fri | Quote card or couples tip | carousel (1 slide, or 5 for a tip) |
-   | Sun | Product guide | carousel, needs Grade's product details (ask in NEEDS-INPUT.md) |
+   | Day | Post | Format | Library file |
+   | --- | --- | --- | --- |
+   | Mon | Myth vs fact | carousel (5 slides: myth, fact, fact or what it means, takeaway) | `myths.json` |
+   | Tue | Education carousel | carousel (6–7 slides, built on one intimova.ng article) | `carousels.json` |
+   | Wed | Story, next part of the series | reel | `stories.json` |
+   | Fri | Quote card or couples tip, alternating | carousel (1 slide, or 5 for a tip) | `quotes-tips.json` |
+   | Sun | Product | carousel (5 slides) | `products.json` |
 
-   All posts go out at 19:30 Lagos time unless Grade changes it.
-4. Rules that never bend:
+   - Record what each post used: `"library": "<item id>"` (story parts are `<series>-<n>`, e.g. `lily-2`).
+   - Facts: only the findings a library item names, in `sources.json`'s wording, with the source on the slide. Carousels: only what the article page says. Products: only what the product page says, with the price from `npm run products`. Claude's cloud runs can't reach intimova.ng, so there read the copies GitHub saves every Saturday morning: `state/site/article-<slug>.txt` and `state/site/product-<slug>.txt` (and `npm run products` falls back to `state/products.json`). Add `"product": { "slug": "...", "price": <naira on the slides> }` so the publisher holds the post if the shop changes.
+   - Never draft an item whose status is `hold` or `website-only`. If a slot has nothing ready, skip it and say so in the pull request.
+   - All posts go out at 19:30 Lagos time unless Grade changes it.
+5. Rules that never bend:
    - Stories: words carry the heat. Above-medium sensual language is fine, but never explicit acts, anatomical or crude words. Every character is clearly an adult. She chooses herself in the end of a series.
    - Reels must stay at or under 89.5 seconds (Facebook's limit is 90). The engine speeds up slightly to fit, and refuses past that. Cut lines if it refuses.
    - Health facts: every number has a named source on the slide; never "cures", "treats" or "prevents"; say "a link, not proof" when the study is observational. Note the country the data comes from.
    - X posts under 280 characters and without links, because a link costs more. Instagram has a 2,200 character limit and allows 30 hashtags at most.
    - Fill in `safety` honestly. Set `hold: true` on anything that needs Grade's input.
-5. Render, check, preview:
+6. Keep the library topped up. If any slot shows under 6 weeks left (⚠️ in the runway), add new items to that file in the same pull request: research them properly (named source, checked on the source's own page, country noted), mark them `ready`, and list them in the pull request description so Grade sees what was added.
+7. Render, check, preview:
    ```
    npm run render -- content/<week>
    node engine/validate.mjs
    npm test
    REPO_URL=https://github.com/<owner>/intimova-content BRANCH=week/<week> npm run preview -- content/<week>
    ```
-   Look at every rendered slide and at least 6 frames of each reel before opening the pull request.
-6. Commit to the branch `week/<week>`, push, and open a pull request titled `Intimova: week of <D Month>`, with `content/<week>/PREVIEW.md` as its description.
-7. Add a line to the Intimova work log in the roadmap doc.
+   Look at every rendered slide and at least 6 frames of each reel before opening the pull request. The preview ends with the library runway.
+8. Commit to the branch `week/<week>`, push, and open a pull request titled `Intimova: week of <D Month>`, with `content/<week>/PREVIEW.md` as its description.
+9. Add a line to the Intimova work log in the roadmap doc.
 
 ## Sunday run (18:00 WAT): apply Grade's comments
 
@@ -55,4 +61,4 @@ Read the open week pull request's comments. Make the changes, re-render the post
 
   Every story should set `pulse`, `turn`, `heat` and `peak`. Stories without a sharp interruption can skip `lights` and `dread`; the music then plays through to the end card. Set `"music": "none"` on a story to make it silent.
 - Slide types: `cover`, `myth`, `fact`, `text`, `takeaway`, `quote`. In sources, `_text_` means italic.
-- Rendering needs Playwright with Chromium, ffmpeg, and python3 with numpy, scipy and Pillow. All of these exist in Claude's workspace.
+- Rendering needs Playwright with Chromium, ffmpeg, and python3 with numpy, scipy and Pillow. In a Claude cloud run, `bash scripts/cloud-setup.sh` sets these up.
