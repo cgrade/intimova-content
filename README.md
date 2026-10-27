@@ -122,7 +122,11 @@ For this to work, `PLATFORMS` must not include `tiktok`. The default is `instagr
 ### 8. The posting alarm (Cloudflare, about 10 minutes)
 
 GitHub's own schedule is unreliable. GitHub's docs say scheduled runs "can be delayed during periods of high loads" and "some queued jobs may be dropped". On 26–27 Oct it started only 4 of the 20-plus runs due.
-So a tiny Cloudflare Worker in `alarm/` starts the job every 10 minutes instead, and GitHub's schedule stays as a backup. Cloudflare's free plan allows 5 of these schedules per account; this uses 1.
+So a tiny Cloudflare Worker in `alarm/` starts the jobs instead, and GitHub's schedules stay as a backup:
+- **Publish due posts** every 10 minutes from 06:08 to 22:58.
+- **Read post results and product prices** on Saturdays at 06:06 and 08:06, before the 09:33 draft run, which needs its fresh product snapshot.
+
+Cloudflare's free plan allows 5 of these schedules per account; this uses 2.
 
 1. **Make a GitHub token** that can only start this repo's jobs. In GitHub, go to Settings > Developer settings > Personal access tokens > Fine-grained tokens > Generate new token.
    - Repository access: **Only select repositories**, then `intimova-content`.

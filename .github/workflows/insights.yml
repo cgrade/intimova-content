@@ -3,6 +3,8 @@ name: Read post results and product prices
 on:
   schedule:
     # Saturdays at 07:13 Lagos time (cron is in UTC), before the 09:33 weekly draft run reads them.
+    # This is the backup clock: GitHub skips scheduled runs when it's busy. The Cloudflare alarm
+    # in alarm/ starts this job at 06:06 and 08:06 Lagos on Saturdays. Running it twice is harmless.
     - cron: '13 6 * * 6'
   workflow_dispatch:
 

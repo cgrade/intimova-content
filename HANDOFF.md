@@ -8,7 +8,7 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
 - **Repo** `cgrade/intimova-content` (public). It holds the content, the rendered media in `public/`, the reel and carousel engine in `engine/`, and the publisher in `publisher/`. See `README.md` for setup and the folder map.
 - **Media hosting:** Cloudflare (Workers static assets, via `wrangler.jsonc`) serves `public/` at `MEDIA_BASE_URL`.
 - **Posting:** the GitHub Actions job "Publish due posts" posts whatever is due.
-  - **Main clock:** the Cloudflare Worker `intimova-alarm` (`alarm/`) starts it every 10 minutes from 06:08 to 22:58 Lagos time, through GitHub's workflow-dispatch API, with a fine-grained token (Actions: read and write) stored as the Worker secret `GITHUB_TOKEN`. Grade deploys it (README step 8).
+  - **Main clock:** the Cloudflare Worker `intimova-alarm` (`alarm/`) starts it every 10 minutes from 06:08 to 22:58 Lagos time, through GitHub's workflow-dispatch API, with a fine-grained token (Actions: read and write) stored as the Worker secret `GITHUB_TOKEN`. It also starts "Read post results and product prices" on Saturdays at 06:06 and 08:06. Grade deploys it (README step 8).
   - **Backup clock:** GitHub's own schedule at :03, :13 … It is unreliable: on 26–27 Oct GitHub started 4 of the 20-plus runs due.
   - Runs queue one at a time (`concurrency: publisher`) and check out the newest `main`, so a run that waited behind another sees what that run posted and doesn't repost it.
   - A post that no run picks up within 12 hours of its time is skipped (`maxLateHours`).
