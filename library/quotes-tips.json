@@ -1,0 +1,86 @@
+{
+  "_about": "Friday: alternate a quote card (1 slide) and a couples tip (5-slide carousel). Quotes are original Intimova lines, attributed '— INTIMOVA'. Never put a famous person's name on a quote: misattributed quotes are common and we can't check them. Tips come from an intimova.ng article or a source in sources.json; if a tip uses a research finding, the source goes on the slide. Alternate kinds: if last Friday was a quote, pick a tip.",
+  "items": [
+    { "id": "q-more-than-surviving", "kind": "quote", "status": "used", "used_in": "2026-10-30-quote-surviving", "text": "You are allowed to want *more than surviving.*" },
+
+    { "id": "t-ask-dont-guess", "kind": "tip", "status": "ready", "audience": "couples",
+      "title": "One question for tonight",
+      "angle": "Swap guessing for asking: one gentle question ('What's something you'd like more of?'), when to ask it (not mid-moment), and how to listen without defending.",
+      "article": "https://intimova.ng/learn/desire-libido/talking-to-your-partner-about-toys" },
+    { "id": "q-choosing-yourself", "kind": "quote", "status": "ready", "text": "Choosing yourself isn't selfish. *It's where love starts.*" },
+
+    { "id": "t-stay-close-after", "kind": "tip", "status": "ready", "audience": "couples",
+      "title": "Stay a while",
+      "angle": "The minutes after matter: put the phone down, stay close, talk. Couples who did reported higher satisfaction.",
+      "facts": ["muise-2014-afterglow/after-sex-affection"] },
+    { "id": "q-not-a-reward", "kind": "quote", "status": "ready", "text": "Pleasure isn't a reward you have to earn. *It's part of looking after you.*" },
+
+    { "id": "t-slow-the-start", "kind": "tip", "status": "ready", "audience": "couples",
+      "title": "Start earlier than the bedroom",
+      "angle": "A message at lunchtime, a hand on the back at dinner, no rush at night. Anticipation is part of it.",
+      "article": "https://intimova.ng/learn/sex-tips/foreplay-tips",
+      "notes": "Space at least 6 weeks from Tuesday's slow-the-start carousel." },
+    { "id": "q-rest-then-want", "kind": "quote", "status": "ready", "text": "Rest first. *Then let yourself want things.*" },
+
+    { "id": "t-introduce-a-toy", "kind": "tip", "status": "ready", "audience": "couples",
+      "title": "Bringing a toy into the bedroom",
+      "angle": "Lead with 'us', choose it together, start with something small and simple, laugh if it's awkward.",
+      "article": "https://intimova.ng/learn/desire-libido/talking-to-your-partner-about-toys",
+      "notes": "Space at least 6 weeks from Tuesday's bringing-up-toys and from t-ask-dont-guess." },
+    { "id": "q-no-permission", "kind": "quote", "status": "ready", "text": "You don't need anyone's permission *to feel good.*" },
+
+    { "id": "t-phones-out", "kind": "tip", "status": "ready", "audience": "couples",
+      "title": "One night, no phones",
+      "angle": "Pick one night a week with phones in another room. Some weeks you'll only talk, and that counts.",
+      "notes": "A suggestion, not a research claim. Don't add statistics." },
+    { "id": "q-home-is-you", "kind": "quote", "status": "ready", "text": "Love starts at home. *Sometimes home is you.*" },
+
+    { "id": "t-early-night", "kind": "tip", "status": "ready", "audience": "couples",
+      "title": "The most romantic thing might be sleep",
+      "angle": "Tired bodies don't want much. An early night together, no expectations, and see what follows.",
+      "notes": "If citing kalmbach-2015-sleep, don't repeat Monday's sleep-has-nothing-to-do within 6 weeks." },
+    { "id": "q-know-what-you-like", "kind": "quote", "status": "ready", "text": "The right person will ask what you like. *Start by knowing.*" },
+
+    { "id": "t-say-it-out-loud", "kind": "tip", "status": "ready", "audience": "her",
+      "title": "Say what you want, one sentence at a time",
+      "angle": "Practise alone first. Start with what you enjoy ('I love it when…'), not what's wrong. Short and warm.",
+      "article": "https://intimova.ng/learn/desire-libido/talking-to-your-partner-about-toys" },
+    { "id": "q-tired-not-done", "kind": "quote", "status": "ready", "text": "Being tired of surviving *isn't the same as being done with love.*" },
+
+    { "id": "t-clean-your-toy", "kind": "tip", "status": "ready", "audience": "all",
+      "title": "Look after your toy, and it looks after you",
+      "angle": "Wipe it clean after every use, water-based lubricant only, charge it before it's flat, store it clean.",
+      "notes": "Care steps only as stated on the product pages (npm run products)." },
+    { "id": "q-body-is-home", "kind": "quote", "status": "ready", "text": "Your body isn't a project to fix. *It's home.*" },
+
+    { "id": "t-keep-it-new", "kind": "tip", "status": "ready", "audience": "couples",
+      "title": "Keep one thing new",
+      "angle": "A new place in the house, a new time of day, a new question. Small changes beat big gestures.",
+      "article": "https://intimova.ng/learn/sex-tips/sex-tips-to-spice-things-up",
+      "notes": "Suggestive only. Space 6 weeks from Tuesday's keeping-things-new." },
+    { "id": "q-small-moments", "kind": "quote", "status": "ready", "text": "Closeness is built in small moments, *not big gestures.*" },
+
+    { "id": "t-desire-mismatch", "kind": "tip", "status": "ready", "audience": "couples",
+      "title": "When one of you wants it more",
+      "angle": "Different levels of desire are normal. Talk about closeness, not frequency; find the middle; no keeping score.",
+      "article": "https://intimova.ng/learn/desire-libido/when-desire-goes-quiet" },
+    { "id": "q-desire-door", "kind": "quote", "status": "ready", "text": "Desire doesn't always knock. *Sometimes you open the door.*" },
+
+    { "id": "t-last-longer-together", "kind": "tip", "status": "ready", "audience": "him",
+      "title": "Less rush, more together",
+      "angle": "Slow down, pause and breathe, make it about both of you and not 'the finish'. See a doctor if it worries you.",
+      "article": "https://intimova.ng/learn/sex-tips/how-to-last-longer-in-bed",
+      "notes": "Space at least 6 weeks from Monday's lasting-is-fixed and Tuesday's lasting-longer." },
+    { "id": "q-soft-not-weak", "kind": "quote", "status": "ready", "text": "Soft is not weak. *Soft is brave.*" },
+
+    { "id": "t-pain-check", "kind": "tip", "status": "ready", "audience": "her",
+      "title": "If it hurts, stop",
+      "angle": "Pain is a signal: stop, use more lube, slow down, and if it keeps happening, see a doctor or a sexual health clinic.",
+      "facts": ["brook-painful-sex/should-not-hurt"],
+      "notes": "Space at least 6 weeks from Monday's pain-is-normal." },
+    { "id": "q-safe-heart", "kind": "quote", "status": "ready", "text": "A safe heart is worth waiting for. *So is yours.*" },
+
+    { "id": "q-whole-night", "kind": "quote", "status": "ready", "text": "You deserve to be looked at *like you're the whole night.*" },
+    { "id": "q-out-loud", "kind": "quote", "status": "ready", "text": "Say what you want out loud. *Even if only to yourself first.*" }
+  ]
+}

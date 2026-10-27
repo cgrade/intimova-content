@@ -1,0 +1,47 @@
+{
+  "_about": "Sunday: product posts (5-slide carousel). Facts come ONLY from the live product page: run npm run products to see each product's live price and stock, and read the page itself for materials, care, delivery and returns. Never copy explicit wording from a product page (some descriptions are written for the website, not for social); describe how it feels and what it's like to own, never use on the body. Record the product in post.json as \"product\": { \"slug\": \"...\", \"price\": <naira shown on the slides> } so the publisher can hold the post if the price or stock changes before it goes out. A product that is out of stock is skipped until it's back. The same product appears at most once every 4 weeks. 'products' lists every product an item features; the first is the one recorded in post.json.",
+  "catalogue": {
+    "rose-air-pulse": { "name": "The Rose — Air-Pulse", "status": "ready" },
+    "rose-flutter": { "name": "The Rose — Flutter", "status": "ready", "notes": "The site's description is too explicit for social. Say 'a soft, fluttering sensation' and stop there." },
+    "rose-duo": { "name": "The Rose Duo — Flutter & Vibration", "status": "ready", "notes": "The site's description is too explicit for social. Describe it as two sensations in one." },
+    "the-wand": { "name": "The Wand — Full-Body Massager", "status": "ready" },
+    "bullet-rechargeable": { "name": "The Bullet — Rechargeable", "status": "ready" },
+    "bullet-classic": { "name": "The Bullet — Classic", "status": "ready" },
+    "silk-water-based-glide": { "name": "Water-based lubricant", "status": "ready", "notes": "Out of stock on 27 Oct 2026; npm run products shows when it's back." },
+    "pocket-toto": { "name": "Pocket Toto", "status": "hold", "notes": "Male masturbator: the highest risk on Meta. Grade decides before any post." },
+    "x-power-coffee-for-men": { "name": "X-Power Coffee for Men", "status": "hold", "notes": "A performance product: its stamina and energy claims are health claims we can't back. Grade decides; never repeat the claims." }
+  },
+  "items": [
+    { "id": "bullet-rechargeable-guide", "status": "used", "used_in": "2026-11-01-guide-bullet", "products": ["bullet-rechargeable"], "angle": "First toy guide: what it is, materials, care, returns, discreet delivery." },
+
+    { "id": "rose-air-pulse-guide", "status": "ready", "products": ["rose-air-pulse"], "angle": "Guide: air pulses instead of vibration, hands-free, what it's made of, care, delivery." },
+    { "id": "wand-guide", "status": "ready", "products": ["the-wand"], "angle": "Guide: a full-body massager first; deep, rumbly power; care and charging." },
+    { "id": "bullet-classic-guide", "status": "ready", "products": ["bullet-classic"], "angle": "Guide: the simple, battery-powered classic. The most affordable first step." },
+    { "id": "rose-flutter-guide", "status": "ready", "products": ["rose-flutter"], "angle": "Guide: a soft, fluttering sensation. Who it suits, care." },
+    { "id": "rose-duo-guide", "status": "ready", "products": ["rose-duo"], "angle": "Guide: two sensations in one. Who it suits, care, price." },
+    { "id": "bullet-rechargeable-vs-classic", "status": "ready", "products": ["bullet-rechargeable", "bullet-classic"], "angle": "Rechargeable or battery? Price, convenience, discretion. Which Bullet is yours." },
+    { "id": "which-rose", "status": "ready", "products": ["rose-air-pulse", "rose-flutter", "rose-duo"], "angle": "Which Rose is which: Air-Pulse, Flutter, Duo. One line each, price each." },
+    { "id": "rose-vs-bullet", "status": "ready", "products": ["rose-air-pulse", "bullet-rechargeable"], "angle": "Your first: Rose or Bullet? Air pulses vs vibration, price, size.", "article": "https://intimova.ng/learn/toys-body-safe/rose-toy-vs-bullet-vibrator" },
+    { "id": "wand-vs-bullet", "status": "ready", "products": ["the-wand", "bullet-rechargeable"], "angle": "Big and broad or small and precise?", "article": "https://intimova.ng/learn/toys-body-safe/bullet-vs-wand" },
+    { "id": "price-ladder", "status": "ready", "products": ["bullet-classic", "bullet-rechargeable", "the-wand", "rose-air-pulse", "rose-duo"], "angle": "A first toy at every budget: the live prices, lowest to highest, one line on each." },
+    { "id": "bullet-in-your-bag", "status": "ready", "products": ["bullet-rechargeable"], "angle": "Pocket-sized and quiet: travel, discretion, USB charging, splash-proof (not waterproof)." },
+    { "id": "rose-air-pulse-care", "status": "ready", "products": ["rose-air-pulse"], "angle": "Looking after your Rose: cleaning, charging, lube choice, storage as the page states." },
+    { "id": "wand-shoulders-first", "status": "ready", "products": ["the-wand"], "angle": "The Wand after a long day: shoulders, neck, back. A massager you can share with a partner." },
+    { "id": "splash-proof-explained", "status": "ready", "products": ["bullet-rechargeable", "rose-air-pulse"], "angle": "Splash-proof vs waterproof, rechargeable vs battery: what the words on our product pages mean.", "notes": "Use each product's own page for its rating." },
+    { "id": "discreet-delivery", "status": "ready", "products": ["bullet-rechargeable"], "angle": "What arrives at your door: plain, unbranded packaging; nationwide delivery and the fee from the page; faulty-item replacement within 2 days.", "notes": "A trust post. Product mentioned only as an example." },
+    { "id": "returns-and-faults", "status": "ready", "products": ["the-wand"], "angle": "What happens if something's wrong: report within 2 days of delivery, replaced free; opened items can't be returned for a change of mind.", "notes": "Wording from the product page only." },
+    { "id": "rose-duo-for-two", "status": "ready", "products": ["rose-duo"], "angle": "The Duo as a shared choice: choosing a toy together.", "notes": "Only say 'for couples' if the page says so; otherwise 'something to choose together'." },
+    { "id": "bullet-classic-budget", "status": "ready", "products": ["bullet-classic"], "angle": "Curious but careful with money? Start here: the lowest price in the shop, body-safe, simple." },
+    { "id": "rose-flutter-vs-air-pulse", "status": "ready", "products": ["rose-flutter", "rose-air-pulse"], "angle": "Flutter or Air-Pulse: two Roses, two sensations, same price." },
+    { "id": "first-toy-quiz", "status": "ready", "products": ["bullet-rechargeable", "rose-air-pulse", "the-wand"], "angle": "Three questions, three answers: which first toy fits you. Swipe to find yours." },
+    { "id": "treat-yourself-december", "status": "ready", "products": ["rose-air-pulse"], "season": { "from": "2026-12-01", "to": "2026-12-31" }, "angle": "End the year with something for you. A December treat-yourself post." },
+    { "id": "new-year-self-care", "status": "ready", "products": ["bullet-rechargeable"], "season": { "from": "2027-01-01", "to": "2027-01-31" }, "angle": "A new year, a gentler resolution: pleasure as part of self-care." },
+    { "id": "valentines-for-two", "status": "ready", "products": ["rose-duo", "the-wand"], "season": { "from": "2027-02-01", "to": "2027-02-14" }, "angle": "Valentine's: something to choose together, delivered discreetly in time. Check the page's delivery times." },
+    { "id": "valentines-for-you", "status": "ready", "products": ["rose-flutter"], "season": { "from": "2027-02-01", "to": "2027-02-14" }, "angle": "Valentine's for the single and the self-partnered: love starts at home." },
+    { "id": "womens-day", "status": "ready", "products": ["rose-air-pulse"], "season": { "from": "2027-03-01", "to": "2027-03-08" }, "angle": "International Women's Day (8 March): pleasure is part of women's wellbeing." },
+
+    { "id": "lube-guide", "status": "ready", "products": ["silk-water-based-glide"], "angle": "Water-based lubricant: toy- and condom-safe, everyday comfort.", "notes": "Only when npm run products shows it in stock." },
+    { "id": "pocket-toto-guide", "status": "hold", "products": ["pocket-toto"], "angle": "Men's guide: what it is, care, discreet delivery." },
+    { "id": "x-power-coffee", "status": "hold", "products": ["x-power-coffee-for-men"], "angle": "Grade decides whether this product is ever posted." }
+  ]
+}
