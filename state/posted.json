@@ -52,6 +52,13 @@
       "issue": 5,
       "url": "https://github.com/cgrade/intimova-content/issues/5",
       "at": "2026-10-28T18:40:19.877Z"
+    },
+    "facebook": {
+      "attempts": 1,
+      "last_try": "2026-10-28T22:32:56.256Z",
+      "done": true,
+      "at": "2026-10-28T22:33:09.018Z",
+      "id": "1444354447159029"
     }
   }
 }
