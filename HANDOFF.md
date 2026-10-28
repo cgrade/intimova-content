@@ -13,6 +13,8 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
   - Runs queue one at a time (`concurrency: publisher`) and check out the newest `main`, so a run that waited behind another sees what that run posted and doesn't repost it.
   - A post that no run picks up within 12 hours of its time is skipped (`maxLateHours`).
   - It posts what's due to **Instagram and Facebook**. Tested live on 26 Oct with `test-hello`; see `state/posted.json` for the IDs.
+  - Facebook reels are uploaded as bytes from the checkout, not as a link. On 28 Oct Facebook refused the link to Lily part 1 ("Restricted by robots.txt") because Cloudflare's managed robots.txt on intimova.ng blocks `meta-externalagent`. Facebook photos and Instagram still go by link and worked.
+  - An error Meta marks `"retriable": false` gives up after one try instead of three.
   - For **TikTok**, it opens a GitHub issue that tags Grade, with the file links and caption, and he posts by hand. TikTok's app review rules out apps that only post to your own account and apps for adult products, so TikTok isn't automated.
   - **X** isn't connected (no credit or app yet). `PLATFORMS` is `instagram,facebook`.
 - **GitHub secrets set:** `META_PAGE_ID`, `IG_USER_ID`, `META_PAGE_TOKEN`. **Variables:** `MEDIA_BASE_URL`, `PLATFORMS`.

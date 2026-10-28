@@ -1,9 +1,12 @@
 // Facebook Page via the Graph API.
 // Photos: /{page}/photos (published=false for each) -> /{page}/feed with attached_media.
-// Reel: /{page}/video_reels start -> rupload with file_url -> finish with video_state=PUBLISHED.
+// Reel: /{page}/video_reels start -> rupload with the file's bytes -> finish with video_state=PUBLISHED.
+// The reel is sent as bytes, not as a file_url, because Facebook refuses URLs on sites whose robots.txt
+// blocks any Meta crawler, and Cloudflare's managed robots.txt for intimova.ng blocks meta-externalagent.
+import fs from 'node:fs';
 import { request, sleep } from '../lib/http.mjs';
 
-export async function postFacebook({ post, manifest, url, cfg, log }) {
+export async function postFacebook({ post, manifest, url, local, cfg, log }) {
   const g = cfg.graph;
   if (!g.pageId || !g.pageToken) throw new Error('Facebook is not set up: META_PAGE_ID and META_PAGE_TOKEN are needed');
   const api = `${g.base}/${g.version}`;
@@ -13,8 +16,9 @@ export async function postFacebook({ post, manifest, url, cfg, log }) {
     if (manifest.duration > 90) throw new Error(`Facebook Reels must be 90 seconds or less; this one is ${manifest.duration}s`);
     const start = await request('POST', `${api}/${g.pageId}/video_reels`, { json: { upload_phase: 'start', access_token: g.pageToken } });
     const videoId = start.video_id;
-    await request('POST', `${g.rupload}/video-upload/${g.version}/${videoId}`, {
-      headers: { Authorization: `OAuth ${g.pageToken}`, file_url: url(manifest.video) } });
+    const video = fs.readFileSync(local(manifest.video));
+    await request('POST', `${g.rupload}/video-upload/${g.version}/${videoId}`, { body: video,
+      headers: { Authorization: `OAuth ${g.pageToken}`, offset: '0', file_size: String(video.length), 'Content-Type': 'application/octet-stream' } });
     // Wait until Facebook has fetched the file before publishing.
     for (let i = 0; i < 24; i++) {
       const s = await request('GET', `${api}/${videoId}?fields=status&access_token=${encodeURIComponent(g.pageToken)}`);

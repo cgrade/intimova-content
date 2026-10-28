@@ -102,7 +102,8 @@ test('publishes carousel, single image and reel to all four platforms, once', as
     assert.equal(Object.keys(feed.body).filter(k => k.startsWith('attached_media')).length, 5);
     assert.deepEqual(JSON.parse(feed.body['attached_media[0]']).media_fbid.startsWith('ph'), true);
     const rup = c.find(x => x.path.startsWith('/rupload/'));
-    assert.match(rup.headers.file_url, /reel\.mp4$/);
+    assert.equal(rup.headers.file_url, undefined);                          // bytes, not a URL Facebook must fetch
+    assert.equal(rup.body.bytes, 9 * 1024 * 1024);
     const fin = c.find(x => x.path === '/graph/v26.0/PAGE1/video_reels' && x.body.upload_phase === 'finish');
     assert.equal(fin.body.video_state, 'PUBLISHED');
     // X: refreshed token, 5 images split 4 + 1 into a thread, reel video in 3 chunks
@@ -147,6 +148,19 @@ test('a failed platform is retried next run without reposting the others', async
     const r2 = await run(cfg, quiet);
     assert.ok(r2.filter(r => r.platform === 'x').every(r => r.ok));
     assert.equal(mock.calls.filter(x => x.path.endsWith('/media_publish')).length, igPublishes); // Instagram not reposted
+  } finally { await mock.close(); }
+});
+
+test('an error Meta marks not retriable gives up at once instead of failing three runs', async () => {
+  const root = makeRoot();
+  const mock = await startMock({ publicDir: path.join(root, 'public'), rejectReel: true });
+  try {
+    const r = await run(cfgFor(root, mock, { PLATFORMS: 'instagram,facebook' }), quiet);
+    assert.ok(r.some(x => x.post === 'reel' && x.platform === 'facebook' && !x.ok));
+    const s = loadState(root).reel.facebook;
+    assert.equal(s.attempts, 1);
+    assert.equal(s.gave_up, true);
+    assert.ok(loadState(root).reel.instagram.done);
   } finally { await mock.close(); }
 });
 

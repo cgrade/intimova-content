@@ -3,7 +3,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 
-export function startMock({ publicDir, failOnce = {}, products = {} } = {}) {
+export function startMock({ publicDir, failOnce = {}, products = {}, rejectReel = false } = {}) {
   const calls = [];
   let n = 0;
   const fails = { ...failOnce };
@@ -69,7 +69,10 @@ export function startMock({ publicDir, failOnce = {}, products = {} } = {}) {
       if (u.searchParams.get('fields') === 'status') return send(200, { status: { video_status: 'upload_complete' } });
     }
     if (p === '/rupload/video-upload/v26.0/v77') {
-      if (!req.headers.file_url || !String(req.headers.authorization).startsWith('OAuth ')) return send(400, { error: { message: 'missing headers' } });
+      if (rejectReel) return send(422, { debug_info: { retriable: false, type: 'FileUrlProcessingError', message: 'Unable to fetch media from URL, got status code: 403 Restricted by robots.txt' } });
+      if (!String(req.headers.authorization).startsWith('OAuth ') || req.headers.offset !== '0' || Number(req.headers.file_size) !== raw.length || !raw.length)
+        return send(400, { error: { message: 'missing headers or bytes' } });
+      call.body = { bytes: raw.length };
       return send(200, { success: true });
     }
     // X

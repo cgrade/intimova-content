@@ -46,12 +46,6 @@
       "at": "2026-10-28T18:40:15.971Z",
       "id": "18145349383579339"
     },
-    "facebook": {
-      "attempts": 3,
-      "last_try": "2026-10-28T18:58:48.353Z",
-      "error": "POST https://rupload.facebook.com/video-upload/v26.0/4880147862218550 failed with 422: {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-      "gave_up": true
-    },
     "tiktok_manual": {
       "attempts": 1,
       "notified": true,

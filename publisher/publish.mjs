@@ -86,7 +86,8 @@ export async function run(cfg = loadConfig(), log = console.log) {
         results.push({ post: post.id, platform: plat, ok: true, id: r.id, needsCaption: r.needs_caption });
       } catch (e) {
         s.error = e.message;
-        if (s.attempts >= cfg.maxAttempts) s.gave_up = true;
+        // Meta marks some errors as not retriable (e.g. it can't fetch the file); trying again won't help.
+        if (s.attempts >= cfg.maxAttempts || e.body?.debug_info?.retriable === false) s.gave_up = true;
         log(`  ✗ ${plat}: ${e.message}${s.gave_up ? ' (giving up after ' + s.attempts + ' tries)' : ''}`);
         results.push({ post: post.id, platform: plat, ok: false, note: e.message });
       }
