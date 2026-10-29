@@ -15,7 +15,13 @@ export function startMock({ publicDir, failOnce = {}, products = {}, rejectReel 
     let body = {};
     if (ct.includes('json')) body = JSON.parse(raw.toString() || '{}');
     else if (ct.includes('x-www-form-urlencoded')) body = Object.fromEntries(new URLSearchParams(raw.toString()));
-    else if (ct.includes('multipart')) body = { multipart: true, bytes: raw.length, segment: /name="segment_index"\r\n\r\n(\d+)/.exec(raw.toString('latin1'))?.[1] };
+    else if (ct.includes('multipart')) {
+      const text = raw.toString('latin1');
+      body = { multipart: true, bytes: raw.length, segment: /name="segment_index"\r\n\r\n(\d+)/.exec(text)?.[1] };
+      // Plain fields (not files) of the form, e.g. description and published on a Page video upload
+      for (const [, k, v] of text.matchAll(/name="(\w+)"\r\n\r\n([^\r]*)\r\n/g)) body[k] = Buffer.from(v, 'latin1').toString('utf8');
+      body.file = /name="source"; filename=/.test(text);
+    }
     const call = { method: req.method, path: u.pathname, query: Object.fromEntries(u.searchParams), headers: req.headers, body };
     calls.push(call);
     const send = (code, obj) => { res.writeHead(code, { 'Content-Type': 'application/json' }); res.end(obj === undefined ? '' : JSON.stringify(obj)); };
@@ -49,7 +55,23 @@ export function startMock({ publicDir, failOnce = {}, products = {}, rejectReel 
       res.writeHead(fs.existsSync(f) ? 200 : 404); return res.end();
     }
     // Meta Graph
-    if ((m = p.match(/^\/graph\/v26\.0\/IG123\/media$/)) && req.method === 'POST') return send(200, { id: 'c' + n });
+    if ((m = p.match(/^\/graph\/v26\.0\/IG123\/media$/)) && req.method === 'POST') {
+      if ((u.searchParams.get('upload_type') || body.upload_type) === 'resumable') {
+        if (body.video_url) return send(400, { error: { message: 'video_url is not supported with a resumable upload' } });
+        return send(200, { id: 'c' + n, uri: `http://${req.headers.host}/rupload/ig-api-upload/v26.0/c${n}` });
+      }
+      return send(200, { id: 'c' + n });
+    }
+    if ((m = p.match(/^\/rupload\/ig-api-upload\/v26\.0\/(c\d+)$/))) {
+      if (!String(req.headers.authorization).startsWith('OAuth ') || req.headers.offset !== '0' || Number(req.headers.file_size) !== raw.length || !raw.length)
+        return send(400, { error: { message: 'missing headers or bytes' } });
+      call.body = { bytes: raw.length };
+      return send(200, { success: true, message: 'Upload successful.' });
+    }
+    if (p === '/graph-video/v26.0/PAGE1/videos' && req.method === 'POST') {
+      if (!body.file || !body.access_token) return send(400, { error: { message: 'source file and access_token are required' } });
+      return send(200, { id: 'vid' + n });
+    }
     if (p === '/graph/v26.0/IG123/media_publish') return send(200, { id: 'igpost' + n });
     if (p === '/graph/v26.0/PAGE1/photos') return send(200, { id: 'ph' + n, post_id: 'PAGE1_' + n });
     if (p === '/graph/v26.0/PAGE1/feed') return send(200, { id: 'PAGE1_feed' + n });

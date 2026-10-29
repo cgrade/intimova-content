@@ -29,8 +29,15 @@ export async function run(cfg = loadConfig(), log = console.log) {
   const tokensBefore = JSON.stringify(tokens);
   const results = [];
   const kits = [];
+  // Rehearsal uploads to the real accounts without publishing, so it's only allowed for one named post.
+  if (cfg.rehearsal && !cfg.onlyPost) {
+    log('✗ Rehearsal needs only_post: name the one post to rehearse.');
+    const results = [{ post: '-', platform: '-', ok: false, note: 'rehearsal needs only_post (the id of one post)' }];
+    writeSummary(cfg, [], results);
+    return results;
+  }
   const due = posts.filter(p => isDue(p, cfg));
-  log(`${cfg.dryRun ? '[DRY RUN] ' : ''}${due.length} post(s) due at ${cfg.now.toISOString()}`);
+  log(`${cfg.dryRun ? '[DRY RUN] ' : cfg.rehearsal ? '[REHEARSAL: upload only, nothing is published] ' : ''}${due.length} post(s) due at ${cfg.now.toISOString()}`);
 
   for (const post of due) {
     log(`• ${post.id} (${post.format})`);
@@ -61,8 +68,10 @@ export async function run(cfg = loadConfig(), log = console.log) {
     }
     const url = f => mediaUrl(cfg.mediaBase, post, f);
     const local = f => localMedia(cfg.root, post, f);
-    const firstFile = manifest.type === 'reel' ? manifest.video : manifest.images[0];
-    const st = (state[post.id] ||= {});
+    // A video too big for the media host (hosted: false) is uploaded as bytes, so check the cover is live instead.
+    const firstFile = manifest.type !== 'reel' ? manifest.images[0] : manifest.hosted === false ? manifest.cover : manifest.video;
+    // A rehearsal records nothing, so the real post still goes out at its time.
+    const st = cfg.rehearsal ? {} : (state[post.id] ||= {});
 
     // Instagram, Facebook and TikTok fetch media from the public URL, so it must be live first.
     let mediaLive = null;
@@ -82,8 +91,8 @@ export async function run(cfg = loadConfig(), log = console.log) {
         const r = await POSTERS[plat]({ post, manifest, url, local, cfg, tokens, log });
         Object.assign(s, { done: true, at: new Date().toISOString(), ...r });
         delete s.error;
-        log(`  ✓ ${plat}: ${r.id}${r.status ? ' (' + r.status + ')' : ''}`);
-        results.push({ post: post.id, platform: plat, ok: true, id: r.id, needsCaption: r.needs_caption });
+        log(`  ✓ ${plat}: ${r.rehearsal ? 'rehearsed, not published, ' : ''}${r.id}${r.status ? ' (' + r.status + ')' : ''}`);
+        results.push({ post: post.id, platform: plat, ok: true, id: r.id, needsCaption: r.needs_caption, ...(r.rehearsal && { rehearsal: true }) });
       } catch (e) {
         s.error = e.message;
         // Meta marks some errors as not retriable (e.g. it can't fetch the file); trying again won't help.
@@ -91,11 +100,11 @@ export async function run(cfg = loadConfig(), log = console.log) {
         log(`  ✗ ${plat}: ${e.message}${s.gave_up ? ' (giving up after ' + s.attempts + ' tries)' : ''}`);
         results.push({ post: post.id, platform: plat, ok: false, note: e.message });
       }
-      if (!cfg.dryRun) saveState(cfg.root, state); // save after every platform so a crash can't cause a repost
+      if (!cfg.dryRun && !cfg.rehearsal) saveState(cfg.root, state); // save after every platform so a crash can't cause a repost
     }
 
     // TikTok by hand: when TikTok isn't automated, send Grade the files and caption to post himself.
-    if (post.platforms.includes('tiktok') && !cfg.platforms.includes('tiktok')) {
+    if (post.platforms.includes('tiktok') && !cfg.platforms.includes('tiktok') && !cfg.rehearsal) {
       const m = (st.tiktok_manual ||= { attempts: 0 });
       if (m.notified) { log(`  = tiktok (by hand): already sent, issue #${m.issue}`); continue; }
       if (m.attempts >= cfg.maxAttempts) { log('  = tiktok (by hand): gave up earlier'); continue; }
@@ -123,7 +132,7 @@ export async function run(cfg = loadConfig(), log = console.log) {
       saveState(cfg.root, state);
     }
   }
-  if (!cfg.dryRun && cfg.tokensKey && JSON.stringify(tokens) !== tokensBefore) saveTokens(cfg.root, tokens, cfg.tokensKey);
+  if (!cfg.dryRun && !cfg.rehearsal && cfg.tokensKey && JSON.stringify(tokens) !== tokensBefore) saveTokens(cfg.root, tokens, cfg.tokensKey);
   const warnings = [];
   const ttEnd = tokens.tiktok?.refresh_expires_at;
   if (ttEnd && ttEnd - cfg.now.getTime() < 30 * 24 * 3600 * 1000) warnings.push(`TikTok login ends on ${new Date(ttEnd).toDateString()}. Rerun npm run setup:tiktok before then.`);
@@ -137,6 +146,9 @@ export function tiktokKit(post, manifest, url, cfg) {
   const c = post.captions || {};
   const name = post.series || c.tiktok_title || post.id;
   const files = manifest.type === 'reel' ? [manifest.video] : manifest.images;
+  // A video the media host doesn't carry (hosted: false) is linked from the repository on GitHub instead.
+  const link = f => manifest.hosted === false && f === manifest.video && cfg.github?.repo
+    ? `https://github.com/${cfg.github.repo}/raw/main/public/${post._week}/${post._slug}/${f}` : url(f);
   const who = cfg.github?.notifyUser ? `@${cfg.github.notifyUser} ` : '';
   const steps = manifest.type === 'reel'
     ? ['Open the video link below and save it to your phone.', 'In TikTok, tap **+**, then **Upload**, and pick the video.', manifest.score ? 'It already has its own soundtrack, so keep the original sound on. If you add a TikTok sound, turn it down low so the score still carries. Then paste the caption below.' : 'Add a sound if you like, then paste the caption below.']
@@ -145,7 +157,7 @@ export function tiktokKit(post, manifest, url, cfg) {
     `${who}it's time to post this on TikTok.`, '',
     `**${name}** · ${manifest.type === 'reel' ? `reel, ${manifest.duration}s` : `${files.length} image${files.length > 1 ? 's' : ''}`}`, '',
     ...steps.map((s, i) => `${i + 1}. ${s}`), '',
-    '**Files**', ...files.map((f, i) => `- [${manifest.type === 'reel' ? 'Video' : `Slide ${i + 1}`}](${url(f)})`), '',
+    '**Files**', ...files.map((f, i) => `- [${manifest.type === 'reel' ? 'Video' : `Slide ${i + 1}`}](${link(f)})`), '',
     ...(manifest.type === 'reel' ? [] : ['**Title**', '```', c.tiktok_title || '', '```', '']),
     '**Caption**', '```', c.tiktok || '', '```', '',
     ...(post.ai_generated ? ['Turn on TikTok\'s "AI-generated content" label for this post.', ''] : []),
@@ -155,10 +167,11 @@ export function tiktokKit(post, manifest, url, cfg) {
 
 function writeSummary(cfg, due, results, warnings = [], kits = []) {
   if (!cfg.summaryFile) return;
-  const lines = [`## Intimova publisher ${cfg.dryRun ? '(dry run)' : ''}`, '', `Checked at ${cfg.now.toISOString()}. ${due.length} post(s) due.`, '', ...warnings.map(w => `> ⚠ ${w}`), ''];
+  const mode = cfg.dryRun ? '(dry run)' : cfg.rehearsal ? '(rehearsal: uploaded, nothing published)' : '';
+  const lines = [`## Intimova publisher ${mode}`, '', `Checked at ${cfg.now.toISOString()}. ${due.length} post(s) due.`, '', ...warnings.map(w => `> ⚠ ${w}`), ''];
   if (results.length) {
     lines.push('| Post | Platform | Result |', '| --- | --- | --- |');
-    for (const r of results) lines.push(`| ${r.post} | ${r.platform} | ${r.ok ? (r.dry ? 'would post' : '✅ ' + (r.id || '')) : (r.waiting ? '⏳ ' : '❌ ') + (r.note || '')} |`);
+    for (const r of results) lines.push(`| ${r.post} | ${r.platform} | ${r.ok ? (r.dry ? 'would post' : r.rehearsal ? '🎭 rehearsed ' + (r.id || '') : '✅ ' + (r.id || '')) : (r.waiting ? '⏳ ' : '❌ ') + (r.note || '')} |`);
   }
   const captions = results.filter(r => r.needsCaption);
   if (captions.length) {
