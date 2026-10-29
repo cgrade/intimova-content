@@ -5,7 +5,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { renderReel } from './reel/render.mjs';
 import { renderCarousel } from './carousel/render.mjs';
-import { loadPost, validatePost } from '../lib/post.mjs';
+import { loadPost, validatePost, writeAssetsIgnore } from '../lib/post.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const args = process.argv.slice(2);
@@ -40,4 +40,5 @@ for (const slug of fs.readdirSync(weekDir).sort()) {
     console.log(`✓ ${slug}: ${JSON.stringify(result)}`);
   } catch (e) { console.error(`✗ ${slug}: ${e.message}`); failed++; }
 }
+writeAssetsIgnore(ROOT);
 process.exit(failed ? 1 : 0);

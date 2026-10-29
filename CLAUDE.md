@@ -29,7 +29,7 @@ This repo is Intimova's content pipeline. **For the current state, open items an
    - All posts go out at 19:30 Lagos time unless Grade changes it.
 5. Rules that never bend:
    - Stories: words carry the heat. Above-medium sensual language is fine, but never explicit acts, anatomical or crude words. Every character is clearly an adult. She chooses herself in the end of a series.
-   - Reels must stay at or under 89.5 seconds (Facebook's limit is 90). The engine speeds up slightly to fit, and refuses past that. Cut lines if it refuses.
+   - Story reels run up to 3 minutes: aim for about 500–550 words, and stay at or under 179.5 seconds (Instagram shows Reels of up to 3 minutes in the Reels tab). The engine speeds up slightly to fit, and refuses past that. Cut lines if it refuses. Reels over 90 seconds go to Facebook as a Page video, since Facebook Reels stop at 90.
    - Health facts: every number has a named source on the slide; never "cures", "treats" or "prevents"; say "a link, not proof" when the study is observational. Note the country the data comes from.
    - X posts under 280 characters and without links, because a link costs more. Instagram has a 2,200 character limit and allows 30 hashtags at most.
    - Fill in `safety` honestly. Set `hold: true` on anything that needs Grade's input.

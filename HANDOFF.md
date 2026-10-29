@@ -39,7 +39,11 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
   - Hard silence at the reveal.
   - The bass and heartbeat carry harmonics so they play on phone speakers.
   - There are deliberately no 432 Hz or binaural tricks (weak evidence; binaural needs headphones).
-- **Reels must stay under 89.5 s,** because Facebook Reels allow 90 s. The engine speeds up by at most about 4% to fit, or refuses.
+- **Story reels run up to 3 minutes (179.5 s),** from Lily part 2 on; Lily part 1 was 89 s. The engine speeds up a little to fit, or refuses.
+  - Instagram shows Reels of up to 3 minutes in the Reels tab. Facebook Reels stop at 90 s, so longer reels go to Facebook as a Page video (`/videos`, the file's bytes).
+  - A reel over 24 MB can't be served by Cloudflare (25 MiB per file). The renderer marks it `"hosted": false` and lists it in `public/.assetsignore`; Instagram then gets the file's bytes (resumable upload), and the TikTok issue links to the file on GitHub.
+  - **Render time:** a 168 s test reel took 44 minutes on Grade's 4-core Mac (13 of them for the text frames, which render in parallel, one browser per worker). Reels over 90 s are encoded straight at CRF 25, which fit that test reel in 17.9 MB; shorter ones try CRF 20 first.
+  - **Rehearsal:** run "Publish due posts" by hand with Dry run unticked, Rehearsal ticked and `only_post` set. It uploads to Instagram and Facebook for real but publishes nothing and records nothing (the Facebook video is left unpublished on the Page; delete it in Meta Business Suite afterwards).
 - **Carousels:** slide types are cover, myth, fact, text, takeaway and quote. They render 1080×1350 JPEG.
 - **Brand:**
   - wine `#6B0F3A`, cream `#FAF3EC`, near-black `#12070D`

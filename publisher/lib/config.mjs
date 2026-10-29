@@ -10,6 +10,7 @@ export function loadConfig(env = process.env) {
     dryRun: env.DRY_RUN === '1' || env.DRY_RUN === 'true',
     now: env.NOW ? new Date(env.NOW) : new Date(),
     onlyPost: env.ONLY_POST || '',            // post id to publish now, ignoring its time (manual run)
+    rehearsal: env.REHEARSAL === '1' || env.REHEARSAL === 'true', // upload everything, publish nothing (needs ONLY_POST)
     maxLateHours: Number(env.MAX_LATE_HOURS || 12),
     maxAttempts: Number(env.MAX_ATTEMPTS || 3),
     platforms: (env.PLATFORMS || 'instagram,facebook').split(',').map(s => s.trim()).filter(Boolean),
@@ -19,6 +20,7 @@ export function loadConfig(env = process.env) {
     graph: {
       base: env.GRAPH_BASE || 'https://graph.facebook.com',
       rupload: env.RUPLOAD_BASE || 'https://rupload.facebook.com',
+      video: env.GRAPH_VIDEO_BASE || 'https://graph-video.facebook.com', // Page video uploads (file bytes)
       version: env.GRAPH_VERSION || 'v26.0',
       pageId: env.META_PAGE_ID || '',
       pageToken: env.META_PAGE_TOKEN || '',

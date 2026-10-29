@@ -17,6 +17,10 @@ on:
         description: 'Post id to publish now, ignoring its time (leave empty for the normal schedule)'
         type: string
         default: ''
+      rehearsal:
+        description: 'Rehearsal: upload only_post to Instagram and Facebook for real, but publish nothing (untick Dry run too)'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -44,6 +48,7 @@ jobs:
           # The alarm sends dry_run as the text "false"; only a real true (or "true") means a dry run.
           DRY_RUN: ${{ (inputs.dry_run == true || inputs.dry_run == 'true') && '1' || '0' }}
           ONLY_POST: ${{ inputs.only_post }}
+          REHEARSAL: ${{ (inputs.rehearsal == true || inputs.rehearsal == 'true') && '1' || '0' }}
           MEDIA_BASE_URL: ${{ vars.MEDIA_BASE_URL }}
           META_PAGE_ID: ${{ secrets.META_PAGE_ID }}
           META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN }}

@@ -4,13 +4,16 @@
 import { createRequire } from 'node:module';
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const require = createRequire(import.meta.url);
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const FPS = 30;
-const MAX_FILE_BYTES = 24 * 1024 * 1024; // stays under Cloudflare Pages' per-file limit
+const PAGE_FRAMES = 1000; // frames one page renders before it is replaced with a fresh one
+export const HOSTED_MAX_BYTES = 24 * 1024 * 1024; // Cloudflare serves files up to 25 MiB; bigger reels are uploaded to Meta as bytes
+const MAX_FILE_BYTES = 95 * 1024 * 1024;          // GitHub refuses files over 100 MB
 
 function run(cmd, args, opts = {}) {
   return new Promise((resolve, reject) => {
@@ -49,7 +52,7 @@ export async function renderReel(story, outDir, { log = console.log } = {}) {
   const meta = await page.evaluate(() => ({ total: window.TOTAL, scale: window.SCALE, fits: window.FITS, cues: window.CUES }));
   if (!meta.fits) {
     await browser.close();
-    throw new Error(`Story runs ${meta.total.toFixed(1)}s even when sped up; the limit is ${story.max_seconds || 89.5}s. Cut some lines.`);
+    throw new Error(`Story runs ${meta.total.toFixed(1)}s even when sped up; the limit is ${story.max_seconds || 179.5}s. Cut some lines.`);
   }
   const frames = Math.ceil(meta.total * FPS);
   fs.writeFileSync(path.join(tmp, 'meta.json'), JSON.stringify({ ...meta, fps: FPS, frames }));
@@ -65,13 +68,51 @@ export async function renderReel(story, outDir, { log = console.log } = {}) {
   const scorePath = path.join(tmp, 'score.wav');
   const score = settle(withScore ? run('python3', [path.join(HERE, 'score.py'), path.join(tmp, 'meta.json'), scorePath, String(story.music_seed ?? 11)]) : Promise.resolve());
 
-  const stage = await page.$('#stage');
-  for (let i = 0; i < frames; i++) {
-    await page.evaluate(t => window.render(t), i / FPS);
-    await stage.screenshot({ path: path.join(tmp, String(i).padStart(5, '0') + '.png'), omitBackground: true });
-    if (i % 300 === 0) log(`  text frame ${i}/${frames}`);
-  }
+  // Text frames: several workers render in parallel (a 3-minute reel is over 5,000 frames). Each worker
+  // has its own browser, since pages in one browser share its compositor and barely run faster. Frames are
+  // captured through DevTools with optimizeForSpeed (same pixels as page.screenshot, about 4x faster).
+  // Each browser is replaced every PAGE_FRAMES frames, and a frame that hangs is retried on a fresh one,
+  // because one Chromium page screenshotting thousands of frames can stall ("waiting for fonts to load").
   await browser.close();
+  const openStage = async () => {
+    const b = await chromium.launch();
+    const p = await b.newPage({ viewport: { width: 1080, height: 1920 } });
+    await p.addInitScript(s => { window.STORY = s; }, story);
+    await p.goto('file://' + path.join(HERE, 'stage.html'));
+    await p.evaluate(() => document.fonts.ready);
+    const cdp = await p.context().newCDPSession(p);
+    await cdp.send('Emulation.setDefaultBackgroundColorOverride', { color: { r: 0, g: 0, b: 0, a: 0 } });
+    const box = await (await p.$('#stage')).boundingBox();
+    return { browser: b, page: p, cdp, clip: { ...box, scale: 1 }, used: 0 };
+  };
+  const timeout = (ms, what) => new Promise((_, reject) => setTimeout(() => reject(new Error(`${what} timed out`)), ms).unref());
+  const workers = Math.max(1, Math.min(4, os.availableParallelism() - 1));
+  let next = 0, done = 0, failed = false;
+  await Promise.all(Array.from({ length: workers }, async () => {
+    let s = await openStage();
+    try {
+      for (let i = next++; i < frames && !failed; i = next++) {
+        for (let attempt = 1; ; attempt++) {
+          try {
+            if (s.used >= PAGE_FRAMES) { await s.browser.close(); s = await openStage(); }
+            await s.page.evaluate(t => window.render(t), i / FPS);
+            const { data } = await Promise.race([
+              s.cdp.send('Page.captureScreenshot', { format: 'png', clip: s.clip, optimizeForSpeed: true }),
+              timeout(60000, 'screenshot'),
+            ]);
+            fs.writeFileSync(path.join(tmp, String(i).padStart(5, '0') + '.png'), Buffer.from(data, 'base64'));
+            s.used++; break;
+          } catch (e) {
+            if (attempt >= 3) { failed = true; throw new Error(`text frame ${i} failed 3 times: ${e.message.split('\n')[0]}`); }
+            log(`  text frame ${i}: ${e.message.split('\n')[0]}; retrying on a fresh browser`);
+            await s.browser.close().catch(() => {});
+            s = await openStage();
+          }
+        }
+        if (++done % 500 === 0) log(`  text frames ${done}/${frames}`);
+      }
+    } finally { await s.browser.close().catch(() => {}); }
+  }));
   const bgErr = await bg, scoreErr = await score;
   if (bgErr) throw new Error('Background render failed: ' + bgErr.message);
   if (scoreErr) throw new Error('Score failed (is scipy installed for python3?): ' + scoreErr.message);
@@ -86,12 +127,20 @@ export async function renderReel(story, outDir, { log = console.log } = {}) {
     '-map', '[v]', '-map', '2:a', '-c:v', 'libx264', '-crf', String(crf), '-maxrate', '9M', '-bufsize', '18M', '-preset', 'slow',
     '-profile:v', 'high', '-r', String(FPS), '-g', String(FPS * 2), '-c:a', 'aac', '-b:a', '160k', '-ar', '48000',
     '-t', D.toFixed(3), '-movflags', '+faststart', out]);
-  await encode(20);
-  if (fs.statSync(out).size > MAX_FILE_BYTES) { log('  file over 24 MB, re-encoding smaller'); await encode(25); }
+  // Reels over 90 s always come out over 24 MB at CRF 20 (the grain is hard to compress), so they go straight to 25.
+  const firstCrf = D > 90 ? 25 : 20;
+  await encode(firstCrf);
+  if (firstCrf < 25 && fs.statSync(out).size > HOSTED_MAX_BYTES) { log('  file over 24 MB, re-encoding smaller'); await encode(25); }
+  const bytes = fs.statSync(out).size;
+  if (bytes > MAX_FILE_BYTES) throw new Error(`Reel is ${(bytes / 1048576).toFixed(0)} MB even re-encoded; GitHub refuses files over 100 MB. Cut some lines.`);
+  // Still too big for the media host: Instagram and Facebook get the bytes instead (see publisher/), and
+  // render-week lists the file in public/.assetsignore so Cloudflare doesn't try to serve it.
+  const hosted = bytes <= HOSTED_MAX_BYTES;
+  if (!hosted) log(`  ${(bytes / 1048576).toFixed(1)} MB: too big for the media host, will be uploaded to Meta directly`);
 
   // Cover: the hook, fully revealed.
   const coverAt = story.cover_at ?? 3.0;
   await run('ffmpeg', ['-y', '-loglevel', 'error', '-ss', String(coverAt), '-i', out, '-frames:v', '1', '-q:v', '3', path.join(outDir, 'cover.jpg')]);
   fs.rmSync(tmp, { recursive: true, force: true });
-  return { video: 'reel.mp4', cover: 'cover.jpg', duration: Number(D.toFixed(2)), bytes: fs.statSync(out).size, score: withScore };
+  return { video: 'reel.mp4', cover: 'cover.jpg', duration: Number(D.toFixed(2)), bytes, score: withScore, ...(!hosted && { hosted: false }) };
 }

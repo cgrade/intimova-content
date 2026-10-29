@@ -9,7 +9,7 @@ import { startMock } from './mock-api.mjs';
 import { run } from '../publisher/publish.mjs';
 import { loadConfig } from '../publisher/lib/config.mjs';
 import { saveTokens, loadTokens, loadState } from '../publisher/lib/store.mjs';
-import { validatePost } from '../lib/post.mjs';
+import { validatePost, assetsIgnoreText } from '../lib/post.mjs';
 
 const KEY = crypto.randomBytes(32).toString('base64');
 const base = (over = {}) => ({
@@ -175,6 +175,107 @@ test('waits when media is not live yet, and dry run posts nothing', async () => 
     assert.ok(d.filter(x => x.ok).every(x => x.dry));
     assert.equal(mock.calls.filter(x => x.method === 'POST').length, 0);
   } finally { await mock.close(); }
+});
+
+// A 3-minute story reel, too big for the media host (manifest hosted: false), as the engine now renders them.
+function makeLongRoot() {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'intimova-long-'));
+  const dir = (...p) => path.join(root, ...p);
+  fs.mkdirSync(dir('content', '2026-11-02', '3-wed-long'), { recursive: true });
+  fs.writeFileSync(dir('content', '2026-11-02', '3-wed-long', 'post.json'), JSON.stringify(base({
+    id: 'long', format: 'reel', series: 'Lily, part 2', publish_at: '2026-11-04T19:30:00+01:00',
+    platforms: ['instagram', 'facebook', 'tiktok'], captions: { instagram: 'ig long', facebook: 'fb long', tiktok: 'tt long' },
+    story: { scenes: [{ lines: [{ text: 'a' }] }] } })));
+  const pub = dir('public', '2026-11-02', '3-wed-long');
+  fs.mkdirSync(pub, { recursive: true });
+  fs.writeFileSync(path.join(pub, 'manifest.json'), JSON.stringify({ type: 'reel', video: 'reel.mp4', cover: 'cover.jpg', duration: 178.4, hosted: false, score: true }));
+  fs.writeFileSync(path.join(pub, 'reel.mp4'), Buffer.alloc(30 * 1024 * 1024, 7));
+  fs.writeFileSync(path.join(pub, 'cover.jpg'), Buffer.alloc(1000, 7));
+  return root;
+}
+const longCfg = (root, mock, over = {}) => cfgFor(root, mock, {
+  NOW: '2026-11-04T19:40:00+01:00', PLATFORMS: 'instagram,facebook', GRAPH_VIDEO_BASE: mock.base + '/graph-video',
+  GITHUB_API_URL: mock.base + '/gh', GITHUB_TOKEN: 'ghs_test', GITHUB_REPOSITORY: 'cgrade/intimova-content', ...over });
+
+test('a 3-minute reel uploads its bytes to Instagram and goes to Facebook as a Page video', async () => {
+  const root = makeLongRoot();
+  const mock = await startMock({ publicDir: path.join(root, 'public') });
+  try {
+    const r = await run(longCfg(root, mock), quiet);
+    assert.ok(r.filter(x => x.platform !== 'tiktok (by hand)').every(x => x.ok), JSON.stringify(r, null, 1));
+    const c = mock.calls;
+    // The video isn't on the media host, so only the cover is checked there
+    assert.ok(c.some(x => x.method === 'HEAD' && x.path.endsWith('/3-wed-long/cover.jpg')));
+    assert.ok(!c.some(x => x.method === 'HEAD' && x.path.endsWith('reel.mp4')));
+    // Instagram: resumable container, the file's bytes to rupload, then publish
+    const ig = c.find(x => x.path === '/graph/v26.0/IG123/media');
+    assert.equal(ig.body.media_type, 'REELS');
+    assert.equal(ig.body.video_url, undefined);
+    assert.match(ig.body.cover_url, /3-wed-long\/cover\.jpg$/);
+    assert.equal(ig.body.caption, 'ig long');
+    const up = c.find(x => x.path.startsWith('/rupload/ig-api-upload/'));
+    assert.equal(up.body.bytes, 30 * 1024 * 1024);
+    assert.equal(c.filter(x => x.path.endsWith('/media_publish')).length, 1);
+    // Facebook: a Page video with the file attached, not a reel
+    const fb = c.find(x => x.path === '/graph-video/v26.0/PAGE1/videos');
+    assert.ok(fb.body.file);
+    assert.equal(fb.body.description, 'fb long');
+    assert.equal(fb.body.title, 'Lily, part 2');
+    assert.notEqual(fb.body.published, 'false');
+    assert.ok(!c.some(x => x.path.endsWith('/video_reels')));
+    assert.match(loadState(root).long.facebook.id, /^vid\d+$/);
+    // TikTok by hand: the issue links to the file on GitHub, since the media host doesn't have it
+    const issue = c.find(x => x.path.endsWith('/issues'));
+    assert.match(issue.body.body, /https:\/\/github\.com\/cgrade\/intimova-content\/raw\/main\/public\/2026-11-02\/3-wed-long\/reel\.mp4/);
+  } finally { await mock.close(); }
+});
+
+test('rehearsal uploads to Instagram and Facebook but publishes and records nothing', async () => {
+  const root = makeLongRoot();
+  const mock = await startMock({ publicDir: path.join(root, 'public') });
+  try {
+    const r = await run(longCfg(root, mock, { REHEARSAL: '1', ONLY_POST: 'long', NOW: '2026-11-01T10:00:00+01:00' }), quiet);
+    assert.deepEqual(r.map(x => [x.platform, x.ok, x.rehearsal]), [['instagram', true, true], ['facebook', true, true]]);
+    const c = mock.calls;
+    assert.ok(c.some(x => x.path.startsWith('/rupload/ig-api-upload/')));
+    assert.ok(!c.some(x => x.path.endsWith('/media_publish')));                     // Instagram: uploaded, never published
+    assert.equal(c.find(x => x.path === '/graph-video/v26.0/PAGE1/videos').body.published, 'false');
+    assert.ok(!c.some(x => x.path.endsWith('/issues')));                              // no TikTok issue
+    assert.deepEqual(loadState(root), {});                                            // nothing recorded, so the real post still goes out
+  } finally { await mock.close(); }
+});
+
+test('rehearsal refuses to run without one named post', async () => {
+  const root = makeLongRoot();
+  const mock = await startMock({ publicDir: path.join(root, 'public') });
+  try {
+    const r = await run(longCfg(root, mock, { REHEARSAL: '1' }), quiet);
+    assert.equal(r.length, 1);
+    assert.equal(r[0].ok, false);
+    assert.match(r[0].note, /only_post/);
+    assert.ok(!mock.calls.some(x => x.method === 'POST'));
+  } finally { await mock.close(); }
+});
+
+test('rehearsal of a short reel uploads it to Facebook without finishing it', async () => {
+  const root = makeRoot();
+  const mock = await startMock({ publicDir: path.join(root, 'public') });
+  try {
+    const r = await run(cfgFor(root, mock, { REHEARSAL: '1', ONLY_POST: 'reel', PLATFORMS: 'instagram,facebook' }), quiet);
+    assert.ok(r.every(x => x.ok && x.rehearsal), JSON.stringify(r));
+    const c = mock.calls;
+    assert.ok(c.some(x => x.path.startsWith('/rupload/video-upload/')));
+    assert.ok(!c.some(x => x.path.endsWith('/video_reels') && x.body.upload_phase === 'finish'));
+    assert.ok(!c.some(x => x.path.endsWith('/media_publish')));
+  } finally { await mock.close(); }
+});
+
+test('.assetsignore lists exactly the videos too big for the media host', () => {
+  const root = makeLongRoot();
+  const text = assetsIgnoreText(root);
+  assert.match(text, /^\/2026-11-02\/3-wed-long\/reel\.mp4$/m);
+  assert.equal(text.split('\n').filter(l => l && !l.startsWith('#')).length, 1);
+  assert.equal(assetsIgnoreText(makeRoot()).split('\n').filter(l => l && !l.startsWith('#')).length, 0); // hosted reels stay on the host
 });
 
 test('validation catches long X posts and missing safety checks', () => {
