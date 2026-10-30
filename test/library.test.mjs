@@ -157,3 +157,20 @@ test('saves a page as readable text without scripts, navigation or markup', asyn
   const html = '<html><nav>Shop Learn</nav><main><h1>The Bullet</h1><script>var x=1</script><p>Care: wipe clean &amp; store dry.</p><p>&#8358;15,000</p></main><footer>© Intimova</footer></html>';
   assert.equal(pageText(html), 'The Bullet\nCare: wipe clean & store dry.\n₦15,000');
 });
+
+test('results use the read-only insights token when it is set, and the Page token otherwise', async () => {
+  const root = makeRoot();
+  fs.mkdirSync(path.join(root, 'state'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'state', 'posted.json'), JSON.stringify({
+    car: { instagram: { done: true, id: 'ig1', at: '2026-11-02T18:30:00Z' }, facebook: { done: true, id: 'PAGE1_9', at: '2026-11-02T18:31:00Z' } } }));
+  const mock = await startMock({ publicDir: root });
+  try {
+    const env = { CONTENT_ROOT: root, NOW: '2026-11-07T07:13:00+01:00', GRAPH_BASE: mock.base + '/graph', META_PAGE_TOKEN: 'page-token' };
+    await readInsights(loadConfig({ ...env, META_INSIGHTS_TOKEN: 'insights-token' }), quiet);
+    const tokens = new Set(mock.calls.filter(c => c.path.startsWith('/graph')).map(c => c.query.access_token));
+    assert.deepEqual([...tokens], ['insights-token']);
+    mock.calls.length = 0;
+    await readInsights(loadConfig(env), quiet);
+    assert.deepEqual([...new Set(mock.calls.filter(c => c.path.startsWith('/graph')).map(c => c.query.access_token))], ['page-token']);
+  } finally { await mock.close(); }
+});
