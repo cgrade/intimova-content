@@ -39,11 +39,11 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
   - Hard silence at the reveal.
   - The bass and heartbeat carry harmonics so they play on phone speakers.
   - There are deliberately no 432 Hz or binaural tricks (weak evidence; binaural needs headphones).
-- **Story reels run up to 3 minutes (179.5 s),** from Lily part 2 on; Lily part 1 was 89 s. The engine speeds up a little to fit, or refuses.
+- **Story reels run 2 min 53 s to 3 minutes (173–179.5 s),** from Lily part 2 on; Lily part 1 was 89 s. 173 s is Grade's floor (30 Oct): the renderer refuses anything shorter, before it renders frames. Lily part 2 (596 words, 21 scenes) came to 173.9 s at normal pace, so aim for about 600 words. Above 179.5 s the engine speeds up a little to fit, or refuses.
   - Instagram shows Reels of up to 3 minutes in the Reels tab. Facebook Reels stop at 90 s, so longer reels go to Facebook as a Page video (`/videos`, the file's bytes).
   - A reel over 24 MB can't be served by Cloudflare (25 MiB per file). The renderer marks it `"hosted": false` and lists it in `public/.assetsignore`; Instagram then gets the file's bytes (resumable upload), and the TikTok issue links to the file on GitHub.
   - **Render time:** a 168 s test reel took 44 minutes on Grade's 4-core Mac (13 of them for the text frames, which render in parallel, one browser per worker). Reels over 90 s are encoded straight at CRF 25, which fit that test reel in 17.9 MB; shorter ones try CRF 20 first.
-  - **Rehearsal:** run "Publish due posts" by hand with Dry run unticked, Rehearsal ticked and `only_post` set. It uploads to Instagram and Facebook for real but publishes nothing and records nothing (the Facebook video is left unpublished on the Page; delete it in Meta Business Suite afterwards).
+  - **Rehearsal:** run "Publish due posts" by hand with Dry run unticked, Rehearsal ticked and `only_post` set. It uploads to Instagram and Facebook for real but publishes nothing and records nothing. On Facebook, a reel of 90 s or less stops before the Reels "finish" step, so nothing appears anywhere; a reel over 90 s is uploaded as an unpublished Page video, which you can delete in Meta Business Suite afterwards. The Instagram container expires by itself.
 - **Carousels:** slide types are cover, myth, fact, text, takeaway and quote. They render 1080×1350 JPEG.
 - **Brand:**
   - wine `#6B0F3A`, cream `#FAF3EC`, near-black `#12070D`
