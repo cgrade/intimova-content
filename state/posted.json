@@ -60,5 +60,28 @@
       "at": "2026-10-28T22:33:09.018Z",
       "id": "1444354447159029"
     }
+  },
+  "2026-10-30-quote-surviving": {
+    "instagram": {
+      "attempts": 1,
+      "last_try": "2026-10-30T18:31:18.780Z",
+      "done": true,
+      "at": "2026-10-30T18:31:27.343Z",
+      "id": "18109703822185581"
+    },
+    "facebook": {
+      "attempts": 1,
+      "last_try": "2026-10-30T18:31:27.343Z",
+      "done": true,
+      "at": "2026-10-30T18:31:31.261Z",
+      "id": "807405089406641_1466042132294369"
+    },
+    "tiktok_manual": {
+      "attempts": 1,
+      "notified": true,
+      "issue": 16,
+      "url": "https://github.com/cgrade/intimova-content/issues/16",
+      "at": "2026-10-30T18:31:31.829Z"
+    }
   }
 }
