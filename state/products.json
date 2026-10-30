@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-30T05:06:43.094Z",
+  "fetched_at": "2026-10-30T07:06:13.358Z",
   "products": {
     "rose-air-pulse": {
       "slug": "rose-air-pulse",
@@ -8,7 +8,11 @@
       "currency": "NGN",
       "inStock": true,
       "availability": "InStock",
-      "url": "https://intimova.ng/product/rose-air-pulse"
+      "url": "https://intimova.ng/product/rose-air-pulse",
+      "images": [
+        "https://tzpxtkfosjdjnrejordi.supabase.co/storage/v1/object/public/intimova/uploads/mr6d35z3-h2347r.jpg",
+        "https://tzpxtkfosjdjnrejordi.supabase.co/storage/v1/object/public/intimova/uploads/mr6d3chf-64s8iu.jpg"
+      ]
     },
     "rose-flutter": {
       "slug": "rose-flutter",
@@ -17,7 +21,10 @@
       "currency": "NGN",
       "inStock": true,
       "availability": "InStock",
-      "url": "https://intimova.ng/product/rose-flutter"
+      "url": "https://intimova.ng/product/rose-flutter",
+      "images": [
+        "https://tzpxtkfosjdjnrejordi.supabase.co/storage/v1/object/public/intimova/uploads/mr6d5hwd-0arnmv.jpg"
+      ]
     },
     "rose-duo": {
       "slug": "rose-duo",
@@ -26,7 +33,11 @@
       "currency": "NGN",
       "inStock": true,
       "availability": "InStock",
-      "url": "https://intimova.ng/product/rose-duo"
+      "url": "https://intimova.ng/product/rose-duo",
+      "images": [
+        "https://tzpxtkfosjdjnrejordi.supabase.co/storage/v1/object/public/intimova/uploads/mr6d52a8-01y9sv.jpg",
+        "https://tzpxtkfosjdjnrejordi.supabase.co/storage/v1/object/public/intimova/uploads/mr6d4tr2-hetqi1.jpg"
+      ]
     },
     "the-wand": {
       "slug": "the-wand",
@@ -35,7 +46,10 @@
       "currency": "NGN",
       "inStock": true,
       "availability": "InStock",
-      "url": "https://intimova.ng/product/the-wand"
+      "url": "https://intimova.ng/product/the-wand",
+      "images": [
+        "https://tzpxtkfosjdjnrejordi.supabase.co/storage/v1/object/public/intimova/uploads/mr6d762y-k2iitv.jpg"
+      ]
     },
     "bullet-rechargeable": {
       "slug": "bullet-rechargeable",
@@ -44,7 +58,11 @@
       "currency": "NGN",
       "inStock": true,
       "availability": "InStock",
-      "url": "https://intimova.ng/product/bullet-rechargeable"
+      "url": "https://intimova.ng/product/bullet-rechargeable",
+      "images": [
+        "https://tzpxtkfosjdjnrejordi.supabase.co/storage/v1/object/public/intimova/uploads/mr6d2m6z-olbm6t.jpg",
+        "https://tzpxtkfosjdjnrejordi.supabase.co/storage/v1/object/public/intimova/uploads/mr6d14xd-i2yyhv.jpg"
+      ]
     },
     "bullet-classic": {
       "slug": "bullet-classic",
@@ -53,7 +71,10 @@
       "currency": "NGN",
       "inStock": true,
       "availability": "InStock",
-      "url": "https://intimova.ng/product/bullet-classic"
+      "url": "https://intimova.ng/product/bullet-classic",
+      "images": [
+        "https://tzpxtkfosjdjnrejordi.supabase.co/storage/v1/object/public/intimova/uploads/mr6d9ay9-xeqor9.jpg"
+      ]
     },
     "silk-water-based-glide": {
       "slug": "silk-water-based-glide",
@@ -62,7 +83,10 @@
       "currency": "NGN",
       "inStock": false,
       "availability": "OutOfStock",
-      "url": "https://intimova.ng/product/silk-water-based-glide"
+      "url": "https://intimova.ng/product/silk-water-based-glide",
+      "images": [
+        "https://tzpxtkfosjdjnrejordi.supabase.co/storage/v1/object/public/intimova/uploads/msbf3g2b-r5r59a.jpg"
+      ]
     },
     "pocket-toto": {
       "slug": "pocket-toto",
@@ -71,7 +95,11 @@
       "currency": "NGN",
       "inStock": true,
       "availability": "InStock",
-      "url": "https://intimova.ng/product/pocket-toto"
+      "url": "https://intimova.ng/product/pocket-toto",
+      "images": [
+        "https://tzpxtkfosjdjnrejordi.supabase.co/storage/v1/object/public/intimova/uploads/msj4n2kb-ulx95d.jpg",
+        "https://tzpxtkfosjdjnrejordi.supabase.co/storage/v1/object/public/intimova/uploads/msj4ns8s-jwfc5m.jpg"
+      ]
     },
     "x-power-coffee-for-men": {
       "slug": "x-power-coffee-for-men",
@@ -80,7 +108,11 @@
       "currency": "NGN",
       "inStock": true,
       "availability": "InStock",
-      "url": "https://intimova.ng/product/x-power-coffee-for-men"
+      "url": "https://intimova.ng/product/x-power-coffee-for-men",
+      "images": [
+        "https://tzpxtkfosjdjnrejordi.supabase.co/storage/v1/object/public/intimova/uploads/ms1vpp8r-k61v0d.jpg",
+        "https://tzpxtkfosjdjnrejordi.supabase.co/storage/v1/object/public/intimova/uploads/ms1vqbkg-bpz8it.jpg"
+      ]
     }
   }
 }
