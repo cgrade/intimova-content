@@ -26,12 +26,13 @@ async function instagramInsights(cfg, mediaId) {
   try {
     return parse(await request('GET', `${api}/${mediaId}/insights?metric=${IG_METRICS.join(',')}&access_token=${token}`));
   } catch {
-    const out = {}; const refused = [];
+    const out = {}; const refused = []; let why = '';
     for (const m of IG_METRICS) {
       try { Object.assign(out, parse(await request('GET', `${api}/${mediaId}/insights?metric=${m}&access_token=${token}`, { retries: 0 }))); }
-      catch { refused.push(m); }
+      catch (e) { refused.push(m); why ||= e.message.replace(/access_token=[^&\s"]+/g, 'access_token=***'); }
     }
-    if (!Object.keys(out).length) throw new Error(`Instagram refused every metric for ${mediaId}`);
+    // Keep Meta's own reason: a missing permission (#10) looks very different from a metric it no longer offers.
+    if (!Object.keys(out).length) throw new Error(`Instagram refused every metric for ${mediaId}. Meta said: ${why}`);
     if (refused.length) out._not_available = refused;
     return out;
   }

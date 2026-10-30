@@ -3,8 +3,11 @@
 //
 // 1. In developers.facebook.com > Tools > Graph API Explorer, pick your app, then "Get User Access Token" with:
 //    pages_show_list, pages_read_engagement, pages_manage_posts, pages_manage_engagement,
-//    pages_read_user_engagement, instagram_basic, instagram_content_publish
-//    (add business_management if your Page sits in a Meta Business portfolio).
+//    pages_read_user_content, instagram_basic, instagram_content_publish, instagram_manage_insights
+//    (add business_management if your Page sits in a Meta Business portfolio, and ads_management and
+//    ads_read if your Page role comes through Business Manager: Meta needs them for Instagram insights).
+//    The results job needs instagram_manage_insights (Instagram numbers) and pages_read_user_content
+//    (Facebook photo posts); without them Meta refuses with "(#10)".
 // 2. export META_APP_ID=... META_APP_SECRET=... META_SHORT_TOKEN=<the token you just generated>
 // 3. npm run setup:meta
 import { need, ask } from './common.mjs';
