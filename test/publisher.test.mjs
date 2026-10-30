@@ -59,7 +59,8 @@ test('TikTok by hand: one GitHub issue per post with links and caption, never tw
     assert.equal(manual.length, 3);                                   // carousel, reel, single
     assert.ok(manual.every(x => x.ok && /issue #\d+/.test(x.id)));
     assert.equal(mock.calls.filter(c => c.path.startsWith('/tiktok') || c.path.startsWith('/x')).length, 0); // no TikTok or X API calls
-    const issues = mock.calls.filter(c => c.path === '/gh/repos/cgrade/intimova-content/issues');
+    const isTiktok = c => c.path === '/gh/repos/cgrade/intimova-content/issues' && /^Post to TikTok/.test(c.body.title);
+    const issues = mock.calls.filter(isTiktok);
     assert.equal(issues.length, 3);
     const reel = issues.find(i => /reel\.mp4/.test(i.body.body));
     assert.match(reel.body.body, /^@cgrade it's time to post this on TikTok/);
@@ -72,7 +73,11 @@ test('TikTok by hand: one GitHub issue per post with links and caption, never tw
     assert.ok(loadState(root).car.tiktok_manual.notified);
     const again = await run(cfgFor(root, mock, gh), quiet);
     assert.equal(again.filter(x => x.platform === 'tiktok (by hand)').length, 0);
-    assert.equal(mock.calls.filter(c => c.path.endsWith('/issues')).length, 3);
+    assert.equal(mock.calls.filter(isTiktok).length, 3);
+    // The unrendered post raises one "Broken" alert, and the second run doesn't repeat it.
+    const alerts = mock.calls.filter(c => c.path.endsWith('/issues') && !isTiktok(c));
+    assert.deepEqual(alerts.map(c => c.body.title), ["Broken: norender can't post"]);
+    assert.match(alerts[0].body.body, /^@cgrade /);
   } finally { await mock.close(); }
 });
 

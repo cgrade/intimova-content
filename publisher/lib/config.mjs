@@ -41,7 +41,8 @@ export function loadConfig(env = process.env) {
       api: env.GITHUB_API_URL || 'https://api.github.com',
       token: env.GITHUB_TOKEN || '',
       repo: env.GITHUB_REPOSITORY || '',        // owner/name, set by GitHub Actions
-      notifyUser: env.NOTIFY_USER || '',        // tagged in the TikTok issue so GitHub alerts them
+      notifyUser: env.NOTIFY_USER || '',        // tagged in TikTok and alert issues so GitHub notifies them
+      event: env.GITHUB_EVENT_NAME || '',       // 'schedule' on GitHub's own clock: only those runs can tell the alarm is down
     },
     tokensKey: env.TOKENS_KEY || '',
     summaryFile: env.GITHUB_STEP_SUMMARY || '',

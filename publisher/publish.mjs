@@ -11,6 +11,7 @@ import { postInstagram } from './platforms/instagram.mjs';
 import { postFacebook } from './platforms/facebook.mjs';
 import { postX } from './platforms/x.mjs';
 import { postTiktok } from './platforms/tiktok.mjs';
+import { postAlerts, watchdogAlerts, raiseAlerts } from './watch.mjs';
 
 const POSTERS = { instagram: postInstagram, facebook: postFacebook, x: postX, tiktok: postTiktok };
 
@@ -137,6 +138,12 @@ export async function run(cfg = loadConfig(), log = console.log) {
   const ttEnd = tokens.tiktok?.refresh_expires_at;
   if (ttEnd && ttEnd - cfg.now.getTime() < 30 * 24 * 3600 * 1000) warnings.push(`TikTok login ends on ${new Date(ttEnd).toDateString()}. Rerun npm run setup:tiktok before then.`);
   for (const w of warnings) log('⚠ ' + w);
+  // Tell Grade about anything that needs him (one GitHub issue per problem, never repeated).
+  if (!cfg.dryRun && !cfg.rehearsal && !cfg.onlyPost) {
+    const alerts = postAlerts({ results, posts, state, cfg });
+    try { alerts.push(...await watchdogAlerts(cfg)); } catch (e) { log(`✗ watchdog: ${e.message}`); }
+    for (const a of await raiseAlerts(cfg, alerts, log)) warnings.push(`${a.title} (issue #${a.issue})`);
+  }
   writeSummary(cfg, due, results, warnings, kits);
   return results;
 }
