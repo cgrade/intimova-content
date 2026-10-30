@@ -54,6 +54,12 @@ export async function renderReel(story, outDir, { log = console.log } = {}) {
     await browser.close();
     throw new Error(`Story runs ${meta.total.toFixed(1)}s even when sped up; the limit is ${story.max_seconds || 179.5}s. Cut some lines.`);
   }
+  // Grade's floor (30 Oct 2026): story reels run at least 2 min 53 s. Refuse before spending ~40 minutes on frames.
+  const floor = story.min_seconds ?? 173;
+  if (meta.total < floor) {
+    await browser.close();
+    throw new Error(`Story runs ${meta.total.toFixed(1)}s; the floor is ${floor}s (2 min 53 s). Add some lines.`);
+  }
   const frames = Math.ceil(meta.total * FPS);
   fs.writeFileSync(path.join(tmp, 'meta.json'), JSON.stringify({ ...meta, fps: FPS, frames }));
   log(`reel: ${meta.total.toFixed(1)}s, ${frames} frames (pace x${(1 / meta.scale).toFixed(2)})`);
