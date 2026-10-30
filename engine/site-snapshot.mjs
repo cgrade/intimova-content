@@ -2,6 +2,7 @@
 //   state/products.json              live price and stock for every catalogue product
 //   state/site/product-<slug>.txt    each product page's text (materials, care, delivery, returns)
 //   state/site/article-<slug>.txt    the text of every article a library carousel is built on (not website-only ones)
+//   state/site/product-<slug>.jpg    the product photo the catalogue approves ("photo"), when it's still on that product's page
 // Run by the "Read post results and product prices" GitHub job every Saturday morning.
 // Usage: node engine/site-snapshot.mjs
 import fs from 'node:fs';
@@ -21,6 +22,15 @@ export function pageText(html) {
     .replace(/<[^>]+>/g, ' ')
     .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&#x27;|&#39;|&rsquo;/g, '’').replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&#8358;|&#x20A6;/gi, '₦')
     .split('\n').map(l => l.replace(/\s+/g, ' ').trim()).filter(Boolean).join('\n');
+}
+
+/** Downloads the catalogue's approved photo, only if it is still one of this product's own images. */
+async function savePhoto(slug, photo, images, siteDir) {
+  const url = images.find(u => u.split('/').pop() === photo);
+  if (!url) throw new Error(`approved photo ${photo} is no longer on the product page; kept the last copy`);
+  const res = await fetch(url, { headers: { 'User-Agent': 'intimova-content/1 (weekly snapshot)' } });
+  if (!res.ok) throw new Error(`${url} returned ${res.status}`);
+  fs.writeFileSync(path.join(siteDir, `product-${slug}.jpg`), Buffer.from(await res.arrayBuffer()));
 }
 
 async function get(url) {
@@ -46,6 +56,11 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
       products[slug] = { slug, ...p };
       fs.writeFileSync(path.join(siteDir, `product-${slug}.txt`), `${url}\nSaved ${fetchedAt}\n\n${pageText(html)}\n`);
       console.log(`✓ product ${slug}: ₦${p.price.toLocaleString('en-NG')}, ${p.availability}`);
+      const photo = lib.products.catalogue[slug].photo;
+      if (photo) {
+        try { await savePhoto(slug, photo, p.images || [], siteDir); console.log(`✓ photo ${slug}`); }
+        catch (e) { failed++; console.log(`✗ photo ${slug}: ${e.message}`); }
+      }
     } catch (e) { failed++; console.log(`✗ product ${slug}: ${e.message}`); }
   }
   const articles = [...new Set(lib.carousels.filter(c => c.status !== 'website-only').map(c => c.article).concat(lib.products.items.map(i => i.article)).filter(Boolean))];

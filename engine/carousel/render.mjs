@@ -19,6 +19,11 @@ export async function renderCarousel(deck, outDir) {
     await page.addInitScript(d => { window.DECK = d; }, deck);
     await page.goto('file://' + path.join(HERE, 'deck.html'));
     await page.evaluate(() => document.fonts.ready);
+    // Product photos must load, or the slide would go out with an empty card.
+    const broken = await page.evaluate(() => Promise.all([...document.images].map(i => i.complete
+      ? (i.naturalWidth ? null : i.src)
+      : new Promise(r => { i.onload = () => r(null); i.onerror = () => r(i.src); })))).then(a => a.filter(Boolean));
+    if (broken.length) throw new Error('Missing product photo: ' + broken.map(s => decodeURIComponent(s.split('/').pop())).join(', ') + '. The weekly snapshot saves it to state/site/.');
     if (errors.length) throw new Error('Template error: ' + errors.join('; '));
     await page.waitForTimeout(200);
     const slides = await page.$$('.slide');

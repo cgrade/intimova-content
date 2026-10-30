@@ -22,6 +22,13 @@ for (const post of loadAllPosts(ROOT)) {
   const e = validatePost(post);
   for (const id of [].concat(post.library || [])) if (!libraryIds.has(id)) e.push(`library id "${id}" isn't in library/`);
   if (post.product && !(lib.products.catalogue[post.product.slug] && Number.isFinite(post.product.price))) e.push('product needs a catalogue slug and a numeric price, e.g. { "slug": "bullet-rechargeable", "price": 15000 }');
+  for (const s of (post.slides || []).filter(s => s.type === 'product')) {
+    const cat = lib.products.catalogue[s.slug];
+    if (!cat) e.push(`product slide: ${s.slug} isn't in the catalogue`);
+    else if (!cat.photo) e.push(`product slide: ${s.slug} has no approved photo (${cat.photo_why || 'photo: false'})`);
+    else if (!fs.existsSync(path.join(ROOT, 'state', 'site', `product-${s.slug}.jpg`))) e.push(`product slide: state/site/product-${s.slug}.jpg is missing`);
+    if (s.price !== undefined && !(post.product?.slug === s.slug && post.product.price === s.price)) e.push(`product slide: a price may only show for the post's own product, and must equal product.price (${s.slug}, ₦${s.price})`);
+  }
   const m = manifestOf(ROOT, post);
   if (!m) e.push('not rendered: run npm run render -- content/' + post._week);
   else {
