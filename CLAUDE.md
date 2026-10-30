@@ -13,15 +13,20 @@ This repo is Intimova's content pipeline. **For the current state, open items an
 1. Work out the coming Monday's date. The week folder is `content/<YYYY-MM-DD of that Monday>/`.
 2. Read the playbook, the last two weeks' folders, `state/posted.json` and `state/insights.json` (how recent posts did), so you continue the story series, don't repeat a fact, and lean towards what's working.
 3. Run `npm run runway -- <Monday's date> --live`. It shows, for each day, the next item to use from `library/` and how many weeks are left. See `library/README.md` for how the library works.
-4. Write one `post.json` per post. Five posts a week, each built from the library item the runway names (you may pick a later ready item instead if it fits better, e.g. to keep 6 weeks between similar topics):
+4. Write one `post.json` per post. Seven posts a week, one a day, each built from the library item the runway names (you may pick a later ready item instead if it fits better, e.g. to keep 6 weeks between similar topics). Name the folders `1-mon-…` to `7-sun-…`:
 
    | Day | Post | Format | Library file |
    | --- | --- | --- | --- |
-   | Mon | Myth vs fact | carousel (5 slides: myth, fact, fact or what it means, takeaway) | `myths.json` |
+   | Mon | Myth buster | carousel (5 slides: myth, fact, fact or what it means, takeaway) | `myths.json` |
    | Tue | Education carousel | carousel (6–7 slides, built on one intimova.ng article) | `carousels.json` |
    | Wed | Story, next part of the series | reel | `stories.json` |
-   | Fri | Quote card or couples tip, alternating | carousel (1 slide, or 5 for a tip) | `quotes-tips.json` |
-   | Sun | Product | carousel (5 slides) | `products.json` |
+   | Thu | Ask Intimova: one question people are too shy to ask | carousel (5–6 slides: the question, the answer, the takeaway) | `asks.json` |
+   | Fri | Quote card | carousel (1 slide) | `quotes-tips.json` (quotes) |
+   | Sat | Tip, alternating young adults and couples | carousel (5 slides) | `quotes-tips.json` (tips) |
+   | Sun | Product showcase or guide | carousel (5 slides) | `products.json` |
+
+   Who it's for: above all, young adults who want pleasure but hide it out of shame. Every post should feel relatable, give them something true, and leave them feeling "it's normal, own it".
+   Ask Intimova never pretends a follower sent the question: it's "the question people are too shy to ask".
 
    - Record what each post used: `"library": "<item id>"` (story parts are `<series>-<n>`, e.g. `lily-2`).
    - Facts: only the findings a library item names, in `sources.json`'s wording, with the source on the slide. Carousels: only what the article page says. Products: only what the product page says, with the price from `npm run products`. Claude's cloud runs can't reach intimova.ng, so there read the copies GitHub saves every Saturday morning: `state/site/article-<slug>.txt` and `state/site/product-<slug>.txt` (and `npm run products` falls back to `state/products.json`). Add `"product": { "slug": "...", "price": <naira on the slides> }` so the publisher holds the post if the shop changes.

@@ -2,7 +2,7 @@
 
 This repo makes and posts Intimova's social content.
 
-- **Claude drafts the week.** Every Saturday Claude writes the next week's five posts from the content library (`library/`, about six months planned ahead), renders them (story reels and carousels), and opens a pull request.
+- **Claude drafts the week.** Every Saturday Claude writes the next week's seven posts (one a day) from the content library (`library/`, about six months planned ahead), renders them (story reels and carousels), and opens a pull request.
 - **You approve.** You review the pull request on your phone. Comment to change something; merge to approve.
 - **It posts itself.** A GitHub job that runs every 10 minutes posts each approved post at its time to Instagram and Facebook, and to X once it's connected. For TikTok, it sends you the files and caption to post by hand.
 
@@ -31,7 +31,9 @@ Every Saturday at 07:13 the **Read post results and product prices** job saves e
 | Mon | Myth vs fact | `library/myths.json` |
 | Tue | Education carousel | `library/carousels.json` |
 | Wed | Story reel | `library/stories.json` |
-| Fri | Quote card or couples tip | `library/quotes-tips.json` |
+| Thu | Ask Intimova | `library/asks.json` |
+| Fri | Quote card | `library/quotes-tips.json` |
+| Sat | Tip (young adults and couples) | `library/quotes-tips.json` |
 | Sun | Product | `library/products.json` |
 
 `npm run runway` shows how many weeks each day has left, and each week's pull request ends with the same table. See `library/README.md`.

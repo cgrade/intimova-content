@@ -32,20 +32,25 @@ test('the real library has no broken references or duplicates', () => {
   assert.deepEqual(validateLibrary(loadLibrary(ROOT)), []);
 });
 
-test('runway skips used items, continues the story, alternates Fridays and rests a product for 4 weeks', () => {
+test('runway skips used items, continues the story, fills all seven days and rests a product for 4 weeks', () => {
   const root = makeRoot({ '2026-11-02': {
-    '1-mon': post({ id: 'a', library: 'orgasm-gap' }),
+    '1-mon': post({ id: 'a', library: 'only-one-who-touches' }),
     '3-wed': post({ id: 'b', library: 'lily-2' }),
     '5-fri': post({ id: 'c', library: 'q-choosing-yourself' }),
     // Uses the first product item, but features the Wand, so the next item in order (wand-guide) must rest.
     '7-sun': post({ id: 'd', publish_at: '2026-11-08T19:30:00+01:00', library: 'rose-air-pulse-guide', product: { slug: 'the-wand', price: 20000 } }),
   } });
   const lib = loadLibrary(root);
-  assert.equal(usedIds(root, lib).get('orgasm-gap'), 'a');
+  assert.equal(usedIds(root, lib).get('only-one-who-touches'), 'a');
   const rows = Object.fromEntries(runway(root, lib, { weekStart: new Date('2026-11-09T00:00:00+01:00') }).map(r => [r.key, r]));
-  assert.equal(rows.myths.next.id, 'intercourse-is-enough');      // orgasm-gap is used
+  assert.equal(rows.myths.next.id, 'orgasm-gap');                 // only-one-who-touches is used
   assert.equal(rows.stories.next.id, 'lily-3');                     // the series continues
-  assert.equal(rows['quotes-tips'].next.kind, 'tip');               // last Friday was a quote
+  assert.deepEqual(runway(root, lib).map(r => r.day), ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']);
+  assert.equal(rows.asks.next.id, 'a-not-from-sex-alone');          // Thursday: Ask Intimova
+  assert.equal(rows.quotes.next.kind, 'quote');
+  assert.notEqual(rows.quotes.next.id, 'q-choosing-yourself');      // used on Friday
+  assert.equal(rows.tips.next.kind, 'tip');                         // Saturday: tips only
+  assert.equal(rows.tips.next.id, 't-ya-first-toy-no-guilt');       // tips alternate young adults and couples, in library order
   assert.equal(rows.products.next.id, 'bullet-classic-guide');      // wand-guide skipped: the Wand posted 1 day earlier
   assert.equal(rows.products.next.season, undefined);               // no seasonal item in November
 });

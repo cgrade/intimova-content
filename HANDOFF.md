@@ -19,7 +19,7 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
   - **X** isn't connected (no credit or app yet). `PLATFORMS` is `instagram,facebook`.
 - **GitHub secrets set:** `META_PAGE_ID`, `IG_USER_ID`, `META_PAGE_TOKEN`. **Variables:** `MEDIA_BASE_URL`, `PLATFORMS`.
   - The Page token was pasted into a chat once, so it should be regenerated after the first live posts, then the secret updated.
-- **Content library (`library/`):** about six months of material for five posts a week (Mon myth vs fact, Tue education carousel, Wed story, Fri quote or tip, Sun product). `npm run runway` shows weeks left per day; see `library/README.md`. From the week of 2 Nov the Saturday run drafts five posts a week from it.
+- **Content library (`library/`):** material for seven posts a week, one a day (Mon myth buster, Tue education carousel, Wed story, Thu Ask Intimova, Fri quote, Sat tip, Sun product); from 30 Oct the first audience is young adults who want pleasure but hide it out of shame. `npm run runway` shows weeks left per day; see `library/README.md`. From the week of 2 Nov the Saturday run drafts five posts a week from it.
 - **Product checks:** product facts come from intimova.ng's public product pages (their schema.org data), read-only. A post with `"product"` is held by the publisher if the live price or stock no longer matches. Nothing in the marketplace repo was changed.
 - **Results and prices:** the "Read post results and product prices" job (Saturdays 07:13 Lagos) saves Instagram and Facebook numbers to `state/insights.json` and product prices and stock to `state/products.json`. Claude's cloud sandbox can't reach intimova.ng, so the Saturday draft uses that snapshot; the publisher's own pre-post check runs on GitHub and reads the live shop. The results part hasn't run against the live Meta API yet: check its first run on 31 Oct.
 - **This week (folder `content/2026-10-26`), all at 19:30 Lagos time:**
@@ -70,12 +70,16 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
   - never "cures", "treats" or "prevents"
   - "a link, not proof" for observational studies
 - **Captions:** X posts under 280 characters and without links. Instagram allows up to 2,200 characters and 30 hashtags.
-- **The week (from 2 Nov), five posts:**
-  - Mon: myth vs fact
+- **The week, seven posts (one a day, decided 30 Oct):**
+  - Mon: myth buster
   - Tue: education carousel
-  - Wed: story reel
-  - Fri: quote card or couples tip, alternating
+  - Wed: story reel (Lily, then Temi, Ronke and Ike for young adults from 25 Nov, then the rest)
+  - Thu: Ask Intimova, a question people are too shy to ask
+  - Fri: quote card
+  - Sat: tip, alternating young adults and couples
   - Sun: product
+- **Why seven:** Buffer's study of 2.1 million posts (Aug 2025) found 3–5 a week is the "sweet spot", with more reach at 6–9 (about 18% more per post) and diminishing returns. Instagram's Mosseri names watch time, likes and sends as the top ranking signals, so the stories carry watch time and the myths and asks are written to be sent to a friend.
+- **Meta's rule on products (checked 30 Oct):** under Restricted Goods and Services → Health and Wellness, Meta restricts posts promoting sex toys, and "sex education with focus on sexual pleasure", to adults 18 and over. They're not removed. "Depiction of sex toys with no clear context" is restricted too, so every product photo sits in a guide.
 
 ## Open items
 
