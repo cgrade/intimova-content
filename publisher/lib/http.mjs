@@ -1,6 +1,7 @@
 // Small fetch wrapper: JSON or form bodies, clear errors, one retry on 429/5xx.
 export class ApiError extends Error {
-  constructor(message, { status, body, url } = {}) { super(message); this.status = status; this.body = body; this.url = url; }
+  // The URL is kept redacted: a crash prints the whole error, and the Actions logs of this public repo can be read by anyone.
+  constructor(message, { status, body, url } = {}) { super(message); this.status = status; this.body = body; this.url = url === undefined ? url : redact(url); }
 }
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -30,7 +31,8 @@ export async function head(url) {
   try { const r = await fetch(url, { method: 'HEAD' }); return r.ok; } catch { return false; }
 }
 
-export function redact(url) { return String(url).replace(/(access_token|token)=[^&]+/g, '$1=***'); }
+// Any query parameter whose name mentions a token, secret, password or key (fb_exchange_token, client_secret, ...).
+export function redact(url) { return String(url).replace(/([?&][^=&]*(?:token|secret|password|key)[^=&]*)=[^&]*/gi, '$1=***'); }
 function summarize(d) {
   const e = d?.error ?? d?.errors ?? d;
   return JSON.stringify(e).slice(0, 500);
