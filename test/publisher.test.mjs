@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { inspect } from 'node:util';
 import { startMock } from './mock-api.mjs';
 import { run } from '../publisher/publish.mjs';
 import { loadConfig } from '../publisher/lib/config.mjs';
@@ -290,4 +291,15 @@ test('validation catches long X posts and missing safety checks', () => {
   const e = validatePost(p);
   assert.ok(e.some(m => m.includes('X post 1')));
   assert.ok(e.some(m => m.includes('safety.explicit')));
+});
+
+test('errors never carry secrets: every token, secret or key in a URL is redacted, in the message and the url field', async () => {
+  const { redact, ApiError } = await import('../publisher/lib/http.mjs');
+  const url = 'https://graph.facebook.com/v26.0/oauth/access_token?grant_type=fb_exchange_token&client_id=123&client_secret=s3cr3t&fb_exchange_token=EAAPxyz&access_token=EAAabc&api_key=k';
+  const r = redact(url);
+  for (const secret of ['s3cr3t', 'EAAPxyz', 'EAAabc', '=k']) assert.ok(!r.includes(secret), `${secret} leaked: ${r}`);
+  assert.match(r, /grant_type=fb_exchange_token&client_id=123&/);       // harmless values stay readable
+  const e = new ApiError('x', { url });
+  assert.ok(!e.url.includes('s3cr3t') && !e.url.includes('EAAPxyz'));
+  assert.ok(!inspect(e).includes('EAAPxyz'));                    // what Node prints when it crashes on this error
 });
