@@ -1,0 +1,327 @@
+{
+  "id": "2026-11-04-lily-part2",
+  "format": "reel",
+  "pillar": "Intimova Stories",
+  "series": "Lily, part 2",
+  "library": "lily-2",
+  "publish_at": "2026-11-04T19:30:00+01:00",
+  "platforms": [
+    "instagram",
+    "facebook",
+    "x",
+    "tiktok"
+  ],
+  "story": {
+    "label": "INTIMOVA STORIES · LILY",
+    "max_seconds": 179.5,
+    "end_seconds": 3.0,
+    "cover_at": 3.0,
+    "scenes": [
+      {
+        "lines": [
+          {
+            "style": "hook",
+            "text": "The door was *open.*"
+          },
+          {
+            "style": "sub",
+            "text": "And her husband was standing in it."
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "Femi. Half asleep, one hand on the frame, squinting into the sudden light."
+          },
+          {
+            "style": "hook",
+            "text": "*“Who are you talking to?”*"
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "The phone was warm against her palm. Her dress was still open at the back."
+          },
+          {
+            "text": "“My sister,” she said. “In Lagos. She can’t sleep.”"
+          },
+          {
+            "text": "Her heart was so loud she was sure he could hear it from the door."
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "He looked at her for one long second."
+          },
+          {
+            "text": "She waited for the question. For him to see the dress. The bare shoulder. *Anything.*"
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "He yawned. He turned. The mattress sighed under his weight."
+          },
+          {
+            "text": "He didn’t ask again."
+          },
+          {
+            "style": "big",
+            "slow": true,
+            "text": "*And that hurt more than if he had.*",
+            "cue": "turn"
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "She replayed every word. The way he said her name, like something he had been saving."
+          },
+          {
+            "text": "The way he went quiet when she breathed, as if her breath *was the answer.*"
+          }
+        ]
+      },
+      {
+        "cue": "pulse",
+        "lines": [
+          {
+            "text": "She lay awake until the call to prayer drifted over Gwarinpa."
+          },
+          {
+            "text": "Chris’s voice was still in her ear. Low. Patient. *Slowly, Lily.*"
+          },
+          {
+            "text": "She remembered the hostel steps at twenty. His hand at the small of her back. *Never lower.*"
+          },
+          {
+            "text": "Eight years, and one phone call had found every place she had stopped letting herself feel."
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "In the dark she touched her shoulder, where the strap had fallen."
+          },
+          {
+            "text": "She told herself it was guilt keeping her awake."
+          },
+          {
+            "style": "punch",
+            "slow": true,
+            "text": "*Guilt does not feel like this.*"
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "Morning came in grey with harmattan dust."
+          },
+          {
+            "text": "Femi ate his bread and egg with one hand and scrolled with the other."
+          },
+          {
+            "text": "He did not look up when she walked in. He had not really looked up in three years."
+          },
+          {
+            "text": "“The generator needs diesel,” he said. *That was all.*"
+          },
+          {
+            "text": "The gate clanged shut behind his car."
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "She used to cook for him in the red wrapper he loved. He used to come home early for it."
+          },
+          {
+            "text": "She couldn’t remember when that stopped. Only that it had, *and nobody said so.*"
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "She stood at the sink in his old T-shirt, washing a plate that was already clean."
+          },
+          {
+            "text": "Then her phone lit up on the counter."
+          }
+        ]
+      },
+      {
+        "cue": "heat",
+        "lines": [
+          {
+            "style": "hook",
+            "text": "*Chris.*"
+          },
+          {
+            "text": "*“Did you sleep?”*"
+          },
+          {
+            "text": "Three words, and the kitchen got warmer."
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "She should delete it. Put the phone face down and go and buy the diesel."
+          },
+          {
+            "text": "Instead she read it again. *And again.*"
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "She dried her hands slowly, the way you do when you already know you will answer."
+          },
+          {
+            "text": "“No,” she typed. *“Did you?”*"
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "*“Not for a second. I could still hear the zip.”*"
+          },
+          {
+            "text": "She pressed the phone to her chest, as if the walls could read it."
+          },
+          {
+            "style": "punch",
+            "slow": true,
+            "text": "*Her heartbeat could.*"
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "*“Tell me he saw you in it.”*"
+          },
+          {
+            "text": "She looked at the empty chair across the table."
+          },
+          {
+            "text": "“He didn’t look,” she typed. Then, before she could stop herself:"
+          },
+          {
+            "style": "hook",
+            "text": "*“You would have.”*"
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "*“I would have,”* he wrote. *“Slowly. Starting with the back of your neck.”*"
+          },
+          {
+            "text": "Her hand rose to her neck before she knew it was moving."
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "The dots appeared. Disappeared. Appeared again."
+          },
+          {
+            "text": "*“Lily, I have looked at you in my head every night for eight years.”*"
+          },
+          {
+            "text": "She sank onto the kitchen stool. The tiles were cold. *She was not.*"
+          }
+        ]
+      },
+      {
+        "cue": "peak",
+        "lines": [
+          {
+            "text": "*“I should have come inside that night.”*"
+          },
+          {
+            "text": "Then, a minute later:"
+          },
+          {
+            "style": "big",
+            "slow": true,
+            "text": "*“I’m in Abuja on the 14th.”*"
+          },
+          {
+            "text": "Nine days."
+          },
+          {
+            "text": "Nine days to decide *who she was.*"
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "She thought of Femi’s back in the doorway. The question he didn’t ask."
+          },
+          {
+            "text": "She thought of the red dress, folded in the wardrobe, still holding her perfume."
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "text": "She read his message until the words stopped being words and became *a door.*"
+          },
+          {
+            "text": "Her thumb hovered over the keyboard."
+          },
+          {
+            "text": "She could type *no*. She could type *I’m married*."
+          },
+          {
+            "text": "She typed one word."
+          },
+          {
+            "style": "punch",
+            "slow": true,
+            "text": "*“Where?”*",
+            "cue": "dread"
+          }
+        ]
+      }
+    ],
+    "end": {
+      "kicker": "LILY · PART 3",
+      "line": "Next week. Follow so you don’t miss it.",
+      "url": "INTIMOVA.NG"
+    }
+  },
+  "captions": {
+    "instagram": "He was standing in the doorway. 🚪\n\nLily · Part 2. Femi asked who she was talking to. She said “my sister”. He went back to bed and never asked again, and that hurt more than if he had.\n\nThen Chris texted: “I’m in Abuja on the 14th.”\n\nPart 3 drops next Wednesday. Follow so you don’t miss it.\n\nWhich hurts more: being caught, or nobody noticing? Tell us below. 👇\n\n#IntimovaStories #LoveStory #RomanceReads #NaijaRomance #Relationships #SelfLove #Intimova",
+    "facebook": "He was standing in the doorway. 🚪\n\nLily · Part 2. Femi asked who she was talking to. She said “my sister”. He went back to bed and never asked again, and that hurt more than if he had.\n\nThen Chris texted: “I’m in Abuja on the 14th.”\n\nPart 3 drops next Wednesday. Follow so you don’t miss it.\n\nWhich hurts more: being caught, or nobody noticing? Tell us below. 👇",
+    "x": "He was standing in the doorway. She said “my sister”. He never asked again. 🚪\n\nLily · Part 2. Part 3 next Wednesday.",
+    "tiktok_title": "He never asked again. Lily · Part 2",
+    "tiktok": "He was standing in the doorway, and he never asked again. 🚪 Lily · Part 2. Part 3 drops next Wednesday, follow so you don’t miss it. #IntimovaStories #BookTok #RomanceBooks #LoveStory #Intimova"
+  },
+  "safety": {
+    "explicit": false,
+    "health_claim": false,
+    "clear_faces": false
+  },
+  "ai_generated": false
+}
