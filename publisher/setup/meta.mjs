@@ -3,13 +3,14 @@
 //
 // 1. In developers.facebook.com > Tools > Graph API Explorer, pick your app, then "Get User Access Token" with:
 //    pages_show_list, pages_read_engagement, pages_manage_posts, pages_manage_engagement,
-//    pages_read_user_content, instagram_basic, instagram_content_publish, instagram_manage_insights
+//    pages_read_user_content, instagram_basic, instagram_content_publish, instagram_manage_insights, read_insights
 //    (add business_management if your Page sits in a Meta Business portfolio, and ads_management and
 //    ads_read if your Page role comes through Business Manager: Meta needs them for Instagram insights).
 //    The results job needs instagram_manage_insights (Instagram numbers) and pages_read_user_content
 //    (Facebook photo posts); without them Meta refuses with "(#10)".
 // 2. export META_APP_ID=... META_APP_SECRET=... META_SHORT_TOKEN=<the token you just generated>
 // 3. npm run setup:meta
+//    For a results-only token (posting keeps META_PAGE_TOKEN): INSIGHTS_ONLY=1 npm run setup:meta
 import { need, ask } from './common.mjs';
 import { request } from '../lib/http.mjs';
 
@@ -34,6 +35,13 @@ try {
   console.log(`✓ Page token can read Instagram @${me.username}`);
 } catch (e) { pageTokenWorksForIg = false; console.log('✗ Page token was refused for Instagram: ' + e.message); }
 
+if (process.env.INSIGHTS_ONLY) {
+  console.log(`
+Add ONE GitHub secret (Settings > Secrets and variables > Actions > New repository secret):
+  META_INSIGHTS_TOKEN = ${page.access_token}
+Do NOT change META_PAGE_TOKEN: posting keeps using it. This token is used only to read results.`);
+  process.exit(0);
+}
 console.log(`
 Add these as GitHub secrets (Settings > Secrets and variables > Actions):
   META_PAGE_ID     = ${page.id}

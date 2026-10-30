@@ -20,7 +20,7 @@ export function loadInsights(root) {
 /** Instagram media insights. Asks for all metrics at once; if Meta refuses one, asks one by one and skips those it refuses. */
 async function instagramInsights(cfg, mediaId) {
   const g = cfg.graph;
-  const token = encodeURIComponent(g.igToken || g.pageToken);
+  const token = encodeURIComponent(g.igToken || g.insightsToken || g.pageToken);
   const api = `${g.base}/${g.version}`;
   const parse = r => Object.fromEntries((r.data || []).map(d => [d.name, d.values?.[0]?.value ?? d.total_value?.value ?? null]));
   try {
@@ -48,7 +48,7 @@ async function facebookInsights(cfg, id) {
   const fields = isVideo
     ? 'likes.summary(total_count).limit(0),comments.summary(total_count).limit(0)'
     : 'shares,reactions.summary(total_count).limit(0),comments.summary(total_count).limit(0)';
-  const r = await request('GET', `${g.base}/${g.version}/${id}?fields=${encodeURIComponent(fields)}&access_token=${encodeURIComponent(g.pageToken)}`);
+  const r = await request('GET', `${g.base}/${g.version}/${id}?fields=${encodeURIComponent(fields)}&access_token=${encodeURIComponent(g.insightsToken || g.pageToken)}`);
   const count = k => r[k]?.summary?.total_count ?? null;
   return isVideo ? { likes: count('likes'), comments: count('comments') } : { reactions: count('reactions'), comments: count('comments'), shares: r.shares?.count ?? 0 };
 }

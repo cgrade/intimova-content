@@ -26,6 +26,7 @@ export function loadConfig(env = process.env) {
       pageToken: env.META_PAGE_TOKEN || '',
       igUserId: env.IG_USER_ID || '',
       igToken: env.META_IG_TOKEN || '',       // only if the Page token is refused for Instagram calls
+      insightsToken: env.META_INSIGHTS_TOKEN || '', // read-only Page token with the insights permissions; results only, never posting
     },
     x: {
       base: env.X_BASE || 'https://api.x.com',
