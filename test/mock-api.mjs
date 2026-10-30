@@ -3,7 +3,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 
-export function startMock({ publicDir, failOnce = {}, products = {}, rejectReel = false } = {}) {
+export function startMock({ publicDir, failOnce = {}, products = {}, rejectReel = false, ghRuns = [], ghPulls = [] } = {}) {
   const calls = [];
   let n = 0;
   const fails = { ...failOnce };
@@ -111,6 +111,9 @@ export function startMock({ publicDir, failOnce = {}, products = {}, rejectReel 
     if (p === '/tiktok/v2/oauth/token/') return send(200, { access_token: 'tt-access-2', refresh_token: 'tt-refresh-2', expires_in: 86400, refresh_expires_in: 31536000, open_id: 'o1' });
     if (p === '/tiktok/v2/post/publish/content/init/' || p === '/tiktok/v2/post/publish/inbox/video/init/') return send(200, { data: { publish_id: 'pub' + n }, error: { code: 'ok', message: '' } });
     if (p === '/tiktok/v2/post/publish/status/fetch/') return send(200, { data: { status: 'SEND_TO_USER_INBOX' }, error: { code: 'ok' } });
+    // GitHub: the watchdog's reads (when the alarm last started a run, and open week pull requests)
+    if (/^\/gh\/repos\/[^/]+\/[^/]+\/actions\/workflows\/publish\.yml\/runs$/.test(p)) return send(200, { workflow_runs: ghRuns });
+    if (/^\/gh\/repos\/[^/]+\/[^/]+\/pulls$/.test(p) && req.method === 'GET') return send(200, ghPulls.filter(pr => !u.searchParams.get('head') || u.searchParams.get('head').endsWith(':' + pr.head)));
     // GitHub issues
     if ((m = p.match(/^\/gh\/repos\/([^/]+)\/([^/]+)\/issues$/)) && req.method === 'POST') {
       if (!String(req.headers.authorization).startsWith('Bearer ')) return send(401, { message: 'Bad credentials' });

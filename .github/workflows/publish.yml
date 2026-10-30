@@ -5,7 +5,8 @@ on:
     # Every 10 minutes (:03, :13, ... :53) from 06:03 to 22:53 Lagos time (cron is in UTC).
     # GitHub delays or drops scheduled runs under load (on 26-27 Oct it started 4 of the 20-plus runs due),
     # so this is only the backup clock. The main clock is the Cloudflare alarm in alarm/,
-    # which starts this job at :08, :18, ... :58. Runs are idempotent: nothing is posted twice.
+    # which starts this job at :01, :11, ... :51 (so a 19:30 post goes out at about 19:31). Runs are idempotent: nothing is posted twice.
+    # These scheduled runs also check that the alarm is still running (publisher/watch.mjs).
     - cron: '3-59/10 5-21 * * *'
   workflow_dispatch:
     inputs:
@@ -25,6 +26,8 @@ on:
 permissions:
   contents: write
   issues: write
+  actions: read          # the watchdog checks when the alarm last started a run
+  pull-requests: read    # and whether next week's pull request is open
 
 concurrency:
   group: publisher
