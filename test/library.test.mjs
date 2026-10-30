@@ -62,9 +62,10 @@ test('runway offers a seasonal product in its window, and skips out-of-stock pro
 });
 
 test('reads price and stock from a product page, and spots a changed price', () => {
-  const html = '<script type="application/ld+json">{"@type":"WebSite"}</script><script type="application/ld+json">{"@type":"Product","name":"The Bullet","offers":{"price":15000,"priceCurrency":"NGN","availability":"https://schema.org/InStock"}}</script>';
+  const html = '<script type="application/ld+json">{"@type":"WebSite"}</script><script type="application/ld+json">{"@type":"Product","name":"The Bullet","image":["https://cdn.example/a.jpg","https://cdn.example/b.jpg"],"offers":{"price":15000,"priceCurrency":"NGN","availability":"https://schema.org/InStock"}}</script>';
   const p = productFromHtml(html);
   assert.deepEqual([p.name, p.price, p.inStock], ['The Bullet', 15000, true]);
+  assert.deepEqual(p.images, ['https://cdn.example/a.jpg', 'https://cdn.example/b.jpg']);   // only this product's own photos
   assert.equal(productProblem({ price: 15000 }, p), null);
   assert.match(productProblem({ price: 12000 }, p), /costs ₦15,000 on the shop, but the post says ₦12,000/);
   assert.match(productProblem({ price: 15000 }, { ...p, inStock: false, availability: 'OutOfStock' }), /OutOfStock/);

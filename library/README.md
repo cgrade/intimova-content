@@ -34,3 +34,4 @@ Everything Intimova's social posts can draw on, planned about six months ahead, 
 - The same product appears at most once every 4 weeks.
 
 The marketplace (`cgrade/intomova_marketplace`) is only ever read, never changed: products come from its public pages, and sources marked `from_marketplace` mirror its citations library.
+- Product posts can show the product's own photo (a `product` slide), only the one the catalogue approves in `photo`; GitHub saves it every Saturday to `state/site/product-<slug>.jpg`. Products with `photo: false` (the Rose Duo and Rose Flutter for their shapes, and anything on hold) are described, never shown. A photo always sits inside a guide, never alone.
