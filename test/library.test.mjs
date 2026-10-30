@@ -34,16 +34,16 @@ test('the real library has no broken references or duplicates', () => {
 
 test('runway skips used items, continues the story, fills all seven days and rests a product for 4 weeks', () => {
   const root = makeRoot({ '2026-11-02': {
-    '1-mon': post({ id: 'a', library: 'orgasm-gap' }),
+    '1-mon': post({ id: 'a', library: 'only-one-who-touches' }),
     '3-wed': post({ id: 'b', library: 'lily-2' }),
     '5-fri': post({ id: 'c', library: 'q-choosing-yourself' }),
     // Uses the first product item, but features the Wand, so the next item in order (wand-guide) must rest.
     '7-sun': post({ id: 'd', publish_at: '2026-11-08T19:30:00+01:00', library: 'rose-air-pulse-guide', product: { slug: 'the-wand', price: 20000 } }),
   } });
   const lib = loadLibrary(root);
-  assert.equal(usedIds(root, lib).get('orgasm-gap'), 'a');
+  assert.equal(usedIds(root, lib).get('only-one-who-touches'), 'a');
   const rows = Object.fromEntries(runway(root, lib, { weekStart: new Date('2026-11-09T00:00:00+01:00') }).map(r => [r.key, r]));
-  assert.equal(rows.myths.next.id, 'intercourse-is-enough');      // orgasm-gap is used
+  assert.equal(rows.myths.next.id, 'orgasm-gap');                 // only-one-who-touches is used
   assert.equal(rows.stories.next.id, 'lily-3');                     // the series continues
   assert.deepEqual(runway(root, lib).map(r => r.day), ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']);
   assert.equal(rows.asks.next.id, 'a-not-from-sex-alone');          // Thursday: Ask Intimova
