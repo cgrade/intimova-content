@@ -7,7 +7,8 @@ Everything Intimova's social posts can draw on, planned about six months ahead, 
 | `myths.json` | Mon | Myths, each with the research findings that answer it |
 | `carousels.json` | Tue | Education carousels, one per intimova.ng article (adapted from the old carousel library) |
 | `stories.json` | Wed | Story series, 4 parts each, with the beats for every part |
-| `quotes-tips.json` | Fri | Original quote lines and couples tips, alternating |
+| `asks.json` | Thu | Ask Intimova: questions people are too shy to ask, answered from one intimova.ng article |
+| `quotes-tips.json` | Fri, Sat | Original quote lines (Friday) and tips for young adults and couples (Saturday) |
 | `products.json` | Sun | Product post angles, and the product catalogue with what's on hold |
 | `sources.json` | — | Every research source a post may cite, with safe wording, country and cautions |
 

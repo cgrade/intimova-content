@@ -1,150 +1,406 @@
 {
   "_about": "Monday: myth vs fact carousels (5 slides: myth, fact, second fact or what it means, takeaway). Each item names the findings it uses as '<source id>/<finding id>' from sources.json; use their wording. status: ready, hold (needs Grade or a check first) or used. The Saturday run picks the first ready item that isn't used yet, skipping any that repeat a pillar used in the last 2 weeks.",
   "items": [
-    { "id": "toys-are-for-singles", "status": "used", "used_in": "2026-10-26-myth-toys", "myth": "Sex toys are for people who can't find a partner.", "facts": ["herbenick-2009-vibrators/prevalence", "reece-2009-men/partner-use"], "audience": "all", "pillar": "Body and health facts" },
-
-    { "id": "orgasm-gap", "status": "ready", "audience": "couples", "pillar": "Couples and reconnection",
+    {
+      "id": "toys-are-for-singles",
+      "status": "used",
+      "used_in": "2026-10-26-myth-toys",
+      "myth": "Sex toys are for people who can't find a partner.",
+      "facts": [
+        "herbenick-2009-vibrators/prevalence",
+        "reece-2009-men/partner-use"
+      ],
+      "audience": "all",
+      "pillar": "Body and health facts"
+    },
+    {
+      "id": "orgasm-gap",
+      "status": "ready",
+      "audience": "couples",
+      "pillar": "Couples and reconnection",
       "myth": "If he finishes, the night went well for both of you.",
-      "facts": ["frederick-2018-orgasm-gap/gap"],
-      "takeaway": "Her pleasure isn't a bonus round. Ask, and take your time." },
-
-    { "id": "intercourse-is-enough", "status": "ready", "audience": "couples", "pillar": "Body and health facts",
+      "facts": [
+        "frederick-2018-orgasm-gap/gap"
+      ],
+      "takeaway": "Her pleasure isn't a bonus round. Ask, and take your time."
+    },
+    {
+      "id": "intercourse-is-enough",
+      "status": "ready",
+      "audience": "couples",
+      "pillar": "Body and health facts",
       "myth": "If it doesn't happen during intercourse, something is wrong with her.",
-      "facts": ["herbenick-2018-stimulation/intercourse-alone"],
+      "facts": [
+        "herbenick-2018-stimulation/intercourse-alone"
+      ],
       "takeaway": "Most women need more than one kind of touch. That's normal, not a problem to fix.",
-      "link": "https://intimova.ng/learn/orgasm-pleasure-literacy/understanding-the-female-orgasm" },
-
-    { "id": "vaseline-is-fine", "status": "ready", "audience": "all", "pillar": "Body and health facts",
+      "link": "https://intimova.ng/learn/orgasm-pleasure-literacy/understanding-the-female-orgasm"
+    },
+    {
+      "id": "vaseline-is-fine",
+      "status": "ready",
+      "audience": "all",
+      "pillar": "Body and health facts",
       "myth": "Vaseline or baby oil works fine as lube with a condom.",
-      "facts": ["nhs-condoms-oil/oil-damages"],
+      "facts": [
+        "nhs-condoms-oil/oil-damages"
+      ],
       "takeaway": "With condoms, stick to water-based (or silicone-based) lube.",
-      "link": "https://intimova.ng/learn/toys-body-safe/water-based-vs-silicone-lubricant" },
-
-    { "id": "one-bad-night", "status": "ready", "audience": "him", "pillar": "Body and health facts",
+      "link": "https://intimova.ng/learn/toys-body-safe/water-based-vs-silicone-lubricant"
+    },
+    {
+      "id": "one-bad-night",
+      "status": "ready",
+      "audience": "him",
+      "pillar": "Body and health facts",
       "myth": "One night it doesn't work means something is wrong with you.",
-      "facts": ["nhs-erection-problems/occasional", "nhs-erection-problems/see-gp"],
-      "takeaway": "Now and then is normal. Often is a reason to see a doctor, not to feel ashamed." },
-
-    { "id": "pain-is-normal", "status": "ready", "audience": "her", "pillar": "Body and health facts",
+      "facts": [
+        "nhs-erection-problems/occasional",
+        "nhs-erection-problems/see-gp"
+      ],
+      "takeaway": "Now and then is normal. Often is a reason to see a doctor, not to feel ashamed."
+    },
+    {
+      "id": "pain-is-normal",
+      "status": "ready",
+      "audience": "her",
+      "pillar": "Body and health facts",
       "myth": "A little pain during sex is normal. You just bear it.",
-      "facts": ["brook-painful-sex/should-not-hurt"],
-      "takeaway": "Pain is a signal, not a duty. Stop, and get it checked." },
-
-    { "id": "sex-stops-at-sixty", "status": "ready", "audience": "all", "pillar": "Permission and self-care",
+      "facts": [
+        "brook-painful-sex/should-not-hurt"
+      ],
+      "takeaway": "Pain is a signal, not a duty. Stop, and get it checked."
+    },
+    {
+      "id": "sex-stops-at-sixty",
+      "status": "ready",
+      "audience": "all",
+      "pillar": "Permission and self-care",
       "myth": "Past 60, intimacy is over.",
-      "facts": ["lindau-2007-older-adults/by-age"],
-      "takeaway": "Desire doesn't retire. Health matters more than age." },
-
-    { "id": "lube-means-broken", "status": "ready", "audience": "her", "pillar": "Body and health facts",
+      "facts": [
+        "lindau-2007-older-adults/by-age"
+      ],
+      "takeaway": "Desire doesn't retire. Health matters more than age."
+    },
+    {
+      "id": "lube-means-broken",
+      "status": "ready",
+      "audience": "her",
+      "pillar": "Body and health facts",
       "myth": "Needing lubricant means something is wrong with you.",
-      "facts": ["herbenick-2014-lubricant/reasons"],
+      "facts": [
+        "herbenick-2014-lubricant/reasons"
+      ],
       "takeaway": "Lube is about comfort and pleasure, not a fix for a problem.",
-      "notes": "No percentage from this paper (see source caution). Pair with a care tip: water-based lube is safe with silicone toys and condoms." },
-
-    { "id": "everyone-finishes-too-fast", "status": "ready", "audience": "him", "pillar": "Body and health facts",
+      "notes": "No percentage from this paper (see source caution). Pair with a care tip: water-based lube is safe with silicone toys and condoms."
+    },
+    {
+      "id": "everyone-finishes-too-fast",
+      "status": "ready",
+      "audience": "him",
+      "pillar": "Body and health facts",
       "myth": "Most men finish too fast.",
-      "facts": ["althof-2014-pe/four-percent"],
-      "takeaway": "What you see online isn't the average. Pressure makes it worse; information makes it better." },
-
-    { "id": "lasting-is-fixed", "status": "ready", "audience": "him", "pillar": "Body and health facts",
+      "facts": [
+        "althof-2014-pe/four-percent"
+      ],
+      "takeaway": "What you see online isn't the average. Pressure makes it worse; information makes it better."
+    },
+    {
+      "id": "lasting-is-fixed",
+      "status": "ready",
+      "audience": "him",
+      "pillar": "Body and health facts",
       "myth": "You either last long or you don't. It can't be learned.",
-      "facts": ["cooper-2015-pe-techniques/stop-start"],
+      "facts": [
+        "cooper-2015-pe-techniques/stop-start"
+      ],
       "takeaway": "It's a skill, and skills can be practised.",
-      "link": "https://intimova.ng/learn/sex-tips/how-to-last-longer-in-bed" },
-
-    { "id": "desire-comes-first", "status": "ready", "audience": "couples", "pillar": "Couples and reconnection",
+      "link": "https://intimova.ng/learn/sex-tips/how-to-last-longer-in-bed"
+    },
+    {
+      "id": "desire-comes-first",
+      "status": "ready",
+      "audience": "couples",
+      "pillar": "Couples and reconnection",
       "myth": "If you're not in the mood first, you don't really want them.",
-      "facts": ["basson-2000-desire/responsive"],
+      "facts": [
+        "basson-2000-desire/responsive"
+      ],
       "takeaway": "Desire doesn't always knock. Sometimes it arrives once you begin.",
-      "link": "https://intimova.ng/learn/desire-libido/when-desire-goes-quiet" },
-
-    { "id": "sleep-has-nothing-to-do", "status": "ready", "audience": "her", "pillar": "Body and health facts",
+      "link": "https://intimova.ng/learn/desire-libido/when-desire-goes-quiet"
+    },
+    {
+      "id": "sleep-has-nothing-to-do",
+      "status": "ready",
+      "audience": "her",
+      "pillar": "Body and health facts",
       "myth": "Sleep has nothing to do with desire.",
-      "facts": ["kalmbach-2015-sleep/extra-hour", "kalmbach-2015-sleep/desire"],
-      "takeaway": "Sometimes the most romantic thing is an early night." },
-
-    { "id": "orgasm-and-sleep", "status": "ready", "audience": "all", "pillar": "Body and health facts",
+      "facts": [
+        "kalmbach-2015-sleep/extra-hour",
+        "kalmbach-2015-sleep/desire"
+      ],
+      "takeaway": "Sometimes the most romantic thing is an early night."
+    },
+    {
+      "id": "orgasm-and-sleep",
+      "status": "ready",
+      "audience": "all",
+      "pillar": "Body and health facts",
       "myth": "Pleasure is a luxury, not self-care.",
-      "facts": ["lastella-2019-sleep/orgasm-sleep"],
-      "takeaway": "Feeling good is part of looking after yourself, alongside sleep, food and people you trust." },
-
-    { "id": "ejaculation-prostate", "status": "ready", "audience": "him", "pillar": "Body and health facts",
+      "facts": [
+        "lastella-2019-sleep/orgasm-sleep"
+      ],
+      "takeaway": "Feeling good is part of looking after yourself, alongside sleep, food and people you trust."
+    },
+    {
+      "id": "ejaculation-prostate",
+      "status": "ready",
+      "audience": "him",
+      "pillar": "Body and health facts",
       "myth": "How often a man ejaculates has nothing to do with his health.",
-      "facts": ["rider-2016-prostate/frequency"],
-      "takeaway": "A link worth knowing. Prostate checks still matter: talk to a doctor." },
-
-    { "id": "mood-and-sex", "status": "ready", "audience": "all", "pillar": "Body and health facts",
+      "facts": [
+        "rider-2016-prostate/frequency"
+      ],
+      "takeaway": "A link worth knowing. Prostate checks still matter: talk to a doctor."
+    },
+    {
+      "id": "mood-and-sex",
+      "status": "ready",
+      "audience": "all",
+      "pillar": "Body and health facts",
       "myth": "Low mood and a low sex drive are two separate problems.",
-      "facts": ["atlantis-2012-mood/both-ways", "who-2017-nigeria/depression"],
+      "facts": [
+        "atlantis-2012-mood/both-ways",
+        "who-2017-nigeria/depression"
+      ],
       "takeaway": "If your mood has been low for weeks, talk to a doctor or a mental health professional. It's a strength, not a weakness.",
-      "notes": "Must end with the professional-help pointer. Never suggest pleasure treats depression." },
-
-    { "id": "vibrators-numb-you", "status": "ready", "audience": "her", "pillar": "Body and health facts",
+      "notes": "Must end with the professional-help pointer. Never suggest pleasure treats depression."
+    },
+    {
+      "id": "vibrators-numb-you",
+      "status": "ready",
+      "audience": "her",
+      "pillar": "Body and health facts",
       "myth": "Using a vibrator will numb you or ruin sex with a partner.",
-      "facts": ["herbenick-2009-vibrators/side-effects"],
-      "takeaway": "Start on the lowest setting, take breaks, and enjoy it." },
-
-    { "id": "erection-problems-are-for-old-men", "status": "ready", "audience": "him", "pillar": "Body and health facts",
+      "facts": [
+        "herbenick-2009-vibrators/side-effects"
+      ],
+      "takeaway": "Start on the lowest setting, take breaks, and enjoy it."
+    },
+    {
+      "id": "erection-problems-are-for-old-men",
+      "status": "ready",
+      "audience": "him",
+      "pillar": "Body and health facts",
       "myth": "Erection problems only happen to older men.",
-      "facts": ["capogrosso-2013-young-ed/one-in-four"],
-      "takeaway": "It's common, it's not a failure, and a doctor can help. It can also be an early sign of heart or blood-sugar problems, so get checked." },
-
-    { "id": "pelvic-floor-is-for-women", "status": "ready", "audience": "him", "pillar": "Body and health facts",
+      "facts": [
+        "capogrosso-2013-young-ed/one-in-four"
+      ],
+      "takeaway": "It's common, it's not a failure, and a doctor can help. It can also be an early sign of heart or blood-sugar problems, so get checked."
+    },
+    {
+      "id": "pelvic-floor-is-for-women",
+      "status": "ready",
+      "audience": "him",
+      "pillar": "Body and health facts",
       "myth": "Pelvic floor exercises are only for women after childbirth.",
-      "facts": ["dorey-2005-pelvic-floor/forty-percent"],
+      "facts": [
+        "dorey-2005-pelvic-floor/forty-percent"
+      ],
       "takeaway": "Men have a pelvic floor too. Ask a doctor or physiotherapist how to do the exercises properly.",
-      "notes": "Never say 'treats' or 'cures'. Keep the 'small trial' wording." },
-
-    { "id": "more-sex-happier", "status": "ready", "audience": "couples", "pillar": "Couples and reconnection",
+      "notes": "Never say 'treats' or 'cures'. Keep the 'small trial' wording."
+    },
+    {
+      "id": "more-sex-happier",
+      "status": "ready",
+      "audience": "couples",
+      "pillar": "Couples and reconnection",
       "myth": "Happy couples have sex every day.",
-      "facts": ["muise-2016-frequency/once-a-week"],
-      "takeaway": "Closeness matters more than keeping score." },
-
-    { "id": "talking-kills-the-mood", "status": "ready", "audience": "couples", "pillar": "Couples and reconnection",
+      "facts": [
+        "muise-2016-frequency/once-a-week"
+      ],
+      "takeaway": "Closeness matters more than keeping score."
+    },
+    {
+      "id": "talking-kills-the-mood",
+      "status": "ready",
+      "audience": "couples",
+      "pillar": "Couples and reconnection",
       "myth": "Talking about sex kills the mood.",
-      "facts": ["mallory-2019-communication/talking-helps"],
+      "facts": [
+        "mallory-2019-communication/talking-helps"
+      ],
       "takeaway": "One honest question can do more than any trick.",
-      "link": "https://intimova.ng/learn/desire-libido/talking-to-your-partner-about-toys" },
-
-    { "id": "all-lubes-are-the-same", "status": "ready", "audience": "all", "pillar": "Shop and trust",
+      "link": "https://intimova.ng/learn/desire-libido/talking-to-your-partner-about-toys"
+    },
+    {
+      "id": "all-lubes-are-the-same",
+      "status": "ready",
+      "audience": "all",
+      "pillar": "Shop and trust",
       "myth": "All lubricants are basically the same.",
-      "facts": ["cunha-2014-lubricants/seven-of-twelve"],
+      "facts": [
+        "cunha-2014-lubricants/seven-of-twelve"
+      ],
       "takeaway": "Read the label: water-based, and as few extras as possible.",
       "link": "https://intimova.ng/learn/toys-body-safe/lubricant-myths-gently-debunked",
-      "notes": "Don't claim Intimova's lubricant passes these tests unless its product page says so. It is out of stock as of 27 Oct 2026." },
-
-    { "id": "youre-the-only-one", "status": "ready", "audience": "her", "pillar": "Permission and self-care",
+      "notes": "Don't claim Intimova's lubricant passes these tests unless its product page says so. It is out of stock as of 27 Oct 2026."
+    },
+    {
+      "id": "youre-the-only-one",
+      "status": "ready",
+      "audience": "her",
+      "pillar": "Permission and self-care",
       "myth": "If sex isn't working for you, you're the only one.",
-      "facts": ["ojomu-ileife-fsd/sixty-three"],
+      "facts": [
+        "ojomu-ileife-fsd/sixty-three"
+      ],
       "takeaway": "Common doesn't mean you have to accept it. Talk to your partner, and to a doctor if it hurts.",
-      "notes": "Nigerian data. Say 'sexual difficulty', not 'dysfunction'." },
-
-    { "id": "after-forty", "status": "ready", "audience": "her", "pillar": "Permission and self-care",
+      "notes": "Nigerian data. Say 'sexual difficulty', not 'dysfunction'."
+    },
+    {
+      "id": "after-forty",
+      "status": "ready",
+      "audience": "her",
+      "pillar": "Permission and self-care",
       "myth": "After 40, intimacy just isn't supposed to matter.",
-      "facts": ["enugu-fsd-age/forties"],
-      "takeaway": "Changes in your 40s are common, and you still deserve pleasure. A doctor can help with the physical side." },
-
-    { "id": "broken-not-common", "status": "ready", "audience": "her", "pillar": "Permission and self-care",
+      "facts": [
+        "enugu-fsd-age/forties"
+      ],
+      "takeaway": "Changes in your 40s are common, and you still deserve pleasure. A doctor can help with the physical side."
+    },
+    {
+      "id": "broken-not-common",
+      "status": "ready",
+      "audience": "her",
+      "pillar": "Permission and self-care",
       "myth": "Struggling with desire or pleasure means you're broken.",
-      "facts": ["mccool-fsd-global/forty-one", "mccool-fsd-global/inequality"],
-      "takeaway": "You're not broken. You're human, and you deserve support." },
-
-    { "id": "all-toys-are-safe", "status": "ready", "audience": "all", "pillar": "Shop and trust",
+      "facts": [
+        "mccool-fsd-global/forty-one",
+        "mccool-fsd-global/inequality"
+      ],
+      "takeaway": "You're not broken. You're human, and you deserve support."
+    },
+    {
+      "id": "all-toys-are-safe",
+      "status": "ready",
+      "audience": "all",
+      "pillar": "Shop and trust",
       "myth": "A toy is a toy. The material doesn't matter.",
-      "facts": ["danish-epa-2006-toys/jelly-plasticisers"],
+      "facts": [
+        "danish-epa-2006-toys/jelly-plasticisers"
+      ],
       "takeaway": "Look for body-safe silicone, and skip anything sold as 'jelly'.",
-      "link": "https://intimova.ng/learn/toys-body-safe/how-to-choose-a-body-safe-toy" },
-
-    { "id": "dryness-is-rare", "status": "hold", "audience": "her", "pillar": "Body and health facts",
+      "link": "https://intimova.ng/learn/toys-body-safe/how-to-choose-a-body-safe-toy"
+    },
+    {
+      "id": "dryness-is-rare",
+      "status": "hold",
+      "audience": "her",
+      "pillar": "Body and health facts",
       "myth": "Dryness during sex is rare.",
-      "facts": ["fsd-domains/lubrication"],
+      "facts": [
+        "fsd-domains/lubrication"
+      ],
       "takeaway": "It's common, and there's no shame in a little help.",
-      "notes": "Hold: check the PMC8261092 paper first (see source caution)." },
-
-    { "id": "talk-after", "status": "hold", "audience": "couples", "pillar": "Couples and reconnection",
+      "notes": "Hold: check the PMC8261092 paper first (see source caution)."
+    },
+    {
+      "id": "talk-after",
+      "status": "hold",
+      "audience": "couples",
+      "pillar": "Couples and reconnection",
       "myth": "Once it's over, it's over.",
-      "facts": ["muise-2014-afterglow/after-sex-affection"],
+      "facts": [
+        "muise-2014-afterglow/after-sex-affection"
+      ],
       "takeaway": "Stay a while. The moments after count too.",
-      "notes": "Reserved for Friday's tip on 'staying close after'. Use here only if that tip is retired." }
+      "notes": "Reserved for Friday's tip on 'staying close after'. Use here only if that tip is retired."
+    },
+    {
+      "id": "only-one-who-touches",
+      "status": "hold",
+      "audience": "young-adults",
+      "pillar": "Permission and self-care",
+      "myth": "You're the only one who touches yourself.",
+      "facts": [
+        "bello-2025-nigeria-masturbation/prevalence"
+      ],
+      "takeaway": "Most people do. It's normal, and it's yours.",
+      "notes": "Proposed 30 Oct 2026 in the young-adults audit; on hold until Grade approves the myths. Nigerian data: say so on the slide."
+    },
+    {
+      "id": "masturbation-damages",
+      "status": "hold",
+      "audience": "young-adults",
+      "pillar": "Body and health facts",
+      "myth": "Touching yourself damages your body.",
+      "facts": [
+        "brook-masturbation/no-risk"
+      ],
+      "takeaway": "No harm, no permanent change. Keep toys and hands clean.",
+      "notes": "Proposed 30 Oct 2026 in the young-adults audit; on hold until Grade approves the myths."
+    },
+    {
+      "id": "virginity-test",
+      "status": "hold",
+      "audience": "young-adults",
+      "pillar": "Permission and self-care",
+      "myth": "You can tell if a woman is a virgin.",
+      "facts": [
+        "who-2018-virginity-testing/no-exam"
+      ],
+      "takeaway": "No test can tell. Your body's history is yours to share, or not.",
+      "notes": "Proposed 30 Oct 2026 in the young-adults audit; on hold until Grade approves the myths. Frame as freedom from shame, never as an attack on faith."
+    },
+    {
+      "id": "most-men-bigger",
+      "status": "hold",
+      "audience": "young-adults",
+      "pillar": "Body and health facts",
+      "myth": "Most men are bigger than you.",
+      "facts": [
+        "veale-2015-size/average"
+      ],
+      "takeaway": "What you see online isn't average. Your worth isn't measured in centimetres.",
+      "notes": "Proposed 30 Oct 2026 in the young-adults audit; on hold until Grade approves the myths. No images."
+    },
+    {
+      "id": "wellbeing-not-just-risk",
+      "status": "hold",
+      "audience": "young-adults",
+      "pillar": "Body and health facts",
+      "myth": "Sexual health just means avoiding infections and pregnancy.",
+      "facts": [
+        "who-sexual-health/pleasure",
+        "zaneva-2022-pleasure/improves"
+      ],
+      "takeaway": "Safe and good can go together. Pleasure is part of health.",
+      "notes": "Proposed 30 Oct 2026 in the young-adults audit; on hold until Grade approves the myths."
+    },
+    {
+      "id": "touching-is-cheating",
+      "status": "hold",
+      "audience": "young-adults",
+      "pillar": "Couples and reconnection",
+      "myth": "If you're in a relationship, touching yourself is cheating.",
+      "facts": [
+        "brook-masturbation/not-betrayal"
+      ],
+      "takeaway": "Your own pleasure isn't a betrayal. Talk about it if it worries either of you.",
+      "notes": "Proposed 30 Oct 2026 in the young-adults audit; on hold until Grade approves the myths. Space 6 weeks from masturbation-damages (same source)."
+    },
+    {
+      "id": "women-care-about-size",
+      "status": "hold",
+      "audience": "young-adults",
+      "pillar": "Couples and reconnection",
+      "myth": "Women care about size more than anything.",
+      "facts": [
+        "lever-2006-size/satisfied"
+      ],
+      "takeaway": "Most women are happy. Most of the worry is men's.",
+      "notes": "Proposed 30 Oct 2026 in the young-adults audit; on hold until Grade approves the myths. Space 6 weeks from most-men-bigger."
+    }
   ]
 }
