@@ -1,0 +1,66 @@
+{
+  "id": "2026-11-08-guide-rose",
+  "format": "carousel",
+  "pillar": "Product guide",
+  "library": "rose-air-pulse-guide",
+  "product": {
+    "slug": "rose-air-pulse",
+    "price": 25000
+  },
+  "publish_at": "2026-11-08T19:30:00+01:00",
+  "platforms": [
+    "instagram",
+    "facebook",
+    "x",
+    "tiktok"
+  ],
+  "series_label": "PRODUCT GUIDE",
+  "last_footer": "DISCREET DELIVERY · INTIMOVA.NG",
+  "slides": [
+    {
+      "type": "cover",
+      "headline": "If buzzing has always felt *too much,* there’s a softer way.",
+      "lead": "A guide to the Rose. Swipe."
+    },
+    {
+      "type": "product",
+      "slug": "rose-air-pulse",
+      "name": "The Rose — Air-Pulse",
+      "headline": "Gentle air pulses. *Entirely hands-free.*",
+      "price": 25000
+    },
+    {
+      "type": "text",
+      "kicker": "HOW IT FEELS",
+      "headline": "No pressing, no rubbing. *Soft pulses of air instead.*",
+      "body": "Gentler and more diffuse than direct vibration, and whisper-quiet. Multiple intensities: start on the lowest.",
+      "note": "₦25,000 on intimova.ng (was ₦32,000)."
+    },
+    {
+      "type": "text",
+      "kicker": "WHAT IT’S MADE OF",
+      "headline": "Body-safe silicone and ABS. *USB-rechargeable.*",
+      "body": "Phthalate-free, according to the manufacturer, with a travel lock. Clean with warm water and a toy-safe cleanser; water-based lubricant only.",
+      "note": "Details from the product page on intimova.ng."
+    },
+    {
+      "type": "takeaway",
+      "kicker": "DISCREET DELIVERY",
+      "headline": "Plain, unbranded packaging. *Always.*",
+      "lead": "Nationwide delivery from ₦6,000. Faulty or wrong? Tell us within 2 days of delivery and we replace it free."
+    }
+  ],
+  "captions": {
+    "instagram": "If buzzing has always felt too much, there’s a softer way. 🌹\n\nThe Rose uses soft pulses of air instead of pressing or rubbing: gentler and more diffuse than direct vibration, hands-free and whisper-quiet. Body-safe silicone, USB-rechargeable, with a travel lock. Clean with warm water and a toy-safe cleanser, and use water-based lubricant only.\n\n₦25,000 at intimova.ng. Delivered nationwide in plain, unbranded packaging. Link in bio.\n\n#Intimova #SexualWellness #PleasureIsSelfCare #SelfLove #Wellbeing",
+    "facebook": "If buzzing has always felt too much, there’s a softer way. 🌹\n\nThe Rose uses soft pulses of air instead of pressing or rubbing: gentler and more diffuse than direct vibration, hands-free and whisper-quiet. Body-safe silicone, USB-rechargeable, with a travel lock. Clean with warm water and a toy-safe cleanser, and use water-based lubricant only.\n\n₦25,000, delivered nationwide in plain, unbranded packaging: https://intimova.ng/product/rose-air-pulse",
+    "x": "If buzzing has always felt too much, there’s a softer way: soft pulses of air, hands-free and whisper-quiet. Delivered in plain, unbranded packaging. 🌹",
+    "tiktok_title": "A softer way: the Rose",
+    "tiktok": "If buzzing has always felt too much, there’s a softer way: gentle air pulses, hands-free and whisper-quiet. Plain, unbranded delivery. #Intimova #SexualWellness #SelfLove"
+  },
+  "safety": {
+    "explicit": false,
+    "health_claim": false,
+    "clear_faces": false
+  },
+  "ai_generated": false
+}

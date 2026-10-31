@@ -1,0 +1,68 @@
+{
+  "id": "2026-11-02-myth-only-one",
+  "format": "carousel",
+  "pillar": "Permission and self-care",
+  "library": "only-one-who-touches",
+  "publish_at": "2026-11-02T19:30:00+01:00",
+  "platforms": [
+    "instagram",
+    "facebook",
+    "x",
+    "tiktok"
+  ],
+  "series_label": "MYTH VS FACT",
+  "last_footer": "DISCREET DELIVERY · INTIMOVA.NG",
+  "slides": [
+    {
+      "type": "myth",
+      "text": "“You’re the only one who touches yourself.”",
+      "lead": "Swipe. A Nigerian study says otherwise."
+    },
+    {
+      "type": "fact",
+      "number": "64.9%",
+      "statement": "of sexually active adults aged 18–45 in Ibadan said they had ever masturbated.",
+      "detail": "That’s about 2 in every 3 people.",
+      "source": "Source: Bello et al., _BMC Public Health_, 2025. 941 sexually active adults aged 18–45 in Ibadan, Nigeria."
+    },
+    {
+      "type": "fact",
+      "number": "62.4%",
+      "statement": "of the women said so. So did 69.9% of the men.",
+      "detail": "It isn’t only a men’s thing. And it isn’t a secret only you keep.",
+      "source": "Source: Bello et al., _BMC Public Health_, 2025. 941 sexually active adults aged 18–45 in Ibadan, Nigeria."
+    },
+    {
+      "type": "text",
+      "kicker": "WHAT IT MEANS",
+      "headline": "Most people do it. *Almost nobody says so out loud.*",
+      "body": "So everyone grows up thinking they’re the only one. You were never the only one.",
+      "note": "Nigerian data, from face-to-face interviews in Ibadan."
+    },
+    {
+      "type": "takeaway",
+      "kicker": "THE TAKEAWAY",
+      "headline": "Most people do. *It’s normal, and it’s yours.*",
+      "lead": "Send this to the friend who needs to hear it."
+    }
+  ],
+  "captions": {
+    "instagram": "Myth: you’re the only one who touches yourself.\n\nIn a Nigerian study of 941 sexually active adults aged 18–45 in Ibadan, 64.9% said they had ever masturbated: 62.4% of the women and 69.9% of the men.\n\nMost people do it. Almost nobody says so out loud, so everyone thinks they’re the only one. It’s normal, and it’s yours.\n\nSend this to the friend who needs to hear it.\n\nSource: Bello et al., BMC Public Health, 2025. Face-to-face interviews in Ibadan, Nigeria.\n\n#MythVsFact #SexualWellness #SelfLove #PleasureIsSelfCare #NoShame #Intimova",
+    "facebook": "Myth: you’re the only one who touches yourself.\n\nIn a Nigerian study of 941 sexually active adults aged 18–45 in Ibadan, 64.9% said they had ever masturbated: 62.4% of the women and 69.9% of the men.\n\nMost people do it. Almost nobody says so out loud, so everyone thinks they’re the only one. It’s normal, and it’s yours.\n\nSend this to the friend who needs to hear it.\n\nSource: Bello et al., BMC Public Health, 2025. Face-to-face interviews in Ibadan, Nigeria.",
+    "x": "Myth: you’re the only one who touches yourself.\n\nA Nigerian study of 941 adults in Ibadan: 64.9% said they had. 👇",
+    "x_thread": [
+      "62.4% of the women and 69.9% of the men. It’s normal, and it’s yours.\n\nSource: Bello et al., BMC Public Health, 2025. Adults aged 18–45, Ibadan, Nigeria."
+    ],
+    "tiktok_title": "Myth: you’re the only one?",
+    "tiktok": "Myth: you’re the only one who touches yourself. A Nigerian study says 64.9% of adults in Ibadan had. Swipe. Source: Bello et al., BMC Public Health, 2025. #MythVsFact #SexualWellness #SelfLove #NoShame #Intimova"
+  },
+  "safety": {
+    "explicit": false,
+    "health_claim": true,
+    "health_sources": [
+      "https://doi.org/10.1186/s12889-025-24701-0"
+    ],
+    "clear_faces": false
+  },
+  "ai_generated": false
+}
