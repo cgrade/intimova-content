@@ -44,6 +44,10 @@ body{margin:0;background:#ccc}
 .foot .sw{font-size:22px;color:var(--muted)}
 .dark .foot .sw,.night .foot .sw{color:#e9c9bd;letter-spacing:4px}
 .spacer{margin-top:auto}
+.pcard{margin:40px 0 0;flex:1;min-height:0;background:#fff;border-radius:28px;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 1px 0 #eadcd3}
+.pcard img{max-width:82%;max-height:88%;object-fit:contain}
+.pname{font-family:'PF',serif;font-size:44px;line-height:1.2;margin:34px 0 0}
+.pprice{font-size:30px;font-weight:600;color:var(--wine);margin:10px 0 0;letter-spacing:1px}
 </style></head><body>
 <svg width="0" height="0" style="position:absolute"><defs>
 <g id="rings" fill="none" stroke-width="2"><circle cx="320" cy="320" r="300"/><circle cx="320" cy="320" r="230"/><circle cx="320" cy="320" r="160"/><circle cx="320" cy="320" r="90"/></g>
@@ -74,6 +78,8 @@ const T = {
   fact: s => `<div class="spacer"></div><span class="tag fill">${esc(s.tag || 'FACT')}</span><p class="num">${esc(s.number)}</p><p class="stmt">${md(s.statement)}</p>${s.detail ? `<p class="detail">${md(s.detail)}</p>` : ''}<p class="src">${md(s.source || '')}</p>`,
   text: s => `<div class="spacer"></div><p class="h">${md(s.headline)}</p><div class="rule"></div>${s.body ? `<p class="body">${md(s.body)}</p>` : ''}${s.note ? `<p class="src">${md(s.note)}</p>` : '<div class="spacer"></div>'}`,
   takeaway: s => `<div class="spacer"></div><p class="h xl">${md(s.headline)}</p><div class="rule"></div>${s.lead ? `<p class="lead">${md(s.lead)}</p>` : ''}`,
+  // A product's own photo (state/site/product-<slug>.jpg, saved by the weekly snapshot), always inside a guide.
+  product: s => `${s.headline ? `<p class="h">${md(s.headline)}</p>` : ''}<div class="pcard"><img src="../../state/site/product-${encodeURIComponent(s.slug)}.jpg" alt=""></div><p class="pname">${md(s.name || '')}</p>${Number.isFinite(s.price) ? `<p class="pprice">₦${s.price.toLocaleString('en-NG')}</p>` : ''}`,
   quote: s => `<div class="spacer"></div><p class="quote">${md(s.quote)}</p><div class="rule"></div><div class="attr">${esc(s.attribution || '— INTIMOVA')}</div><div class="spacer"></div>`,
 };
 document.getElementById('deck').innerHTML = DECK.slides.map((s, i) => {

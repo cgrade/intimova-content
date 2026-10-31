@@ -2,7 +2,7 @@
 
 This repo makes and posts Intimova's social content.
 
-- **Claude drafts the week.** Every Saturday Claude writes the next week's five posts from the content library (`library/`, about six months planned ahead), renders them (story reels and carousels), and opens a pull request.
+- **Claude drafts the week.** Every Saturday Claude writes the next week's seven posts (one a day) from the content library (`library/`, about six months planned ahead), renders them (story reels and carousels), and opens a pull request.
 - **You approve.** You review the pull request on your phone. Comment to change something; merge to approve.
 - **It posts itself.** A GitHub job that runs every 10 minutes posts each approved post at its time to Instagram and Facebook, and to X once it's connected. For TikTok, it sends you the files and caption to post by hand.
 
@@ -15,7 +15,7 @@ Nothing posts unless it is merged into `main`. A post with `"hold": true` never 
    - To change something, comment on the post. Claude's Sunday 18:00 run makes the fixes.
    - To approve, merge the pull request.
 3. **After the merge.** Cloudflare publishes the images and videos at `https://media.intimova.ng` within a minute or two.
-4. **At each post's time.** The **Publish due posts** job runs every 10 minutes from 06:08 to 22:58 and posts whatever is due, so a post goes out within about 10 minutes of its time. A Cloudflare alarm starts it (setup step 8), because GitHub's own schedule skips runs when GitHub is busy. GitHub's schedule stays on as a backup.
+4. **At each post's time.** The **Publish due posts** job runs every 10 minutes from 06:01 to 22:51 and posts whatever is due, so a post goes out within about 10 minutes of its time. A Cloudflare alarm starts it (setup step 8), because GitHub's own schedule skips runs when GitHub is busy. GitHub's schedule stays on as a backup.
 5. **TikTok.** You get a GitHub notification titled "Post to TikTok" with the files and caption. Post it by hand, then close the issue.
 
 If a platform fails, the job retries it on the next run, up to three times. GitHub emails you when a run fails. Platforms that already worked are never posted twice.
@@ -31,7 +31,9 @@ Every Saturday at 07:13 the **Read post results and product prices** job saves e
 | Mon | Myth vs fact | `library/myths.json` |
 | Tue | Education carousel | `library/carousels.json` |
 | Wed | Story reel | `library/stories.json` |
-| Fri | Quote card or couples tip | `library/quotes-tips.json` |
+| Thu | Ask Intimova | `library/asks.json` |
+| Fri | Quote card | `library/quotes-tips.json` |
+| Sat | Tip (young adults and couples) | `library/quotes-tips.json` |
 | Sun | Product | `library/products.json` |
 
 `npm run runway` shows how many weeks each day has left, and each week's pull request ends with the same table. See `library/README.md`.
@@ -123,7 +125,7 @@ For this to work, `PLATFORMS` must not include `tiktok`. The default is `instagr
 
 GitHub's own schedule is unreliable. GitHub's docs say scheduled runs "can be delayed during periods of high loads" and "some queued jobs may be dropped". On 26–27 Oct it started only 4 of the 20-plus runs due.
 So a tiny Cloudflare Worker in `alarm/` starts the jobs instead, and GitHub's schedules stay as a backup:
-- **Publish due posts** every 10 minutes from 06:08 to 22:58.
+- **Publish due posts** every 10 minutes from 06:01 to 22:51.
 - **Read post results and product prices** on Saturdays at 06:06 and 08:06, before the 09:33 draft run, which needs its fresh product snapshot.
 
 Cloudflare's free plan allows 5 of these schedules per account; this uses 2.
@@ -141,7 +143,7 @@ Cloudflare's free plan allows 5 of these schedules per account; this uses 2.
    npx wrangler deploy
    npx wrangler secret put GITHUB_TOKEN  # paste the token when it asks
    ```
-3. **Check it.** After the next :08, :18, :28 … mark, Actions > **Publish due posts** shows a new run with the event `workflow_dispatch`. The Worker's logs in Cloudflare (Workers & Pages > intimova-alarm) say "Started the publisher".
+3. **Check it.** After the next :01, :11, :21 … mark, Actions > **Publish due posts** shows a new run with the event `workflow_dispatch`. The Worker's logs in Cloudflare (Workers & Pages > intimova-alarm) say "Started the publisher".
 
 If the token expires, make a new one and run `npx wrangler secret put GITHUB_TOKEN` again.
 

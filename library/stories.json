@@ -1,81 +1,360 @@
 {
-  "_about": "Wednesday: story reels of up to 3 minutes (about 500–550 words, under 179.5 s), one part a week. Each series has 4 parts. The beats are a plan, not a script: the Saturday run writes the lines, following CLAUDE.md and the playbook's craft rules. Rules for every series: every character is a named adult with a stated age of 25 or over; wanting is always mutual; nothing explicit, no anatomical or crude words; local, specific senses; every part ends on a pull; and by the last part SHE CHOOSES HERSELF. Each part sets the score cues pulse, turn, heat and peak; lights and dread only where there is a real interruption. Names already used in earlier stories, so don't reuse them for new characters: Lily, Chris, Chioma, Emeka, Ada, Nneka, Funmi. Series run in the order listed; a series' part 1 starts the Wednesday after the previous series' part 4.",
+  "_about": "Wednesday: story reels of 2 min 53 s to 3 minutes (173 to 179.5 s, about 590–610 words; 173 s is Grade's floor), one part a week. Each series has 4 parts. The beats are a plan, not a script: the Saturday run writes the lines, following CLAUDE.md and the playbook's craft rules. Rules for every series: every character is a named adult with a stated age of 25 or over; wanting is always mutual; nothing explicit, no anatomical or crude words; local, specific senses; every part ends on a pull; and by the last part SHE CHOOSES HERSELF. Each part sets the score cues pulse, turn, heat and peak; lights and dread only where there is a real interruption. Names already used in earlier stories, so don't reuse them for new characters: Lily, Chris, Chioma, Emeka, Ada, Nneka, Funmi, Femi, Temi, Seun, Bolanle, Ronke, Bayo, Hauwa, Nkem, Yetunde, Ike, Zainab, Chidi, Amara, Tanko, Bisi, Kunle, Ifeoma, Obinna, Kemi, Dayo, Toke, Kolawole, Funke, Tobi. Series run in the order listed; a series' part 1 starts the Wednesday after the previous series' part 4.",
   "series": [
     {
-      "id": "lily", "title": "The 2am Call", "name": "Lily", "audience": "Hurt or single (married but lonely)",
+      "id": "lily",
+      "title": "The 2am Call",
+      "name": "Lily",
+      "audience": "Hurt or single (married but lonely)",
       "cast": "Lily, 31, married seven years. Her husband Femi, 36. Chris, 31, her friend from university.",
       "setting": "Abuja: a flat in Gwarinpa, NEPA cuts, harmattan coming in.",
       "parts": [
-        { "n": 1, "status": "used", "used_in": "2026-10-28-lily-part1", "beats": "Anniversary forgotten. 2am call to Chris. The red dress, the zip. The light comes back and the bedroom door she closed is open." },
-        { "n": 2, "status": "ready", "title": "The open door", "beats": "Femi is in the doorway, half asleep: 'Who are you talking to?' 'My sister.' He goes back to bed and doesn't ask again, and that hurts more than if he had. Morning: he eats, scrolls, leaves. Chris texts: 'I'm in Abuja on the 14th.' Cliffhanger: her thumb over the keyboard. She types one word: 'Where?'", "cue_notes": "pulse at the text; turn on 'that hurt more'; dread on 'Where?'" },
-        { "n": 3, "status": "ready", "title": "Room 714", "beats": "A hotel lounge in the Central Business District, 8pm. She wears the red dress. Chris is warm and charming, but he talks only about the girl she was at 20. She realises he wants a memory, and she wants to be seen as she is now. He slides a key card across the table: 'Room 714. No pressure.' Cliffhanger: she stands up, and we don't see which way she walks.", "cue_notes": "heat through the conversation; turn on the realisation; peak as she stands." },
-        { "n": 4, "status": "ready", "title": "Red", "beats": "She walks out to the car park and drives home with the windows down. Not Chris. But not the old silence either. She wakes Femi and tells him the truth he hasn't asked for: 'I have been lonely in this house for three years.' He listens, really listens, for the first time. The next weekend she books a room for herself, alone, in the red dress, and orders her own dinner. Last line: for the first time in years, she was the one looking. She chooses herself.", "cue_notes": "turn on 'I have been lonely'; peak on her alone in the room, by choice." }
+        {
+          "n": 1,
+          "status": "used",
+          "used_in": "2026-10-28-lily-part1",
+          "beats": "Anniversary forgotten. 2am call to Chris. The red dress, the zip. The light comes back and the bedroom door she closed is open."
+        },
+        {
+          "n": 2,
+          "status": "ready",
+          "title": "The open door",
+          "beats": "Femi is in the doorway, half asleep: 'Who are you talking to?' 'My sister.' He goes back to bed and doesn't ask again, and that hurts more than if he had. Morning: he eats, scrolls, leaves. Chris texts: 'I'm in Abuja on the 14th.' Cliffhanger: her thumb over the keyboard. She types one word: 'Where?'",
+          "cue_notes": "pulse at the text; turn on 'that hurt more'; dread on 'Where?'"
+        },
+        {
+          "n": 3,
+          "status": "ready",
+          "title": "Room 714",
+          "beats": "A hotel lounge in the Central Business District, 8pm. She wears the red dress. Chris is warm and charming, but he talks only about the girl she was at 20. She realises he wants a memory, and she wants to be seen as she is now. He slides a key card across the table: 'Room 714. No pressure.' Cliffhanger: she stands up, and we don't see which way she walks.",
+          "cue_notes": "heat through the conversation; turn on the realisation; peak as she stands."
+        },
+        {
+          "n": 4,
+          "status": "ready",
+          "title": "Red",
+          "beats": "She walks out to the car park and drives home with the windows down. Not Chris. But not the old silence either. She wakes Femi and tells him the truth he hasn't asked for: 'I have been lonely in this house for three years.' He listens, really listens, for the first time. The next weekend she books a room for herself, alone, in the red dress, and orders her own dinner. Last line: for the first time in years, she was the one looking. She chooses herself.",
+          "cue_notes": "turn on 'I have been lonely'; peak on her alone in the room, by choice."
+        }
       ]
     },
     {
-      "id": "amara", "title": "Harmattan", "name": "Amara", "audience": "Hurt or single (divorced, starting again)",
+      "id": "temi",
+      "title": "The Parcel",
+      "name": "Temi",
+      "audience": "Young adults hiding it (the hidden toy)",
+      "cast": "Temi, 26, a product designer sharing a flat in Yaba. Seun, 28, a sound engineer she's been seeing for a month. Aunty Bolanle, 54, her late mother's sister, visiting from Ibadan.",
+      "setting": "Lagos: Third Mainland Bridge at night, a dispatch rider at the gate, the flat's thin walls, Aunty's suitcase in the corridor.",
+      "parts": [
+        {
+          "n": 1,
+          "status": "ready",
+          "title": "The order",
+          "beats": "After another night of pretending with Seun, Temi orders her first toy at 1am, heart racing as if she'd stolen something. Next evening the dispatch rider calls: he's at the gate. So is Aunty Bolanle, a day early, with her suitcase. Cliffhanger: the parcel and the aunt reach the door at the same time.",
+          "cue_notes": "pulse at the 1am order; turn on 'as if she'd stolen something'; heat as the rider calls; peak at the gate; dread on the last line."
+        },
+        {
+          "n": 2,
+          "status": "ready",
+          "title": "The box",
+          "beats": "Aunty Bolanle carries the parcel in herself. Temi says it's a shoulder massager, and spends dinner sure her aunt knows. Seun texts: 'Tonight?' Temi realises she has never once told a man what she likes, because she doesn't know herself. Cliffhanger: alone at last, she opens the box.",
+          "cue_notes": "turn on 'because she doesn't know herself'; heat through Seun's texts; peak as she opens the box."
+        },
+        {
+          "n": 3,
+          "status": "ready",
+          "title": "Learning",
+          "beats": "In private, unhurried, Temi learns what she likes and stops apologising for wanting it (words carry it; nothing explicit). The next time Seun reaches for her, she says what she wants out loud for the first time. He listens, and slows down. Fade to black. Cliffhanger: in the morning, the box is gone from her drawer.",
+          "cue_notes": "heat as she learns; turn when she first speaks; peak before the fade; lights or dread on the empty drawer."
+        },
+        {
+          "n": 4,
+          "status": "ready",
+          "title": "Bolanle",
+          "beats": "Her aunt has it, and gives it back with a story: at 26 she was told wanting was a sin, and she believed it for thirty years. 'Don't hide in your own house.' Temi stops hiding: from Seun, from herself, from shame. She chooses herself.",
+          "cue_notes": "turn on Aunty's confession; peak on 'Don't hide in your own house'."
+        }
+      ]
+    },
+    {
+      "id": "ronke",
+      "title": "Delete for Everyone",
+      "name": "Ronke",
+      "audience": "Young adults hiding it (faking it)",
+      "cast": "Ronke, 28, a pharmacist, engaged to Bayo, 30, a civil engineer. Her friends in the group chat: Hauwa, 27, Nkem, 29, and Yetunde, 28.",
+      "setting": "Abuja: Wuse 2 lounges, a WhatsApp group called 'Owambe Committee', wedding prep at the fabric market.",
+      "parts": [
+        {
+          "n": 1,
+          "status": "ready",
+          "title": "Midnight",
+          "beats": "After a perfect evening with Bayo, Ronke lies awake and types into the group chat: 'Is it normal that I've never... with him? Not once in three years?' She taps 'delete for everyone' a second too late: two blue ticks. Cliffhanger: Hauwa is typing.",
+          "cue_notes": "pulse as she types; turn on the blue ticks; dread on 'Hauwa is typing'."
+        },
+        {
+          "n": 2,
+          "status": "ready",
+          "title": "The replies",
+          "beats": "One by one, the friends confess: Hauwa fakes it, Nkem only ever gets there alone, Yetunde has never told anyone anything. They laugh until they cry, then go quiet. Cliffhanger: Nkem's message: 'Have you told Bayo?'",
+          "cue_notes": "heat through the confessions; turn on the quiet; peak on Nkem's question."
+        },
+        {
+          "n": 3,
+          "status": "ready",
+          "title": "Telling him",
+          "beats": "Ronke tells Bayo on the balcony, rehearsed and still shaking. He's hurt first ('Three years?'), then quiet, then asks the question nobody ever asked her: 'What would you like?' Slow, charged, fade to black. Cliffhanger: she's still not sure he's okay.",
+          "cue_notes": "turn on 'What would you like?'; heat and peak before the fade."
+        },
+        {
+          "n": 4,
+          "status": "ready",
+          "title": "Not me",
+          "beats": "Weeks later, Bayo has learned to ask and Ronke has learned to answer. She posts in the group chat: 'It was never me. Nobody taught us to ask.' She chooses herself, before the wedding and not after it.",
+          "cue_notes": "turn on 'It was never me'; peak on her choosing herself."
+        }
+      ]
+    },
+    {
+      "id": "ike",
+      "title": "Two Minutes",
+      "name": "Ike",
+      "audience": "Young men hiding it (lasting), and the women who love them",
+      "cast": "Ike, 27, a bank analyst. His girlfriend Zainab, 26, a radio presenter. His friend Chidi, 28.",
+      "setting": "Enugu: evening traffic, suya by the roadside, the boys' banter, Zainab's voice on the morning show.",
+      "rule_note": "Grade approved (30 Oct 2026): this is mainly Ike's story, and the 'she chooses herself' rule is carried by Zainab's last line in part 4.",
+      "parts": [
+        {
+          "n": 1,
+          "status": "ready",
+          "title": "The night",
+          "beats": "The first night with Zainab ends almost before it starts. Ike makes a joke, she laughs kindly, and he lies awake searching his phone, sure he's broken. Cliffhanger: he starts avoiding her calls.",
+          "cue_notes": "pulse at the first kiss; heat; turn on 'sure he's broken'; dread on the ignored call."
+        },
+        {
+          "n": 2,
+          "status": "ready",
+          "title": "The boys",
+          "beats": "At the suya spot, the boys brag about all-night stamina. Ike laughs along. Walking home, Chidi admits, quietly, that it happened to him for months. Cliffhanger: Zainab, live on air the next morning: 'Ladies, when a man goes quiet on you, what does it mean?'",
+          "cue_notes": "turn on Chidi's admission; peak on Zainab's voice on air."
+        },
+        {
+          "n": 3,
+          "status": "ready",
+          "title": "The truth",
+          "beats": "Zainab turns up at his door: 'Did I do something?' He tells her. She's relieved: she thought he'd lost interest. 'It's not a race, Ike.' They take it slowly, and the slowness is the heat. Fade to black. Cliffhanger: he books a doctor anyway.",
+          "cue_notes": "turn on 'It's not a race'; heat and peak in the slowness."
+        },
+        {
+          "n": 4,
+          "status": "ready",
+          "title": "Present, not performing",
+          "beats": "The doctor tells him it's common and can be learned. Ike stops performing and starts paying attention. The last line is Zainab's: she says what she wants without waiting to be asked. She chooses herself, and he's glad she does.",
+          "cue_notes": "turn at the doctor's words; peak on Zainab's last line."
+        }
+      ]
+    },
+    {
+      "id": "amara",
+      "title": "Harmattan",
+      "name": "Amara",
+      "audience": "Hurt or single (divorced, starting again)",
       "cast": "Amara, 38, an accountant, divorced last year. Tanko, 41, the carpenter building her new bookshelves.",
       "setting": "Jos: cold harmattan mornings, a new flat with bare walls, tea on the balcony, the smell of fresh-cut wood.",
       "parts": [
-        { "n": 1, "status": "ready", "title": "Bare walls", "beats": "First night alone in the new flat. Silence where an argument used to be. She realises she doesn't know what she likes anymore: not her food, not her music, not her body. Tanko arrives to measure the wall. His hands, the tape measure, the way he asks 'Where do you want it?' and waits for her answer. Cliffhanger: nobody has asked her that in eleven years." },
-        { "n": 2, "status": "ready", "title": "Sawdust", "beats": "Three days of building. Tea for him, questions from him. She starts making choices again: a colour, a song, a dress. One evening the power goes and they sit in the dark talking. He doesn't reach for her. She notices she wants him to. Cliffhanger: she says his name in the dark." },
-        { "n": 3, "status": "ready", "title": "The last shelf", "beats": "The shelves are finished. He lingers. The charged almost: his hand beside hers on the new wood, a breath, a kiss she starts. She pulls back, not from him but to catch up with herself: 'I want this. I want to want it slowly.' He smiles: 'Then slowly.' Cliffhanger: he leaves his number written in pencil on the underside of a shelf." },
-        { "n": 4, "status": "ready", "title": "Her own company", "beats": "A month on. She fills the shelves with her own books. She takes herself out to dinner. She learns what she likes, alone and unhurried, and is no longer afraid of an empty flat. Only then does she call the number under the shelf, on her terms. She chooses herself, and then chooses who gets to join her." }
+        {
+          "n": 1,
+          "status": "ready",
+          "title": "Bare walls",
+          "beats": "First night alone in the new flat. Silence where an argument used to be. She realises she doesn't know what she likes anymore: not her food, not her music, not her body. Tanko arrives to measure the wall. His hands, the tape measure, the way he asks 'Where do you want it?' and waits for her answer. Cliffhanger: nobody has asked her that in eleven years."
+        },
+        {
+          "n": 2,
+          "status": "ready",
+          "title": "Sawdust",
+          "beats": "Three days of building. Tea for him, questions from him. She starts making choices again: a colour, a song, a dress. One evening the power goes and they sit in the dark talking. He doesn't reach for her. She notices she wants him to. Cliffhanger: she says his name in the dark."
+        },
+        {
+          "n": 3,
+          "status": "ready",
+          "title": "The last shelf",
+          "beats": "The shelves are finished. He lingers. The charged almost: his hand beside hers on the new wood, a breath, a kiss she starts. She pulls back, not from him but to catch up with herself: 'I want this. I want to want it slowly.' He smiles: 'Then slowly.' Cliffhanger: he leaves his number written in pencil on the underside of a shelf."
+        },
+        {
+          "n": 4,
+          "status": "ready",
+          "title": "Her own company",
+          "beats": "A month on. She fills the shelves with her own books. She takes herself out to dinner. She learns what she likes, alone and unhurried, and is no longer afraid of an empty flat. Only then does she call the number under the shelf, on her terms. She chooses herself, and then chooses who gets to join her."
+        }
       ]
     },
     {
-      "id": "bisi", "title": "Second Honeymoon", "name": "Bisi", "audience": "Couples where intimacy has faded",
+      "id": "bisi",
+      "title": "Second Honeymoon",
+      "name": "Bisi",
+      "audience": "Couples where intimacy has faded",
       "cast": "Bisi, 39, and her husband Kunle, 42, married eleven years, with twin boys aged 8.",
       "setting": "Lagos: Third Mainland traffic, school runs, a cousin's wedding, and a weekend in a beach hotel in Epe.",
       "parts": [
-        { "n": 1, "status": "ready", "title": "Roommates", "beats": "They are a good team: lunches, fees, generator fuel. They haven't kissed properly in a year. At the cousin's wedding Kunle watches her dance and she catches him looking, the old look. Cliffhanger: in the car he says, 'My mother will keep the boys. Let's go somewhere.'" },
-        { "n": 2, "status": "ready", "title": "Epe", "beats": "The hotel room is too quiet. They don't know how to start. Awkward jokes. Both on their phones. Bisi finally says it: 'I don't know how to want you when I'm this tired.' He doesn't take it as rejection. Cliffhanger: 'Then tell me what you do want. Even if it's sleep.'" },
-        { "n": 3, "status": "ready", "title": "Slowly, then", "beats": "She sleeps, deeply, for the first time in months. She wakes to the sea and to him reading beside her. Nothing is expected, so she reaches for him. Desire arriving after closeness, not before. Slow, tender, fade to black. Cliffhanger: back home, the twins burst in at 6am and they laugh. Will it last?" },
-        { "n": 4, "status": "ready", "title": "The Thursday rule", "beats": "Back in Lagos they make a small rule: Thursday nights are theirs, phones off. Some Thursdays they only talk. Bisi starts saying what she wants out loud, in bed and out of it. She chooses herself inside her marriage, not instead of it." }
+        {
+          "n": 1,
+          "status": "ready",
+          "title": "Roommates",
+          "beats": "They are a good team: lunches, fees, generator fuel. They haven't kissed properly in a year. At the cousin's wedding Kunle watches her dance and she catches him looking, the old look. Cliffhanger: in the car he says, 'My mother will keep the boys. Let's go somewhere.'"
+        },
+        {
+          "n": 2,
+          "status": "ready",
+          "title": "Epe",
+          "beats": "The hotel room is too quiet. They don't know how to start. Awkward jokes. Both on their phones. Bisi finally says it: 'I don't know how to want you when I'm this tired.' He doesn't take it as rejection. Cliffhanger: 'Then tell me what you do want. Even if it's sleep.'"
+        },
+        {
+          "n": 3,
+          "status": "ready",
+          "title": "Slowly, then",
+          "beats": "She sleeps, deeply, for the first time in months. She wakes to the sea and to him reading beside her. Nothing is expected, so she reaches for him. Desire arriving after closeness, not before. Slow, tender, fade to black. Cliffhanger: back home, the twins burst in at 6am and they laugh. Will it last?"
+        },
+        {
+          "n": 4,
+          "status": "ready",
+          "title": "The Thursday rule",
+          "beats": "Back in Lagos they make a small rule: Thursday nights are theirs, phones off. Some Thursdays they only talk. Bisi starts saying what she wants out loud, in bed and out of it. She chooses herself inside her marriage, not instead of it."
+        }
       ]
     },
     {
-      "id": "ifeoma", "title": "Twenty-Eight Days", "name": "Ifeoma", "audience": "Hurt or single, and couples (long distance)",
+      "id": "ifeoma",
+      "title": "Twenty-Eight Days",
+      "name": "Ifeoma",
+      "audience": "Hurt or single, and couples (long distance)",
       "cast": "Ifeoma, 33, a pharmacist. Her husband Obinna, 35, an offshore engineer on 28-day rotations.",
       "setting": "Port Harcourt: rain on the zinc, the pharmacy counter, voice notes that arrive at 3am from the rig.",
       "parts": [
-        { "n": 1, "status": "ready", "title": "Day one", "beats": "The morning he flies out. The bed is too big. She has spent five years waiting for his 28 days at home, and she is tired of living on a countdown. Cliffhanger: a 3am voice note: 'Tell me what you're wearing.' She laughs, then stops laughing." },
-        { "n": 2, "status": "ready", "title": "Voice notes", "beats": "Their voice notes get braver. Words carry it: what they miss, what they'd do, slow and suggestive, never explicit. But when the signal drops she realises her whole wanting depends on his signal. Cliffhanger: she buys herself something from a discreet shop and hides the parcel from no one." },
-        { "n": 3, "status": "ready", "title": "Her side of the bed", "beats": "She learns her own pleasure without waiting for him, and the house stops feeling like a waiting room. She tells him in a voice note. Silence for an hour. Cliffhanger: his reply: 'Day 14. I'm coming home early.'" },
-        { "n": 4, "status": "ready", "title": "Day twenty-eight", "beats": "He comes home and she leads: she knows what she likes now, and she says it. He is not threatened; he is delighted. When he flies out again, she isn't counting days. She chooses herself, and their marriage is better for it." }
+        {
+          "n": 1,
+          "status": "ready",
+          "title": "Day one",
+          "beats": "The morning he flies out. The bed is too big. She has spent five years waiting for his 28 days at home, and she is tired of living on a countdown. Cliffhanger: a 3am voice note: 'Tell me what you're wearing.' She laughs, then stops laughing."
+        },
+        {
+          "n": 2,
+          "status": "ready",
+          "title": "Voice notes",
+          "beats": "Their voice notes get braver. Words carry it: what they miss, what they'd do, slow and suggestive, never explicit. But when the signal drops she realises her whole wanting depends on his signal. Cliffhanger: she buys herself something from a discreet shop and hides the parcel from no one."
+        },
+        {
+          "n": 3,
+          "status": "ready",
+          "title": "Her side of the bed",
+          "beats": "She learns her own pleasure without waiting for him, and the house stops feeling like a waiting room. She tells him in a voice note. Silence for an hour. Cliffhanger: his reply: 'Day 14. I'm coming home early.'"
+        },
+        {
+          "n": 4,
+          "status": "ready",
+          "title": "Day twenty-eight",
+          "beats": "He comes home and she leads: she knows what she likes now, and she says it. He is not threatened; he is delighted. When he flies out again, she isn't counting days. She chooses herself, and their marriage is better for it."
+        }
       ]
     },
     {
-      "id": "kemi", "title": "The Wedding Planner", "name": "Kemi", "audience": "Hurt or single",
+      "id": "kemi",
+      "title": "The Wedding Planner",
+      "name": "Kemi",
+      "audience": "Hurt or single",
       "cast": "Kemi, 33, runs a wedding-planning business. Dayo, 35, the groom's older brother at a client's wedding.",
       "setting": "Lagos: Lekki event halls, aso-ebi fabric samples, 5am setups, the hum of a generator behind the DJ.",
       "parts": [
-        { "n": 1, "status": "ready", "title": "Everyone else's day", "beats": "She has planned 112 weddings and not one date for herself in two years. At a Lekki reception Dayo finds her hiding in the store room with a plate of jollof: 'Who plans your Saturdays?' Cliffhanger: nobody, and she can't answer him." },
-        { "n": 2, "status": "ready", "title": "Aso-ebi", "beats": "Dayo keeps turning up: the cake tasting, the fabric market, the rehearsal. He makes her laugh until she forgets the clipboard. A slow dance after the guests leave, the hall half-lit. Cliffhanger: he asks her to come to Accra with him next weekend." },
-        { "n": 3, "status": "ready", "title": "Accra", "beats": "She goes. It's heady and warm and she enjoys every minute of being wanted. But on the last night he plans her whole next year for her: move here, give up the business, he'll take care of her. Cliffhanger: she realises she's about to plan herself out of her own life again." },
-        { "n": 4, "status": "ready", "title": "Her own day", "beats": "She tells him: 'I don't need to be taken care of. I need to be chosen as I am.' She flies home, books a day for herself, the spa, a new dress, nobody's schedule but hers, and takes on only the clients she wants. If Dayo can love that woman, he can call. She chooses herself." }
+        {
+          "n": 1,
+          "status": "ready",
+          "title": "Everyone else's day",
+          "beats": "She has planned 112 weddings and not one date for herself in two years. At a Lekki reception Dayo finds her hiding in the store room with a plate of jollof: 'Who plans your Saturdays?' Cliffhanger: nobody, and she can't answer him."
+        },
+        {
+          "n": 2,
+          "status": "ready",
+          "title": "Aso-ebi",
+          "beats": "Dayo keeps turning up: the cake tasting, the fabric market, the rehearsal. He makes her laugh until she forgets the clipboard. A slow dance after the guests leave, the hall half-lit. Cliffhanger: he asks her to come to Accra with him next weekend."
+        },
+        {
+          "n": 3,
+          "status": "ready",
+          "title": "Accra",
+          "beats": "She goes. It's heady and warm and she enjoys every minute of being wanted. But on the last night he plans her whole next year for her: move here, give up the business, he'll take care of her. Cliffhanger: she realises she's about to plan herself out of her own life again."
+        },
+        {
+          "n": 4,
+          "status": "ready",
+          "title": "Her own day",
+          "beats": "She tells him: 'I don't need to be taken care of. I need to be chosen as I am.' She flies home, books a day for herself, the spa, a new dress, nobody's schedule but hers, and takes on only the clients she wants. If Dayo can love that woman, he can call. She chooses herself."
+        }
       ]
     },
     {
-      "id": "toke", "title": "Indigo", "name": "Toke", "audience": "Hurt or single (widowed, over 40)",
+      "id": "toke",
+      "title": "Indigo",
+      "name": "Toke",
+      "audience": "Hurt or single (widowed, over 40)",
       "cast": "Toke, 47, widowed five years, runs an adire fabric shop. Kolawole, 52, a retired architect who comes to buy cloth.",
       "setting": "Abeokuta: indigo dye vats, the market's noise, a house that's been quiet since her husband died.",
       "parts": [
-        { "n": 1, "status": "ready", "title": "Five years", "beats": "Everyone has decided her life is finished except the part about her children and her shop. Kolawole comes in for indigo cloth and stays an hour asking how the patterns are made. Cliffhanger: at night she touches her own wrist where his fingers brushed hers and feels guilty for feeling anything." },
-        { "n": 2, "status": "ready", "title": "The dye", "beats": "He comes back to learn to tie and dye. Her hands guide his. Laughter she'd forgotten. Her daughter teases her on the phone; her sister disapproves. Cliffhanger: Kolawole asks her to dinner, and she says she'll think about it, and thinks about nothing else." },
-        { "n": 3, "status": "ready", "title": "Permission", "beats": "Dinner. She tells him she hasn't been touched in five years and doesn't know if she's allowed to want to be. He says it isn't his permission she needs. A slow kiss at her gate, under the security light. Cliffhanger: she invites him in, then asks him to wait while she decides." },
-        { "n": 4, "status": "ready", "title": "Blue", "beats": "She decides for herself, not for her sister or the market women. Whatever happens with Kolawole, she wears colour again, opens the shop late on Sundays to sit in her own garden, and lets herself want. Desire doesn't retire. She chooses herself." }
+        {
+          "n": 1,
+          "status": "ready",
+          "title": "Five years",
+          "beats": "Everyone has decided her life is finished except the part about her children and her shop. Kolawole comes in for indigo cloth and stays an hour asking how the patterns are made. Cliffhanger: at night she touches her own wrist where his fingers brushed hers and feels guilty for feeling anything."
+        },
+        {
+          "n": 2,
+          "status": "ready",
+          "title": "The dye",
+          "beats": "He comes back to learn to tie and dye. Her hands guide his. Laughter she'd forgotten. Her daughter teases her on the phone; her sister disapproves. Cliffhanger: Kolawole asks her to dinner, and she says she'll think about it, and thinks about nothing else."
+        },
+        {
+          "n": 3,
+          "status": "ready",
+          "title": "Permission",
+          "beats": "Dinner. She tells him she hasn't been touched in five years and doesn't know if she's allowed to want to be. He says it isn't his permission she needs. A slow kiss at her gate, under the security light. Cliffhanger: she invites him in, then asks him to wait while she decides."
+        },
+        {
+          "n": 4,
+          "status": "ready",
+          "title": "Blue",
+          "beats": "She decides for herself, not for her sister or the market women. Whatever happens with Kolawole, she wears colour again, opens the shop late on Sundays to sit in her own garden, and lets herself want. Desire doesn't retire. She chooses herself."
+        }
       ]
     },
     {
-      "id": "funke", "title": "The Question", "name": "Funke", "audience": "Men, and couples",
+      "id": "funke",
+      "title": "The Question",
+      "name": "Funke",
+      "audience": "Men, and couples",
       "cast": "Funke, 34, a nurse on night shifts, and her husband Tobi, 37, who tells the story. Married six years.",
       "setting": "Ibadan: night shifts, the hospital's smell on her uniform, Tobi's mechanic workshop, Sunday rice.",
       "parts": [
-        { "n": 1, "status": "ready", "title": "His side", "beats": "Told by Tobi. He thinks their sex life is fine. Then he overhears Funke laughing with her friend on the phone: 'Fine is a strong word.' Cliffhanger: he realises he has never once asked her what she likes." },
-        { "n": 2, "status": "ready", "title": "Asking", "beats": "He tries to ask and it comes out wrong, defensive, hurt. She goes quiet. He tries again the next night, gentler: 'Teach me.' Cliffhanger: she looks at him for a long time and says, 'Are you sure you want to hear it?'" },
-        { "n": 3, "status": "ready", "title": "Listening", "beats": "She tells him, slowly, with words she has never said out loud. He listens without making it about himself. Closeness, then desire, tender and charged, fade to black. Cliffhanger: afterwards she cries, and he's frightened he did something wrong. She says, 'No. Nobody ever asked.'" },
-        { "n": 4, "status": "ready", "title": "Her answer", "beats": "Weeks later, she's the one asking for what she wants without waiting to be asked. Tobi, telling the story, admits the best thing he ever did was be quiet. The last line is hers. She chooses herself, out loud." }
+        {
+          "n": 1,
+          "status": "ready",
+          "title": "His side",
+          "beats": "Told by Tobi. He thinks their sex life is fine. Then he overhears Funke laughing with her friend on the phone: 'Fine is a strong word.' Cliffhanger: he realises he has never once asked her what she likes."
+        },
+        {
+          "n": 2,
+          "status": "ready",
+          "title": "Asking",
+          "beats": "He tries to ask and it comes out wrong, defensive, hurt. She goes quiet. He tries again the next night, gentler: 'Teach me.' Cliffhanger: she looks at him for a long time and says, 'Are you sure you want to hear it?'"
+        },
+        {
+          "n": 3,
+          "status": "ready",
+          "title": "Listening",
+          "beats": "She tells him, slowly, with words she has never said out loud. He listens without making it about himself. Closeness, then desire, tender and charged, fade to black. Cliffhanger: afterwards she cries, and he's frightened he did something wrong. She says, 'No. Nobody ever asked.'"
+        },
+        {
+          "n": 4,
+          "status": "ready",
+          "title": "Her answer",
+          "beats": "Weeks later, she's the one asking for what she wants without waiting to be asked. Tobi, telling the story, admits the best thing he ever did was be quiet. The last line is hers. She chooses herself, out loud."
+        }
       ]
     }
   ]

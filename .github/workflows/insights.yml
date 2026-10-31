@@ -29,6 +29,7 @@ jobs:
         env:
           META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN }}
           META_IG_TOKEN: ${{ secrets.META_IG_TOKEN }}
+          META_INSIGHTS_TOKEN: ${{ secrets.META_INSIGHTS_TOKEN }}   # results only; posting keeps META_PAGE_TOKEN
         run: node publisher/insights.mjs
       - name: Save product prices, product pages and articles
         # Claude's cloud runs can't reach intimova.ng, so the Saturday draft reads these copies instead.

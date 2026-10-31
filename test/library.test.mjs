@@ -32,20 +32,25 @@ test('the real library has no broken references or duplicates', () => {
   assert.deepEqual(validateLibrary(loadLibrary(ROOT)), []);
 });
 
-test('runway skips used items, continues the story, alternates Fridays and rests a product for 4 weeks', () => {
+test('runway skips used items, continues the story, fills all seven days and rests a product for 4 weeks', () => {
   const root = makeRoot({ '2026-11-02': {
-    '1-mon': post({ id: 'a', library: 'orgasm-gap' }),
+    '1-mon': post({ id: 'a', library: 'only-one-who-touches' }),
     '3-wed': post({ id: 'b', library: 'lily-2' }),
     '5-fri': post({ id: 'c', library: 'q-choosing-yourself' }),
     // Uses the first product item, but features the Wand, so the next item in order (wand-guide) must rest.
     '7-sun': post({ id: 'd', publish_at: '2026-11-08T19:30:00+01:00', library: 'rose-air-pulse-guide', product: { slug: 'the-wand', price: 20000 } }),
   } });
   const lib = loadLibrary(root);
-  assert.equal(usedIds(root, lib).get('orgasm-gap'), 'a');
+  assert.equal(usedIds(root, lib).get('only-one-who-touches'), 'a');
   const rows = Object.fromEntries(runway(root, lib, { weekStart: new Date('2026-11-09T00:00:00+01:00') }).map(r => [r.key, r]));
-  assert.equal(rows.myths.next.id, 'intercourse-is-enough');      // orgasm-gap is used
+  assert.equal(rows.myths.next.id, 'orgasm-gap');                 // only-one-who-touches is used
   assert.equal(rows.stories.next.id, 'lily-3');                     // the series continues
-  assert.equal(rows['quotes-tips'].next.kind, 'tip');               // last Friday was a quote
+  assert.deepEqual(runway(root, lib).map(r => r.day), ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']);
+  assert.equal(rows.asks.next.id, 'a-not-from-sex-alone');          // Thursday: Ask Intimova
+  assert.equal(rows.quotes.next.kind, 'quote');
+  assert.notEqual(rows.quotes.next.id, 'q-choosing-yourself');      // used on Friday
+  assert.equal(rows.tips.next.kind, 'tip');                         // Saturday: tips only
+  assert.equal(rows.tips.next.id, 't-ya-first-toy-no-guilt');       // tips alternate young adults and couples, in library order
   assert.equal(rows.products.next.id, 'bullet-classic-guide');      // wand-guide skipped: the Wand posted 1 day earlier
   assert.equal(rows.products.next.season, undefined);               // no seasonal item in November
 });
@@ -62,9 +67,10 @@ test('runway offers a seasonal product in its window, and skips out-of-stock pro
 });
 
 test('reads price and stock from a product page, and spots a changed price', () => {
-  const html = '<script type="application/ld+json">{"@type":"WebSite"}</script><script type="application/ld+json">{"@type":"Product","name":"The Bullet","offers":{"price":15000,"priceCurrency":"NGN","availability":"https://schema.org/InStock"}}</script>';
+  const html = '<script type="application/ld+json">{"@type":"WebSite"}</script><script type="application/ld+json">{"@type":"Product","name":"The Bullet","image":["https://cdn.example/a.jpg","https://cdn.example/b.jpg"],"offers":{"price":15000,"priceCurrency":"NGN","availability":"https://schema.org/InStock"}}</script>';
   const p = productFromHtml(html);
   assert.deepEqual([p.name, p.price, p.inStock], ['The Bullet', 15000, true]);
+  assert.deepEqual(p.images, ['https://cdn.example/a.jpg', 'https://cdn.example/b.jpg']);   // only this product's own photos
   assert.equal(productProblem({ price: 15000 }, p), null);
   assert.match(productProblem({ price: 12000 }, p), /costs ₦15,000 on the shop, but the post says ₦12,000/);
   assert.match(productProblem({ price: 15000 }, { ...p, inStock: false, availability: 'OutOfStock' }), /OutOfStock/);
@@ -150,4 +156,21 @@ test('saves a page as readable text without scripts, navigation or markup', asyn
   const { pageText } = await import('../engine/site-snapshot.mjs');
   const html = '<html><nav>Shop Learn</nav><main><h1>The Bullet</h1><script>var x=1</script><p>Care: wipe clean &amp; store dry.</p><p>&#8358;15,000</p></main><footer>© Intimova</footer></html>';
   assert.equal(pageText(html), 'The Bullet\nCare: wipe clean & store dry.\n₦15,000');
+});
+
+test('results use the read-only insights token when it is set, and the Page token otherwise', async () => {
+  const root = makeRoot();
+  fs.mkdirSync(path.join(root, 'state'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'state', 'posted.json'), JSON.stringify({
+    car: { instagram: { done: true, id: 'ig1', at: '2026-11-02T18:30:00Z' }, facebook: { done: true, id: 'PAGE1_9', at: '2026-11-02T18:31:00Z' } } }));
+  const mock = await startMock({ publicDir: root });
+  try {
+    const env = { CONTENT_ROOT: root, NOW: '2026-11-07T07:13:00+01:00', GRAPH_BASE: mock.base + '/graph', META_PAGE_TOKEN: 'page-token' };
+    await readInsights(loadConfig({ ...env, META_INSIGHTS_TOKEN: 'insights-token' }), quiet);
+    const tokens = new Set(mock.calls.filter(c => c.path.startsWith('/graph')).map(c => c.query.access_token));
+    assert.deepEqual([...tokens], ['insights-token']);
+    mock.calls.length = 0;
+    await readInsights(loadConfig(env), quiet);
+    assert.deepEqual([...new Set(mock.calls.filter(c => c.path.startsWith('/graph')).map(c => c.query.access_token))], ['page-token']);
+  } finally { await mock.close(); }
 });

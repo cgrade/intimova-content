@@ -37,7 +37,7 @@ test('alarm explains a refused or missing token', async () => {
 test('the Saturday cron starts the results job, with no inputs; every other cron starts the publisher', async () => {
   const env = { GITHUB_TOKEN: 'tok', INSIGHTS_CRON: '6 5,7 * * 6' };
   assert.equal(jobFor('6 5,7 * * 6', env).workflow, 'insights.yml');
-  assert.equal(jobFor('8,18,28,38,48,58 5-21 * * *', env).workflow, 'publish.yml');
+  assert.equal(jobFor('1,11,21,31,41,51 5-21 * * *', env).workflow, 'publish.yml');
   const gh = fakeGithub(204);
   const job = jobFor('6 5,7 * * 6', env);
   await startWorkflow(env, job.workflow, job.inputs, gh.fetchImpl);

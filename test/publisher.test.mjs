@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { inspect } from 'node:util';
 import { startMock } from './mock-api.mjs';
 import { run } from '../publisher/publish.mjs';
 import { loadConfig } from '../publisher/lib/config.mjs';
@@ -59,7 +60,8 @@ test('TikTok by hand: one GitHub issue per post with links and caption, never tw
     assert.equal(manual.length, 3);                                   // carousel, reel, single
     assert.ok(manual.every(x => x.ok && /issue #\d+/.test(x.id)));
     assert.equal(mock.calls.filter(c => c.path.startsWith('/tiktok') || c.path.startsWith('/x')).length, 0); // no TikTok or X API calls
-    const issues = mock.calls.filter(c => c.path === '/gh/repos/cgrade/intimova-content/issues');
+    const isTiktok = c => c.path === '/gh/repos/cgrade/intimova-content/issues' && /^Post to TikTok/.test(c.body.title);
+    const issues = mock.calls.filter(isTiktok);
     assert.equal(issues.length, 3);
     const reel = issues.find(i => /reel\.mp4/.test(i.body.body));
     assert.match(reel.body.body, /^@cgrade it's time to post this on TikTok/);
@@ -72,7 +74,11 @@ test('TikTok by hand: one GitHub issue per post with links and caption, never tw
     assert.ok(loadState(root).car.tiktok_manual.notified);
     const again = await run(cfgFor(root, mock, gh), quiet);
     assert.equal(again.filter(x => x.platform === 'tiktok (by hand)').length, 0);
-    assert.equal(mock.calls.filter(c => c.path.endsWith('/issues')).length, 3);
+    assert.equal(mock.calls.filter(isTiktok).length, 3);
+    // The unrendered post raises one "Broken" alert, and the second run doesn't repeat it.
+    const alerts = mock.calls.filter(c => c.path.endsWith('/issues') && !isTiktok(c));
+    assert.deepEqual(alerts.map(c => c.body.title), ["Broken: norender can't post"]);
+    assert.match(alerts[0].body.body, /^@cgrade /);
   } finally { await mock.close(); }
 });
 
@@ -285,4 +291,15 @@ test('validation catches long X posts and missing safety checks', () => {
   const e = validatePost(p);
   assert.ok(e.some(m => m.includes('X post 1')));
   assert.ok(e.some(m => m.includes('safety.explicit')));
+});
+
+test('errors never carry secrets: every token, secret or key in a URL is redacted, in the message and the url field', async () => {
+  const { redact, ApiError } = await import('../publisher/lib/http.mjs');
+  const url = 'https://graph.facebook.com/v26.0/oauth/access_token?grant_type=fb_exchange_token&client_id=123&client_secret=s3cr3t&fb_exchange_token=EAAPxyz&access_token=EAAabc&api_key=k';
+  const r = redact(url);
+  for (const secret of ['s3cr3t', 'EAAPxyz', 'EAAabc', '=k']) assert.ok(!r.includes(secret), `${secret} leaked: ${r}`);
+  assert.match(r, /grant_type=fb_exchange_token&client_id=123&/);       // harmless values stay readable
+  const e = new ApiError('x', { url });
+  assert.ok(!e.url.includes('s3cr3t') && !e.url.includes('EAAPxyz'));
+  assert.ok(!inspect(e).includes('EAAPxyz'));                    // what Node prints when it crashes on this error
 });

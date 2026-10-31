@@ -7,7 +7,8 @@ Everything Intimova's social posts can draw on, planned about six months ahead, 
 | `myths.json` | Mon | Myths, each with the research findings that answer it |
 | `carousels.json` | Tue | Education carousels, one per intimova.ng article (adapted from the old carousel library) |
 | `stories.json` | Wed | Story series, 4 parts each, with the beats for every part |
-| `quotes-tips.json` | Fri | Original quote lines and couples tips, alternating |
+| `asks.json` | Thu | Ask Intimova: questions people are too shy to ask, answered from one intimova.ng article |
+| `quotes-tips.json` | Fri, Sat | Original quote lines (Friday) and tips for young adults and couples (Saturday) |
 | `products.json` | Sun | Product post angles, and the product catalogue with what's on hold |
 | `sources.json` | — | Every research source a post may cite, with safe wording, country and cautions |
 
@@ -34,3 +35,4 @@ Everything Intimova's social posts can draw on, planned about six months ahead, 
 - The same product appears at most once every 4 weeks.
 
 The marketplace (`cgrade/intomova_marketplace`) is only ever read, never changed: products come from its public pages, and sources marked `from_marketplace` mirror its citations library.
+- Product posts can show the product's own photo (a `product` slide), only the one the catalogue approves in `photo`; GitHub saves it every Saturday to `state/site/product-<slug>.jpg`. Products with `photo: false` (the Rose Duo and Rose Flutter for their shapes, and anything on hold) are described, never shown. A photo always sits inside a guide, never alone.

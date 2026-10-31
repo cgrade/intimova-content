@@ -8,10 +8,11 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
 - **Repo** `cgrade/intimova-content` (public). It holds the content, the rendered media in `public/`, the reel and carousel engine in `engine/`, and the publisher in `publisher/`. See `README.md` for setup and the folder map.
 - **Media hosting:** Cloudflare (Workers static assets, via `wrangler.jsonc`) serves `public/` at `MEDIA_BASE_URL`.
 - **Posting:** the GitHub Actions job "Publish due posts" posts whatever is due.
-  - **Main clock:** the Cloudflare Worker `intimova-alarm` (`alarm/`) starts it every 10 minutes from 06:08 to 22:58 Lagos time, through GitHub's workflow-dispatch API, with a fine-grained token (Actions: read and write) stored as the Worker secret `GITHUB_TOKEN`. It also starts "Read post results and product prices" on Saturdays at 06:06 and 08:06. Grade deploys it (README step 8).
+  - **Main clock:** the Cloudflare Worker `intimova-alarm` (`alarm/`) starts it every 10 minutes from 06:01 to 22:51 Lagos time, through GitHub's workflow-dispatch API, with a fine-grained token (Actions: read and write) stored as the Worker secret `GITHUB_TOKEN`. It also starts "Read post results and product prices" on Saturdays at 06:06 and 08:06. Grade deploys it (README step 8).
   - **Backup clock:** GitHub's own schedule at :03, :13 … It is unreliable: on 26–27 Oct GitHub started 4 of the 20-plus runs due.
   - Runs queue one at a time (`concurrency: publisher`) and check out the newest `main`, so a run that waited behind another sees what that run posted and doesn't repost it.
   - A post that no run picks up within 12 hours of its time is skipped (`maxLateHours`).
+  - **Alerts (from 30 Oct):** `publisher/watch.mjs` opens one GitHub issue tagging Grade, once per problem (remembered in `state/alerts.json`), when a post is held, broken, given up on or missed; when the alarm hasn't started a run for 2 hours (checked by GitHub's own scheduled runs, 09:00–23:00 Lagos); when there's no draft or open week pull request by Saturday 13:00; and when the week isn't merged by Sunday 20:00.
   - It posts what's due to **Instagram and Facebook**. Tested live on 26 Oct with `test-hello`; see `state/posted.json` for the IDs.
   - Facebook reels are uploaded as bytes from the checkout, not as a link. On 28 Oct Facebook refused the link to Lily part 1 ("Restricted by robots.txt") because Cloudflare's managed robots.txt on intimova.ng blocks `meta-externalagent`. Facebook photos and Instagram still go by link and worked.
   - An error Meta marks `"retriable": false` gives up after one try instead of three.
@@ -19,7 +20,7 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
   - **X** isn't connected (no credit or app yet). `PLATFORMS` is `instagram,facebook`.
 - **GitHub secrets set:** `META_PAGE_ID`, `IG_USER_ID`, `META_PAGE_TOKEN`. **Variables:** `MEDIA_BASE_URL`, `PLATFORMS`.
   - The Page token was pasted into a chat once, so it should be regenerated after the first live posts, then the secret updated.
-- **Content library (`library/`):** about six months of material for five posts a week (Mon myth vs fact, Tue education carousel, Wed story, Fri quote or tip, Sun product). `npm run runway` shows weeks left per day; see `library/README.md`. From the week of 2 Nov the Saturday run drafts five posts a week from it.
+- **Content library (`library/`):** material for seven posts a week, one a day (Mon myth buster, Tue education carousel, Wed story, Thu Ask Intimova, Fri quote, Sat tip, Sun product); from 30 Oct the first audience is young adults who want pleasure but hide it out of shame. `npm run runway` shows weeks left per day; see `library/README.md`. From the week of 2 Nov the Saturday run drafts five posts a week from it.
 - **Product checks:** product facts come from intimova.ng's public product pages (their schema.org data), read-only. A post with `"product"` is held by the publisher if the live price or stock no longer matches. Nothing in the marketplace repo was changed.
 - **Results and prices:** the "Read post results and product prices" job (Saturdays 07:13 Lagos) saves Instagram and Facebook numbers to `state/insights.json` and product prices and stock to `state/products.json`. Claude's cloud sandbox can't reach intimova.ng, so the Saturday draft uses that snapshot; the publisher's own pre-post check runs on GitHub and reads the live shop. The results part hasn't run against the live Meta API yet: check its first run on 31 Oct.
 - **This week (folder `content/2026-10-26`), all at 19:30 Lagos time:**
@@ -39,11 +40,11 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
   - Hard silence at the reveal.
   - The bass and heartbeat carry harmonics so they play on phone speakers.
   - There are deliberately no 432 Hz or binaural tricks (weak evidence; binaural needs headphones).
-- **Story reels run up to 3 minutes (179.5 s),** from Lily part 2 on; Lily part 1 was 89 s. The engine speeds up a little to fit, or refuses.
+- **Story reels run 2 min 53 s to 3 minutes (173–179.5 s),** from Lily part 2 on; Lily part 1 was 89 s. 173 s is Grade's floor (30 Oct): the renderer refuses anything shorter, before it renders frames. Lily part 2 (596 words, 21 scenes) came to 173.9 s at normal pace, so aim for about 600 words. Above 179.5 s the engine speeds up a little to fit, or refuses.
   - Instagram shows Reels of up to 3 minutes in the Reels tab. Facebook Reels stop at 90 s, so longer reels go to Facebook as a Page video (`/videos`, the file's bytes).
   - A reel over 24 MB can't be served by Cloudflare (25 MiB per file). The renderer marks it `"hosted": false` and lists it in `public/.assetsignore`; Instagram then gets the file's bytes (resumable upload), and the TikTok issue links to the file on GitHub.
   - **Render time:** a 168 s test reel took 44 minutes on Grade's 4-core Mac (13 of them for the text frames, which render in parallel, one browser per worker). Reels over 90 s are encoded straight at CRF 25, which fit that test reel in 17.9 MB; shorter ones try CRF 20 first.
-  - **Rehearsal:** run "Publish due posts" by hand with Dry run unticked, Rehearsal ticked and `only_post` set. It uploads to Instagram and Facebook for real but publishes nothing and records nothing (the Facebook video is left unpublished on the Page; delete it in Meta Business Suite afterwards).
+  - **Rehearsal:** run "Publish due posts" by hand with Dry run unticked, Rehearsal ticked and `only_post` set. It uploads to Instagram and Facebook for real but publishes nothing and records nothing. On Facebook, a reel of 90 s or less stops before the Reels "finish" step, so nothing appears anywhere; a reel over 90 s is uploaded as an unpublished Page video, which you can delete in Meta Business Suite afterwards. The Instagram container expires by itself.
 - **Carousels:** slide types are cover, myth, fact, text, takeaway and quote. They render 1080×1350 JPEG.
 - **Brand:**
   - wine `#6B0F3A`, cream `#FAF3EC`, near-black `#12070D`
@@ -70,12 +71,16 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
   - never "cures", "treats" or "prevents"
   - "a link, not proof" for observational studies
 - **Captions:** X posts under 280 characters and without links. Instagram allows up to 2,200 characters and 30 hashtags.
-- **The week (from 2 Nov), five posts:**
-  - Mon: myth vs fact
+- **The week, seven posts (one a day, decided 30 Oct):**
+  - Mon: myth buster
   - Tue: education carousel
-  - Wed: story reel
-  - Fri: quote card or couples tip, alternating
+  - Wed: story reel (Lily, then Temi, Ronke and Ike for young adults from 25 Nov, then the rest)
+  - Thu: Ask Intimova, a question people are too shy to ask
+  - Fri: quote card
+  - Sat: tip, alternating young adults and couples
   - Sun: product
+- **Why seven:** Buffer's study of 2.1 million posts (Aug 2025) found 3–5 a week is the "sweet spot", with more reach at 6–9 (about 18% more per post) and diminishing returns. Instagram's Mosseri names watch time, likes and sends as the top ranking signals, so the stories carry watch time and the myths and asks are written to be sent to a friend.
+- **Meta's rule on products (checked 30 Oct):** under Restricted Goods and Services → Health and Wellness, Meta restricts posts promoting sex toys, and "sex education with focus on sexual pleasure", to adults 18 and over. They're not removed. "Depiction of sex toys with no clear context" is restricted too, so every product photo sits in a guide.
 
 ## Open items
 

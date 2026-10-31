@@ -20,18 +20,19 @@ export function loadInsights(root) {
 /** Instagram media insights. Asks for all metrics at once; if Meta refuses one, asks one by one and skips those it refuses. */
 async function instagramInsights(cfg, mediaId) {
   const g = cfg.graph;
-  const token = encodeURIComponent(g.igToken || g.pageToken);
+  const token = encodeURIComponent(g.igToken || g.insightsToken || g.pageToken);
   const api = `${g.base}/${g.version}`;
   const parse = r => Object.fromEntries((r.data || []).map(d => [d.name, d.values?.[0]?.value ?? d.total_value?.value ?? null]));
   try {
     return parse(await request('GET', `${api}/${mediaId}/insights?metric=${IG_METRICS.join(',')}&access_token=${token}`));
   } catch {
-    const out = {}; const refused = [];
+    const out = {}; const refused = []; let why = '';
     for (const m of IG_METRICS) {
       try { Object.assign(out, parse(await request('GET', `${api}/${mediaId}/insights?metric=${m}&access_token=${token}`, { retries: 0 }))); }
-      catch { refused.push(m); }
+      catch (e) { refused.push(m); why ||= e.message.replace(/access_token=[^&\s"]+/g, 'access_token=***'); }
     }
-    if (!Object.keys(out).length) throw new Error(`Instagram refused every metric for ${mediaId}`);
+    // Keep Meta's own reason: a missing permission (#10) looks very different from a metric it no longer offers.
+    if (!Object.keys(out).length) throw new Error(`Instagram refused every metric for ${mediaId}. Meta said: ${why}`);
     if (refused.length) out._not_available = refused;
     return out;
   }
@@ -47,7 +48,7 @@ async function facebookInsights(cfg, id) {
   const fields = isVideo
     ? 'likes.summary(total_count).limit(0),comments.summary(total_count).limit(0)'
     : 'shares,reactions.summary(total_count).limit(0),comments.summary(total_count).limit(0)';
-  const r = await request('GET', `${g.base}/${g.version}/${id}?fields=${encodeURIComponent(fields)}&access_token=${encodeURIComponent(g.pageToken)}`);
+  const r = await request('GET', `${g.base}/${g.version}/${id}?fields=${encodeURIComponent(fields)}&access_token=${encodeURIComponent(g.insightsToken || g.pageToken)}`);
   const count = k => r[k]?.summary?.total_count ?? null;
   return isVideo ? { likes: count('likes'), comments: count('comments') } : { reactions: count('reactions'), comments: count('comments'), shares: r.shares?.count ?? 0 };
 }
