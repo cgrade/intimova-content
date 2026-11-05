@@ -175,5 +175,28 @@
       "url": "https://github.com/cgrade/intimova-content/issues/21",
       "at": "2026-11-04T19:02:42.829Z"
     }
+  },
+  "2026-11-05-ask-not-from-sex-alone": {
+    "instagram": {
+      "attempts": 1,
+      "last_try": "2026-11-05T18:31:23.255Z",
+      "done": true,
+      "at": "2026-11-05T18:31:55.435Z",
+      "id": "18053551160604051"
+    },
+    "facebook": {
+      "attempts": 1,
+      "last_try": "2026-11-05T18:31:55.435Z",
+      "done": true,
+      "at": "2026-11-05T18:32:06.910Z",
+      "id": "807405089406641_1472014698363779"
+    },
+    "tiktok_manual": {
+      "attempts": 1,
+      "notified": true,
+      "issue": 22,
+      "url": "https://github.com/cgrade/intimova-content/issues/22",
+      "at": "2026-11-05T18:32:07.656Z"
+    }
   }
 }
