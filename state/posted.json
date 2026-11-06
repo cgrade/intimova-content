@@ -198,5 +198,28 @@
       "url": "https://github.com/cgrade/intimova-content/issues/22",
       "at": "2026-11-05T18:32:07.656Z"
     }
+  },
+  "2026-11-06-quote-choosing-yourself": {
+    "instagram": {
+      "attempts": 1,
+      "last_try": "2026-11-06T18:31:18.732Z",
+      "done": true,
+      "at": "2026-11-06T18:31:26.893Z",
+      "id": "18116574875601437"
+    },
+    "facebook": {
+      "attempts": 1,
+      "last_try": "2026-11-06T18:31:26.894Z",
+      "done": true,
+      "at": "2026-11-06T18:31:31.419Z",
+      "id": "807405089406641_1473078904924025"
+    },
+    "tiktok_manual": {
+      "attempts": 1,
+      "notified": true,
+      "issue": 23,
+      "url": "https://github.com/cgrade/intimova-content/issues/23",
+      "at": "2026-11-06T18:31:31.915Z"
+    }
   }
 }
