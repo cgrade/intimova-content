@@ -221,5 +221,28 @@
       "url": "https://github.com/cgrade/intimova-content/issues/23",
       "at": "2026-11-06T18:31:31.915Z"
     }
+  },
+  "2026-11-07-tip-nerves": {
+    "instagram": {
+      "attempts": 1,
+      "last_try": "2026-11-07T18:31:16.836Z",
+      "done": true,
+      "at": "2026-11-07T18:31:50.796Z",
+      "id": "18124818718905066"
+    },
+    "facebook": {
+      "attempts": 1,
+      "last_try": "2026-11-07T18:31:50.797Z",
+      "done": true,
+      "at": "2026-11-07T18:32:00.864Z",
+      "id": "807405089406641_1474139148151334"
+    },
+    "tiktok_manual": {
+      "attempts": 1,
+      "notified": true,
+      "issue": 25,
+      "url": "https://github.com/cgrade/intimova-content/issues/25",
+      "at": "2026-11-07T18:32:01.466Z"
+    }
   }
 }
