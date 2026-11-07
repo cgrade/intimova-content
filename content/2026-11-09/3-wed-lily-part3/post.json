@@ -1,0 +1,177 @@
+{
+  "id": "2026-11-11-lily-part3",
+  "format": "reel",
+  "pillar": "Intimova Stories",
+  "series": "Lily, part 3",
+  "library": "lily-3",
+  "publish_at": "2026-11-11T19:30:00+01:00",
+  "platforms": [
+    "instagram",
+    "facebook",
+    "x",
+    "tiktok"
+  ],
+  "story": {
+    "label": "INTIMOVA STORIES · LILY",
+    "max_seconds": 179.5,
+    "end_seconds": 3.0,
+    "cover_at": 3.0,
+    "scenes": [
+      {
+        "lines": [
+          { "style": "hook", "text": "The 14th came *anyway.*" },
+          { "style": "sub", "text": "And she wore the red dress." }
+        ]
+      },
+      {
+        "lines": [
+          { "text": "She told Femi it was a work dinner. A colleague’s send-forth in Maitama." },
+          { "text": "He nodded at the television. *“Don’t come back late.”*" },
+          { "text": "He didn’t look up to see what she was wearing." }
+        ]
+      },
+      {
+        "lines": [
+          { "text": "The car wound through the Central Business District, past the lit towers and the quiet roads." },
+          { "text": "Harmattan haze hung around the streetlights like smoke." },
+          { "text": "She held her clutch in both hands so they would stop shaking." }
+        ]
+      },
+      {
+        "cue": "pulse",
+        "lines": [
+          { "text": "The hotel lounge was all low gold light and soft piano." },
+          { "text": "And there he was, already standing before she reached the table." },
+          { "style": "hook", "text": "*Chris.*" },
+          { "text": "Grey at the temples now. The same slow smile that used to wait for her at the foot of the hostel steps." }
+        ]
+      },
+      {
+        "lines": [
+          { "text": "*“Lily,”* he said, as if he was tasting it." },
+          { "text": "His eyes went to the dress, then up, slowly, *all the way to her mouth.*" },
+          { "text": "Her skin remembered every word of that phone call." }
+        ]
+      },
+      {
+        "cue": "heat",
+        "lines": [
+          { "text": "He ordered for her. Chapman, the way she drank it at twenty." },
+          { "text": "She didn’t tell him she drinks red wine now." },
+          { "text": "Under the table his knee rested against hers. *She didn’t move it.*" }
+        ]
+      },
+      {
+        "lines": [
+          { "text": "*“Do you remember the night of the fire alarm?”* he said. *“You came down in my jersey.”*" },
+          { "text": "She laughed. She did remember. The cold steps. His jersey, still warm from him." },
+          { "text": "*“You had braids to your waist,”* he said. *“You used to sing in the corridor.”*" }
+        ]
+      },
+      {
+        "lines": [
+          { "text": "His fingers found her wrist on the table and drew slow circles there." },
+          { "text": "Heat climbed her arm like a rumour." },
+          { "text": "*“You were the most beautiful girl on that campus,”* he murmured." }
+        ]
+      },
+      {
+        "lines": [
+          { "style": "punch", "slow": true, "text": "*Were.*" },
+          { "text": "She waited for him to ask about now. Her work. Her mother. The three years of silence in her house." },
+          { "text": "He told her about her old laugh instead." }
+        ]
+      },
+      {
+        "lines": [
+          { "text": "*“You still have that dimple,”* he said. *“The girl I couldn’t stop thinking about.”*" },
+          { "text": "She looked at his hand on her wrist. At the Chapman she hadn’t touched." },
+          { "style": "big", "slow": true, "text": "*He wasn’t looking at her. He was looking at who she used to be.*", "cue": "turn" }
+        ]
+      },
+      {
+        "lines": [
+          { "text": "It landed softly, the way true things do." },
+          { "text": "Femi didn’t see her at all. Chris only saw her at twenty." },
+          { "style": "punch", "slow": true, "text": "*Nobody was looking at Lily, thirty-one.*" }
+        ]
+      },
+      {
+        "lines": [
+          { "text": "She thought of the woman in the mirror tonight. The one who had zipped the dress up herself." },
+          { "text": "She had wanted that woman to be seen. *Wanted it so much it ached.*" }
+        ]
+      },
+      {
+        "lines": [
+          { "text": "Chris leaned closer. His voice dropped to the one from the phone. Low. Patient." },
+          { "text": "*“I’ve thought about finishing what we started,”* he said. *“Every night since.”*" },
+          { "text": "Her breath caught. Her body still answered him. *That was the hard part.*" }
+        ]
+      },
+      {
+        "lines": [
+          { "text": "He slid something across the table under his palm, slowly." },
+          { "text": "A key card. Cream and gold." },
+          { "style": "hook", "text": "*“Room 714.”*" },
+          { "text": "*“No pressure,”* he said. *“I’ll be upstairs. Come up, or don’t.”*" }
+        ]
+      },
+      {
+        "lines": [
+          { "text": "He paid. He touched her shoulder, exactly where the strap had fallen that night." },
+          { "text": "Then he walked to the lifts and didn’t look back. *He knew she was watching.*" }
+        ]
+      },
+      {
+        "lines": [
+          { "text": "She sat alone with the key card, the piano and her own heartbeat." },
+          { "text": "To her left, the lifts. Seven floors up, a man who remembered a girl with braids." },
+          { "text": "To her right, the glass doors. The car park. The road home to a man who didn’t look up." }
+        ]
+      },
+      {
+        "lines": [
+          { "text": "Her phone buzzed on the table. *Femi.*" },
+          { "text": "*“Did you buy the diesel?”*" },
+          { "text": "She almost laughed. She almost cried." }
+        ]
+      },
+      {
+        "lines": [
+          { "text": "She turned the card over in her fingers. *714.* The numbers blurred." },
+          { "text": "She thought of every night she had waited on those hostel steps for someone to choose her." },
+          { "text": "Twenty years old, waiting. Thirty-one, *still waiting.*" }
+        ]
+      },
+      {
+        "cue": "peak",
+        "lines": [
+          { "text": "She picked up the key card." },
+          { "text": "She picked up her clutch." },
+          { "style": "big", "slow": true, "text": "*And Lily stood up.*" },
+          { "text": "The dress whispered against her knees. Across the lounge, heads turned." },
+          { "style": "punch", "slow": true, "text": "*She knew exactly which way she was walking.*", "cue": "dread" }
+        ]
+      }
+    ],
+    "end": {
+      "kicker": "LILY · PART 4, THE FINALE",
+      "line": "Next week. Follow so you don’t miss it.",
+      "url": "INTIMOVA.NG"
+    }
+  },
+  "captions": {
+    "instagram": "Room 714. No pressure. 🗝️\n\nLily · Part 3. She wore the red dress. Chris ordered her the drink she loved at twenty, talked about the girl with braids to her waist, and slid a key card across the table.\n\nBut he never once asked who she is now.\n\nShe stood up. Which way did she walk?\n\nThe finale drops next Wednesday. Follow so you don’t miss it.\n\nHave you ever been loved for who you used to be? Tell us below. 👇\n\n#IntimovaStories #LoveStory #RomanceReads #NaijaRomance #Relationships #SelfLove #Intimova",
+    "facebook": "Room 714. No pressure. 🗝️\n\nLily · Part 3. She wore the red dress. Chris ordered her the drink she loved at twenty, talked about the girl with braids to her waist, and slid a key card across the table.\n\nBut he never once asked who she is now.\n\nShe stood up. Which way did she walk?\n\nThe finale drops next Wednesday. Follow so you don’t miss it.\n\nHave you ever been loved for who you used to be? Tell us below. 👇",
+    "x": "He slid a key card across the table. “Room 714. No pressure.” 🗝️\n\nBut he only saw the girl she was at twenty. Lily · Part 3. The finale is next Wednesday.",
+    "tiktok_title": "Room 714. Lily · Part 3",
+    "tiktok": "“Room 714. No pressure.” But he only saw the girl she used to be. 🗝️ Lily · Part 3. The finale drops next Wednesday, follow so you don’t miss it. #IntimovaStories #BookTok #RomanceBooks #LoveStory #Intimova"
+  },
+  "safety": {
+    "explicit": false,
+    "health_claim": false,
+    "clear_faces": false
+  },
+  "ai_generated": false
+}

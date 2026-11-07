@@ -1,0 +1,66 @@
+{
+  "id": "2026-11-15-guide-wand",
+  "format": "carousel",
+  "pillar": "Product guide",
+  "library": "wand-guide",
+  "product": {
+    "slug": "the-wand",
+    "price": 20000
+  },
+  "publish_at": "2026-11-15T19:30:00+01:00",
+  "platforms": [
+    "instagram",
+    "facebook",
+    "x",
+    "tiktok"
+  ],
+  "series_label": "PRODUCT GUIDE",
+  "last_footer": "DISCREET DELIVERY · INTIMOVA.NG",
+  "slides": [
+    {
+      "type": "cover",
+      "headline": "Many people buy their first one *as a massager.*",
+      "lead": "A guide to the Wand. Swipe."
+    },
+    {
+      "type": "product",
+      "slug": "the-wand",
+      "name": "The Wand — Full-Body Massager",
+      "headline": "Deep, rumbly power. *The reassuring classic.*",
+      "price": 20000
+    },
+    {
+      "type": "text",
+      "kicker": "HOW IT FEELS",
+      "headline": "Broad and powerful, *not pinpoint.*",
+      "body": "A broad, cushioned head with deep, rumbly vibration, as at home easing a tense shoulder as anywhere else. Multiple speeds: start low, and a layer of clothing softens it at first.",
+      "note": "₦20,000 on intimova.ng (was ₦25,000)."
+    },
+    {
+      "type": "text",
+      "kicker": "WHAT IT’S MADE OF",
+      "headline": "Body-safe silicone head, ABS body. *USB-rechargeable.*",
+      "body": "Phthalate-free, according to the manufacturer. Cordless, with a flexible neck, and quieter than you’d expect. Wipe the head with a toy-safe cleanser; water-based lubricant only.",
+      "note": "Details from the product page on intimova.ng."
+    },
+    {
+      "type": "takeaway",
+      "kicker": "DISCREET DELIVERY",
+      "headline": "Plain, unbranded packaging. *Always.*",
+      "lead": "Nationwide delivery from ₦6,000. Faulty or wrong? Tell us within 2 days of delivery and we replace it free."
+    }
+  ],
+  "captions": {
+    "instagram": "Many people buy their first one as a massager, and that’s a perfectly good reason. 💜\n\nThe Wand has a broad, cushioned head and deep, rumbly vibration: as at home easing a tense shoulder as anywhere else. Multiple speeds, so start low. Body-safe silicone head and ABS body, phthalate-free according to the manufacturer, cordless and USB-rechargeable, with a flexible neck. Wipe the head with a toy-safe cleanser, and use water-based lubricant only.\n\n₦20,000 at intimova.ng. Delivered nationwide in plain, unbranded packaging. Link in bio.\n\n#Intimova #SexualWellness #PleasureIsSelfCare #SelfLove #Wellbeing",
+    "facebook": "Many people buy their first one as a massager, and that’s a perfectly good reason. 💜\n\nThe Wand has a broad, cushioned head and deep, rumbly vibration: as at home easing a tense shoulder as anywhere else. Multiple speeds, so start low. Body-safe silicone head and ABS body, phthalate-free according to the manufacturer, cordless and USB-rechargeable, with a flexible neck. Wipe the head with a toy-safe cleanser, and use water-based lubricant only.\n\n₦20,000, delivered nationwide in plain, unbranded packaging: https://intimova.ng/product/the-wand",
+    "x": "Many people buy their first one as a massager. The Wand: deep, rumbly power, multiple speeds, body-safe silicone, rechargeable. Delivered in plain, unbranded packaging. 💜",
+    "tiktok_title": "A guide to the Wand",
+    "tiktok": "Many people buy their first one as a massager: deep, rumbly power, multiple speeds, body-safe silicone. Plain, unbranded delivery. #Intimova #SexualWellness #SelfLove"
+  },
+  "safety": {
+    "explicit": false,
+    "health_claim": false,
+    "clear_faces": false
+  },
+  "ai_generated": false
+}

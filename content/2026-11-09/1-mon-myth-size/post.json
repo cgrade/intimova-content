@@ -1,0 +1,66 @@
+{
+  "id": "2026-11-09-myth-size",
+  "format": "carousel",
+  "pillar": "Body and health facts",
+  "library": "most-men-bigger",
+  "publish_at": "2026-11-09T19:30:00+01:00",
+  "platforms": [
+    "instagram",
+    "facebook",
+    "x",
+    "tiktok"
+  ],
+  "series_label": "MYTH VS FACT",
+  "last_footer": "DISCREET DELIVERY · INTIMOVA.NG",
+  "slides": [
+    {
+      "type": "myth",
+      "text": "“Most men are bigger than you.”",
+      "lead": "Swipe. Here’s what was actually measured."
+    },
+    {
+      "type": "fact",
+      "number": "13.12 cm",
+      "statement": "was the average erect length, measured in 692 men.",
+      "detail": "From a review pooling studies of up to 15,521 men.",
+      "source": "Source: Veale et al., _BJU International_, 2015. A systematic review of studies from several countries, not Nigeria alone."
+    },
+    {
+      "type": "text",
+      "kicker": "WHAT IT MEANS",
+      "headline": "What you see online *isn’t average.*",
+      "body": "Screens show what was picked to impress, not what’s typical. Comparing yourself to that was never a fair test."
+    },
+    {
+      "type": "text",
+      "kicker": "YOU’RE NOT THE ONLY ONE",
+      "headline": "Almost everyone has wondered. *Almost nobody says so.*",
+      "body": "So the worry grows in private, and everyone thinks it’s only them. It isn’t."
+    },
+    {
+      "type": "takeaway",
+      "kicker": "THE TAKEAWAY",
+      "headline": "Online isn’t average. *Your worth isn’t measured in centimetres.*",
+      "lead": "Send this to the friend who needs to hear it."
+    }
+  ],
+  "captions": {
+    "instagram": "Myth: most men are bigger than you.\n\nA review pooling studies of up to 15,521 men found an average erect length of 13.12 cm, measured in 692 men.\n\nWhat you see online isn’t average: it was picked to impress. Almost everyone has wondered, and almost nobody says so, so the worry grows in private. You’re not the only one, and your worth isn’t measured in centimetres.\n\nSend this to the friend who needs to hear it.\n\nSource: Veale et al., BJU International, 2015. A systematic review of studies from several countries.\n\n#MythVsFact #SexualWellness #BodyConfidence #NoShame #MensHealth #Intimova",
+    "facebook": "Myth: most men are bigger than you.\n\nA review pooling studies of up to 15,521 men found an average erect length of 13.12 cm, measured in 692 men.\n\nWhat you see online isn’t average: it was picked to impress. Almost everyone has wondered, and almost nobody says so, so the worry grows in private. You’re not the only one, and your worth isn’t measured in centimetres.\n\nSend this to the friend who needs to hear it.\n\nSource: Veale et al., BJU International, 2015. A systematic review of studies from several countries.",
+    "x": "Myth: most men are bigger than you.\n\nA review of studies of up to 15,521 men: the measured average was 13.12 cm. Online isn’t average. 👇",
+    "x_thread": [
+      "Almost everyone has wondered. Almost nobody says so. Your worth isn’t measured in centimetres.\n\nSource: Veale et al., BJU International, 2015. Systematic review, several countries."
+    ],
+    "tiktok_title": "Myth: most men are bigger than you",
+    "tiktok": "Myth: most men are bigger than you. A review of studies of up to 15,521 men found the measured average was 13.12 cm. Online isn’t average. Source: Veale et al., BJU International, 2015. #MythVsFact #BodyConfidence #NoShame #Intimova"
+  },
+  "safety": {
+    "explicit": false,
+    "health_claim": true,
+    "health_sources": [
+      "https://pubmed.ncbi.nlm.nih.gov/25487360/"
+    ],
+    "clear_faces": false
+  },
+  "ai_generated": false
+}
