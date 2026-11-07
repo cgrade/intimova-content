@@ -1,0 +1,64 @@
+{
+  "id": "2026-11-14-tip-stay-close",
+  "format": "carousel",
+  "pillar": "Tips",
+  "library": "t-stay-close-after",
+  "publish_at": "2026-11-14T19:30:00+01:00",
+  "platforms": [
+    "instagram",
+    "facebook",
+    "x",
+    "tiktok"
+  ],
+  "series_label": "INTIMOVA TIPS",
+  "last_footer": "DISCREET DELIVERY · INTIMOVA.NG",
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "TIP · COUPLES",
+      "headline": "The minutes after *matter too.*",
+      "lead": "Stay a while. Swipe."
+    },
+    {
+      "type": "text",
+      "kicker": "WHAT ONE STUDY FOUND",
+      "headline": "Couples who stayed affectionate for longer after sex *reported higher satisfaction.*",
+      "body": "Cuddling, talking, closeness. Both their sexual and relationship satisfaction were higher, and still were three months later.",
+      "note": "Source: Muise, Giang & Impett, _Archives of Sexual Behavior_, 2014. 335 people in relationships and 101 couples, Canada. A link, not proof."
+    },
+    {
+      "type": "text",
+      "kicker": "PHONE DOWN",
+      "headline": "The messages can wait. *Your person is right here.*",
+      "body": "Turn the phone face down, or leave it in another room. Ten quiet minutes is plenty."
+    },
+    {
+      "type": "text",
+      "kicker": "STAY CLOSE, TALK",
+      "headline": "About nothing. About everything. *About what you loved.*",
+      "body": "No rush to shower, sleep or scroll. This is the part where people feel chosen."
+    },
+    {
+      "type": "takeaway",
+      "kicker": "THE TAKEAWAY",
+      "headline": "Don’t rush off. *The closeness after counts.*",
+      "lead": "Send this to your person. Tonight, stay a while."
+    }
+  ],
+  "captions": {
+    "instagram": "The minutes after matter too. 🤍\n\nIn a Canadian study of 335 people in relationships and 101 couples, those who spent longer being affectionate after sex (cuddling, talking, closeness) reported higher sexual and relationship satisfaction, and still did three months later. A link, not proof.\n\nSo tonight: phone face down, stay close, and talk. About nothing, about everything, about what you loved.\n\nSend this to your person.\n\nSource: Muise, Giang & Impett, Archives of Sexual Behavior, 2014.\n\n#IntimovaTips #Couples #Relationships #Intimacy #NoShame #Intimova",
+    "facebook": "The minutes after matter too. 🤍\n\nIn a Canadian study of 335 people in relationships and 101 couples, those who spent longer being affectionate after sex (cuddling, talking, closeness) reported higher sexual and relationship satisfaction, and still did three months later. A link, not proof.\n\nSo tonight: phone face down, stay close, and talk. About nothing, about everything, about what you loved.\n\nSend this to your person.\n\nSource: Muise, Giang & Impett, Archives of Sexual Behavior, 2014.",
+    "x": "The minutes after matter too.\n\nCouples who stayed affectionate for longer after sex reported higher satisfaction (Muise et al., 2014, Canada; a link, not proof). Phone down. Stay a while. 🤍",
+    "tiktok_title": "The minutes after matter too",
+    "tiktok": "The minutes after matter too. Phone down, stay close, talk. Couples who did reported higher satisfaction (Muise et al., 2014, Canada; a link, not proof). #IntimovaTips #Couples #Relationships #Intimova"
+  },
+  "safety": {
+    "explicit": false,
+    "health_claim": true,
+    "health_sources": [
+      "https://doi.org/10.1007/s10508-014-0305-3"
+    ],
+    "clear_faces": false
+  },
+  "ai_generated": false
+}
