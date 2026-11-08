@@ -244,5 +244,28 @@
       "url": "https://github.com/cgrade/intimova-content/issues/25",
       "at": "2026-11-07T18:32:01.466Z"
     }
+  },
+  "2026-11-08-guide-rose": {
+    "instagram": {
+      "attempts": 1,
+      "last_try": "2026-11-08T18:31:20.330Z",
+      "done": true,
+      "at": "2026-11-08T18:32:01.464Z",
+      "id": "18118410574820766"
+    },
+    "facebook": {
+      "attempts": 1,
+      "last_try": "2026-11-08T18:32:01.465Z",
+      "done": true,
+      "at": "2026-11-08T18:32:12.872Z",
+      "id": "807405089406641_1475203638044885"
+    },
+    "tiktok_manual": {
+      "attempts": 1,
+      "notified": true,
+      "issue": 26,
+      "url": "https://github.com/cgrade/intimova-content/issues/26",
+      "at": "2026-11-08T18:32:13.274Z"
+    }
   }
 }
