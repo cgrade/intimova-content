@@ -1,0 +1,76 @@
+{
+  "id": "2026-11-10-carousel-body-safe",
+  "format": "carousel",
+  "pillar": "Body-safe toys",
+  "library": "body-safe-checklist",
+  "publish_at": "2026-11-10T19:30:00+01:00",
+  "platforms": [
+    "instagram",
+    "facebook",
+    "x",
+    "tiktok"
+  ],
+  "series_label": "INTIMOVA GUIDES",
+  "last_footer": "FULL GUIDE · LINK IN BIO",
+  "slides": [
+    {
+      "type": "cover",
+      "headline": "Not everything sold as a toy is *made to be safe.*",
+      "lead": "A two-minute checklist. Swipe."
+    },
+    {
+      "type": "text",
+      "kicker": "WHAT “BODY-SAFE” MEANS",
+      "headline": "Non-porous, and *free of harmful chemicals.*",
+      "body": "No microscopic holes for bacteria to hide in, and no phthalates, the softeners used to make cheap plastics squishy.",
+      "note": "From intimova.ng: How to choose a body-safe sex toy."
+    },
+    {
+      "type": "text",
+      "kicker": "THE THREE TO TRUST",
+      "headline": "Body-safe silicone, glass, *stainless steel.*",
+      "body": "All three are non-porous and easy to clean. Silicone is the most common and the most versatile."
+    },
+    {
+      "type": "fact",
+      "number": "70%",
+      "statement": "Jelly-type toys are made of soft PVC, which can contain up to 70% plasticisers, including phthalates.",
+      "detail": "Little risk at normal use, the report found. It’s why “body-safe silicone” matters.",
+      "source": "Source: Danish Environmental Protection Agency, _Survey of chemical substances in consumer products_ no. 77, 2006. Laboratory survey, Denmark."
+    },
+    {
+      "type": "text",
+      "kicker": "WALK AWAY IF…",
+      "headline": "It smells of chemicals, *or no material is listed.*",
+      "body": "Also: vague “jelly”, TPR or TPE with no safety information, suspiciously cheap with no cleaning guidance, or a seller who can’t answer “what is this made of?”"
+    },
+    {
+      "type": "text",
+      "kicker": "KEEP IT SAFE",
+      "headline": "Wash before and after. *Water-based lube only.*",
+      "body": "Warm water and a mild, toy-safe cleanser, then dry it and store it somewhere clean and private. Silicone lube can wear down a silicone toy over time."
+    },
+    {
+      "type": "takeaway",
+      "kicker": "WHY IT’S NORMAL",
+      "headline": "Caring what touches your body *isn’t fussy. It’s self-respect.*",
+      "lead": "Save this for before you buy. Full guide: link in bio."
+    }
+  ],
+  "captions": {
+    "instagram": "Not everything sold as a toy is made to be safe. 🧴\n\n“Body-safe” is a real standard: non-porous (no tiny holes for bacteria to hide in) and free of harmful chemicals like phthalates. Trust body-safe silicone, glass and stainless steel.\n\nWalk away from strong chemical smells, vague “jelly” with no material listed, and any seller who can’t tell you what it’s made of. Wash before and after, and pair silicone toys with water-based lube.\n\nCaring what touches your body isn’t fussy. It’s self-respect.\n\nSave this for before you buy. Full guide: link in bio.\n\nSource for the 70% figure: Danish Environmental Protection Agency, Survey no. 77, 2006 (Denmark).\n\n#Intimova #BodySafe #SexualWellness #SelfCare #NoShame #Nigeria",
+    "facebook": "Not everything sold as a toy is made to be safe. 🧴\n\n“Body-safe” is a real standard: non-porous (no tiny holes for bacteria to hide in) and free of harmful chemicals like phthalates. Trust body-safe silicone, glass and stainless steel.\n\nWalk away from strong chemical smells, vague “jelly” with no material listed, and any seller who can’t tell you what it’s made of. Wash before and after, and pair silicone toys with water-based lube.\n\nCaring what touches your body isn’t fussy. It’s self-respect.\n\nSource for the 70% figure: Danish Environmental Protection Agency, Survey no. 77, 2006 (Denmark).\n\nThe full guide: https://intimova.ng/learn/toys-body-safe/how-to-choose-a-body-safe-toy",
+    "x": "Not everything sold as a toy is made to be safe.\n\nTrust body-safe silicone, glass, stainless steel. Walk away from chemical smells and “jelly” with no material listed. Caring what touches you is self-respect.",
+    "tiktok_title": "Is your toy actually body-safe?",
+    "tiktok": "Not everything sold as a toy is made to be safe. Trust silicone, glass and stainless steel; walk away from chemical smells and unlabelled “jelly”. #Intimova #BodySafe #SexualWellness #NoShame"
+  },
+  "safety": {
+    "explicit": false,
+    "health_claim": true,
+    "health_sources": [
+      "https://www2.mst.dk/udgiv/publications/2006/87-7052-227-8/html/default_eng.htm"
+    ],
+    "clear_faces": false
+  },
+  "ai_generated": false
+}
