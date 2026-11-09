@@ -267,5 +267,28 @@
       "url": "https://github.com/cgrade/intimova-content/issues/26",
       "at": "2026-11-08T18:32:13.274Z"
     }
+  },
+  "2026-11-09-myth-size": {
+    "instagram": {
+      "attempts": 1,
+      "last_try": "2026-11-09T18:31:20.937Z",
+      "done": true,
+      "at": "2026-11-09T18:31:59.424Z",
+      "id": "18104202344646747"
+    },
+    "facebook": {
+      "attempts": 1,
+      "last_try": "2026-11-09T18:31:59.425Z",
+      "done": true,
+      "at": "2026-11-09T18:32:13.214Z",
+      "id": "807405089406641_1476213441277238"
+    },
+    "tiktok_manual": {
+      "attempts": 1,
+      "notified": true,
+      "issue": 27,
+      "url": "https://github.com/cgrade/intimova-content/issues/27",
+      "at": "2026-11-09T18:32:13.594Z"
+    }
   }
 }
