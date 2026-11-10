@@ -18,7 +18,8 @@
     "setup:key": "node publisher/setup/make-key.mjs",
     "setup:meta": "node publisher/setup/meta.mjs",
     "setup:x": "node publisher/setup/x.mjs",
-    "setup:tiktok": "node publisher/setup/tiktok.mjs"
+    "setup:tiktok": "node publisher/setup/tiktok.mjs",
+    "telegram:check": "node publisher/setup/telegram-check.mjs"
   },
   "devDependencies": {
     "@fontsource/inter": "5.1.1",

@@ -6,14 +6,17 @@ import { loadConfig } from './lib/config.mjs';
 import { loadAllPosts, validatePost, manifestOf, mediaUrl, localMedia } from '../lib/post.mjs';
 import { loadState, saveState, loadTokens, saveTokens } from './lib/store.mjs';
 import { fetchProduct, productProblem } from '../lib/product.mjs';
-import { head, request } from './lib/http.mjs';
+import { head, request, sleep } from './lib/http.mjs';
 import { postInstagram } from './platforms/instagram.mjs';
 import { postFacebook } from './platforms/facebook.mjs';
 import { postX } from './platforms/x.mjs';
 import { postTiktok } from './platforms/tiktok.mjs';
+import { postTelegram } from './platforms/telegram.mjs';
 import { postAlerts, watchdogAlerts, raiseAlerts } from './watch.mjs';
 
-const POSTERS = { instagram: postInstagram, facebook: postFacebook, x: postX, tiktok: postTiktok };
+const POSTERS = { instagram: postInstagram, facebook: postFacebook, x: postX, tiktok: postTiktok, telegram: postTelegram };
+// These upload the file's bytes themselves, so they don't wait for the media host.
+const UPLOADS_BYTES = ['x', 'telegram'];
 
 export function isDue(post, cfg) {
   if (cfg.onlyPost) return post.id === cfg.onlyPost;
@@ -37,6 +40,7 @@ export async function run(cfg = loadConfig(), log = console.log) {
     writeSummary(cfg, [], results);
     return results;
   }
+  if (cfg.backfill.length) return backfill(cfg, posts, state, log);
   const due = posts.filter(p => isDue(p, cfg));
   log(`${cfg.dryRun ? '[DRY RUN] ' : cfg.rehearsal ? '[REHEARSAL: upload only, nothing is published] ' : ''}${due.length} post(s) due at ${cfg.now.toISOString()}`);
 
@@ -53,19 +57,8 @@ export async function run(cfg = loadConfig(), log = console.log) {
     // A product post names its price on the slides, so hold it if the shop has changed since it was approved.
     const pending = post.platforms.some(p => cfg.platforms.includes(p) && !(state[post.id]?.[p]?.done || state[post.id]?.[p]?.gave_up));
     if (post.product?.slug && pending) {
-      let live;
-      try { live = await fetchProduct(post.product.slug, { base: cfg.shopBase }); }
-      catch (e) {
-        log(`  … couldn't check ${post.product.slug} on the shop (${e.message}); will try next run`);
-        results.push({ post: post.id, platform: '-', ok: false, waiting: true, note: 'shop not reachable to check the product' });
-        continue;
-      }
-      const why = productProblem(post.product, live);
-      if (why) {
-        log(`  ✗ held: ${why}. Fix the post (or set "hold": true) and push.`);
-        results.push({ post: post.id, platform: '-', ok: false, note: `held: ${why}` });
-        continue;
-      }
+      const stop = await productCheck(post, cfg, log);
+      if (stop) { results.push(stop); continue; }
     }
     const url = f => mediaUrl(cfg.mediaBase, post, f);
     const local = f => localMedia(cfg.root, post, f);
@@ -81,7 +74,9 @@ export async function run(cfg = loadConfig(), log = console.log) {
     for (const plat of post.platforms.filter(p => cfg.platforms.includes(p))) {
       const s = (st[plat] ||= { attempts: 0 });
       if (s.done || s.gave_up) { log(`  = ${plat}: ${s.done ? 'already posted' : 'gave up earlier'}`); continue; }
-      if (plat !== 'x' && !(await ensureLive())) {
+      // Telegram can't upload without publishing, so a rehearsal leaves it alone.
+      if (cfg.rehearsal && plat === 'telegram') { log('  ~ telegram: skipped in rehearsal'); continue; }
+      if (!UPLOADS_BYTES.includes(plat) && !(await ensureLive())) {
         log(`  … ${plat}: media isn't live at ${url(firstFile)} yet; will try next run`);
         results.push({ post: post.id, platform: plat, ok: false, waiting: true, note: 'media not live yet' });
         continue;
@@ -145,6 +140,80 @@ export async function run(cfg = loadConfig(), log = console.log) {
     for (const a of await raiseAlerts(cfg, alerts, log)) warnings.push(`${a.title} (issue #${a.issue})`);
   }
   writeSummary(cfg, due, results, warnings, kits);
+  return results;
+}
+
+/** A product post names its price on the slides: null if the shop still matches, otherwise the result that stops it. */
+async function productCheck(post, cfg, log) {
+  let live;
+  try { live = await fetchProduct(post.product.slug, { base: cfg.shopBase }); }
+  catch (e) {
+    log(`  … couldn't check ${post.product.slug} on the shop (${e.message}); will try next run`);
+    return { post: post.id, platform: '-', ok: false, waiting: true, note: 'shop not reachable to check the product' };
+  }
+  const why = productProblem(post.product, live);
+  if (!why) return null;
+  log(`  ✗ held: ${why}. Fix the post (or set "hold": true) and push.`);
+  return { post: post.id, platform: '-', ok: false, note: `held: ${why}` };
+}
+
+/**
+ * Backfill: send chosen earlier posts to Telegram only, now, oldest first, a gap apart,
+ * silently except the last so subscribers get one notification. Times, holds and the post's own platforms are ignored.
+ */
+async function backfill(cfg, posts, state, log) {
+  const results = [];
+  if (cfg.rehearsal) {
+    log('✗ A backfill posts for real; it cannot be a rehearsal.');
+    results.push({ post: '-', platform: 'telegram', ok: false, note: 'backfill cannot be a rehearsal' });
+    writeSummary(cfg, [], results);
+    return results;
+  }
+  const byId = new Map(posts.map(p => [p.id, p]));
+  for (const id of cfg.backfill.filter(id => !byId.has(id))) {
+    log(`✗ ${id}: no such post`);
+    results.push({ post: id, platform: 'telegram', ok: false, note: 'no such post' });
+  }
+  const chosen = cfg.backfill.filter(id => byId.has(id)).map(id => byId.get(id)).sort((a, b) => Date.parse(a.publish_at) - Date.parse(b.publish_at));
+  const todo = chosen.filter(p => !state[p.id]?.telegram?.done);
+  for (const p of chosen.filter(p => state[p.id]?.telegram?.done)) {
+    log(`= ${p.id}: telegram: already posted`);
+    results.push({ post: p.id, platform: 'telegram', ok: true, id: state[p.id].telegram.id, note: 'already posted' });
+  }
+  log(`${cfg.dryRun ? '[DRY RUN] ' : ''}Backfill to Telegram: ${todo.map(p => p.id).join(', ') || 'nothing to send'}`);
+  for (const [i, post] of todo.entries()) {
+    log(`• ${post.id} (${post.format})`);
+    const manifest = manifestOf(cfg.root, post);
+    const problems = validatePost({ ...post, platforms: ['telegram'] });
+    if (!manifest) problems.push('not rendered yet (no manifest.json in public/)');
+    if (problems.length) {
+      log(`  ✗ ${problems.join('; ')}`);
+      results.push({ post: post.id, platform: 'telegram', ok: false, note: problems.join('; ') });
+      continue;
+    }
+    if (post.product?.slug) {
+      const stop = await productCheck(post, cfg, log);
+      if (stop) { results.push({ ...stop, platform: 'telegram' }); continue; }
+    }
+    if (cfg.dryRun) { log('  ~ telegram: would post'); results.push({ post: post.id, platform: 'telegram', ok: true, dry: true }); continue; }
+    const s = ((state[post.id] ||= {}).telegram ||= { attempts: 0 });
+    if (s.done) continue;
+    s.attempts++; s.last_try = new Date().toISOString();
+    try {
+      const r = await postTelegram({ post, manifest, local: f => localMedia(cfg.root, post, f), cfg, log, silent: i < todo.length - 1 });
+      Object.assign(s, { done: true, at: new Date().toISOString(), backfill: true, ...r });
+      delete s.error;
+      log(`  ✓ telegram: ${r.id}`);
+      results.push({ post: post.id, platform: 'telegram', ok: true, id: r.id });
+    } catch (e) {
+      s.error = e.message;
+      log(`  ✗ telegram: ${e.message}`);
+      results.push({ post: post.id, platform: 'telegram', ok: false, note: e.message });
+    }
+    saveState(cfg.root, state);
+    if (i < todo.length - 1 && cfg.backfillGapMs) await sleep(cfg.backfillGapMs);
+  }
+  writeSummary(cfg, todo, results);
   return results;
 }
 

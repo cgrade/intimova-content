@@ -38,6 +38,13 @@ export function loadConfig(env = process.env) {
       clientKey: env.TIKTOK_CLIENT_KEY || '',
       clientSecret: env.TIKTOK_CLIENT_SECRET || '',
     },
+    telegram: {
+      base: env.TELEGRAM_BASE || 'https://api.telegram.org',
+      token: env.TELEGRAM_BOT_TOKEN || '',
+      chatId: env.TELEGRAM_CHAT_ID || '',     // the channel's @username, or its numeric id
+    },
+    backfill: [...new Set((env.BACKFILL || '').split(',').map(s => s.trim()).filter(Boolean))], // post ids to send to Telegram only, now
+    backfillGapMs: Number(env.BACKFILL_GAP_MS || 30000),
     github: {
       api: env.GITHUB_API_URL || 'https://api.github.com',
       token: env.GITHUB_TOKEN || '',

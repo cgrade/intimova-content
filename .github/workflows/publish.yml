@@ -22,6 +22,10 @@ on:
         description: 'Rehearsal: upload only_post to Instagram and Facebook for real, but publish nothing (untick Dry run too)'
         type: boolean
         default: false
+      backfill:
+        description: 'Backfill: post ids to send to Telegram only, now, oldest first (comma-separated)'
+        type: string
+        default: ''
 
 permissions:
   contents: write
@@ -52,6 +56,7 @@ jobs:
           DRY_RUN: ${{ (inputs.dry_run == true || inputs.dry_run == 'true') && '1' || '0' }}
           ONLY_POST: ${{ inputs.only_post }}
           REHEARSAL: ${{ (inputs.rehearsal == true || inputs.rehearsal == 'true') && '1' || '0' }}
+          BACKFILL: ${{ inputs.backfill }}
           MEDIA_BASE_URL: ${{ vars.MEDIA_BASE_URL }}
           META_PAGE_ID: ${{ secrets.META_PAGE_ID }}
           META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN }}
@@ -62,6 +67,8 @@ jobs:
           TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
           TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
           TOKENS_KEY: ${{ secrets.TOKENS_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ vars.TELEGRAM_CHAT_ID }}
           PLATFORMS: ${{ vars.PLATFORMS || 'instagram,facebook' }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NOTIFY_USER: ${{ github.repository_owner }}

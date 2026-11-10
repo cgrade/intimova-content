@@ -18,7 +18,7 @@ export async function request(method, url, { json, form, body, headers = {}, ret
   for (let attempt = 0; ; attempt++) {
     let res;
     try { res = await fetch(url, { method, headers: h, body: payload }); }
-    catch (e) { if (attempt < retries) { await sleep(2000); continue; } throw new ApiError(`Network error calling ${redact(url)}: ${e.message}`, { url }); }
+    catch (e) { if (attempt < retries) { await sleep(2000); continue; } throw new ApiError(`Network error calling ${redact(url)}: ${redact(e.message)}`, { url }); }
     const text = await res.text();
     let data; try { data = text ? JSON.parse(text) : {}; } catch { data = { raw: text }; }
     if (res.ok) return data;
@@ -32,7 +32,10 @@ export async function head(url) {
 }
 
 // Any query parameter whose name mentions a token, secret, password or key (fb_exchange_token, client_secret, ...).
-export function redact(url) { return String(url).replace(/([?&][^=&]*(?:token|secret|password|key)[^=&]*)=[^&]*/gi, '$1=***'); }
+// Telegram puts the bot token in the path: /bot<token>/method.
+export function redact(url) {
+  return String(url).replace(/([?&][^=&]*(?:token|secret|password|key)[^=&]*)=[^&]*/gi, '$1=***').replace(/\/bot[^/]+\//g, '/bot***/');
+}
 function summarize(d) {
   const e = d?.error ?? d?.errors ?? d;
   return JSON.stringify(e).slice(0, 500);

@@ -3,7 +3,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 
-export function startMock({ publicDir, failOnce = {}, products = {}, rejectReel = false, ghRuns = [], ghPulls = [] } = {}) {
+export function startMock({ publicDir, failOnce = {}, products = {}, rejectReel = false, ghRuns = [], ghPulls = [], tgReject = false, tgMember = { status: 'administrator', can_post_messages: true } } = {}) {
   const calls = [];
   let n = 0;
   const fails = { ...failOnce };
@@ -21,6 +21,9 @@ export function startMock({ publicDir, failOnce = {}, products = {}, rejectReel 
       // Plain fields (not files) of the form, e.g. description and published on a Page video upload
       for (const [, k, v] of text.matchAll(/name="(\w+)"\r\n\r\n([^\r]*)\r\n/g)) body[k] = Buffer.from(v, 'latin1').toString('utf8');
       body.file = /name="source"; filename=/.test(text);
+      // Every field, multi-line text included, and the names of the file parts (Telegram uploads)
+      body.fields = Object.fromEntries([...text.matchAll(/name="(\w+)"\r\n\r\n([\s\S]*?)\r\n--/g)].map(([, k, v]) => [k, Buffer.from(v, 'latin1').toString('utf8')]));
+      body.files = [...text.matchAll(/name="(\w+)"; filename=/g)].map(x => x[1]);
     }
     const call = { method: req.method, path: u.pathname, query: Object.fromEntries(u.searchParams), headers: req.headers, body };
     calls.push(call);
@@ -114,6 +117,17 @@ export function startMock({ publicDir, failOnce = {}, products = {}, rejectReel 
     // GitHub: the watchdog's reads (when the alarm last started a run, and open week pull requests)
     if (/^\/gh\/repos\/[^/]+\/[^/]+\/actions\/workflows\/publish\.yml\/runs$/.test(p)) return send(200, { workflow_runs: ghRuns });
     if (/^\/gh\/repos\/[^/]+\/[^/]+\/pulls$/.test(p) && req.method === 'GET') return send(200, ghPulls.filter(pr => !u.searchParams.get('head') || u.searchParams.get('head').endsWith(':' + pr.head)));
+    // Telegram Bot API: /tg/bot<token>/<method>
+    if ((m = p.match(/^\/tg\/bot([^/]+)\/(\w+)$/))) {
+      const method = m[2];
+      if (m[1] !== 'tg-token') return send(401, { ok: false, error_code: 401, description: 'Unauthorized' });
+      if (tgReject) return send(403, { ok: false, error_code: 403, description: 'Forbidden: bot is not a member of the channel chat' });
+      if (method === 'getMe') return send(200, { ok: true, result: { id: 42, is_bot: true, username: 'intimova_bot' } });
+      if (method === 'getChat') return send(200, { ok: true, result: { id: -1001, type: 'channel', title: 'Intimova', username: 'intimova' } });
+      if (method === 'getChatMember') return send(200, { ok: true, result: { user: { id: 42 }, ...tgMember } });
+      if (method === 'sendMediaGroup') return send(200, { ok: true, result: JSON.parse(body.fields.media).map((_, i) => ({ message_id: 1000 + n * 10 + i })) });
+      if (['sendPhoto', 'sendVideo', 'sendMessage'].includes(method)) return send(200, { ok: true, result: { message_id: 1000 + n * 10 } });
+    }
     // GitHub issues
     if ((m = p.match(/^\/gh\/repos\/([^/]+)\/([^/]+)\/issues$/)) && req.method === 'POST') {
       if (!String(req.headers.authorization).startsWith('Bearer ')) return send(401, { message: 'Bad credentials' });

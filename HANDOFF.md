@@ -17,7 +17,10 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
   - Facebook reels are uploaded as bytes from the checkout, not as a link. On 28 Oct Facebook refused the link to Lily part 1 ("Restricted by robots.txt") because Cloudflare's managed robots.txt on intimova.ng blocks `meta-externalagent`. Facebook photos and Instagram still go by link and worked.
   - An error Meta marks `"retriable": false` gives up after one try instead of three.
   - For **TikTok**, it opens a GitHub issue that tags Grade, with the file links and caption, and he posts by hand. TikTok's app review rules out apps that only post to your own account and apps for adult products, so TikTok isn't automated.
-  - **X** isn't connected (no credit or app yet). `PLATFORMS` is `instagram,facebook`.
+  - **X** isn't connected (no credit or app yet).
+  - **Telegram (from 10 Nov):** posts that list `telegram` also go to Grade's public Telegram channel through a bot (`publisher/platforms/telegram.mjs`), with the Facebook caption, files uploaded as bytes. Secret `TELEGRAM_BOT_TOKEN`, variable `TELEGRAM_CHAT_ID`. A one-off backfill (`backfill` input on "Publish due posts") sends chosen earlier posts to Telegram only. "Check Telegram" confirms the bot can post. README step 9.
+  - `PLATFORMS` is `instagram,facebook,telegram`.
+  - **WhatsApp** is on hold (Grade, 10 Nov): the official API can't post to Channels, the Groups API needs an Official Business Account and an API-created group, and WhatsApp's Business Messaging Policy restricts adult products.
 - **GitHub secrets set:** `META_PAGE_ID`, `IG_USER_ID`, `META_PAGE_TOKEN`. **Variables:** `MEDIA_BASE_URL`, `PLATFORMS`.
   - The Page token was pasted into a chat once, so it should be regenerated after the first live posts, then the secret updated.
 - **Content library (`library/`):** material for seven posts a week, one a day (Mon myth buster, Tue education carousel, Wed story, Thu Ask Intimova, Fri quote, Sat tip, Sun product); from 30 Oct the first audience is young adults who want pleasure but hide it out of shame. `npm run runway` shows weeks left per day; see `library/README.md`. From the week of 2 Nov the Saturday run drafts five posts a week from it.
@@ -88,7 +91,7 @@ Read it with `CLAUDE.md`. `CLAUDE.md` holds the standing rules for the weekly ru
 2. Done 27 Oct: Grade deployed the posting alarm (README step 8). Its first run started "Publish due posts" at 22:38 Lagos and succeeded. The GitHub token it uses expires on the date Grade chose; when it does, make a new one and run `npx wrangler secret put GITHUB_TOKEN` in `alarm/`. If a post is ever late, run the workflow by hand with Dry run unticked and `only_post` set to the post's id.
 3. Grade: regenerate the Meta Page token and update the secret.
 4. Optional: connect X (README step 5). This needs pay-per-use credit.
-5. Optional later: Instagram's Audio API can attach a track from Instagram's own library to Reels at publish time. It's untested with the Page token we use, and Facebook has no equivalent.
+5. Sound: the Instagram API can't attach a track from Instagram's music library to any post (checked 10 Nov; the only audio field, `audio_name`, renames a reel's own audio). Grade chose (10 Nov) to turn carousels and quote cards into short videos with our own score so they post as Reels with sound: the next project after Telegram.
 6. Check after each Lily reel: listen on a phone speaker. The score was checked by measurement only, never by ear.
 
 ## Running things locally

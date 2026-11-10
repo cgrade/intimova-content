@@ -16,7 +16,8 @@ Nothing posts unless it is merged into `main`. A post with `"hold": true` never 
    - To approve, merge the pull request.
 3. **After the merge.** Cloudflare publishes the images and videos at `https://media.intimova.ng` within a minute or two.
 4. **At each post's time.** The **Publish due posts** job runs every 10 minutes from 06:01 to 22:51 and posts whatever is due, so a post goes out within about 10 minutes of its time. A Cloudflare alarm starts it (setup step 8), because GitHub's own schedule skips runs when GitHub is busy. GitHub's schedule stays on as a backup.
-5. **TikTok.** You get a GitHub notification titled "Post to TikTok" with the files and caption. Post it by hand, then close the issue.
+5. **Telegram.** The same job posts each post to the Telegram channel, with the Facebook caption.
+6. **TikTok.** You get a GitHub notification titled "Post to TikTok" with the files and caption. Post it by hand, then close the issue.
 
 If a platform fails, the job retries it on the next run, up to three times. GitHub emails you when a run fails. Platforms that already worked are never posted twice.
 
@@ -146,6 +147,15 @@ Cloudflare's free plan allows 5 of these schedules per account; this uses 2.
 3. **Check it.** After the next :01, :11, :21 … mark, Actions > **Publish due posts** shows a new run with the event `workflow_dispatch`. The Worker's logs in Cloudflare (Workers & Pages > intimova-alarm) say "Started the publisher".
 
 If the token expires, make a new one and run `npx wrangler secret put GITHUB_TOKEN` again.
+
+### 9. Telegram channel (about 5 minutes)
+
+1. In Telegram, message **@BotFather**, send `/newbot`, and follow the steps. It gives you a bot token. Keep it private: don't paste it anywhere but GitHub.
+2. In your channel, go to Administrators > Add Admin, pick the bot, and allow **Post messages**.
+3. In GitHub, Settings > Secrets and variables > Actions: add the **secret** `TELEGRAM_BOT_TOKEN`, the **variable** `TELEGRAM_CHAT_ID` = the channel's username with the @ (for example `@intimova`), and add `telegram` to the `PLATFORMS` variable.
+4. Actions > **Check Telegram** > Run workflow. It says whether the bot can post there, and posts nothing.
+5. Posts go to Telegram when their `platforms` list includes `telegram`. Photos, albums and reels are uploaded as files, so Telegram doesn't wait for media.intimova.ng.
+6. **Backfill** (sending earlier posts once): Actions > **Publish due posts** > Run workflow, put the post ids in **backfill**, comma-separated. Leave Dry run ticked first to see what it would send, then run it again unticked. It posts to Telegram only, oldest first, 30 seconds apart, and only the last one notifies subscribers. Product guides are held if the shop's price or stock has changed.
 
 ## Things I couldn't confirm from the platforms' docs
 
