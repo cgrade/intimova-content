@@ -217,3 +217,23 @@ test('backfill dry run posts nothing, and rehearsal refuses a backfill', async (
     assert.deepEqual(loadState(root), {});
   } finally { await mock.close(); }
 });
+
+import { checkTelegram } from '../publisher/setup/telegram-check.mjs';
+
+test('telegram check passes for an admin that can post, and says what is wrong otherwise', async () => {
+  for (const [member, ok] of [[{ status: 'administrator', can_post_messages: true }, true], [{ status: 'member' }, false], [{ status: 'administrator', can_post_messages: false }, false]]) {
+    const mock = await startMock({ publicDir: os.tmpdir(), tgMember: member });
+    try {
+      const r = await checkTelegram(loadConfig({ TELEGRAM_BASE: mock.base + '/tg', TELEGRAM_BOT_TOKEN: 'tg-token', TELEGRAM_CHAT_ID: '@intimova' }));
+      assert.equal(r.ok, ok, JSON.stringify(member));
+      const text = r.lines.join('\n');
+      assert.match(text, /@intimova_bot/);
+      assert.match(text, /Intimova/);
+      if (!ok) assert.match(text, /make the bot an admin with "Post messages"/);
+      assert.ok(!text.includes('tg-token'));
+    } finally { await mock.close(); }
+  }
+  const r = await checkTelegram(loadConfig({}));
+  assert.equal(r.ok, false);
+  assert.match(r.lines.join('\n'), /TELEGRAM_BOT_TOKEN/);
+});
