@@ -12,13 +12,15 @@ Every Intimova post also goes to Grade's public Telegram channel at its normal t
 - Photo and video captions: 0–1024 characters. Text messages: 1–4096.
 - `sendMediaGroup` sends an album of 2–10 items.
 - Files uploaded with multipart/form-data: up to 10 MB per photo, 50 MB for other files. (By URL: 5 MB and 20 MB.)
+- `sendVideo` takes a `cover` image (InputFile or `attach://name`).
 - `disable_notification` sends a message silently. `supports_streaming` marks a video as suitable for streaming.
 
 ## Design
 
 ### Publisher (`publisher/platforms/telegram.mjs`)
 
-- One slide → `sendPhoto`. 2–10 slides → `sendMediaGroup` with the caption on the first photo. Reel → `sendVideo` with `supports_streaming` and the cover as `thumbnail`.
+- One slide → `sendPhoto`. 2–10 slides → `sendMediaGroup` with the caption on the first photo. Reel → `sendVideo` with `supports_streaming` and the cover image as `cover` (not `thumbnail`, which must be at most 320 px and under 200 kB).
+- Captions are plain text (no `parse_mode`), so `*` or `_` in a caption can't break a post.
 - All media is uploaded as bytes from the checkout (`public/`), never by URL, so it doesn't wait for the media host.
 - Caption: `post.captions.facebook` (no hashtags, has the full link). If it is over 1024 characters, the media gets the first paragraph and the full text follows as a `sendMessage` reply.
 - Records the message id in `state/posted.json` under `telegram`, with the same no-repost, 3-tries and give-up rules as the other platforms.
