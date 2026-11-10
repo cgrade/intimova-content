@@ -237,3 +237,29 @@ test('telegram check passes for an admin that can post, and says what is wrong o
   assert.equal(r.ok, false);
   assert.match(r.lines.join('\n'), /TELEGRAM_BOT_TOKEN/);
 });
+
+test('backfill posts a repeated id only once', async () => {
+  const root = makeRoot(noTg);
+  const mock = await startMock({ publicDir: path.join(root, 'public') });
+  try {
+    await run(cfgFor(root, mock, { BACKFILL: 'single, single,single' }), quiet);
+    assert.equal(tg(mock).filter(c => c.method === 'sendPhoto').length, 1);
+  } finally { await mock.close(); }
+});
+
+test('telegram: a send that errors is not retried at once (it may have gone out)', async () => {
+  const root = makeRoot();
+  const mock = await startMock({ publicDir: path.join(root, 'public'), failOnce: { sendPhoto: 1 } });
+  try {
+    await run(cfgFor(root, mock, { ONLY_POST: 'single' }), quiet);
+    assert.equal(tg(mock).filter(c => c.method === 'sendPhoto').length, 1);
+    const s = loadState(root).single.telegram;
+    assert.equal(s.done, undefined);
+    assert.equal(s.attempts, 1);
+  } finally { await mock.close(); }
+});
+
+test('a network error never carries the bot token', async () => {
+  const { request } = await import('../publisher/lib/http.mjs');
+  await assert.rejects(request('POST', 'nota-url/botSECRET123:abc/sendPhoto', { retries: 0 }), e => !e.message.includes('SECRET123'));
+});

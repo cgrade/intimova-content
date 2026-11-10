@@ -6,6 +6,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { request } from '../lib/http.mjs';
+// Sends are never retried within a run: Telegram may have posted before the error, and a repost can't be undone.
+// The publisher's next run (up to 3) covers real failures.
 
 export const CAPTION_MAX = 1024;
 
@@ -39,25 +41,25 @@ export async function postTelegram({ post, manifest, local, cfg, log = () => {},
     if (manifest.duration) f.append('duration', String(Math.round(manifest.duration)));
     attach(f, 'video', manifest.video);
     if (manifest.cover) { f.append('cover', 'attach://cover'); attach(f, 'cover', manifest.cover); }
-    messageId = (await request('POST', api('sendVideo'), { body: f })).result.message_id;
+    messageId = (await request('POST', api('sendVideo'), { body: f, retries: 0 })).result.message_id;
   } else if (manifest.images.length === 1) {
     const f = form();
     f.append('caption', caption);
     attach(f, 'photo', manifest.images[0]);
-    messageId = (await request('POST', api('sendPhoto'), { body: f })).result.message_id;
+    messageId = (await request('POST', api('sendPhoto'), { body: f, retries: 0 })).result.message_id;
   } else {
     const f = form();
     const media = manifest.images.map((img, i) => ({ type: 'photo', media: `attach://p${i}`, ...(i === 0 && { caption }) }));
     f.append('media', JSON.stringify(media));
     manifest.images.forEach((img, i) => attach(f, `p${i}`, img));
-    messageId = (await request('POST', api('sendMediaGroup'), { body: f })).result[0].message_id;
+    messageId = (await request('POST', api('sendMediaGroup'), { body: f, retries: 0 })).result[0].message_id;
   }
 
   // The post is out once the media is; a failed follow-up must not make the next run post the media again.
   let full_text;
   if (rest) {
     try {
-      await request('POST', api('sendMessage'), { json: {
+      await request('POST', api('sendMessage'), { retries: 0, json: {
         chat_id: t.chatId, text: rest, reply_parameters: { message_id: messageId }, link_preview_options: { is_disabled: true },
         ...(silent && { disable_notification: true }) } });
       full_text = 'sent';

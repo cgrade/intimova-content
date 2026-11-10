@@ -18,7 +18,7 @@ export async function request(method, url, { json, form, body, headers = {}, ret
   for (let attempt = 0; ; attempt++) {
     let res;
     try { res = await fetch(url, { method, headers: h, body: payload }); }
-    catch (e) { if (attempt < retries) { await sleep(2000); continue; } throw new ApiError(`Network error calling ${redact(url)}: ${e.message}`, { url }); }
+    catch (e) { if (attempt < retries) { await sleep(2000); continue; } throw new ApiError(`Network error calling ${redact(url)}: ${redact(e.message)}`, { url }); }
     const text = await res.text();
     let data; try { data = text ? JSON.parse(text) : {}; } catch { data = { raw: text }; }
     if (res.ok) return data;

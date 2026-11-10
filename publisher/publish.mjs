@@ -197,6 +197,7 @@ async function backfill(cfg, posts, state, log) {
     }
     if (cfg.dryRun) { log('  ~ telegram: would post'); results.push({ post: post.id, platform: 'telegram', ok: true, dry: true }); continue; }
     const s = ((state[post.id] ||= {}).telegram ||= { attempts: 0 });
+    if (s.done) continue;
     s.attempts++; s.last_try = new Date().toISOString();
     try {
       const r = await postTelegram({ post, manifest, local: f => localMedia(cfg.root, post, f), cfg, log, silent: i < todo.length - 1 });

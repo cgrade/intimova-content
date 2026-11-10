@@ -43,7 +43,7 @@ export function loadConfig(env = process.env) {
       token: env.TELEGRAM_BOT_TOKEN || '',
       chatId: env.TELEGRAM_CHAT_ID || '',     // the channel's @username, or its numeric id
     },
-    backfill: (env.BACKFILL || '').split(',').map(s => s.trim()).filter(Boolean), // post ids to send to Telegram only, now
+    backfill: [...new Set((env.BACKFILL || '').split(',').map(s => s.trim()).filter(Boolean))], // post ids to send to Telegram only, now
     backfillGapMs: Number(env.BACKFILL_GAP_MS || 30000),
     github: {
       api: env.GITHUB_API_URL || 'https://api.github.com',
