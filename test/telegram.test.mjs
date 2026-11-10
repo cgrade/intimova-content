@@ -161,3 +161,59 @@ test('rehearsal skips telegram', async () => {
     assert.ok(log.some(l => /telegram: skipped in rehearsal/.test(l)));
   } finally { await mock.close(); }
 });
+
+// Backfill: posts that never listed telegram, sent to Telegram only.
+const noTg = { car: { platforms: ['instagram', 'facebook'] }, single: { platforms: ['instagram', 'facebook'] }, reel: { platforms: ['instagram', 'facebook'] }, guide: { platforms: ['instagram', 'facebook'] } };
+
+test('backfill sends only to telegram, oldest first, silent except the last', async () => {
+  const root = makeRoot(noTg);
+  const mock = await startMock({ publicDir: path.join(root, 'public'), products: { rose: { price: 25000 } } });
+  try {
+    const r = await run(cfgFor(root, mock, { BACKFILL: 'reel, guide, single' }), quiet);
+    const sends = tg(mock).filter(c => c.method.startsWith('send'));
+    assert.deepEqual(sends.map(c => c.method), ['sendMediaGroup', 'sendPhoto', 'sendVideo']); // guide 9 Nov, single 10 Nov, reel 11 Nov
+    assert.deepEqual(sends.map(c => c.fields.disable_notification), ['true', 'true', undefined]);
+    assert.equal(mock.calls.filter(c => c.path.startsWith('/graph/') || c.path.startsWith('/rupload/')).length, 0);
+    const state = loadState(root);
+    for (const id of ['reel', 'guide', 'single']) assert.ok(state[id].telegram.done, id);
+    assert.equal(state.car, undefined);
+    assert.ok(r.every(x => x.ok && x.platform === 'telegram'));
+  } finally { await mock.close(); }
+});
+
+test('backfill skips ones already sent and names unknown ids', async () => {
+  const root = makeRoot(noTg);
+  const mock = await startMock({ publicDir: path.join(root, 'public') });
+  try {
+    await run(cfgFor(root, mock, { BACKFILL: 'single' }), quiet);
+    const before = mock.calls.length;
+    const r = await run(cfgFor(root, mock, { BACKFILL: 'single,nope' }), quiet);
+    assert.equal(mock.calls.slice(before).filter(c => c.path.startsWith('/tg/')).length, 0);
+    assert.equal(r.find(x => x.post === 'nope').note, 'no such post');
+    assert.ok(r.find(x => x.post === 'single').ok);
+  } finally { await mock.close(); }
+});
+
+test('backfill holds a product post whose price changed', async () => {
+  const root = makeRoot(noTg);
+  const mock = await startMock({ publicDir: path.join(root, 'public'), products: { rose: { price: 30000 } } });
+  try {
+    const r = await run(cfgFor(root, mock, { BACKFILL: 'guide' }), quiet);
+    assert.equal(tg(mock).length, 0);
+    assert.match(r[0].note, /^held: /);
+  } finally { await mock.close(); }
+});
+
+test('backfill dry run posts nothing, and rehearsal refuses a backfill', async () => {
+  const root = makeRoot(noTg);
+  const mock = await startMock({ publicDir: path.join(root, 'public') });
+  try {
+    const r = await run(cfgFor(root, mock, { BACKFILL: 'single,reel', DRY_RUN: '1' }), quiet);
+    assert.equal(tg(mock).length, 0);
+    assert.ok(r.every(x => x.dry));
+    const r2 = await run(cfgFor(root, mock, { BACKFILL: 'single', REHEARSAL: '1', ONLY_POST: 'single' }), quiet);
+    assert.equal(tg(mock).length, 0);
+    assert.equal(r2[0].ok, false);
+    assert.deepEqual(loadState(root), {});
+  } finally { await mock.close(); }
+});
