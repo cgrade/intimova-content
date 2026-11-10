@@ -32,3 +32,132 @@ test('telegram settings come from the environment', () => {
   assert.deepEqual(c.telegram, { base: 'https://api.telegram.org', token: 't', chatId: '@chan' });
   assert.deepEqual(loadConfig({}).backfill, []);
 });
+
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { startMock } from './mock-api.mjs';
+import { run } from '../publisher/publish.mjs';
+import { loadState } from '../publisher/lib/store.mjs';
+import { splitCaption } from '../publisher/platforms/telegram.mjs';
+
+const WEEK = '2026-11-09';
+function makeRoot(over = {}) {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'intimova-tg-'));
+  const add = (slug, p, manifest, files) => {
+    fs.mkdirSync(path.join(root, 'content', WEEK, slug), { recursive: true });
+    fs.writeFileSync(path.join(root, 'content', WEEK, slug, 'post.json'), JSON.stringify(p));
+    const pub = path.join(root, 'public', WEEK, slug);
+    fs.mkdirSync(pub, { recursive: true });
+    fs.writeFileSync(path.join(pub, 'manifest.json'), JSON.stringify(manifest));
+    for (const [f, bytes] of Object.entries(files)) fs.writeFileSync(path.join(pub, f), Buffer.alloc(bytes, 7));
+  };
+  const imgs = [1, 2, 3, 4, 5].map(i => `slide-${i}.jpg`);
+  add('1-car', post({ id: 'car', publish_at: '2026-11-09T19:30:00+01:00', platforms: ['instagram', 'telegram'], ...over.car }),
+    { type: 'carousel', images: imgs }, Object.fromEntries(imgs.map(i => [i, 2000])));
+  add('2-single', post({ id: 'single', publish_at: '2026-11-10T19:30:00+01:00', ...over.single }), { type: 'carousel', images: ['slide-1.jpg'] }, { 'slide-1.jpg': 2000 });
+  add('3-reel', post({ id: 'reel', format: 'reel', publish_at: '2026-11-11T19:30:00+01:00', slides: undefined, story: { scenes: [{ lines: [{ text: 'a' }] }] }, ...over.reel }),
+    { type: 'reel', video: 'reel.mp4', cover: 'cover.jpg', duration: 176 }, { 'reel.mp4': 3 * 1024 * 1024, 'cover.jpg': 1000 });
+  add('4-guide', post({ id: 'guide', publish_at: '2026-11-09T19:00:00+01:00', product: { slug: 'rose', price: 25000 }, ...over.guide }),
+    { type: 'carousel', images: ['slide-1.jpg', 'slide-2.jpg'] }, { 'slide-1.jpg': 2000, 'slide-2.jpg': 2000 });
+  return root;
+}
+const cfgFor = (root, mock, over = {}) => loadConfig({
+  CONTENT_ROOT: root, NOW: '2026-11-11T20:00:00+01:00', MEDIA_BASE_URL: mock.base + '/media', POLL_MS: '5',
+  GRAPH_BASE: mock.base + '/graph', RUPLOAD_BASE: mock.base + '/rupload', META_PAGE_ID: 'PAGE1', META_PAGE_TOKEN: 'page-token', IG_USER_ID: 'IG123',
+  SHOP_BASE_URL: mock.base + '/shop', TELEGRAM_BASE: mock.base + '/tg', TELEGRAM_BOT_TOKEN: 'tg-token', TELEGRAM_CHAT_ID: '@intimova',
+  PLATFORMS: 'instagram,facebook,telegram', BACKFILL_GAP_MS: '0', MAX_LATE_HOURS: '72', ...over });
+const quiet = () => {};
+const tg = mock => mock.calls.filter(c => c.path.startsWith('/tg/')).map(c => ({ method: c.path.split('/').pop(), ...c.body }));
+
+test('telegram: single slide is one photo, a carousel is one album, a reel is one video, each once', async () => {
+  const root = makeRoot();
+  const mock = await startMock({ publicDir: path.join(root, 'public'), products: { rose: { price: 25000 } } });
+  try {
+    await run(cfgFor(root, mock), quiet);
+    const calls = tg(mock);
+    const photo = calls.find(c => c.method === 'sendPhoto');
+    assert.equal(photo.fields.caption, 'fb');
+    assert.equal(photo.fields.chat_id, '@intimova');
+    assert.deepEqual(photo.files, ['photo']);
+    assert.equal(photo.fields.parse_mode, undefined);
+    const albums = calls.filter(c => c.method === 'sendMediaGroup');
+    const car = albums.find(a => JSON.parse(a.fields.media).length === 5);
+    const media = JSON.parse(car.fields.media);
+    assert.deepEqual(media.map(m => [m.type, m.media]), [0, 1, 2, 3, 4].map(i => ['photo', `attach://p${i}`]));
+    assert.equal(media[0].caption, 'fb');
+    assert.ok(media.slice(1).every(m => m.caption === undefined));
+    assert.equal(car.files.length, 5);
+    const video = calls.find(c => c.method === 'sendVideo');
+    assert.equal(video.fields.supports_streaming, 'true');
+    assert.equal(video.fields.cover, 'attach://cover');
+    assert.deepEqual(video.files.sort(), ['cover', 'video']);
+    const state = loadState(root);
+    for (const id of ['car', 'single', 'reel', 'guide']) assert.ok(state[id].telegram.done && state[id].telegram.id, id);
+    const before = mock.calls.length;
+    await run(cfgFor(root, mock), quiet);
+    assert.equal(mock.calls.slice(before).filter(c => c.path.startsWith('/tg/')).length, 0);
+  } finally { await mock.close(); }
+});
+
+test('telegram: no media-host check (files are uploaded), while Instagram waits', async () => {
+  const root = makeRoot();
+  const mock = await startMock({ publicDir: path.join(root, 'public'), products: { rose: { price: 25000 } } });
+  try {
+    const r = await run(cfgFor(root, mock, { MEDIA_BASE_URL: mock.base + '/nowhere', ONLY_POST: 'car' }), quiet);
+    assert.ok(r.find(x => x.platform === 'telegram').ok);
+    assert.ok(r.find(x => x.platform === 'instagram').waiting);
+  } finally { await mock.close(); }
+});
+
+test('splitCaption keeps captions up to 1024 and splits longer ones', () => {
+  const exact = 'a'.repeat(1024);
+  assert.deepEqual(splitCaption(exact), { caption: exact, rest: null });
+  const two = 'b'.repeat(700) + '\n\n' + 'c'.repeat(700);
+  assert.deepEqual(splitCaption(two), { caption: 'b'.repeat(700), rest: two });
+  const one = Array.from({ length: 300 }, () => 'word').join(' ');   // 1499 characters, no paragraph break
+  const s = splitCaption(one);
+  assert.ok(s.caption.length <= 1024);
+  assert.match(s.caption, /word…$/);
+  assert.equal(s.rest, one);
+});
+
+test('telegram: a long caption is followed by the full text as a reply', async () => {
+  const long = 'x'.repeat(700) + '\n\n' + 'y'.repeat(700);
+  const root = makeRoot({ single: { captions: { instagram: 'ig', facebook: long } } });
+  const mock = await startMock({ publicDir: path.join(root, 'public') });
+  try {
+    await run(cfgFor(root, mock, { ONLY_POST: 'single' }), quiet);
+    const calls = tg(mock);
+    const photo = calls.find(c => c.method === 'sendPhoto');
+    assert.equal(photo.fields.caption, 'x'.repeat(700));
+    const msg = calls.find(c => c.method === 'sendMessage');
+    assert.equal(msg.text, long);
+    assert.equal(msg.chat_id, '@intimova');
+    assert.ok(msg.reply_parameters.message_id > 0);
+  } finally { await mock.close(); }
+});
+
+test('telegram: a refusal is retried and then given up, without the token in the error', async () => {
+  const root = makeRoot();
+  const mock = await startMock({ publicDir: path.join(root, 'public'), tgReject: true });
+  try {
+    for (let i = 0; i < 3; i++) await run(cfgFor(root, mock, { ONLY_POST: 'single' }), quiet);
+    const s = loadState(root).single.telegram;
+    assert.equal(s.attempts, 3);
+    assert.equal(s.gave_up, true);
+    assert.match(s.error, /bot is not a member/);
+    assert.ok(!s.error.includes('tg-token'));
+  } finally { await mock.close(); }
+});
+
+test('rehearsal skips telegram', async () => {
+  const root = makeRoot();
+  const mock = await startMock({ publicDir: path.join(root, 'public') });
+  try {
+    const log = [];
+    await run(cfgFor(root, mock, { ONLY_POST: 'single', REHEARSAL: '1', PLATFORMS: 'telegram' }), l => log.push(l));
+    assert.equal(tg(mock).length, 0);
+    assert.ok(log.some(l => /telegram: skipped in rehearsal/.test(l)));
+  } finally { await mock.close(); }
+});

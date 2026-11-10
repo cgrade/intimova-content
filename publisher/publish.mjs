@@ -11,9 +11,12 @@ import { postInstagram } from './platforms/instagram.mjs';
 import { postFacebook } from './platforms/facebook.mjs';
 import { postX } from './platforms/x.mjs';
 import { postTiktok } from './platforms/tiktok.mjs';
+import { postTelegram } from './platforms/telegram.mjs';
 import { postAlerts, watchdogAlerts, raiseAlerts } from './watch.mjs';
 
-const POSTERS = { instagram: postInstagram, facebook: postFacebook, x: postX, tiktok: postTiktok };
+const POSTERS = { instagram: postInstagram, facebook: postFacebook, x: postX, tiktok: postTiktok, telegram: postTelegram };
+// These upload the file's bytes themselves, so they don't wait for the media host.
+const UPLOADS_BYTES = ['x', 'telegram'];
 
 export function isDue(post, cfg) {
   if (cfg.onlyPost) return post.id === cfg.onlyPost;
@@ -81,7 +84,9 @@ export async function run(cfg = loadConfig(), log = console.log) {
     for (const plat of post.platforms.filter(p => cfg.platforms.includes(p))) {
       const s = (st[plat] ||= { attempts: 0 });
       if (s.done || s.gave_up) { log(`  = ${plat}: ${s.done ? 'already posted' : 'gave up earlier'}`); continue; }
-      if (plat !== 'x' && !(await ensureLive())) {
+      // Telegram can't upload without publishing, so a rehearsal leaves it alone.
+      if (cfg.rehearsal && plat === 'telegram') { log('  ~ telegram: skipped in rehearsal'); continue; }
+      if (!UPLOADS_BYTES.includes(plat) && !(await ensureLive())) {
         log(`  … ${plat}: media isn't live at ${url(firstFile)} yet; will try next run`);
         results.push({ post: post.id, platform: plat, ok: false, waiting: true, note: 'media not live yet' });
         continue;
