@@ -32,7 +32,10 @@ export async function head(url) {
 }
 
 // Any query parameter whose name mentions a token, secret, password or key (fb_exchange_token, client_secret, ...).
-export function redact(url) { return String(url).replace(/([?&][^=&]*(?:token|secret|password|key)[^=&]*)=[^&]*/gi, '$1=***'); }
+// Telegram puts the bot token in the path: /bot<token>/method.
+export function redact(url) {
+  return String(url).replace(/([?&][^=&]*(?:token|secret|password|key)[^=&]*)=[^&]*/gi, '$1=***').replace(/\/bot[^/]+\//g, '/bot***/');
+}
 function summarize(d) {
   const e = d?.error ?? d?.errors ?? d;
   return JSON.stringify(e).slice(0, 500);
