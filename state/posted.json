@@ -360,5 +360,35 @@
       "url": "https://github.com/cgrade/intimova-content/issues/29",
       "at": "2026-11-10T18:32:21.582Z"
     }
+  },
+  "2026-11-11-lily-part3": {
+    "instagram": {
+      "attempts": 1,
+      "last_try": "2026-11-11T18:31:21.102Z",
+      "done": true,
+      "at": "2026-11-11T18:32:44.193Z",
+      "id": "18107641823282978"
+    },
+    "facebook": {
+      "attempts": 1,
+      "last_try": "2026-11-11T18:32:44.197Z",
+      "done": true,
+      "at": "2026-11-11T18:32:48.863Z",
+      "id": "1692938335881785"
+    },
+    "telegram": {
+      "attempts": 1,
+      "last_try": "2026-11-11T18:32:48.863Z",
+      "done": true,
+      "at": "2026-11-11T18:32:51.959Z",
+      "id": "141"
+    },
+    "tiktok_manual": {
+      "attempts": 1,
+      "notified": true,
+      "issue": 30,
+      "url": "https://github.com/cgrade/intimova-content/issues/30",
+      "at": "2026-11-11T18:32:52.530Z"
+    }
   }
 }
