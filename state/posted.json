@@ -393,9 +393,11 @@
   },
   "2026-11-12-ask-feel-replaced": {
     "instagram": {
-      "attempts": 1,
-      "last_try": "2026-11-12T18:31:23.139Z",
-      "error": "POST https://graph.facebook.com/v26.0/17841440270503173/media_publish failed with 400: {\"message\":\"Media ID is not available\",\"type\":\"OAuthException\",\"code\":9007,\"error_subcode\":2207027,\"is_transient\":false,\"error_user_title\":\"Cannot publish\",\"error_user_msg\":\"The media is not ready to be published. Please wait a moment.\",\"fbtrace_id\":\"AzTu0c3OoZ2SlimAr_ivLoO\"}"
+      "attempts": 2,
+      "last_try": "2026-11-12T18:41:22.468Z",
+      "done": true,
+      "at": "2026-11-12T18:42:01.273Z",
+      "id": "18116123531162256"
     },
     "facebook": {
       "attempts": 1,
