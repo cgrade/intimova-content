@@ -420,5 +420,35 @@
       "url": "https://github.com/cgrade/intimova-content/issues/31",
       "at": "2026-11-12T18:32:01.770Z"
     }
+  },
+  "2026-11-13-quote-not-a-reward": {
+    "instagram": {
+      "attempts": 1,
+      "last_try": "2026-11-13T18:31:21.111Z",
+      "done": true,
+      "at": "2026-11-13T18:31:29.511Z",
+      "id": "17939336400402418"
+    },
+    "facebook": {
+      "attempts": 1,
+      "last_try": "2026-11-13T18:31:29.511Z",
+      "done": true,
+      "at": "2026-11-13T18:31:35.258Z",
+      "id": "807405089406641_1480576600840922"
+    },
+    "telegram": {
+      "attempts": 1,
+      "last_try": "2026-11-13T18:31:35.259Z",
+      "done": true,
+      "at": "2026-11-13T18:31:36.269Z",
+      "id": "148"
+    },
+    "tiktok_manual": {
+      "attempts": 1,
+      "notified": true,
+      "issue": 32,
+      "url": "https://github.com/cgrade/intimova-content/issues/32",
+      "at": "2026-11-13T18:31:36.729Z"
+    }
   }
 }
