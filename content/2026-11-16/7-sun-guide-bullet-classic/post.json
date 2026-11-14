@@ -1,0 +1,67 @@
+{
+  "id": "2026-11-22-guide-bullet-classic",
+  "format": "carousel",
+  "pillar": "Product guide",
+  "library": "bullet-classic-guide",
+  "product": {
+    "slug": "bullet-classic",
+    "price": 10000
+  },
+  "publish_at": "2026-11-22T19:30:00+01:00",
+  "platforms": [
+    "instagram",
+    "facebook",
+    "x",
+    "tiktok",
+    "telegram"
+  ],
+  "series_label": "PRODUCT GUIDE",
+  "last_footer": "DISCREET DELIVERY · INTIMOVA.NG",
+  "slides": [
+    {
+      "type": "cover",
+      "headline": "Switch it on *and it’s ready.*",
+      "lead": "A guide to the Bullet — Classic. Swipe."
+    },
+    {
+      "type": "product",
+      "slug": "bullet-classic",
+      "name": "The Bullet — Classic",
+      "headline": "The simple, battery-powered classic. *A gentle, affordable first step.*",
+      "price": 10000
+    },
+    {
+      "type": "text",
+      "kicker": "HOW IT WORKS",
+      "headline": "One button. *No charging.*",
+      "body": "It runs on a single AA-type “tiger” battery: put one in, switch on, explore gently. Light, pocket-sized and beginner-friendly. Keep a spare battery handy.",
+      "note": "₦10,000 on intimova.ng (was ₦14,500)."
+    },
+    {
+      "type": "text",
+      "kicker": "WHAT IT’S MADE OF",
+      "headline": "Body-safe silicone tip, *ABS body.*",
+      "body": "Phthalate-free, according to the manufacturer. Wipe it clean, use water-based lubricant only, and take the battery out for storage to protect the motor.",
+      "note": "Details from the product page on intimova.ng."
+    },
+    {
+      "type": "takeaway",
+      "kicker": "DISCREET DELIVERY",
+      "headline": "Plain, unbranded packaging. *Always.*",
+      "lead": "Nationwide delivery from ₦6,000. Faulty or wrong? Tell us within 2 days of delivery and we replace it free."
+    }
+  ],
+  "captions": {
+    "instagram": "Switch it on and it’s ready. 💜\n\nThe Bullet — Classic is the simple, battery-powered classic: one button, no charging, a single AA-type “tiger” battery. Light, pocket-sized and beginner-friendly. Body-safe silicone tip and ABS body, phthalate-free according to the manufacturer. Wipe it clean, use water-based lubricant only, and take the battery out for storage.\n\n₦10,000 at intimova.ng, the most affordable first step in the shop. Delivered nationwide in plain, unbranded packaging. Link in bio.\n\n#Intimova #SexualWellness #PleasureIsSelfCare #SelfLove #Wellbeing",
+    "facebook": "Switch it on and it’s ready. 💜\n\nThe Bullet — Classic is the simple, battery-powered classic: one button, no charging, a single AA-type “tiger” battery. Light, pocket-sized and beginner-friendly. Body-safe silicone tip and ABS body, phthalate-free according to the manufacturer. Wipe it clean, use water-based lubricant only, and take the battery out for storage.\n\n₦10,000, delivered nationwide in plain, unbranded packaging: https://intimova.ng/product/bullet-classic",
+    "x": "Switch it on and it’s ready. The Bullet — Classic: one button, battery-powered, body-safe silicone tip, pocket-sized. A gentle, affordable first step, delivered in plain, unbranded packaging. 💜",
+    "tiktok_title": "A guide to the Bullet — Classic",
+    "tiktok": "Switch it on and it’s ready: one button, battery-powered, body-safe silicone tip. A gentle, affordable first step. Plain, unbranded delivery. #Intimova #SexualWellness #SelfLove"
+  },
+  "safety": {
+    "explicit": false,
+    "health_claim": false,
+    "clear_faces": false
+  },
+  "ai_generated": false
+}
