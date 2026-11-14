@@ -450,5 +450,35 @@
       "url": "https://github.com/cgrade/intimova-content/issues/32",
       "at": "2026-11-13T18:31:36.729Z"
     }
+  },
+  "2026-11-14-tip-stay-close": {
+    "instagram": {
+      "attempts": 1,
+      "last_try": "2026-11-14T18:31:17.831Z",
+      "done": true,
+      "at": "2026-11-14T18:31:59.343Z",
+      "id": "17990667980877868"
+    },
+    "facebook": {
+      "attempts": 1,
+      "last_try": "2026-11-14T18:31:59.344Z",
+      "done": true,
+      "at": "2026-11-14T18:32:14.580Z",
+      "id": "807405089406641_1481722594059656"
+    },
+    "telegram": {
+      "attempts": 1,
+      "last_try": "2026-11-14T18:32:14.581Z",
+      "done": true,
+      "at": "2026-11-14T18:32:16.891Z",
+      "id": "149"
+    },
+    "tiktok_manual": {
+      "attempts": 1,
+      "notified": true,
+      "issue": 34,
+      "url": "https://github.com/cgrade/intimova-content/issues/34",
+      "at": "2026-11-14T18:32:17.354Z"
+    }
   }
 }
