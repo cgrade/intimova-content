@@ -480,5 +480,35 @@
       "url": "https://github.com/cgrade/intimova-content/issues/34",
       "at": "2026-11-14T18:32:17.354Z"
     }
+  },
+  "2026-11-15-guide-wand": {
+    "instagram": {
+      "attempts": 1,
+      "last_try": "2026-11-15T18:31:23.539Z",
+      "done": true,
+      "at": "2026-11-15T18:31:59.827Z",
+      "id": "17963924133257941"
+    },
+    "facebook": {
+      "attempts": 1,
+      "last_try": "2026-11-15T18:31:59.827Z",
+      "done": true,
+      "at": "2026-11-15T18:32:15.845Z",
+      "id": "807405089406641_1482892953942620"
+    },
+    "telegram": {
+      "attempts": 1,
+      "last_try": "2026-11-15T18:32:15.846Z",
+      "done": true,
+      "at": "2026-11-15T18:32:17.583Z",
+      "id": "154"
+    },
+    "tiktok_manual": {
+      "attempts": 1,
+      "notified": true,
+      "issue": 35,
+      "url": "https://github.com/cgrade/intimova-content/issues/35",
+      "at": "2026-11-15T18:32:17.938Z"
+    }
   }
 }
