@@ -1,0 +1,67 @@
+{
+  "id": "2026-11-16-myth-virginity-test",
+  "format": "carousel",
+  "pillar": "Permission and self-care",
+  "library": "virginity-test",
+  "publish_at": "2026-11-16T19:30:00+01:00",
+  "platforms": [
+    "instagram",
+    "facebook",
+    "x",
+    "tiktok",
+    "telegram"
+  ],
+  "series_label": "MYTH VS FACT",
+  "last_footer": "DISCREET DELIVERY · INTIMOVA.NG",
+  "slides": [
+    {
+      "type": "myth",
+      "text": "“You can tell if a woman is a virgin.”",
+      "lead": "Swipe. Here’s what the World Health Organization says."
+    },
+    {
+      "type": "fact",
+      "number": "No",
+      "statement": "examination can prove a girl or woman has had sex.",
+      "detail": "Said jointly by the WHO, UN Human Rights and UN Women.",
+      "source": "Source: WHO, UN Human Rights and UN Women, interagency statement, 17 Oct 2018. International guidance."
+    },
+    {
+      "type": "text",
+      "kicker": "WHAT IT MEANS",
+      "headline": "Nobody can read your history *off your body.*",
+      "body": "Whatever you have or haven’t done, no test can tell. And it was never anyone else’s to inspect."
+    },
+    {
+      "type": "text",
+      "kicker": "YOU’RE NOT THE ONLY ONE",
+      "headline": "So many of us grew up *afraid of being “found out”.*",
+      "body": "That fear rested on something that was never true. You’re allowed to put it down."
+    },
+    {
+      "type": "takeaway",
+      "kicker": "THE TAKEAWAY",
+      "headline": "No test can tell. *Your body’s history is yours to share, or not.*",
+      "lead": "Send this to the friend who needs to hear it."
+    }
+  ],
+  "captions": {
+    "instagram": "Myth: you can tell if a woman is a virgin.\n\nThe World Health Organization, UN Human Rights and UN Women said it together in 2018: there is no examination that can prove a girl or woman has had sex.\n\nSo many of us grew up afraid of being “found out”. That fear rested on something that was never true. Whatever you have or haven’t done, nobody can read it off your body, and it was never anyone else’s to inspect.\n\nYour body’s history is yours to share, or not.\n\nSend this to the friend who needs to hear it.\n\nSource: WHO, UN Human Rights and UN Women, interagency statement, 17 Oct 2018.\n\n#MythVsFact #NoShame #BodyConfidence #SexualWellness #WomensHealth #Intimova",
+    "facebook": "Myth: you can tell if a woman is a virgin.\n\nThe World Health Organization, UN Human Rights and UN Women said it together in 2018: there is no examination that can prove a girl or woman has had sex.\n\nSo many of us grew up afraid of being “found out”. That fear rested on something that was never true. Whatever you have or haven’t done, nobody can read it off your body, and it was never anyone else’s to inspect.\n\nYour body’s history is yours to share, or not.\n\nSend this to the friend who needs to hear it.\n\nSource: WHO, UN Human Rights and UN Women, interagency statement, 17 Oct 2018.",
+    "x": "Myth: you can tell if a woman is a virgin.\n\nNo examination can prove a girl or woman has had sex (WHO, UN Human Rights and UN Women, 2018). Your body’s history is yours to share, or not. 👇",
+    "x_thread": [
+      "So many of us grew up afraid of being “found out”. That fear rested on something that was never true. You’re allowed to put it down."
+    ],
+    "tiktok_title": "Myth: you can tell if a woman is a virgin",
+    "tiktok": "Myth: you can tell if a woman is a virgin. No examination can prove a girl or woman has had sex (WHO, UN Human Rights and UN Women, 2018). Your history is yours to share, or not. #MythVsFact #NoShame #BodyConfidence #Intimova"
+  },
+  "safety": {
+    "explicit": false,
+    "health_claim": true,
+    "health_sources": [
+      "https://www.who.int/news/item/17-10-2018-interagency-statement-calls-for-the-elimination-of-virginity-testing"
+    ],
+    "clear_faces": false
+  },
+  "ai_generated": false
+}

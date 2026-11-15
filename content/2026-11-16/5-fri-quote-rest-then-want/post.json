@@ -1,0 +1,35 @@
+{
+  "id": "2026-11-20-quote-rest-then-want",
+  "format": "carousel",
+  "pillar": "Permission",
+  "library": "q-rest-then-want",
+  "publish_at": "2026-11-20T19:30:00+01:00",
+  "platforms": [
+    "instagram",
+    "facebook",
+    "x",
+    "tiktok",
+    "telegram"
+  ],
+  "series_label": "PERMISSION",
+  "slides": [
+    {
+      "type": "quote",
+      "quote": "Rest first. *Then let yourself want things.*",
+      "attribution": "— INTIMOVA"
+    }
+  ],
+  "captions": {
+    "instagram": "Rest first. Then let yourself want things.\n\nA tired body isn’t a broken one. Sleep, slow down, put the week down. Then, when you’re ready, let yourself want, without apologising for it. Tag someone who needs this tonight.\n\n#Intimova #SelfLove #PleasureIsSelfCare #NoShame #Wellbeing",
+    "facebook": "Rest first. Then let yourself want things.\n\nA tired body isn’t a broken one. Sleep, slow down, put the week down. Then, when you’re ready, let yourself want, without apologising for it. Tag someone who needs this tonight.",
+    "x": "Rest first. Then let yourself want things.",
+    "tiktok_title": "Rest first. Then let yourself want things.",
+    "tiktok": "A tired body isn’t a broken one. Rest, then let yourself want, without apologising. #Intimova #SelfLove #PleasureIsSelfCare #NoShame"
+  },
+  "safety": {
+    "explicit": false,
+    "health_claim": false,
+    "clear_faces": false
+  },
+  "ai_generated": false
+}
