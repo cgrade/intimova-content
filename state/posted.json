@@ -510,5 +510,35 @@
       "url": "https://github.com/cgrade/intimova-content/issues/35",
       "at": "2026-11-15T18:32:17.938Z"
     }
+  },
+  "2026-11-16-myth-virginity-test": {
+    "instagram": {
+      "attempts": 1,
+      "last_try": "2026-11-16T18:31:19.302Z",
+      "done": true,
+      "at": "2026-11-16T18:31:58.160Z",
+      "id": "18116863124610278"
+    },
+    "facebook": {
+      "attempts": 1,
+      "last_try": "2026-11-16T18:31:58.161Z",
+      "done": true,
+      "at": "2026-11-16T18:32:09.467Z",
+      "id": "807405089406641_1483897850508797"
+    },
+    "telegram": {
+      "attempts": 1,
+      "last_try": "2026-11-16T18:32:09.468Z",
+      "done": true,
+      "at": "2026-11-16T18:32:11.133Z",
+      "id": "159"
+    },
+    "tiktok_manual": {
+      "attempts": 1,
+      "notified": true,
+      "issue": 37,
+      "url": "https://github.com/cgrade/intimova-content/issues/37",
+      "at": "2026-11-16T18:32:11.574Z"
+    }
   }
 }
