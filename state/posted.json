@@ -540,5 +540,35 @@
       "url": "https://github.com/cgrade/intimova-content/issues/37",
       "at": "2026-11-16T18:32:11.574Z"
     }
+  },
+  "2026-11-17-carousel-which-lube": {
+    "instagram": {
+      "attempts": 1,
+      "last_try": "2026-11-17T18:31:19.470Z",
+      "done": true,
+      "at": "2026-11-17T18:32:00.706Z",
+      "id": "18100271117423160"
+    },
+    "facebook": {
+      "attempts": 1,
+      "last_try": "2026-11-17T18:32:00.706Z",
+      "done": true,
+      "at": "2026-11-17T18:32:18.095Z",
+      "id": "807405089406641_1484870597078189"
+    },
+    "telegram": {
+      "attempts": 1,
+      "last_try": "2026-11-17T18:32:18.096Z",
+      "done": true,
+      "at": "2026-11-17T18:32:19.987Z",
+      "id": "164"
+    },
+    "tiktok_manual": {
+      "attempts": 1,
+      "notified": true,
+      "issue": 38,
+      "url": "https://github.com/cgrade/intimova-content/issues/38",
+      "at": "2026-11-17T18:32:20.416Z"
+    }
   }
 }
