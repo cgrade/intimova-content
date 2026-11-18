@@ -587,9 +587,11 @@
       "id": "1494594789398985"
     },
     "telegram": {
-      "attempts": 1,
-      "last_try": "2026-11-18T18:32:45.353Z",
-      "error": "Network error calling https://api.telegram.org/bot***/sendVideo: fetch failed"
+      "attempts": 2,
+      "last_try": "2026-11-18T18:41:20.307Z",
+      "done": true,
+      "at": "2026-11-18T18:41:23.321Z",
+      "id": "171"
     },
     "tiktok_manual": {
       "attempts": 1,
