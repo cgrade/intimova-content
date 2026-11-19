@@ -600,5 +600,35 @@
       "url": "https://github.com/cgrade/intimova-content/issues/39",
       "at": "2026-11-18T18:34:53.660Z"
     }
+  },
+  "2026-11-19-ask-desire-gone": {
+    "instagram": {
+      "attempts": 1,
+      "last_try": "2026-11-19T18:31:22.524Z",
+      "done": true,
+      "at": "2026-11-19T18:32:04.233Z",
+      "id": "17915872836473793"
+    },
+    "facebook": {
+      "attempts": 1,
+      "last_try": "2026-11-19T18:32:04.234Z",
+      "done": true,
+      "at": "2026-11-19T18:32:19.427Z",
+      "id": "807405089406641_1486813566883892"
+    },
+    "telegram": {
+      "attempts": 1,
+      "last_try": "2026-11-19T18:32:19.428Z",
+      "done": true,
+      "at": "2026-11-19T18:32:21.237Z",
+      "id": "172"
+    },
+    "tiktok_manual": {
+      "attempts": 1,
+      "notified": true,
+      "issue": 40,
+      "url": "https://github.com/cgrade/intimova-content/issues/40",
+      "at": "2026-11-19T18:32:21.752Z"
+    }
   }
 }
