@@ -660,5 +660,35 @@
       "url": "https://github.com/cgrade/intimova-content/issues/41",
       "at": "2026-11-20T18:31:50.539Z"
     }
+  },
+  "2026-11-21-tip-first-toy": {
+    "instagram": {
+      "attempts": 1,
+      "last_try": "2026-11-21T18:31:17.634Z",
+      "done": true,
+      "at": "2026-11-21T18:32:01.274Z",
+      "id": "18130480747866853"
+    },
+    "facebook": {
+      "attempts": 1,
+      "last_try": "2026-11-21T18:32:01.274Z",
+      "done": true,
+      "at": "2026-11-21T18:32:13.505Z",
+      "id": "807405089406641_1488880963343819"
+    },
+    "telegram": {
+      "attempts": 1,
+      "last_try": "2026-11-21T18:32:13.506Z",
+      "done": true,
+      "at": "2026-11-21T18:32:15.408Z",
+      "id": "179"
+    },
+    "tiktok_manual": {
+      "attempts": 1,
+      "notified": true,
+      "issue": 43,
+      "url": "https://github.com/cgrade/intimova-content/issues/43",
+      "at": "2026-11-21T18:32:16.176Z"
+    }
   }
 }
