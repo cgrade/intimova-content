@@ -690,5 +690,35 @@
       "url": "https://github.com/cgrade/intimova-content/issues/43",
       "at": "2026-11-21T18:32:16.176Z"
     }
+  },
+  "2026-11-22-guide-bullet-classic": {
+    "instagram": {
+      "attempts": 1,
+      "last_try": "2026-11-22T18:31:20.128Z",
+      "done": true,
+      "at": "2026-11-22T18:31:59.938Z",
+      "id": "18091385444293791"
+    },
+    "facebook": {
+      "attempts": 1,
+      "last_try": "2026-11-22T18:31:59.939Z",
+      "done": true,
+      "at": "2026-11-22T18:32:10.392Z",
+      "id": "807405089406641_1489908286574420"
+    },
+    "telegram": {
+      "attempts": 1,
+      "last_try": "2026-11-22T18:32:10.393Z",
+      "done": true,
+      "at": "2026-11-22T18:32:12.289Z",
+      "id": "184"
+    },
+    "tiktok_manual": {
+      "attempts": 1,
+      "notified": true,
+      "issue": 44,
+      "url": "https://github.com/cgrade/intimova-content/issues/44",
+      "at": "2026-11-22T18:32:12.751Z"
+    }
   }
 }
